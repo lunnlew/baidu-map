@@ -1,0 +1,340 @@
+import { BMapGLRef, map } from './map';
+import { BMapGL, BmMarkerIconProps, BmMarkerProps, BmMarker3DProps, BmPolygonProps, BmPolylineProps, BmCityBoundaryProps, BmPrismProps, BmGroundOverlayProps, BmLabelProps, BmContextMenuProps, BmCircleProps, BmInfoWindowProps } from "types"
+
+interface AllEventMap {
+    Marker: BMapGL.MarkerEvent;
+    Label: BMapGL.LabelEvent;
+    Polyline: BMapGL.PolylineEvent;
+    Polygon: BMapGL.PolygonEvent;
+    Circle: BMapGL.CircleEvent;
+    Prism: BMapGL.PrismEvent;
+    InfoWindow: BMapGL.InfoWindowEvent;
+}
+type AllEvent = keyof AllEventMap;
+type AllBMapGLType = keyof BMapGL.BMapGL;
+type OnBMapGLPayload<U extends AllBMapGLType> = BMapGL.BMapGL[U]
+type EventL = {
+    addEventListener<U extends AllBMapGLType, T extends AllEvent>(event: OnBMapGLEventPayload<T>, handler: (e: any, obj: OnBMapGLPayload<U>) => void): void
+    removeEventListener<U extends AllBMapGLType, T extends AllEvent>(event: OnBMapGLEventPayload<T>, handler: (e: any, obj: OnBMapGLPayload<U>) => void): void
+};
+type OnBMapGLEventPayload<T extends AllEvent> = AllEventMap[T]
+
+/**
+ * 绑定事件
+ * @param obj keyof BMapGL.BMapGL
+ * @param events AllEvent
+ * @param emit Function
+ */
+export function bindEvents<U, T extends AllEvent>(obj: U, events: string[], emit: (event: string, ...args: any[]) => void): U {
+    if (obj) {
+        for (let eName of events as OnBMapGLEventPayload<T>[]) {
+            (obj as unknown as EventL).addEventListener(eName, (e, obj) => emit(eName, e, obj));
+        }
+    }
+    return obj as U
+}
+
+/**
+ * 添加点标注
+ * @param point 
+ * @param marker_params
+ */
+export function addMaker(point: [number, number], marker_params: {
+    [key: string]: any
+} & Required<BmMarkerProps>): BMapGL.Marker | undefined {
+    if (BMapGLRef.value && map.value) {
+        let marker_options = {} as {
+            [key: string]: any
+        } & Required<BMapGL.MarkerOptions>
+        if (marker_params.icon) {
+            let icon_props = marker_params.icon as Required<BmMarkerIconProps>
+            marker_options.icon = new BMapGLRef.value.Icon(icon_props.src, new BMapGLRef.value.Size(icon_props.size[0], icon_props.size[1]), {
+                anchor: new BMapGLRef.value.Size(icon_props.anchor[0], icon_props.anchor[1]),
+                imageOffset: new BMapGLRef.value.Size(icon_props.imageOffset[0], icon_props.imageOffset[1])
+            });
+        }
+        for (let key in marker_params) {
+            if (key !== 'icon' && key !== 'offset') {
+                marker_options[key as string] = marker_params[key]
+            }
+        }
+        marker_options.offset = new BMapGLRef.value.Size(marker_params.offset[0], marker_params.offset[1])
+        let marker = new BMapGLRef.value.Marker(new BMapGLRef.value.Point(point[0], point[1]), marker_options)
+        map.value.addOverlay(marker);
+        return marker
+    }
+}
+
+/**
+ * 添加3D点标注
+ * @param point 
+ * @param marker_params
+ */
+export function addMaker3D(point: [number, number], marker_params: {
+    [key: string]: any
+} & Required<BmMarker3DProps>): BMapGL.Marker3D | undefined {
+    if (BMapGLRef.value && map.value) {
+        let marker_options = {} as {
+            [key: string]: any
+        } & Required<BMapGL.Marker3DOptions>
+        if (marker_params.icon) {
+            let icon_props = marker_params.icon as Required<BmMarkerIconProps>
+            marker_options.icon = new BMapGLRef.value.Icon(icon_props.src, new BMapGLRef.value.Size(icon_props.size[0], icon_props.size[1]), {
+                anchor: new BMapGLRef.value.Size(icon_props.anchor[0], icon_props.anchor[1]),
+                imageOffset: new BMapGLRef.value.Size(icon_props.imageOffset[0], icon_props.imageOffset[1])
+            });
+        }
+        for (let key in marker_params) {
+            if (key !== 'icon' && key !== 'height') {
+                marker_options[key as string] = marker_params[key]
+            }
+        }
+        let marker = new BMapGLRef.value.Marker3D(new BMapGLRef.value.Point(point[0], point[1]), marker_params.height, marker_options)
+        map.value.addOverlay(marker);
+        return marker
+    }
+}
+
+/**
+ * 添加折线
+ * @param points 
+ * @param polyline_params
+ */
+export function addPolyline(points: [number, number][], polyline_params: {
+    [key: string]: any
+} & Required<BmPolylineProps>): BMapGL.Marker | undefined {
+    if (BMapGLRef.value && map.value) {
+        let marker_options = {} as {
+            [key: string]: any
+        } & Required<BMapGL.PolylineOptions>
+        for (let key in polyline_params) {
+            if (key !== 'points') {
+                marker_options[key as string] = polyline_params[key]
+            }
+        }
+        let polyline_points = []
+        for (let point of points) {
+            polyline_points.push(new BMapGLRef.value.Point(point[0], point[1]))
+        }
+        let polyline = new BMapGLRef.value.Polyline(polyline_points, marker_options)
+        map.value.addOverlay(polyline);
+        return polyline
+    }
+}
+
+/**
+ * 添加多边形
+ * @param points 
+ * @param polygon_params
+ */
+export function addPolygon(points: [number, number][], polygon_params: {
+    [key: string]: any
+} & Required<BmPolygonProps>): BMapGL.Marker | undefined {
+    if (BMapGLRef.value && map.value) {
+        let marker_options = {} as {
+            [key: string]: any
+        } & Required<BMapGL.PolygonOptions>
+        for (let key in polygon_params) {
+            if (key !== 'points') {
+                marker_options[key as string] = polygon_params[key]
+            }
+        }
+        let polygon_points = []
+        for (let point of points) {
+            polygon_points.push(new BMapGLRef.value.Point(point[0], point[1]))
+        }
+        let polygon = new BMapGLRef.value.Polygon(polygon_points, marker_options)
+        map.value.addOverlay(polygon);
+        return polygon
+    }
+}
+
+/**
+ * 城市区域镂空多边形
+ * @param points 
+ * @param polygon_params
+ */
+export function addCityBoundary(str: string, boundary_params: {
+    [key: string]: any
+} & Required<BmCityBoundaryProps>): BMapGL.Boundary | undefined {
+    if (BMapGLRef.value && map.value) {
+        let marker_options = {} as {
+            [key: string]: any
+        }
+        if (boundary_params.polygon) {
+            for (let key in boundary_params.polygon) {
+                if (key !== 'points') {
+                    marker_options[key as string] = boundary_params.polygon[key]
+                }
+            }
+        }
+        let boundary = new BMapGLRef.value.Boundary()
+        boundary.get(str, function (rs: {
+            boundaries: BMapGL.Point[]
+        }) {
+            if (BMapGLRef.value && map.value && rs.boundaries.length > 0) {
+                let hole
+                if (rs.boundaries.length == 2 || !boundary_params.polygon || !boundary_params.polygon.points || boundary_params.polygon.points.length == 0) {
+                    hole = new BMapGLRef.value.Polygon(rs.boundaries, marker_options);
+                } else {
+                    hole = new BMapGLRef.value.Polygon([rs.boundaries[0], boundary_params.polygon.points.map((v: number[]) => v.join(', ')).join(';')], marker_options);
+                }
+                map.value.addOverlay(hole);
+            }
+        });
+        return boundary
+    }
+}
+
+/**
+ * 添加棱柱
+ * @param points 
+ * @param prism_params
+ */
+export function addPrism(points: [number, number][], prism_params: {
+    [key: string]: any
+} & Required<BmPrismProps>): BMapGL.Prism | undefined {
+    if (BMapGLRef.value && map.value) {
+        let marker_options = {} as {
+            [key: string]: any
+        } & Required<BMapGL.PrismOptions>
+        for (let key in prism_params) {
+            if (key !== 'points' && key !== 'altitude') {
+                marker_options[key as string] = prism_params[key]
+            }
+        }
+        let prism_points = []
+        for (let point of points) {
+            prism_points.push(new BMapGLRef.value.Point(point[0], point[1]))
+        }
+        let prism = new BMapGLRef.value.Prism(prism_points, prism_params.altitude, marker_options)
+        map.value.addOverlay(prism);
+        return prism
+    }
+}
+
+/**
+ * 添加地面叠加层
+ * @param ground_params
+ */
+export function addGroundOverlay(startPoint: [number, number], endPoint: [number, number], ground_params: {
+    [key: string]: any
+} & Required<BmGroundOverlayProps>): BMapGL.GroundOverlay | undefined {
+    if (BMapGLRef.value && map.value) {
+        let marker_options = {} as {
+            [key: string]: any
+        } & Required<BMapGL.GroundOverlayOptions>
+        for (let key in ground_params) {
+            if (key !== 'startPoint' && key !== 'endPoint') {
+                marker_options[key as string] = ground_params[key]
+            }
+        }
+        let pStart = new BMapGLRef.value.Point(startPoint[0], startPoint[1]);
+        let pEnd = new BMapGLRef.value.Point(endPoint[0], endPoint[1]);
+        let bounds = new BMapGLRef.value.Bounds(new BMapGLRef.value.Point(pStart.lng, pEnd.lat), new BMapGLRef.value.Point(pEnd.lng, pStart.lat));
+        let imgOverlay = new BMapGLRef.value.GroundOverlay(bounds, marker_options);
+        map.value.addOverlay(imgOverlay);
+        return imgOverlay
+    }
+}
+
+/**
+ * 添加文本标注
+ * @param prism_params
+ */
+export function addLabel(label_params: {
+    [key: string]: any
+} & Required<BmLabelProps>): BMapGL.Label | undefined {
+    if (BMapGLRef.value && map.value) {
+        let label = new BMapGLRef.value.Label(label_params.content, {
+            position: new BMapGLRef.value.Point(label_params.position[0], label_params.position[1]),
+            offset: new BMapGLRef.value.Size(label_params.offset[0], label_params.offset[1]),
+            styles: Object.assign(
+                {
+                    backgroundColor: "#fff",
+                    border: "1px solid #f00",
+                    padding: "1px",
+                    whiteSpace: "nowrap",
+                    fontSize: "12px",
+                    zIndex: "80",
+                    MozUserSelect: "none"
+                }
+                , label_params.styles || {})
+        })
+        map.value.addOverlay(label);
+        return label
+    }
+}
+
+/**
+ * 添加右键菜单
+ * @param menu_params
+ */
+export function addContextMenu(menu_params: {
+    [key: string]: any
+} & Required<BmContextMenuProps>): BMapGL.ContextMenu | undefined {
+    if (BMapGLRef.value && map.value) {
+        let context_menu = new BMapGLRef.value.ContextMenu()
+        for (var i = 0; i < menu_params.menus.length; i++) {
+            let menu = menu_params.menus[i]
+            context_menu.addItem(new BMapGLRef.value.MenuItem(
+                menu.text || ('菜单-' + i),
+                (e: any) => menu.callback && menu.callback(e, map.value, BMapGLRef.value),
+                {
+                    width: menu.width,
+                    id: menu.id || ('id-' + i)
+                }
+            ));
+        }
+        map.value.addContextMenu(context_menu);
+        return context_menu
+    }
+}
+
+/**
+ * 添加圆形
+ * @param center 
+ * @param radius 
+ * @param circle_params
+ */
+export function addCircle(center: [number, number], radius: number, circle_params: {
+    [key: string]: any
+} & Required<BmCircleProps>): BMapGL.Circle | undefined {
+    if (BMapGLRef.value && map.value) {
+        let marker_options = {} as {
+            [key: string]: any
+        } & Required<BMapGL.CircleOptions>
+        for (let key in circle_params) {
+            if (key !== 'center' && key !== 'radius') {
+                marker_options[key as string] = circle_params[key]
+            }
+        }
+        console.log('dd')
+        let circle = new BMapGLRef.value.Circle(new BMapGLRef.value.Point(center[0], center[1]), radius, marker_options)
+        map.value.addOverlay(circle);
+        return circle
+    }
+}
+
+/**
+ * 添加信息窗口
+ * @param info_params
+ */
+export function addInfoWindow(info_params: {
+    [key: string]: any
+} & Required<BmInfoWindowProps>): BMapGL.InfoWindow | undefined {
+    if (BMapGLRef.value && map.value) {
+        let marker_options = {} as {
+            [key: string]: any
+        } & BMapGL.InfoWindowOptions
+        for (let key in info_params) {
+            if (key !== 'content' && key !== 'offset') {
+                marker_options[key as string] = info_params[key]
+            }
+        }
+        marker_options.offset = new BMapGLRef.value.Size(info_params.offset[0], info_params.offset[1])
+        let info = new BMapGLRef.value.InfoWindow(info_params.content, marker_options)
+        map.value.openInfoWindow(info, map.value.getCenter());
+        return info
+    }
+}
