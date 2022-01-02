@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, watch, ref, computed, useAttrs } from "vue";
+import { watch, computed, useAttrs } from "vue";
 import { state } from "@/lib/map";
 import { addCityListControl } from "@/lib/control";
 import { bindEvents, extractEmitEvents } from "@/utils/util";

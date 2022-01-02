@@ -17,7 +17,8 @@ const props = withDefaults(defineProps<{
   zoom?: number
   enableRotate?: boolean
   enableTilt?: boolean
-  mapType?: BMapGL.MapTypeId
+  mapType?: BMapGL.MapTypeId,
+  onReady?: (state: any) => void
 }>(), {
   apiKey: '',
   center: () => ({
@@ -27,7 +28,8 @@ const props = withDefaults(defineProps<{
   zoom: 13,
   enableRotate: true,
   enableTilt: true,
-  mapType: BMapGL.MapTypeId.BMAP_NORMAL_MAP
+  mapType: BMapGL.MapTypeId.BMAP_NORMAL_MAP,
+  onReady: () => { },
 })
 const emit = defineEmits({})
 const bm = ref()

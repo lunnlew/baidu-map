@@ -40,6 +40,7 @@ interface AllEventMap {
     ZoomControl: BMapGL.ZoomControlEvent;
     ScaleControl: BMapGL.ScaleControlEvent;
     MapTypeControl: BMapGL.MapTypeControlEvent;
+    ViewAnimation: BMapGL.ViewAnimationEvent;
 }
 type AllEvent = keyof AllEventMap;
 type OnBMapGLEventPayload<T extends AllEvent> = AllEventMap[T]
