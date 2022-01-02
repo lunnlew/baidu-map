@@ -4,10 +4,10 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, ref, useAttrs, watch } from "vue";
+import { computed, ref, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
 import { addTrackAnimation, initTrackAnimation } from "@/lib/animation";
-import { bindEvents, extractEmitEvents } from "@/utils/util";
+import { bindEvents, extractEmitEvents, mergePropsDefault } from "@/utils/util";
 const props = withDefaults(defineProps<{
     points: {
         lng: number
@@ -28,16 +28,28 @@ const props = withDefaults(defineProps<{
 })
 const emit = defineEmits({})
 const attrs = useAttrs();
+const slots = useSlots()
 const isShow = computed(() => state.value.inited && props.show);
 const options = computed(() => props)
 const bm = ref()
 watch(
     () => isShow.value,
     (val) => {
+        let merge_props = { ...options.value };
+        if (slots.default) {
+            let MarkerPolyline = slots.default().find((s) => (s.type as any).name == "Polyline");
+            if (MarkerPolyline) {
+                let merge_polyline_props = mergePropsDefault(
+                    MarkerPolyline.props as any,
+                    (MarkerPolyline.type as any).props
+                );
+                (merge_props as any).polyline = merge_polyline_props;
+            }
+        }
         if (val) {
             initTrackAnimation().then((result) => {
                 bm.value = bindEvents(
-                    addTrackAnimation(options.value),
+                    addTrackAnimation(merge_props),
                     extractEmitEvents(attrs),
                     emit
                 );

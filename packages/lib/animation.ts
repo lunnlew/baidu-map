@@ -83,15 +83,33 @@ export function addTrackAnimation(animation_params: {
             [key: string]: any
         } & BMapGL.TrackAnimationOptions
         for (let key in animation_params) {
-            if (key !== 'points') {
+            if (key !== 'points' && key !== 'polyline') {
                 animation_options[key as string] = animation_params[key]
             }
         }
-        let points = [];
-        for (let point of animation_params.points) {
-            points.push(new BMapGLRef.value.Point(point.lng, point.lat))
+
+        let polyline_options = {} as {
+            [key: string]: any
+        } & BMapGL.PolylineOptions
+        if (animation_params.polyline) {
+            for (let key in animation_params.polyline) {
+                if (key !== 'points') {
+                    polyline_options[key as string] = animation_params.polyline[key]
+                }
+            }
         }
-        let pl = new BMapGLRef.value.Polyline(points);
+
+        let points = [];
+        if (animation_params.polyline?.points) {
+            for (let point of animation_params.polyline.points) {
+                points.push(new BMapGLRef.value.Point(point.lng, point.lat))
+            }
+        } else {
+            for (let point of animation_params.points) {
+                points.push(new BMapGLRef.value.Point(point.lng, point.lat))
+            }
+        }
+        let pl = new BMapGLRef.value.Polyline(points, polyline_options);
         let animation = new BMapGLLibRef.value.TrackAnimation(map.value, pl, animation_options);
         animation.start();
         return animation
