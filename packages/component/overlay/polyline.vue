@@ -55,6 +55,6 @@ watch(
 </script>
 <script lang="ts">
 export default {
-  name: "Poliline",
+  name: "Polyline",
 }
 </script>
