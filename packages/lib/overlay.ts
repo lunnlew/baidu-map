@@ -6,7 +6,10 @@ import { BMapGL, BmMarkerIconProps, BmMarkerProps, BmMarker3DProps, BmPolygonPro
  * @param point 
  * @param marker_params
  */
-export function addMaker(point: [number, number], marker_params: {
+export function addMaker(point: {
+    lng: number;
+    lat: number;
+}, marker_params: {
     [key: string]: any
 } & Required<BmMarkerProps>): BMapGL.Marker | undefined {
     if (BMapGLRef.value && map.value) {
@@ -26,7 +29,7 @@ export function addMaker(point: [number, number], marker_params: {
             }
         }
         marker_options.offset = new BMapGLRef.value.Size(marker_params.offset[0], marker_params.offset[1])
-        let marker = new BMapGLRef.value.Marker(new BMapGLRef.value.Point(point[0], point[1]), marker_options)
+        let marker = new BMapGLRef.value.Marker(new BMapGLRef.value.Point(point.lng, point.lat), marker_options)
         map.value.addOverlay(marker);
         return marker
     }
@@ -37,7 +40,10 @@ export function addMaker(point: [number, number], marker_params: {
  * @param point 
  * @param marker_params
  */
-export function addMaker3D(point: [number, number], marker_params: {
+export function addMaker3D(point: {
+    lng: number;
+    lat: number;
+}, marker_params: {
     [key: string]: any
 } & Required<BmMarker3DProps>): BMapGL.Marker3D | undefined {
     if (BMapGLRef.value && map.value) {
@@ -56,7 +62,7 @@ export function addMaker3D(point: [number, number], marker_params: {
                 marker_options[key as string] = marker_params[key]
             }
         }
-        let marker = new BMapGLRef.value.Marker3D(new BMapGLRef.value.Point(point[0], point[1]), marker_params.height, marker_options)
+        let marker = new BMapGLRef.value.Marker3D(new BMapGLRef.value.Point(point.lng, point.lat), marker_params.height, marker_options)
         map.value.addOverlay(marker);
         return marker
     }
@@ -67,9 +73,12 @@ export function addMaker3D(point: [number, number], marker_params: {
  * @param points 
  * @param polyline_params
  */
-export function addPolyline(points: [number, number][], polyline_params: {
+export function addPolyline(points: {
+    lng: number;
+    lat: number;
+}[], polyline_params: {
     [key: string]: any
-} & Required<BmPolylineProps>): BMapGL.Marker | undefined {
+} & Required<BmPolylineProps>): BMapGL.Polyline | undefined {
     if (BMapGLRef.value && map.value) {
         let marker_options = {} as {
             [key: string]: any
@@ -81,7 +90,7 @@ export function addPolyline(points: [number, number][], polyline_params: {
         }
         let polyline_points = []
         for (let point of points) {
-            polyline_points.push(new BMapGLRef.value.Point(point[0], point[1]))
+            polyline_points.push(new BMapGLRef.value.Point(point.lng, point.lat))
         }
         let polyline = new BMapGLRef.value.Polyline(polyline_points, marker_options)
         map.value.addOverlay(polyline);
@@ -94,9 +103,12 @@ export function addPolyline(points: [number, number][], polyline_params: {
  * @param points 
  * @param polygon_params
  */
-export function addPolygon(points: [number, number][], polygon_params: {
+export function addPolygon(points: {
+    lng: number;
+    lat: number;
+}[], polygon_params: {
     [key: string]: any
-} & Required<BmPolygonProps>): BMapGL.Marker | undefined {
+} & Required<BmPolygonProps>): BMapGL.Polygon | undefined {
     if (BMapGLRef.value && map.value) {
         let marker_options = {} as {
             [key: string]: any
@@ -108,7 +120,7 @@ export function addPolygon(points: [number, number][], polygon_params: {
         }
         let polygon_points = []
         for (let point of points) {
-            polygon_points.push(new BMapGLRef.value.Point(point[0], point[1]))
+            polygon_points.push(new BMapGLRef.value.Point(point.lng, point.lat))
         }
         let polygon = new BMapGLRef.value.Polygon(polygon_points, marker_options)
         map.value.addOverlay(polygon);
@@ -121,7 +133,7 @@ export function addPolygon(points: [number, number][], polygon_params: {
  * @param points 
  * @param polygon_params
  */
-export function addCityBoundary(str: string, boundary_params: {
+export function addCityBoundary(name: string, boundary_params: {
     [key: string]: any
 } & Required<BmCityBoundaryProps>): BMapGL.Boundary | undefined {
     if (BMapGLRef.value && map.value) {
@@ -136,7 +148,7 @@ export function addCityBoundary(str: string, boundary_params: {
             }
         }
         let boundary = new BMapGLRef.value.Boundary()
-        boundary.get(str, function (rs: {
+        boundary.get(name, function (rs: {
             boundaries: BMapGL.Point[]
         }) {
             if (BMapGLRef.value && map.value && rs.boundaries.length > 0) {
@@ -158,7 +170,10 @@ export function addCityBoundary(str: string, boundary_params: {
  * @param points 
  * @param prism_params
  */
-export function addPrism(points: [number, number][], prism_params: {
+export function addPrism(points: {
+    lng: number;
+    lat: number;
+}[], prism_params: {
     [key: string]: any
 } & Required<BmPrismProps>): BMapGL.Prism | undefined {
     if (BMapGLRef.value && map.value) {
@@ -172,7 +187,7 @@ export function addPrism(points: [number, number][], prism_params: {
         }
         let prism_points = []
         for (let point of points) {
-            prism_points.push(new BMapGLRef.value.Point(point[0], point[1]))
+            prism_points.push(new BMapGLRef.value.Point(point.lng, point.lat))
         }
         let prism = new BMapGLRef.value.Prism(prism_points, prism_params.altitude, marker_options)
         map.value.addOverlay(prism);
@@ -184,7 +199,13 @@ export function addPrism(points: [number, number][], prism_params: {
  * 添加地面叠加层
  * @param ground_params
  */
-export function addGroundOverlay(startPoint: [number, number], endPoint: [number, number], ground_params: {
+export function addGroundOverlay(startPoint: {
+    lng: number;
+    lat: number;
+}, endPoint: {
+    lng: number;
+    lat: number;
+}, ground_params: {
     [key: string]: any
 } & Required<BmGroundOverlayProps>): BMapGL.GroundOverlay | undefined {
     if (BMapGLRef.value && map.value) {
@@ -196,8 +217,8 @@ export function addGroundOverlay(startPoint: [number, number], endPoint: [number
                 marker_options[key as string] = ground_params[key]
             }
         }
-        let pStart = new BMapGLRef.value.Point(startPoint[0], startPoint[1]);
-        let pEnd = new BMapGLRef.value.Point(endPoint[0], endPoint[1]);
+        let pStart = new BMapGLRef.value.Point(startPoint.lng, startPoint.lat);
+        let pEnd = new BMapGLRef.value.Point(endPoint.lng, endPoint.lat);
         let bounds = new BMapGLRef.value.Bounds(new BMapGLRef.value.Point(pStart.lng, pEnd.lat), new BMapGLRef.value.Point(pEnd.lng, pStart.lat));
         let imgOverlay = new BMapGLRef.value.GroundOverlay(bounds, marker_options);
         map.value.addOverlay(imgOverlay);
@@ -214,7 +235,7 @@ export function addLabel(label_params: {
 } & Required<BmLabelProps>): BMapGL.Label | undefined {
     if (BMapGLRef.value && map.value) {
         let label = new BMapGLRef.value.Label(label_params.content, {
-            position: new BMapGLRef.value.Point(label_params.position[0], label_params.position[1]),
+            position: new BMapGLRef.value.Point(label_params.position.lng, label_params.position.lat),
             offset: new BMapGLRef.value.Size(label_params.offset[0], label_params.offset[1]),
             styles: Object.assign(
                 {
@@ -244,14 +265,16 @@ export function addContextMenu(menu_params: {
         let context_menu = new BMapGLRef.value.ContextMenu()
         for (var i = 0; i < menu_params.menus.length; i++) {
             let menu = menu_params.menus[i]
-            context_menu.addItem(new BMapGLRef.value.MenuItem(
-                menu.text || ('菜单-' + i),
-                (e: any) => menu.callback && menu.callback(e, map.value, BMapGLRef.value),
-                {
-                    width: menu.width,
-                    id: menu.id || ('id-' + i)
-                }
-            ));
+            if (menu.show) {
+                context_menu.addItem(new BMapGLRef.value.MenuItem(
+                    menu.text || ('菜单-' + i),
+                    (e: any) => menu.callback && menu.callback(e, map.value, BMapGLRef.value),
+                    {
+                        width: menu.width,
+                        id: menu.id || ('id-' + i)
+                    }
+                ));
+            }
         }
         map.value.addContextMenu(context_menu);
         return context_menu
@@ -264,7 +287,10 @@ export function addContextMenu(menu_params: {
  * @param radius 
  * @param circle_params
  */
-export function addCircle(center: [number, number], radius: number, circle_params: {
+export function addCircle(center: {
+    lng: number;
+    lat: number;
+  }, radius: number, circle_params: {
     [key: string]: any
 } & Required<BmCircleProps>): BMapGL.Circle | undefined {
     if (BMapGLRef.value && map.value) {
@@ -277,7 +303,7 @@ export function addCircle(center: [number, number], radius: number, circle_param
             }
         }
         console.log('dd')
-        let circle = new BMapGLRef.value.Circle(new BMapGLRef.value.Point(center[0], center[1]), radius, marker_options)
+        let circle = new BMapGLRef.value.Circle(new BMapGLRef.value.Point(center.lng, center.lat), radius, marker_options)
         map.value.addOverlay(circle);
         return circle
     }
@@ -301,7 +327,7 @@ export function addInfoWindow(info_params: {
         }
         marker_options.offset = new BMapGLRef.value.Size(info_params.offset[0], info_params.offset[1])
         let info = new BMapGLRef.value.InfoWindow(info_params.content, marker_options)
-        map.value.openInfoWindow(info, map.value.getCenter());
+        map.value.openInfoWindow(info, new BMapGLRef.value.Point(info_params.point.lng, info_params.point.lat));
         return info
     }
 }

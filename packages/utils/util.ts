@@ -72,7 +72,7 @@ export function extractEmitEvents<T, U extends DataKey<T>>(attr: T): U {
 export function bindEvents<U, T extends PickEvent<AllEventMap>>(obj: U, events: T[], emit: (event: T, ...args: any[]) => void): U {
     if (obj) {
         for (let eName of events) {
-            (obj as unknown as EventL).addEventListener(eName, (e, obj) => emit(eName, e, obj));
+            (obj as unknown as EventL).addEventListener(eName, (e) => emit(eName, e, obj));
         }
     }
     return obj

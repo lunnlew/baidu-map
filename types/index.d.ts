@@ -1,7 +1,10 @@
 import { ComponentPublicInstance } from 'vue'
 
 declare namespace BaiduMapOptions {
-    type center = [number, number];
+    type center = {
+        lng: number;
+        lat: number;
+    };
 }
 
 declare namespace BaiduMapVue3 {
@@ -39,7 +42,11 @@ declare namespace BaiduMapVue3 {
         /**
          * 控件偏移量
          */
-        offset?: [number, number]
+        offset?: [number, number],
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     /**
      * 比例尺控件
@@ -53,7 +60,11 @@ declare namespace BaiduMapVue3 {
         /**
          * 控件偏移量
          */
-        offset?: [number, number]
+        offset?: [number, number],
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     /**
      * 地图级别控件
@@ -68,6 +79,10 @@ declare namespace BaiduMapVue3 {
          * 控件偏移量
          */
         offset?: [number, number]
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     /**
      * 版权控件
@@ -105,7 +120,11 @@ declare namespace BaiduMapVue3 {
         /**
          * 控件类型
          */
-        type?: BMapGL.NavigationControlType
+        type?: BMapGL.NavigationControlType,
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     /**
      * 平移导航控件
@@ -115,15 +134,19 @@ declare namespace BaiduMapVue3 {
         /**
          * 控件停靠位置
          */
-        anchor: BMapGL.ControlAnchor,
+        anchor?: BMapGL.ControlAnchor,
         /**
          * 控件偏移量
          */
-        offset: [number, number],
+        offset?: [number, number],
         /**
          * 控件类型
          */
-        type: BMapGL.NavigationControlType
+        type?: BMapGL.NavigationControlType
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     /**
      * 3D导航控件
@@ -139,6 +162,10 @@ declare namespace BaiduMapVue3 {
          * 控件偏移量
          */
         offset?: [number, number]
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     /**
      * 定位控件
@@ -154,6 +181,10 @@ declare namespace BaiduMapVue3 {
          * 控件偏移量
          */
         offset?: [number, number]
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     /**
      * 地图类型控件
@@ -168,6 +199,10 @@ declare namespace BaiduMapVue3 {
          * 控件偏移量
          */
         offset?: [number, number],
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     /**
      * 城市列表控件
@@ -180,7 +215,10 @@ declare namespace BaiduMapVue3 {
         /**
          * 标注坐标
          */
-        point: [number, number]
+        point: {
+            lng: number;
+            lat: number;
+        }
         /**
          * 标注的位置偏移值
          */
@@ -214,6 +252,10 @@ declare namespace BaiduMapVue3 {
          * 鼠标移到marker上的显示内容
          */
         title?: string
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     export const BmMarker: ComponentPublicInstance<BmMarkerProps>
 
@@ -224,7 +266,10 @@ declare namespace BaiduMapVue3 {
         /**
          * 标注位置
          */
-        point: [number, number]
+        point: {
+            lng: number;
+            lat: number;
+        }
         /**
         * 点的高度
         */
@@ -245,6 +290,10 @@ declare namespace BaiduMapVue3 {
          * 点的透明度，范围0-1，默认0.8
          */
         fillOpacity?: number,
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     export const BmMarkerThreed: ComponentPublicInstance<BmMarker3DProps>
 
@@ -259,7 +308,10 @@ declare namespace BaiduMapVue3 {
         /**
          * 文本标注的地理位置
          */
-        position: [number, number]
+        position: {
+            lng: number;
+            lat: number;
+        }
         /**
         * 文本标注的位置偏移值
         */
@@ -272,6 +324,10 @@ declare namespace BaiduMapVue3 {
          * 样式表
          */
         styles?: Object
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     export const BmLabel: ComponentPublicInstance<BmLabelProps>
 
@@ -305,7 +361,10 @@ declare namespace BaiduMapVue3 {
         /**
          * 折线点集
          */
-        points: [number, number][]
+        points: {
+            lng: number;
+            lat: number;
+        }[]
         /**
          * 折线颜色
          */
@@ -334,6 +393,10 @@ declare namespace BaiduMapVue3 {
          * 是否响应点击事件，默认为true
          */
         enableClicking: boolean
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     export const BmPolyline: ComponentPublicInstance<BmPolylineProps>
     /**
@@ -343,7 +406,10 @@ declare namespace BaiduMapVue3 {
         /**
          * 多边形点集
          */
-        points: [number, number][]
+        points: {
+            lng: number;
+            lat: number;
+        }[]
         /**
          * 边线颜色
          */
@@ -379,7 +445,11 @@ declare namespace BaiduMapVue3 {
         /**
          * 是否响应点击事件，默认为true
          */
-        enableClicking?: boolean
+        enableClicking?: boolean,
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     export const BmPolygon: ComponentPublicInstance<BmPolygonProps>
 
@@ -387,7 +457,11 @@ declare namespace BaiduMapVue3 {
         /**
          * 城市区域区域字符串
          */
-        str?: string
+        name?: string,
+        /**
+         * 是否显示
+         */
+        show?: boolean,
     }
     export const BmCityBoundary: ComponentPublicInstance<BmCityBoundaryProps>
 
@@ -395,7 +469,10 @@ declare namespace BaiduMapVue3 {
         /**
          * 点集
          */
-        points: [number, number][]
+        points: {
+            lng: number;
+            lat: number;
+        }[]
         /**
          * 高度
          */
@@ -420,6 +497,10 @@ declare namespace BaiduMapVue3 {
          * 是否在调用map.clearOverlays清除此覆盖物，默认为true
          */
         enableMassClear?: boolean
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     export const BmPrism: ComponentPublicInstance<BmPrismProps>
 
@@ -427,11 +508,17 @@ declare namespace BaiduMapVue3 {
         /**
          * 矩形对角左上坐标
          */
-        startPoint: [number, number]
+        startPoint: {
+            lng: number;
+            lat: number;
+        }
         /**
          * 矩形对角右下坐标
          */
-        endPoint: [number, number]
+        endPoint: {
+            lng: number;
+            lat: number;
+        }
         /**
          * 'image' | 'video' | 'canvas'，默认为image
          */
@@ -443,7 +530,11 @@ declare namespace BaiduMapVue3 {
         /**
          * 图层地址
          */
-        url?: string
+        url?: string,
+        /**
+         * 是否显示
+         */
+        show?: boolean,
     }
     export const BmGroundOverlay: ComponentPublicInstance<BmGroundOverlayProps>
     export interface BmGroundOverlayImageProps {
@@ -485,14 +576,35 @@ declare namespace BaiduMapVue3 {
     }
     export const BmMarkerIcon: ComponentPublicInstance<BmMarkerIconProps>
 
-    export interface BmContextMenuProps { }
+    export interface BmContextMenuProps {
+        /**
+         * 是否显示
+         */
+        show?: boolean
+    }
     export const BmContextMenu: ComponentPublicInstance<BmContextMenuProps>
 
     export interface BmContextMenuItemProps {
+        /**
+         * 子菜单ID
+         */
         id: string,
+        /**
+         * 菜单宽度
+         */
         width: number,
+        /**
+         * 菜单文本
+         */
         text: string,
+        /**
+         * 菜单点击回调
+         */
         callback: Function,
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     export const BmContextMenuItem: ComponentPublicInstance<BmContextMenuItemProps>
 
@@ -500,7 +612,10 @@ declare namespace BaiduMapVue3 {
         /**
          * 圆心坐标
          */
-        center: [number, number],
+        center: {
+            lng: number;
+            lat: number;
+        },
         /**
          * 半径
          */
@@ -540,11 +655,22 @@ declare namespace BaiduMapVue3 {
         /**
          * 是否响应点击事件，默认为true
          */
-        enableClicking?: boolean
+        enableClicking?: boolean,
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     export const BmCircle: ComponentPublicInstance<BmCircleProps>
 
     export type BmInfoWindowProps = {
+        /**
+         * 信息窗口的坐标
+         */
+        point: {
+            lng: number;
+            lat: number;
+        },
         /**
          * 信息窗口的内容，支持HTML内容
          */
@@ -581,6 +707,10 @@ declare namespace BaiduMapVue3 {
          * 是否开启点击地图关闭信息窗口（默认开启）
          */
         enableCloseOnClick?: boolean
+        /**
+         * 是否显示
+         */
+        show?: boolean
     }
     export const BmInfoWindow: ComponentPublicInstance<BmInfoWindowProps>
 
@@ -2270,6 +2400,85 @@ declare namespace BaiduMapVue3 {
              */
             constructor(point: Point, opts: MarkerOptions)
             /**
+             * 设置标注所用的图标对象
+             * @param icon 
+             */
+            setIcon(icon: Icon): void
+            /**
+             * 返回标注所用的图标对象
+             */
+            getIcon(): Icon
+            /**
+             * 设置标注的地理坐标
+             * @param position 
+             */
+            setPosition(position: Point): void
+            /**
+             * 返回标注的地理坐标
+             */
+            getPosition(): Point
+            /**
+             * 设置标注的偏移值
+             * @param offset 
+             */
+            setOffset(offset: Size): void
+            /**
+             * 返回标注的偏移值
+             */
+            getOffset(): Size
+            /**
+             * 设置标注的标题，当鼠标移至标注上时显示此标题
+             * @param title 
+             */
+            setTitle(title: String): void
+            /**
+             * 返回标注的标题
+             */
+            getTitle(): String
+            /**
+             * 为标注添加文本标注
+             * @param label 
+             */
+            setLabel(label: Label): void
+            /**
+             * 返回标注的文本内容
+             */
+            getLabel(): Label
+            /**
+             * 开启标注拖拽功能
+             */
+            enableDragging(): void
+            /**
+             * 关闭标注拖拽功能
+             */
+            disableDragging(): void
+            /**
+             * 允许覆盖物在map.clearOverlays方法中被清除
+             */
+            enableMassClear(): void
+            /**
+             * 禁止覆盖物在map.clearOverlays方法中被清除
+             */
+            disableMassClear(): void
+            /**
+             * 设置覆盖物的zIndex
+             * @param zIndex 
+             */
+            setZIndex(zIndex: Number): void
+            /**
+             * 返回覆盖物所在的map对象
+             */
+            getMap(): Map
+            /**
+             * 设置点的旋转角度
+             * @param rotation 
+             */
+            setRotation(rotation: Number): void
+            /**
+             * 获取点的旋转角度
+             */
+            getRotation(): Number
+            /**
              * 添加事件监听函数
              * @param event 
              * @param handler 
@@ -2396,6 +2605,18 @@ declare namespace BaiduMapVue3 {
              * 右键点击标注时触发此事件
              */
             rightclick: OverlayEventPayload
+            /**
+             * 拖动开始触发此事件
+             */
+            dragstart: OverlayEventPayload
+            /**
+             * 拖动中触发此事件
+             */
+            drag: OverlayEventPayload
+            /**
+             * 拖动结束触发此事件
+             */
+            dragend: OverlayEventPayload
         }
         type OverlayEvent = keyof OverlayEventEventMap;
         type OverlayEventPayload = {

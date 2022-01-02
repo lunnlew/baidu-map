@@ -4,45 +4,61 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useAttrs, useSlots, watch } from "vue";
+import { useAttrs, useSlots, watch, computed } from "vue";
 import { state } from "@/lib/map";
 import { addGroundOverlay } from "@/lib/overlay";
 import { mergePropsDefault, bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
-  startPoint: [number, number]
-  endPoint: [number, number]
+  startPoint: {
+    lng: number;
+    lat: number;
+  }
+  endPoint: {
+    lng: number;
+    lat: number;
+  }
   type?: string
   opacity?: number
-  url?: string
+  url?: string,
+  show?: boolean,
 }>(), {
-  startPoint: () => [0, 0],
-  endPoint: () => [0, 0],
+  startPoint: () => ({
+    lng: 0,
+    lat: 0
+  }),
+  endPoint: () => ({
+    lng: 0,
+    lat: 0
+  }),
   type: "image",
   opacity: 0.8,
   url: "",
+  show: true,
 })
 const attrs = useAttrs();
 const slots = useSlots()
 const emit = defineEmits({});
-let options = { ...props };
-if (slots.default) {
-  let GroundOverlayImage = slots
-    .default()
-    .find((s) => (s.type as any).name == "GroundOverlayImage");
-  if (GroundOverlayImage) {
-    let merge_image_props = mergePropsDefault(
-      GroundOverlayImage.props as any,
-      (GroundOverlayImage.type as any).props
-    );
-    options = Object.assign(options, merge_image_props);
-  }
-}
+const options = computed(() => props)
+const isShow = computed(() => state.value.inited && props.show);
 watch(
-  state.value,
+  () => isShow.value,
   (val) => {
-    if (val.inited) {
+    if (val) {
+      let merge_props = { ...options.value };
+      if (slots.default) {
+        let GroundOverlayImage = slots
+          .default()
+          .find((s) => (s.type as any).name == "GroundOverlayImage");
+        if (GroundOverlayImage) {
+          let merge_image_props = mergePropsDefault(
+            GroundOverlayImage.props as any,
+            (GroundOverlayImage.type as any).props
+          );
+          merge_props = Object.assign(merge_props, merge_image_props);
+        }
+      }
       bindEvents(
-        addGroundOverlay(props.startPoint, props.endPoint, options),
+        addGroundOverlay(props.startPoint, props.endPoint, merge_props),
         extractEmitEvents(attrs),
         emit
       );

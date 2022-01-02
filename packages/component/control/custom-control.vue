@@ -6,7 +6,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref, useAttrs, useSlots, watch } from "vue";
+import { computed, ref, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
 import { addCustomControl } from "@/lib/control";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
@@ -14,25 +14,29 @@ const props = withDefaults(defineProps<{
     dom?: HTMLElement,
     anchor?: number,
     offset?: [number, number],
+    show?: boolean,
 }>(), {
     dom: undefined,
     anchor: 0,
     offset: () => [50, 80],
+    show: true,
 })
-let options = { ...props };
 const attrs = useAttrs();
 const slots = useSlots()
 const control = ref();
 const emit = defineEmits({});
+const isShow = computed(() => state.value.inited && props.show);
+const options = computed(() => props)
 watch(
-    state.value,
+    () => isShow.value,
     (val) => {
-        if (val.inited) {
+        if (val) {
+            let merge_props = { ...options.value };
             if (slots.default) {
-                options.dom = control.value;
+                merge_props.dom = control.value;
             }
             bindEvents(
-                addCustomControl(options),
+                addCustomControl(merge_props),
                 extractEmitEvents(attrs),
                 emit
             );

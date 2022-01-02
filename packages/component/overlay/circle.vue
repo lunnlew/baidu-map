@@ -4,12 +4,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useAttrs, watch } from "vue";
+import { computed, ref, useAttrs, watch } from "vue";
 import { state } from "@/lib/map";
 import { addCircle } from "@/lib/overlay";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
-  center: [number, number],
+  center: {
+    lng: number;
+    lat: number;
+  },
   radius?: number,
   strokeColor?: string
   strokeWeight?: number
@@ -20,9 +23,12 @@ const props = withDefaults(defineProps<{
   enableMassClear?: boolean
   enableEditing?: boolean
   enableClicking?: boolean
-  addToMap?: boolean
+  show?: boolean
 }>(), {
-  center: () => [116.403963, 39.915119],
+  center: () => ({
+    lng: 116.403963,
+    lat: 39.915119
+  }),
   radius: 200,
   strokeColor: "black",
   strokeWeight: 1,
@@ -33,20 +39,33 @@ const props = withDefaults(defineProps<{
   enableMassClear: true,
   enableEditing: false,
   enableClicking: true,
-  addToMap: true
+  show: true
 })
 const attrs = useAttrs();
 const emit = defineEmits({});
-let options = { ...props };
+const bm = ref()
+const isShow = computed(() => state.value.inited && props.show);
+const options = computed(() => props)
 watch(
-  state.value,
+  () => isShow.value,
   (val) => {
-    if (val.inited && props.addToMap) {
-      bindEvents(
-        addCircle(props.center, props.radius, options),
+    if (val) {
+      bm.value = bindEvents(
+        addCircle(props.center, props.radius, options.value),
         extractEmitEvents(attrs),
         emit
       );
+    }
+  },
+  {
+    immediate: true,
+  }
+);
+watch(
+  () => props.center,
+  (val) => {
+    if (bm.value) {
+      bm.value.setCenter(val);
     }
   },
   {
