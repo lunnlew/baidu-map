@@ -28,6 +28,7 @@ import BmCircle from './component/overlay/circle.vue';
 import BmInfoWindow from './component/overlay/info-window.vue';
 
 import BmViewAnimation from './component/animation/index.vue';
+import BmTrackAnimation from './component/animation/track.vue';
 
 /**
  * 地图类型空间及根组件
@@ -71,5 +72,6 @@ export {
     /**
      * 地图动画
      */
-    BmViewAnimation
+    BmViewAnimation,
+    BmTrackAnimation
 };
