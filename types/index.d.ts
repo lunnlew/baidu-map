@@ -768,6 +768,41 @@ declare namespace BaiduMapVue3 {
      */
     export const BmViewAnimation: ComponentPublicInstance<BmViewAnimationProps>
 
+    interface BmTrackAnimationProps {
+        /**
+         * 轨迹点
+         */
+        points: {
+            lng: number;
+            lat: number;
+        }[]
+        /**
+         *  动画完成后自动调整视野到总览
+         */
+        overallView?: boolean,
+        /**
+         * 轨迹播放的角度，默认为55
+         */
+        tilt?: number,
+        /**
+         * 动画持续时长，默认为10000，单位ms
+         */
+        duration?: number,
+        /**
+         * 动画开始的延迟，默认0，单位ms
+         */
+        delay?: number,
+        /**
+         * 是否显示
+         */
+        show?: boolean
+    }
+
+    /**
+     * 轨迹动画
+     */
+    export const BmTrackAnimation: ComponentPublicInstance<BmTrackAnimationProps>
+
     /**
      * BMapGL 名称空间
      */
@@ -2954,6 +2989,46 @@ declare namespace BaiduMapVue3 {
             constructor(keyFrames: Array<ViewAnimationKeyFrames>, opts: ViewAnimationOptions)
         }
 
+        interface TrackAnimationOptions {
+            /**
+             *  动画完成后自动调整视野到总览
+             */
+            overallView: boolean,
+            /**
+             * 轨迹播放的角度，默认为55
+             */
+            tilt: number,
+            /**
+             * 动画持续时长，默认为10000，单位ms
+             */
+            duration: number,
+            /**
+             * 动画开始的延迟，默认0，单位ms
+             */
+            delay: number
+        }
+
+        /**
+        * 地图轨迹动画类。
+        */
+        class TrackAnimation {
+            /**
+             * 创建一个地图轨迹动画对象
+             * @param bmap 
+             * @param pl 
+             * @param opts 
+             */
+            constructor(bmap: Map, pl: Polyline, opts: TrackAnimationOptions)
+            /**
+             * 启动动画
+             */
+            start(): void
+            /**
+             * 强制停止动画
+             */
+            cancel(): void
+        }
+
         /**
         *  Map 事件
         */
@@ -4295,13 +4370,13 @@ declare namespace BaiduMapVue3 {
              * @param points Array<Point>
              * @param opts PolylineOptions
              */
-            Polyline: { new(points: Array<Point>, opts: PolylineOptions): Polyline };
+            Polyline: { new(points: Array<Point>, opts?: PolylineOptions): Polyline };
             /**
              * 创建多边形覆盖物
              * @param points Array<Point>
              * @param opts PolygonOptions
              */
-            Polygon: { new(points: Array<Point>, opts: PolygonOptions): Polygon };
+            Polygon: { new(points: Array<Point>, opts?: PolygonOptions): Polygon };
             /**
              * 创建圆覆盖物
              * @param center Point
@@ -4429,10 +4504,21 @@ declare namespace BaiduMapVue3 {
             LocalSearch: { new(location: Map | Point | String, opts: LocalSearchOptions): LocalSearch };
             /**
              * 创建地图视角动画对象，通过关键帧的形式对动画进行定义
-             * @param keyFrames 
-             * @param opts 
+             * @param keyFrames Array<ViewAnimationKeyFrames>
+             * @param opts ViewAnimationOptions
              */
             ViewAnimation: { new(keyFrames: Array<ViewAnimationKeyFrames>, opts: ViewAnimationOptions): ViewAnimation };
+
+        }
+
+        interface BMapGLLib {
+            /**
+            * 创建地图轨迹动画对象，通过折线轨迹形式对动画进行定义
+            * @param bmap 
+            * @param pl 
+            * @param opts TrackAnimationOptions
+            */
+            TrackAnimation: { new(bmap: Map, pl: Polyline, opts: TrackAnimationOptions): TrackAnimation };
         }
 
         type AllBMapGLType = keyof BMapGL.BMapGL;

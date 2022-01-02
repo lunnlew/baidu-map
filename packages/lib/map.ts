@@ -9,6 +9,10 @@ export const state = ref({
      * 地图是否初始化完成
      */
     inited: false,
+    /**
+     * 轨迹动画库是否初始化完成
+     */
+    track_animation_lib_inited: false,
 });
 
 /**
@@ -20,6 +24,11 @@ export const containerRef = ref();
  * 百度地图类
  */
 export const BMapGLRef = ref<BMapGL.BMapGL>();
+
+/**
+ * 百度地图三方库
+ */
+export const BMapGLLibRef = ref<BMapGL.BMapGLLib>();
 
 /**
  * 百度地图实例
