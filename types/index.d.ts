@@ -14,6 +14,10 @@ declare namespace BaiduMapVue3 {
          */
         center: BaiduMapOptions.center,
         /**
+         * 百度地图APIKEY
+         */
+        apiKey: string,
+        /**
          * 地图缩放级别
          */
         zoom?: number,
@@ -2904,6 +2908,21 @@ declare namespace BaiduMapVue3 {
         interface MapEventEventMap {
             tilesloaded: MapPayload,
             click: MapPayload,
+            dblclick: MapPayload,
+            mousedown: MapPayload,
+            mouseup: MapPayload,
+            mousemove: MapPayload,
+            mouseover: MapPayload,
+            mouseout: MapPayload,
+            moveend: MapPayload,
+            movestart: MapPayload,
+            mousewheel: MapPayload,
+            rightclick: MapPayload,
+            resize: MapPayload,
+            touchstart: MapPayload,
+            touchmove: MapPayload,
+            touchend: MapPayload,
+            touchcancel: MapPayload
         }
         type MapEvent = keyof MapEventEventMap;
         type MapPayload = {

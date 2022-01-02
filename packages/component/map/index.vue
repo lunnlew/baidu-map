@@ -4,26 +4,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
-import {
-  // container,
-  MapInitializer,
-  BMapAk,
-  map_center,
-  map_zoom,
-} from "@/lib/map";
+import { computed, onMounted, ref, useAttrs, watch } from "vue";
 import BMapGL from "../../lib/BMapGL";
-const bm = ref()
-onMounted(() => {
-  MapInitializer(container.value, {
-    enableRotate: props.enableRotate,
-    enableTilt: props.enableTilt,
-    mapType: props.mapType,
-  }).then((result) => {
-    bm.value = result.map
-    emit("ready", result)
-  });
-});
+import { bindEvents, extractEmitEvents } from "@/utils/util";
+import { initMap } from "@/lib/map";
 const props = withDefaults(defineProps<{
   apiKey: string
   center: {
@@ -31,25 +15,37 @@ const props = withDefaults(defineProps<{
     lat: number
   },
   zoom?: number
-  mapType?: BMapGL.MapTypeId
   enableRotate?: boolean
   enableTilt?: boolean
+  mapType?: BMapGL.MapTypeId
 }>(), {
   apiKey: '',
-  enableRotate: true,
-  enableTilt: true,
   center: () => ({
     lng: 116.403963,
     lat: 116.403963,
   }),
   zoom: 13,
-  mapType: BMapGL.MapTypeId.BMAP_NORMAL_MAP,
+  enableRotate: true,
+  enableTilt: true,
+  mapType: BMapGL.MapTypeId.BMAP_NORMAL_MAP
 })
-const emit = defineEmits(["ready"])
-BMapAk.value = props.apiKey;
-map_center.value = props.center;
-map_zoom.value = props.zoom;
+const emit = defineEmits({})
+const bm = ref()
 const container = ref();
+const attrs = useAttrs();
+const options = computed(() => props)
+onMounted(() => {
+  let merge_props = { ...options.value };
+  initMap(container.value, merge_props)?.then((result) => {
+    let events = extractEmitEvents(attrs) as string[]
+    bindEvents(result.map, events.filter((v: string) => ![
+      // 某些地图事件本身就有默认的事件处理，不需要再次注册，否则导致多次触发
+      'click',
+      'mousedown',
+    ].includes(v)), emit);
+    emit("ready", result)
+  });
+})
 watch(
   () => props.center,
   (val) => {

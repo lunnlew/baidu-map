@@ -1,5 +1,4 @@
-import { BaiduMapProps, BmContextMenuProps, BmCircleProps, BmCityBoundaryProps, BmCityListControlProps, BmContextMenuItemProps, BmCopyrightControlProps, BmGroundOverlayImageProps, BmGroundOverlayProps, BmInfoWindowProps, BmLabelProps, BmLocationControlProps, BmMapTypeControlProps, BmMarkerIconProps, BmMarkerProps, BmMarkerThreedIconProps, BmNavigationControlProps, BmNavigationThreedControlProps, BmScaleControlProps, BmZoomControlProps, BmMarker3DProps, BmPolygonProps, BmPolylineProps, BmPrismProps, BMapGL } from "types"
-import { withDefaults, defineProps } from "vue"
+import { BMapGL } from "types"
 /**
  * 合并实际的属性值
  * @param used_props 
