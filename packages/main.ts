@@ -27,6 +27,8 @@ import BmContextMenuItem from './component/overlay/context-menu-item.vue';
 import BmCircle from './component/overlay/circle.vue';
 import BmInfoWindow from './component/overlay/info-window.vue';
 
+import BmViewAnimation from './component/animation/index.vue';
+
 /**
  * 地图类型空间及根组件
  */
@@ -64,5 +66,10 @@ export {
     BmContextMenu,
     BmContextMenuItem,
     BmCircle,
-    BmInfoWindow
+    BmInfoWindow,
+
+    /**
+     * 地图动画
+     */
+    BmViewAnimation
 };
