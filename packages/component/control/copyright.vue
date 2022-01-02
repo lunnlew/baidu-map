@@ -4,9 +4,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, watch } from "vue";
+import { computed, useAttrs, watch } from "vue";
 import { state } from "@/lib/map";
 import { addCopyrightControl } from "@/lib/control";
+import { bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
   anchor?: number,
   offset?: [number, number],
@@ -16,13 +17,19 @@ const props = withDefaults(defineProps<{
   offset: () => [50, 80],
   show: true,
 })
+const attrs = useAttrs();
+const emit = defineEmits({});
 const isShow = computed(() => state.value.inited && props.show);
 const options = computed(() => props)
 watch(
   () => isShow.value,
   (val) => {
     if (val) {
-      addCopyrightControl(options.value);
+      bindEvents(
+        addCopyrightControl(options.value),
+        extractEmitEvents(attrs),
+        emit
+      );
     }
   },
   {

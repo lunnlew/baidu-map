@@ -4,9 +4,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, watch, ref, computed } from "vue";
+import { onMounted, watch, ref, computed, useAttrs } from "vue";
 import { state } from "@/lib/map";
 import { addCityListControl } from "@/lib/control";
+import { bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
   anchor?: number,
   offset?: [number, number],
@@ -16,13 +17,19 @@ const props = withDefaults(defineProps<{
   offset: () => [50, 80],
   show: true,
 })
+const attrs = useAttrs();
+const emit = defineEmits({});
 const isShow = computed(() => state.value.inited && props.show);
 const options = computed(() => props)
 watch(
   () => isShow.value,
   (val) => {
     if (val) {
-      addCityListControl(options.value);
+      bindEvents(
+        addCityListControl(options.value),
+        extractEmitEvents(attrs),
+        emit
+      );
     }
   },
   {

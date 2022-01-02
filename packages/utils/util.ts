@@ -30,6 +30,7 @@ export function mergePropsDefault(used_props: {
 }
 
 interface AllEventMap {
+    Map: BMapGL.MapEvent;
     Marker: BMapGL.OverlayEvent;
     Label: BMapGL.OverlayEvent;
     Polyline: BMapGL.OverlayEvent;
@@ -37,6 +38,9 @@ interface AllEventMap {
     Circle: BMapGL.OverlayEvent;
     Prism: BMapGL.OverlayEvent;
     InfoWindow: BMapGL.InfoWindowEvent;
+    ZoomControl: BMapGL.ZoomControlEvent;
+    ScaleControl: BMapGL.ScaleControlEvent;
+    MapTypeControl: BMapGL.MapTypeControlEvent;
 }
 type AllEvent = keyof AllEventMap;
 type OnBMapGLEventPayload<T extends AllEvent> = AllEventMap[T]
