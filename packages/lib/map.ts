@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { BMapGL } from "types"
+import { BaiduMapProps, BMapGL } from "types"
 
 /**
  * 地图状态
@@ -10,11 +10,6 @@ export const state = ref({
      */
     inited: false,
 });
-
-/**
- * 百度地图JS API AK参数
- */
-export const BMapAk = ref('');
 
 /**
  * 百度地图容器
@@ -32,25 +27,11 @@ export const BMapGLRef = ref<BMapGL.BMapGL>();
 export const map = ref<BMapGL.Map>();
 
 /**
- * 地图中心点坐标
- */
-export const map_center = ref<{
-    lng: number,
-    lat: number,
-}>({
-    lng: 116.403963,
-    lat: 39.915119
-});
-
-/**
- * 地图级别
- */
-export const map_zoom = ref<number>(13);
-
-/**
  * 初始化百度地图
  */
-export async function MapInitializer(container: string | HTMLElement, opts: BMapGL.MapOptions): Promise<{
+export function initMap(container: string | HTMLElement, map_params: {
+    [key: string]: any
+} & Required<BaiduMapProps>): undefined | Promise<{
     BMap: BMapGL.BMapGL;
     map: BMapGL.Map;
     container: string | HTMLElement
@@ -58,7 +39,7 @@ export async function MapInitializer(container: string | HTMLElement, opts: BMap
     return new Promise((resolve, reject) => {
         containerRef.value = container;
         if (!state.value.inited) {
-            if (!BMapAk.value) {
+            if (!map_params.apiKey) {
                 throw Error("请提供百度地图APIKEY参数：apiKey");
             }
             // @ts-ignore
@@ -67,12 +48,20 @@ export async function MapInitializer(container: string | HTMLElement, opts: BMap
                 state.value.inited = true;
                 // @ts-ignore
                 BMapGLRef.value = globalThis.BMapGL as BMapGL.BMapGL;
-                console.log('MapOptions', opts, map_center.value, map_zoom.value);
+                console.log('MapOptions', map_params);
                 if (!container) {
                     throw new Error("container is not defined");
                 }
-                map.value = new BMapGLRef.value.Map(container as string | HTMLElement, opts)
-                map.value.centerAndZoom(new BMapGLRef.value.Point(map_center.value.lng, map_center.value.lat), map_zoom.value);
+                let map_options = {} as {
+                    [key: string]: any
+                } & Required<BMapGL.MapOptions>
+                for (let key in map_params) {
+                    if (key !== 'apiKey' && key !== 'center' && key !== 'zoom') {
+                        map_options[key as string] = map_params[key]
+                    }
+                }
+                map.value = new BMapGLRef.value.Map(container as string | HTMLElement, map_options)
+                map.value.centerAndZoom(new BMapGLRef.value.Point(map_params.center.lng, map_params.center.lat), map_params.zoom);
                 resolve({
                     BMap: BMapGLRef.value,
                     map: map.value,
@@ -80,7 +69,7 @@ export async function MapInitializer(container: string | HTMLElement, opts: BMap
                 })
             }
             let script = document.createElement("script");
-            script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BMapAk.value}&callback=initializeMap`;
+            script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${map_params.apiKey}&callback=initializeMap`;
             script.onerror = function () {
                 reject(new Error('BMap script load failed'))
             }
