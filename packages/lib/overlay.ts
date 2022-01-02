@@ -302,7 +302,6 @@ export function addCircle(center: {
                 marker_options[key as string] = circle_params[key]
             }
         }
-        console.log('dd')
         let circle = new BMapGLRef.value.Circle(new BMapGLRef.value.Point(center.lng, center.lat), radius, marker_options)
         map.value.addOverlay(circle);
         return circle
