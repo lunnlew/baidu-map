@@ -10,8 +10,8 @@ const props = withDefaults(defineProps<{
   url?: string
 }>(), {
   type: "image",
-  url: "",
   opacity: 0.8,
+  url: "",
 })
 </script>
 <script lang="ts">

@@ -11,8 +11,8 @@
 <script setup lang="ts">
 import { ref, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
-import { addInfoWindow, bindEvents } from "@/lib/overlay";
-import { extractEmitEvents } from "@/utils/util";
+import { addInfoWindow } from "@/lib/overlay";
+import { bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
   content?: string
   width?: number
@@ -32,8 +32,8 @@ const props = withDefaults(defineProps<{
   offset: () => [0, 0],
   title: "",
   enableAutoPan: true,
-  enableCloseOnClick: true,
   enableMaximize: true,
+  enableCloseOnClick: true,
   addToMap: true
 })
 

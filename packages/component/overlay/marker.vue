@@ -6,8 +6,8 @@
 <script setup lang="ts">
 import { useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
-import { addMaker, bindEvents } from "@/lib/overlay";
-import { mergePropsDefault, extractEmitEvents } from "@/utils/util";
+import { addMaker } from "@/lib/overlay";
+import { mergePropsDefault, bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
   point: [number, number]
   offset?: [number, number]
@@ -21,9 +21,9 @@ const props = withDefaults(defineProps<{
 }>(), {
   point: () => [116.403963, 39.915119],
   offset: () => [0, 0],
-  enableClicking: true,
-  enableDragging: false,
   enableMassClear: true,
+  enableDragging: false,
+  enableClicking: true,
   raiseOnDrag: false,
   draggingCursor: '',
   rotation: 0,

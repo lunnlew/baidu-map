@@ -6,8 +6,8 @@
 <script setup lang="ts">
 import { useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
-import { addPolyline, bindEvents } from "@/lib/overlay";
-import { extractEmitEvents } from "@/utils/util";
+import { addPolyline } from "@/lib/overlay";
+import { bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
   points: [number, number][]
   strokeColor?: string
@@ -16,18 +16,16 @@ const props = withDefaults(defineProps<{
   strokeStyle?: string
   enableMassClear?: boolean
   enableEditing?: boolean
-  enableClicking?: boolean
+  enableClicking: boolean
 }>(), {
   points: () => [],
   strokeColor: "#FF0000",
-  strokeOpacity: 0.8,
   strokeWeight: 2,
+  strokeOpacity: 0.8,
   strokeStyle: "solid",
-  fillColor: "#FF0000",
-  fillOpacity: 0.35,
-  enableClicking: true,
-  enableEditing: false,
   enableMassClear: true,
+  enableEditing: false,
+  enableClicking: true,
 })
 let options = { ...props };
 const attrs = useAttrs();

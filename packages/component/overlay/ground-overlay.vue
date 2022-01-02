@@ -6,8 +6,8 @@
 <script setup lang="ts">
 import { useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
-import { addGroundOverlay, bindEvents } from "@/lib/overlay";
-import { mergePropsDefault, extractEmitEvents } from "@/utils/util";
+import { addGroundOverlay } from "@/lib/overlay";
+import { mergePropsDefault, bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
   startPoint: [number, number]
   endPoint: [number, number]
@@ -18,8 +18,8 @@ const props = withDefaults(defineProps<{
   startPoint: () => [0, 0],
   endPoint: () => [0, 0],
   type: "image",
-  url: "",
   opacity: 0.8,
+  url: "",
 })
 const attrs = useAttrs();
 const slots = useSlots()

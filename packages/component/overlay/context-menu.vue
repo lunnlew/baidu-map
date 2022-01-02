@@ -6,8 +6,8 @@
 <script setup lang="ts">
 import { useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
-import { addContextMenu, bindEvents } from "@/lib/overlay";
-import { mergePropsDefault, extractEmitEvents } from "@/utils/util";
+import { addContextMenu } from "@/lib/overlay";
+import { mergePropsDefault, bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps(), {})
 let options = { ...props, menus: [] as any[] };
 const attrs = useAttrs();

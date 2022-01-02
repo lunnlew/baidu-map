@@ -6,8 +6,8 @@
 <script setup lang="ts">
 import { useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
-import { addLabel, bindEvents } from "@/lib/overlay";
-import { extractEmitEvents } from "@/utils/util";
+import { addLabel } from "@/lib/overlay";
+import { bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
   content: string
   position: [number, number]
