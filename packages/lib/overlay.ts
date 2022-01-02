@@ -1,39 +1,6 @@
 import { BMapGLRef, map } from './map';
 import { BMapGL, BmMarkerIconProps, BmMarkerProps, BmMarker3DProps, BmPolygonProps, BmPolylineProps, BmCityBoundaryProps, BmPrismProps, BmGroundOverlayProps, BmLabelProps, BmContextMenuProps, BmCircleProps, BmInfoWindowProps } from "types"
 
-interface AllEventMap {
-    Marker: BMapGL.MarkerEvent;
-    Label: BMapGL.LabelEvent;
-    Polyline: BMapGL.PolylineEvent;
-    Polygon: BMapGL.PolygonEvent;
-    Circle: BMapGL.CircleEvent;
-    Prism: BMapGL.PrismEvent;
-    InfoWindow: BMapGL.InfoWindowEvent;
-}
-type AllEvent = keyof AllEventMap;
-type AllBMapGLType = keyof BMapGL.BMapGL;
-type OnBMapGLPayload<U extends AllBMapGLType> = BMapGL.BMapGL[U]
-type EventL = {
-    addEventListener<U extends AllBMapGLType, T extends AllEvent>(event: OnBMapGLEventPayload<T>, handler: (e: any, obj: OnBMapGLPayload<U>) => void): void
-    removeEventListener<U extends AllBMapGLType, T extends AllEvent>(event: OnBMapGLEventPayload<T>, handler: (e: any, obj: OnBMapGLPayload<U>) => void): void
-};
-type OnBMapGLEventPayload<T extends AllEvent> = AllEventMap[T]
-
-/**
- * 绑定事件
- * @param obj keyof BMapGL.BMapGL
- * @param events AllEvent
- * @param emit Function
- */
-export function bindEvents<U, T extends AllEvent>(obj: U, events: string[], emit: (event: string, ...args: any[]) => void): U {
-    if (obj) {
-        for (let eName of events as OnBMapGLEventPayload<T>[]) {
-            (obj as unknown as EventL).addEventListener(eName, (e, obj) => emit(eName, e, obj));
-        }
-    }
-    return obj as U
-}
-
 /**
  * 添加点标注
  * @param point 

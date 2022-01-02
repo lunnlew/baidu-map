@@ -6,8 +6,8 @@
 <script setup lang="ts">
 import { useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
-import { addMaker3D, bindEvents } from "@/lib/overlay";
-import { mergePropsDefault, extractEmitEvents } from "@/utils/util";
+import { addMaker3D } from "@/lib/overlay";
+import { mergePropsDefault, bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
   point: [number, number]
   height?: number,

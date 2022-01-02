@@ -6,8 +6,8 @@
 <script setup lang="ts">
 import { useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
-import { addPrism, bindEvents } from "@/lib/overlay";
-import { extractEmitEvents } from "@/utils/util";
+import { addPrism } from "@/lib/overlay";
+import { bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
   points?: [number, number][]
   altitude?: number
@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<{
 let options = { ...props };
 const attrs = useAttrs();
 const slots = useSlots()
-const emit = defineEmits({});
+const emit = defineEmits([]);
 watch(
   state.value,
   (val) => {

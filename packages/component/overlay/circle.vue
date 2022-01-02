@@ -6,17 +6,17 @@
 <script setup lang="ts">
 import { useAttrs, watch } from "vue";
 import { state } from "@/lib/map";
-import { addCircle, bindEvents } from "@/lib/overlay";
-import { extractEmitEvents } from "@/utils/util";
+import { addCircle } from "@/lib/overlay";
+import { bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
   center: [number, number],
   radius?: number,
   strokeColor?: string
-  fillColor?: string
   strokeWeight?: number
   strokeOpacity?: number
-  fillOpacity?: number
   strokeStyle?: string
+  fillColor?: string
+  fillOpacity?: number
   enableMassClear?: boolean
   enableEditing?: boolean
   enableClicking?: boolean

@@ -8,9 +8,8 @@
 <script setup lang="ts">
 import { ref, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
-import { bindEvents } from "@/lib/overlay";
 import { addCustomControl } from "@/lib/control";
-import { extractEmitEvents } from "@/utils/util";
+import { bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
     dom?: HTMLElement,
     anchor?: number,

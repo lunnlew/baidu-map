@@ -881,7 +881,7 @@ declare namespace BaiduMapVue3 {
         /**
          * 此类表示地图上包含信息的窗口。
          */
-        class InfoWindow extends Overlay {
+        class InfoWindow {
             /**
              * 创建一个信息窗实例，其中content支持HTML内容。
              * @param content 
@@ -1008,47 +1008,6 @@ declare namespace BaiduMapVue3 {
         }
 
         /**
-         * Label 事件
-         */
-        interface LabelEventEventMap {
-            /**
-             * 点击文本标注后会触发此事件
-             */
-            click: LabelEventPayload
-            /**
-             * 双击文本标注后会触发此事件
-             */
-            dblclick: LabelEventPayload
-            /**
-             * 鼠标在文本标注上按下触发此事件
-             */
-            mousedown: LabelEventPayload
-            /**
-             * 鼠标在文本标注释放触发此事件
-             */
-            mouseup: LabelEventPayload
-            /**
-             * 鼠标离开文本标注时触发此事件
-             */
-            mouseout: LabelEventPayload
-            /**
-             * 当鼠标进入文本标注区域时会触发此事件
-             */
-            mouseover: LabelEventPayload
-            /**
-             * 移除文本标注时触发
-             */
-            remove: LabelEventPayload
-            /**
-             * 右键点击标注时触发此事件
-             */
-            rightclick: LabelEventPayload
-        }
-        type LabelEvent = keyof LabelEventEventMap;
-        type LabelEventPayload = { type: string, target: Label }
-        type OnLabelEventPayload<T extends LabelEvent> = LabelEventEventMap[T];
-
-        /**
          * 此类表示地图上的文本标注。
          */
         class Label extends Overlay {
@@ -1122,19 +1081,19 @@ declare namespace BaiduMapVue3 {
              * @param event 
              * @param handler 
              */
-            addEventListener<T extends LabelEvent>(event: T, handler: (data: OnLabelEventPayload<T>) => void): void
+            addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
              * @param event 
              * @param handler 
              */
-            removeEventListener<T extends LabelEvent>(event: T, handler: (data: OnLabelEventPayload<T>) => void): void
+            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 事件处理函数
              * @param event 
              * @param listener 
              */
-            on<T extends LabelEvent>(event: T, listener: (data: OnLabelEventPayload<T>) => void): this;
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
         }
 
         /**
@@ -1348,16 +1307,6 @@ declare namespace BaiduMapVue3 {
         }
 
         /**
-         *  Polyline 事件
-         */
-        interface PolylineEventEventMap {
-            click: PolylinePayload
-        }
-        type PolylineEvent = keyof PolylineEventEventMap;
-        type PolylinePayload = { type: string, target: Polyline }
-        type OnPolylineEventPayload<T extends PolylineEvent> = PolylineEventEventMap[T];
-
-        /**
          * 使用浏览器的矢量制图工具（如果可用）在地图上绘制折线的地图叠加层。
          */
         class Polyline extends Overlay {
@@ -1447,19 +1396,19 @@ declare namespace BaiduMapVue3 {
              * @param event 
              * @param handler 
              */
-            addEventListener<T extends PolylineEvent>(event: T, handler: (data: OnPolylineEventPayload<T>) => void): void
+            addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
              * @param event 
              * @param handler 
              */
-            removeEventListener<T extends PolylineEvent>(event: T, handler: (data: OnPolylineEventPayload<T>) => void): void
+            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 事件处理函数
              * @param event 
              * @param listener 
              */
-            on<T extends PolylineEvent>(event: T, listener: (data: OnPolylineEventPayload<T>) => void): this;
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
         }
 
         /**
@@ -1503,17 +1452,6 @@ declare namespace BaiduMapVue3 {
              */
             enableClicking?: boolean
         }
-
-
-        /**
-         *  Polygon 事件
-         */
-        interface PolygonEventEventMap {
-            click: PolygonPayload
-        }
-        type PolygonEvent = keyof PolygonEventEventMap;
-        type PolygonPayload = { type: string, target: Polygon }
-        type OnPolygonEventPayload<T extends PolygonEvent> = PolygonEventEventMap[T];
 
         /**
          * 此类表示一个多边形覆盖物。
@@ -1623,19 +1561,19 @@ declare namespace BaiduMapVue3 {
              * @param event 
              * @param handler 
              */
-            addEventListener<T extends PolygonEvent>(event: T, handler: (data: OnPolygonEventPayload<T>) => void): void
+            addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
              * @param event 
              * @param handler 
              */
-            removeEventListener<T extends PolygonEvent>(event: T, handler: (data: OnPolygonEventPayload<T>) => void): void
+            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 事件处理函数
              * @param event 
              * @param listener 
              */
-            on<T extends PolygonEvent>(event: T, listener: (data: OnPolygonEventPayload<T>) => void): this;
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
         }
 
         /**
@@ -1679,20 +1617,6 @@ declare namespace BaiduMapVue3 {
              */
             enableClicking: boolean
         }
-
-        /**
-         *  Circle 事件
-         */
-        interface CircleEventEventMap {
-            /**
-             * 点击Circle时触发事件
-             */
-            click: CirclePayload
-        }
-        type CircleEvent = keyof CircleEventEventMap;
-        type CirclePayload = { type: string, target: Circle }
-        type OnCircleEventPayload<T extends CircleEvent> = CircleEventEventMap[T];
-
 
         /**
          * 此类表示地图上的圆覆盖物。
@@ -1806,19 +1730,19 @@ declare namespace BaiduMapVue3 {
              * @param event 
              * @param handler 
              */
-            addEventListener<T extends CircleEvent>(event: T, handler: (data: OnCircleEventPayload<T>) => void): void
+            addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
              * @param event 
              * @param handler 
              */
-            removeEventListener<T extends CircleEvent>(event: T, handler: (data: OnCircleEventPayload<T>) => void): void
+            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 事件处理函数
              * @param event 
              * @param listener 
              */
-            on<T extends CircleEvent>(event: T, listener: (data: OnCircleEventPayload<T>) => void): this;
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
         }
 
         /**
@@ -1902,6 +1826,24 @@ declare namespace BaiduMapVue3 {
              * 返回图层显示的最大级别
              */
             getDispalyOnMaxLevel(): number
+            /**
+             * 添加事件监听函数
+             * @param event 
+             * @param handler 
+             */
+            addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
+            /**
+             * 移除事件监听函数
+             * @param event 
+             * @param handler 
+             */
+            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
+            /**
+             * 事件处理函数
+             * @param event 
+             * @param listener 
+             */
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
         }
 
         /**
@@ -2318,19 +2260,6 @@ declare namespace BaiduMapVue3 {
         }
 
         /**
-         *  Marker 事件
-         */
-        interface MarkerEventEventMap {
-            /**
-             * 点击Marker时触发事件
-             */
-            click: MarkerPayload
-        }
-        type MarkerEvent = keyof MarkerEventEventMap;
-        type MarkerPayload = { type: string, target: Marker }
-        type OnMarkerEventPayload<T extends MarkerEvent> = MarkerEventEventMap[T];
-
-        /**
          * 此类表示地图上的一个图像标注。
          */
         class Marker extends Overlay {
@@ -2345,19 +2274,19 @@ declare namespace BaiduMapVue3 {
              * @param event 
              * @param handler 
              */
-            addEventListener<T extends MarkerEvent>(event: T, handler: (data: OnMarkerEventPayload<T>) => void): void
+            addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
              * @param event 
              * @param handler 
              */
-            removeEventListener<T extends MarkerEvent>(event: T, handler: (data: OnMarkerEventPayload<T>) => void): void
+            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 事件处理函数
              * @param event 
              * @param listener 
              */
-            on<T extends MarkerEvent>(event: T, listener: (data: OnMarkerEventPayload<T>) => void): this;
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
         }
 
         /**
@@ -2416,20 +2345,72 @@ declare namespace BaiduMapVue3 {
              * @param event 
              * @param handler 
              */
-            addEventListener<T extends MarkerEvent>(event: T, handler: (data: OnMarkerEventPayload<T>) => void): void
+            addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
              * @param event 
              * @param handler 
              */
-            removeEventListener<T extends MarkerEvent>(event: T, handler: (data: OnMarkerEventPayload<T>) => void): void
+            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 事件处理函数
              * @param event 
              * @param listener 
              */
-            on<T extends MarkerEvent>(event: T, listener: (data: OnMarkerEventPayload<T>) => void): this;
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
         }
+
+        /**
+         *  Overlay 事件
+         */
+        interface OverlayEventEventMap {
+            /**
+             * 点击文本标注后会触发此事件
+             */
+            click: OverlayEventPayload
+            /**
+             * 双击文本标注后会触发此事件
+             */
+            dblclick: OverlayEventPayload
+            /**
+             * 鼠标在文本标注上按下触发此事件
+             */
+            mousedown: OverlayEventPayload
+            /**
+             * 鼠标在文本标注释放触发此事件
+             */
+            mouseup: OverlayEventPayload
+            /**
+             * 鼠标离开文本标注时触发此事件
+             */
+            mouseout: OverlayEventPayload
+            /**
+             * 当鼠标进入文本标注区域时会触发此事件
+             */
+            mouseover: OverlayEventPayload
+            /**
+             * 移除文本标注时触发
+             */
+            remove: OverlayEventPayload
+            /**
+             * 右键点击标注时触发此事件
+             */
+            rightclick: OverlayEventPayload
+        }
+        type OverlayEvent = keyof OverlayEventEventMap;
+        type OverlayEventPayload = {
+            cancelBubble: boolean
+            currentTarget: keyof BMapGL.BMapGL
+            domEvent: any
+            latLng: Point
+            pixel: Pixel
+            point: Point
+            returnValue: boolean
+            srcElement: keyof BMapGL.BMapGL
+            target: keyof BMapGL.BMapGL
+            type: string
+        }
+        type OnOverlayEventPayload<T extends OverlayEvent> = OverlayEventEventMap[T];
 
         /**
          * 覆盖物的抽象基类，所有覆盖物均继承基类的方法。此类不可实例化。
@@ -2456,6 +2437,24 @@ declare namespace BaiduMapVue3 {
              * 隐藏覆盖物。对于自定义覆盖物，此方法会自动将initialize方法返回的HTML元素样式的display属性设置为none
              */
             hide(): void
+            /**
+             * 添加事件监听函数
+             * @param event 
+             * @param handler 
+             */
+            addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
+            /**
+             * 移除事件监听函数
+             * @param event 
+             * @param handler 
+             */
+            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
+            /**
+             * 事件处理函数
+             * @param event 
+             * @param listener 
+             */
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
         }
 
         /**
@@ -2659,6 +2658,19 @@ declare namespace BaiduMapVue3 {
              */
             constructor(keyFrames: Array<ViewAnimationKeyFrames>, opts: ViewAnimationOptions)
         }
+
+        /**
+        *  Map 事件
+        */
+        interface MapEventEventMap {
+            tilesloaded: MapPayload,
+            click: MapPayload,
+        }
+        type MapEvent = keyof MapEventEventMap;
+        type MapPayload = {
+            latlng: Point,
+        }
+        type OnMapEventPayload<T extends MapEvent> = MapEventEventMap[T];
 
         /**
          * 此类是地图API的核心类，用来实例化一个地图。请注意WebGL版本的地图API的命名空间是BMapGL。
@@ -3119,6 +3131,25 @@ declare namespace BaiduMapVue3 {
              * @param point 
              */
             openInfoWindow(infoWindow: InfoWindow, point: Point): void;
+
+            /**
+             * 添加事件监听函数
+             * @param event 
+             * @param handler 
+             */
+            addEventListener<T extends MapEvent>(event: T, handler: (data: OnMapEventPayload<T>) => void): void
+            /**
+             * 移除事件监听函数
+             * @param event 
+             * @param handler 
+             */
+            removeEventListener<T extends MapEvent>(event: T, handler: (data: OnMapEventPayload<T>) => void): void
+            /**
+             * 事件处理函数
+             * @param event 
+             * @param listener 
+             */
+            on<T extends MapEvent>(event: T, listener: (data: OnMapEventPayload<T>) => void): this;
         }
 
         /**
@@ -3162,16 +3193,6 @@ declare namespace BaiduMapVue3 {
              */
             enableMassClear: boolean
         }
-
-        /**
-         *  Prism 事件
-         */
-        interface PrismEventEventMap {
-            click: PrismPayload
-        }
-        type PrismEvent = keyof PrismEventEventMap;
-        type PrismPayload = { type: string, target: Prism }
-        type OnPrismEventPayload<T extends PrismEvent> = PrismEventEventMap[T];
 
         /**
          * 此类表示一个棱柱覆盖物
@@ -3255,25 +3276,25 @@ declare namespace BaiduMapVue3 {
              * @param event 
              * @param handler 
              */
-            addEventListener<T extends PrismEvent>(event: T, handler: (data: OnPrismEventPayload<T>) => void): void
+            addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
              * @param event 
              * @param handler 
              */
-            removeEventListener<T extends PrismEvent>(event: T, handler: (data: OnPrismEventPayload<T>) => void): void
+            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 事件处理函数
              * @param event 
              * @param listener 
              */
-            on<T extends PrismEvent>(event: T, listener: (data: OnPrismEventPayload<T>) => void): this;
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
         }
 
         /**
          * 定位结果状态
          */
-        enum GeolocationStatusCode {
+        enum StatusCode {
             BMAP_STATUS_SUCCESS = 0,
             BMAP_STATUS_UNKNOWN_LOCATION = 2,
             BMAP_STATUS_PERMISSION_DENIED = 6,
@@ -3341,7 +3362,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 定位完成后的状态码。分为BMAP_STATUS_SUCCESS，BMAP_STATUS_UNKNOWN_LOCATION，BMAP_STATUS_PERMISSION_DENIED，BMAP_STATUS_TIMEOUT
              */
-            getStatus(): GeolocationStatusCode
+            getStatus(): StatusCode
             /**
              * 开启SDK辅助定位，仅当使用环境为移动web混合开发，且开启了定位sdk辅助定位功能后生效
              */
@@ -3417,6 +3438,505 @@ declare namespace BaiduMapVue3 {
             get(callback: Function): void
         }
 
+        /**
+         * 此类表示Geocoder的地址解析请求的可选参数。它不可实例化。
+         */
+        interface LocationOptions {
+            /**
+             * 附近POI所处于的最大半径，默认为100米
+             */
+            poiRadius: number
+            /**
+             * 返回的POI点个数，默认为10个。取值范围
+             */
+            numPois: number
+        }
+        /**
+         * 此枚举常量表示地点的类型。
+         */
+        enum PoiType {
+            /**
+             * 一般位置点
+             */
+            BMAP_POI_TYPE_NORMAL = 0,
+            /**
+             * 公交车站位置点
+             */
+            BMAP_POI_TYPE_BUSSTOP = 1,
+            /**
+             * 公交线路位置点
+             */
+            BMAP_POI_TYPE_BUSLINE = 2,
+            /**
+             * 地铁车站位置点
+             */
+            BMAP_POI_TYPE_SUBSTOP = 3,
+            /**
+             * 地铁线路位置点
+             */
+            BMAP_POI_TYPE_SUBLINE = 4
+        }
+
+        /**
+         * 此类表示位置检索或路线规划的一个结果点，没有构造函数，可通过对象字面量形式表示。
+         */
+        interface LocalResultPoi {
+            /**
+             * 结果的名称标题
+             */
+            title: string
+            /**
+             * 该结果所在的地理位置
+             */
+            point: Point
+            /**
+             * 在百度地图中展示该结果点的详情信息链接
+             */
+            url: string
+            /**
+             * 地址（根据数据部分提供）。注：当结果点类型为公交站或地铁站时，地址信息为经过该站点的所有车次
+             */
+            address: string
+            /**
+             * 所在城市
+             */
+            city: string
+            /**
+             * 电话，根据数据部分提供
+             */
+            phoneNumber: string
+            /**
+             * 邮政编码，根据数据部分提供
+             */
+            postcode: string
+            /**
+             * 类型，根据数据部分提供
+             */
+            type: PoiType
+            /**
+             * 是否精确匹配。只适用LocalSearch的search方法检索的结果
+             */
+            isAccurate: boolean
+            /**
+             * 所在省份
+             */
+            province: string
+            /**
+             * POI的标签，如商务大厦、餐馆等。目前只有LocalSearch的回调函数onSearchComplete(result)中的result和Geocoder.getLocation的回调函数的参数GeocoderResult.surroundingPois涉及的LocalResultPoi有tags字段。其他API涉及的LocalResultPoi没有该字段
+             */
+            tags: Array<string>
+            /**
+             * 	在百度地图详情页面展示该结果点的链接。localsearch的结果中才有
+             */
+            detailUrl: string
+        }
+
+        /**
+         * 此类表示Geocoder的地址解析结果。它在地址解析的回调函数的参数中返回，不可实例化。
+         */
+        interface GeocoderResult {
+            /**
+             * 坐标点
+             */
+            point: Point
+            /**
+             * 地址描述
+             */
+            address: string
+            /**
+             * 结构化的地址描述
+             */
+            addressComponents: AddressComponent
+            /**
+             * 附近的POI点
+             */
+            surroundingPois: Array<LocalResultPoi>
+            /**
+             * 商圈字段，代表此点所属的商圈
+             */
+            business: string
+        }
+
+        /**
+         * 类用于获取用户的地址解析。
+         */
+        class Geocoder {
+            /**
+             * 创建一个地址解析器的实例
+             */
+            constructor()
+            /**
+             * 对指定的地址进行解析。如果地址定位成功，则以地址所在的坐标点Point为参数调用回调函数。否则，回调函数的参数为null。city为地址所在的城市名，例如“北京市”
+             * @param address 
+             * @param callback 
+             * @param city 
+             */
+            getPoint(address: String, callback: Function, city: String): void
+            /**
+             * 对指定的坐标点进行反地址解析。如果解析成功，则回调函数的参数为GeocoderResult对象，否则回调函数的参数为null
+             * @param point 
+             * @param callback 
+             * @param options 
+             */
+            getLocation(point: Point, callback: Function, options: LocationOptions): void
+        }
+
+        /**
+         * 此类表示TileLayer构造函数的可选参数
+         */
+        interface TileLayerOptions {
+            /**
+             * 是否使用了带有透明信息的PNG。由于IE6不支持PNG透明，因此需要特殊处理
+             */
+            transparentPng: boolean
+            /**
+             * 指定图块网址模板，该模板可以针对每个图块请求而展开，以根据现有的图块坐标系引用唯一的图块。模板的格式应该为：http://yourhost/tile?x={X}&y={Y}&z={Z}.png 其中X和Y分别指纬度和经度图块坐标，Z指缩放级别，比如： http://yourhost/tile?x=3&y=27&z=5.png 如果您没有提供图块网址模板，您需要实现TileLayer.getTileUrl()抽象方法
+             */
+            tileUrlTemplate: string
+            /**
+             * 图层的zIndex
+             */
+            zIndex: number
+        }
+
+        /**
+         * 此类表示一个地图图层，您可以向地图中添加自定义图层。
+         */
+        class TileLayer {
+            /**
+             * 创建一个地图图层实例
+             * @param opts 
+             */
+            constructor(opts: TileLayerOptions)
+            /**
+             * 抽象。向地图返回地图图块的网址，图块索引由tileCoord的x和y属性在指定的缩放级别zoom提供。如果您在TileLayerOptions中提供了tileUrlTemplate参数，则可不实现此接口
+             * @param tileCoord 
+             * @param zoom 
+             */
+            getTilesUrl(tileCoord: Pixel, zoom: Number): string
+            /**
+             * 如果图层所用的图片为PNG格式并且包含透明信息，则返回true
+             */
+            isTransparentPng(): number
+        }
+
+        type transformType = "EPSG3857" | "BD09MC"
+
+        /**
+         * XYZLayer的构造参数
+         */
+        interface XYZLayerOptions {
+            /**
+             * 坐标转换设置默认 {source："EPSG3857", target："BD09MC"}
+             */
+            transform: {
+                source: transformType,
+                target: transformType
+            }
+            /**
+             * 	图像数据请求地址。可通过{0,1,2}标记实现多请求地址的配置；可通过[z]，[x]，[y]，[b]引用默认的*Template。WMTS/TMS/自定义栅格图层服务默认使用[z]，[x]，[y]，瓦片大小为256*256。WMS服务默认使用[b]。
+             */
+            tileUrlTemplate: String
+            /**
+             * 通过输入的网格x、y、z参数计算[x]具体返回值。x、y、z参数对应是Google web墨卡托网格的列号、行号、缩放等级。
+             */
+            xTemplate: Function
+            /**
+             * 通过输入的网格x、y、z参数计算[y]具体返回值。x、y、z参数对应是Google web墨卡托网格的列号、行号、缩放等级。
+             */
+            yTemplate: Function
+            /**
+             * 通过输入的网格x、y、z参数计算[z]具体返回值。x、y、z参数对应是Google web墨卡托网格的列号、行号、缩放等级。
+             */
+            zTemplate: Function
+            /**
+             * 通过输入的网格x、y、z参数计算[b]具体返回值，返回值默认为四至坐标拼接成的字符串：’minX,minY,maxX,maxY’。x、y、z参数对应是Google web墨卡托网格的列号、行号、缩放等级。
+             */
+            bTemplate: Function
+            /**
+             * 设置图层显示的最小缩放等级。
+             */
+            minZoom: Number
+            /**
+             * 设置图层显示的最大缩放等级。
+             */
+            maxZoom: Number
+            /**
+             * 设置图层加载数据的四至范围，输入的范围数值默认为EPSG:3857坐标[minX,minY,maxX,maxY]。
+             */
+            extent: [number, number, number, number]
+            /**
+             * 标记参数extend数组数据是否为EPSG:4326坐标。默认false，如果设置为true，参数extent数值需要是EPSG:4326 坐标。
+             */
+            extentCRSIsWGS84: Boolean
+            /**
+             * 设置图层掩膜。可通过BMapGL.Boundary()获取行政区域的坐标数据。
+             */
+            boundary: any[]
+            /**
+             * 缩放图层时，是否使用跨图层的瓦片进行平滑切换。默认false。如果影响透明图层的展示效果，可以设置false；如果非透明图层，可以设置true。
+             */
+            useThumbData: Boolean
+            /**
+             * tileUrlTemplate中[y]是否为tms请求服务形式。默认false。如果是则设置为true。
+             */
+            tms: Boolean
+        }
+
+        /**
+         * 此类用于添加第三方标准图层。
+         */
+        class XYZLayer {
+            /**
+             * XYZLayer实例化TileLayer，用于添加第三方标准图层，通过options设置图层瓦片请求地址、显示等级、显示范围等。
+             * @param options 
+             */
+            constructor(options: XYZLayerOptions)
+            /**
+             * 设置图层掩膜。boundaries可通过BMapGL.Boundary()获取行政区域的坐标数据。
+             * @param boundaries 
+             */
+            addBoundary(boundaries: any[]): void
+            /**
+             * 清空图层掩膜。
+             */
+            clearBoundary(): void
+            /**
+             * 
+             * @param index 设置图层显示层级，数字越大，显示越靠上。
+             */
+            setZIndex(index: Number): void
+            /**
+             * 设置图层显示等级为最上层。
+             */
+            setZIndexTop(): void
+        }
+
+        /**
+         * 此类表示检索lbs云服务的数据。它没有构造函数，但可通过对象字面量形式表示。 要检索lbs云服务的数据，需要在引用api的时候在参数后加上lbs云平台的key。
+         */
+        interface CustomData {
+            /**
+             * lbs云v2接口，可在lbs云平台上查看自己的geotableId
+             */
+            geotableId: Number
+            /**
+             * 空格分隔的多字符串
+             */
+            tags: String
+            /**
+             * 	过滤条件，参考：lbsyun.baidu.com/index.php?title=lbscloud/api/geosearch
+             */
+            filter: String
+        }
+
+        /**
+         * 此类表示搜索结果呈现的配置。它没有构造函数，但可通过对象字面量形式表示。
+         */
+        interface LocalRenderOptions {
+            /**
+             * 展现结果的地图实例。当指定此参数后，搜索结果的标注、线路等均会自动添加到此地图上
+             */
+            map: Map
+            /**
+             * 结果列表的HTML容器id或容器元素，提供此参数后，结果列表将在此容器中进行展示。此属性对LocalCity无效。驾车路线规划无效
+             */
+            panel: String | HTMLElement
+            /**
+             * 是否选择第一个检索结果。此属性仅对LocalSearch有效
+             */
+            selectFirstResult: Boolean
+            /**
+             * 	检索结束后是否自动调整地图视野。此属性对LocalCity无效
+             */
+            autoViewport: Boolean
+        }
+
+        /**
+         * 此类表示LocalSearch构造函数的可选参数。
+         */
+        interface LocalSearchOptions {
+            /**
+             * 结果呈现设置
+             */
+            renderOptions: LocalRenderOptions
+            /**
+             * 标注添加完成后的回调函数。 参数： pois: Array ，通过marker属性可得到其对应的标注
+             */
+            onMarkersSet: Function
+            /**
+             * 标注气泡内容创建后的回调函数。 参数： poi: LocalResultPoi，通过其marker属性可得到当前的标注。 html: HTMLElement，气泡内的Dom元素
+             */
+            onInfoHtmlSet: Function
+            /**
+             * 结果列表添加完成后的回调函数。 参数： container: HTMLElement，结果列表所用的HTML元素 */
+            onResultsHtmlSet: Function
+            /**
+             * 设置每页容量，取值范围：1 - 100，对于多关键字检索，容量表示每个关键字的数量，如果有2个关键字，则实际检索结果数量范围为：2 - 200
+             */
+            pageCapacity: Number
+            /**
+             * 检索完成后的回调函数。 参数：results: LocalResult或Array 如果是多关键字检索，回调函数参数返回一个LocalResult的数组，数组中的结果顺序和检索中多关键字数组中顺序一致
+             */
+            onSearchComplete: Function
+        }
+
+        /**
+         * 类表示LocalSearch的检索结果，没有构造函数，通过LocalSearch.getResults()方法或LocalSearch的onSearchComplete回调函数的参数得到。
+         */
+        interface LocalResult {
+            /**
+             * 本次检索的关键词
+             */
+            keyword: String
+            /**
+             * 周边检索的中心点（仅当周边检索时提供）
+             */
+            center: LocalResultPoi
+            /**
+             * 周边检索的半径（仅当周边检索时提供）
+             */
+            radius: Number
+            /**
+             * 范围检索的地理区域（仅当范围检索时提供）
+             */
+            bounds: Bounds
+            /**
+             * 本次检索所在的城市
+             */
+            city: String
+            /**
+             * 更多结果的链接，到百度地图进行搜索
+             */
+            moreResultsUrl: String
+            /**
+             * 本次检索所在的省份
+             */
+            province: String
+            /**
+             * 搜索建议列表。（当关键词是拼音或拼写错误时给出的搜索建议）
+             */
+            suggestions: Array<String>
+            /**
+             * 
+             * @param i 返回索引指定的结果。索引0表示第1条结果
+             */
+            getPoi(i: Number): LocalResultPoi
+            /**
+             * 返回当前页的结果数
+             */
+            getCurrentNumPois(): Number
+            /**
+             * 返回总结果数
+             */
+            getNumPois(): Number
+            /**
+             * 返回总页数
+             */
+            getNumPages(): Number
+            /**
+             * 返回页数序号
+             */
+            getPageIndex(): Number
+            /**
+             * 返回城市列表。数组元素对象包含如下属性： city: String，城市名 numResults: Number，结果数
+             */
+            getCityList(): Array<Object>
+        }
+
+        /**
+         * 用于位置检索、周边检索和范围检索。
+         */
+        class LocalSearch {
+            /**
+             * 创建一个搜索类实例，其中location表示检索区域，其类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定，且搜索结果的标注将自动加载到地图上，并支持调整地图视野层级；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
+             * @param location 
+             * @param opts 
+             */
+            constructor(location: Map | Point | String, opts: LocalSearchOptions)
+            /**
+             * 根据检索词发起检索。当keyword为数组时将同时执行多关键字的查询，最多支持10个关键字，多关键字自 1.2 版本支持。option:{forceLocal:Boolean, customData:CustomData} forceLocal表示是否将搜索范围约束在当前城市，customData表示检索lbs云服务的数据
+             * @param keyword 
+             * @param option 
+             */
+            search(keyword: String | Array<String>, option: Object): void
+            /**
+             * 根据范围和检索词发起范围检索。当keyword为数组时将同时执行多关键字检索，最多支持10个关键字，多关键字自 1.2 版本支持。option:{customData:CustomData} customData表示检索lbs云服务的数据
+             * @param keyword 
+             * @param bounds 
+             * @param option 
+             */
+            searchInBounds(keyword: String | Array<String>, bounds: Bounds, option: Object): void
+            /**
+             * 根据中心点、半径与检索词发起周边检索。当keyword为数组时将同时执行多关键字的检索，最多支持10个关键字，多关键字自 1.2 版本支持。当center为字符串时，半径参数将忽略。注意：Point类型的中心点自 1.1 版本支持。option: { customData: CustomData } customData表示检索lbs云服务的数据
+             * @param keyword 
+             * @param center 
+             * @param radius 
+             * @param option 
+             */
+            searchNearby(keyword: String | Array<String>, center: LocalResultPoi | String | Point, radius: Number, option: Object): void
+            /**
+             * 返回最近一次检索的结果。如果是多关键字范围检索，则返回一个LocalResult的数组，数组中的结果顺序和范围检索中多关键字数组中顺序一致
+             */
+            getResults(): LocalResult | Array<LocalResult>
+            /**
+             * 清除最近一次检索的结果
+             */
+            clearResults(): void
+            /**
+             * 检索特定页面的结果
+             */
+            gotoPage(page: Number): void
+            /**
+             * 启用根据结果自动调整地图层级，当指定了搜索结果所展现的地图时有效
+             */
+            enableAutoViewport(): void
+            /**
+             * 禁用根据结果自动调整地图层级
+             */
+            disableAutoViewport(): void
+            /**
+             * 启用自动选择第一个检索结果
+             */
+            enableFirstResultSelection(): void
+            /**
+             * 禁用自动选择第一个检索结果
+             */
+            disableFirstResultSelection(): void
+            /**
+             *  设置检索范围，参数类型可以为地图实例、坐标点或字符串。例：setLocation("北京市")
+             */
+            setLocation(location: Map | Point | String): void
+            /**
+             * 设置每页容量，取值范围：1 - 100，对于多关键字检索，每页容量表示每个关键字返回结果的数量（例如当用2个关键字检索时，实际结果数量范围为：2 - 200）。此值只对下一次检索有效
+             */
+            setPageCapacity(): void
+            /**
+             * 返回每页容量，对于多关键字检索，返回每个关键字对应的页面容量
+             */
+            getPageCapacity(): Number
+            /**
+             *  设置检索结束后的回调函数。参数：results: LocalResult 或 Array 如果是多关键字检索，回调函数参数为LocalResult的数组，数组中的结果顺序和检索中多关键字数组中顺序一致
+             */
+            setSearchCompleteCallback(): void
+            /**
+             * 设置添加标注后的回调函数。参数： pois: Array ，通过marker属性可得到其对应的标注
+             */
+            setMarkersSetCallback(callback: Function): void
+            /**
+             *  设置标注气泡创建时的回调函数。参数： poi: LocalResultPoi，通过其marker属性可得到当前的标注。 html: HTMLElement，气泡内的Dom元素
+             */
+            setInfoHtmlSetCallback(callback: Function): void
+            /**
+             * 设置结果列表创建后的回调函数。参数： container: HTMLElement，结果列表所用的HTML元素
+             */
+            setResultsHtmlSetCallback(callback: Function): void
+            /**
+             * 返回状态码
+             */
+            getStatus(): StatusCode
+        }
+
         interface BMapGL {
             /**
              * 在指定的容器内创建地图实例，之后需要调用Map.centerAndZoom()方法对地图进行初始化。未进行初始化的地图将不能进行任何操作
@@ -3436,6 +3956,12 @@ declare namespace BaiduMapVue3 {
              * @param lat Number
              */
             Point: { new(lng: number, lat: number): Point };
+            /**
+             * 创建像素点对象实例。像素坐标的坐标原点为地图区域的左上角
+             * @param x 
+             * @param y 
+             */
+            Pixel: { new(x: number, y: number): Pixel };
             /**
              * 创建一个图像标注实例。point参数指定了图像标注所在的地理位置
              * @param point Point
@@ -3535,6 +4061,11 @@ declare namespace BaiduMapVue3 {
             */
             CityListControl: { new(opts?: CityListControlOptions): CityListControl };
             /**
+             * 创建一个自定义控件
+             * @param opts CustomControlOptions
+             */
+            Control: { new(opts: CustomControlOptions): Control };
+            /**
             * 创建一个分界范围区域
             */
             Boundary: { new(): Boundary };
@@ -3557,6 +4088,9 @@ declare namespace BaiduMapVue3 {
             ContextMenu: { new(): ContextMenu };
             /**
             * 创建一个右键菜单项实例
+            * @param text string
+            * @param callback Function
+            * @param opts MenuItemOptions
             */
             MenuItem: { new(text: string, callback: Function, opts: MenuItemOptions): MenuItem };
             /**
@@ -3565,12 +4099,30 @@ declare namespace BaiduMapVue3 {
             Geolocation: { new(): Geolocation };
             /**
              * 创建一个获取本地城市位置的实例
+             * @param opts LocalCityOptions
              */
             LocalCity: { new(opts: LocalCityOptions): LocalCity };
             /**
-             * 创建一个自定义控件
+             * 创建一个地址解析器的实例
              */
-            Control: { new(opts: CustomControlOptions): Control };
+            Geocoder: { new(): Geocoder };
+            /**
+             * 创建一个地图图层实例
+             * @param opts TileLayerOptions
+             */
+            TileLayer: { new(opts: TileLayerOptions): TileLayer };
+            /**
+             * 创建一个搜索类实例，其中location表示检索区域，其类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定，且搜索结果的标注将自动加载到地图上，并支持调整地图视野层级；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
+             * @param location 
+             * @param opts 
+             */
+            LocalSearch: { new(location: Map | Point | String, opts: LocalSearchOptions): LocalSearch };
+            /**
+             * 创建地图视角动画对象，通过关键帧的形式对动画进行定义
+             * @param keyFrames 
+             * @param opts 
+             */
+            ViewAnimation: { new(keyFrames: Array<ViewAnimationKeyFrames>, opts: ViewAnimationOptions): ViewAnimation };
         }
 
         type AllBMapGLType = keyof BMapGL.BMapGL;

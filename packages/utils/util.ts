@@ -1,4 +1,4 @@
-import { BaiduMapProps, BmContextMenuProps, BmCircleProps, BmCityBoundaryProps, BmCityListControlProps, BmContextMenuItemProps, BmCopyrightControlProps, BmGroundOverlayImageProps, BmGroundOverlayProps, BmInfoWindowProps, BmLabelProps, BmLocationControlProps, BmMapTypeControlProps, BmMarkerIconProps, BmMarkerProps, BmMarkerThreedIconProps, BmNavigationControlProps, BmNavigationThreedControlProps, BmScaleControlProps, BmZoomControlProps, BmMarker3DProps, BmPolygonProps, BmPolylineProps, BmPrismProps } from "types"
+import { BaiduMapProps, BmContextMenuProps, BmCircleProps, BmCityBoundaryProps, BmCityListControlProps, BmContextMenuItemProps, BmCopyrightControlProps, BmGroundOverlayImageProps, BmGroundOverlayProps, BmInfoWindowProps, BmLabelProps, BmLocationControlProps, BmMapTypeControlProps, BmMarkerIconProps, BmMarkerProps, BmMarkerThreedIconProps, BmNavigationControlProps, BmNavigationThreedControlProps, BmScaleControlProps, BmZoomControlProps, BmMarker3DProps, BmPolygonProps, BmPolylineProps, BmPrismProps, BMapGL } from "types"
 import { withDefaults, defineProps } from "vue"
 /**
  * 合并实际的属性值
@@ -28,17 +28,52 @@ export function mergePropsDefault(used_props: {
     }
     return props
 }
+
+interface AllEventMap {
+    Marker: BMapGL.OverlayEvent;
+    Label: BMapGL.OverlayEvent;
+    Polyline: BMapGL.OverlayEvent;
+    Polygon: BMapGL.OverlayEvent;
+    Circle: BMapGL.OverlayEvent;
+    Prism: BMapGL.OverlayEvent;
+    InfoWindow: BMapGL.InfoWindowEvent;
+}
+type AllEvent = keyof AllEventMap;
+type OnBMapGLEventPayload<T extends AllEvent> = AllEventMap[T]
+type AllBMapGLType = keyof BMapGL.BMapGL;
+type OnBMapGLPayload<U extends AllBMapGLType> = BMapGL.BMapGL[U]
+type EventL = {
+    addEventListener<U extends AllBMapGLType, T extends PickEvent<AllEventMap>>(event: T, handler: (e: any, obj: OnBMapGLPayload<U>) => void): void
+    removeEventListener<U extends AllBMapGLType, T extends PickEvent<AllEventMap>>(event: T, handler: (e: any, obj: OnBMapGLPayload<U>) => void): void
+};
+type ValueOf<T> = T[keyof T]
+type PickEvent<U> = ValueOf<U>[keyof ValueOf<U>]
+type DataKey<T> = T[keyof T]
+
 /**
  * 提取事件名称
  */
-export function extractEmitEvents(attr: {
-    [key: string]: any
-}): string[] {
+export function extractEmitEvents<T, U extends DataKey<T>>(attr: T): U {
     let events = []
     for (let key in attr) {
         if (key.startsWith('on')) {
             events.push(key.substring(2).toLowerCase())
         }
     }
-    return events
+    return events as unknown as U
+}
+
+/**
+ * 绑定事件
+ * @param obj keyof BMapGL.BMapGL
+ * @param events AllEvent
+ * @param emit Function
+ */
+export function bindEvents<U, T extends PickEvent<AllEventMap>>(obj: U, events: T[], emit: (event: T, ...args: any[]) => void): U {
+    if (obj) {
+        for (let eName of events) {
+            (obj as unknown as EventL).addEventListener(eName, (e, obj) => emit(eName, e, obj));
+        }
+    }
+    return obj
 }
