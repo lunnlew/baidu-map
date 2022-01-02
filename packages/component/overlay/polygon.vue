@@ -4,12 +4,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useAttrs, useSlots, watch } from "vue";
+import { computed, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
 import { addPolygon } from "@/lib/overlay";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
-  points?: [number, number][]
+  points?: {
+    lng: number;
+    lat: number;
+  }[]
   strokeColor?: string
   strokeWeight?: number
   strokeOpacity?: number
@@ -19,7 +22,7 @@ const props = withDefaults(defineProps<{
   enableMassClear?: boolean
   enableClicking?: boolean
   enableEditing?: boolean
-  addToMap?: boolean
+  show?: boolean
 }>(), {
   points: () => [],
   strokeColor: "#FF0000",
@@ -31,18 +34,19 @@ const props = withDefaults(defineProps<{
   enableMassClear: true,
   enableClicking: true,
   enableEditing: false,
-  addToMap: true,
+  show: true,
 })
-let options = { ...props };
 const attrs = useAttrs();
 const slots = useSlots()
 const emit = defineEmits({});
+const isShow = computed(() => state.value.inited && props.show);
+const options = computed(() => props)
 watch(
-  state.value,
+  () => isShow.value,
   (val) => {
-    if (val.inited && props.addToMap) {
+    if (val) {
       bindEvents(
-        addPolygon(props.points, options),
+        addPolygon(props.points, options.value),
         extractEmitEvents(attrs),
         emit
       );

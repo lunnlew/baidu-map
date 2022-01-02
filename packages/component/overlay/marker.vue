@@ -4,12 +4,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useAttrs, useSlots, watch } from "vue";
+import { computed, ref, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
 import { addMaker } from "@/lib/overlay";
 import { mergePropsDefault, bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
-  point: [number, number]
+  point: {
+    lng: number;
+    lat: number;
+  }
   offset?: [number, number]
   enableMassClear?: boolean
   enableDragging?: boolean
@@ -17,9 +20,13 @@ const props = withDefaults(defineProps<{
   raiseOnDrag?: boolean
   draggingCursor?: string
   rotation?: number
-  title?: string
+  title?: string,
+  show?: boolean,
 }>(), {
-  point: () => [116.403963, 39.915119],
+  point: () => ({
+    lng: 116.403963,
+    lat: 39.915119
+  }),
   offset: () => [0, 0],
   enableMassClear: true,
   enableDragging: false,
@@ -28,33 +35,47 @@ const props = withDefaults(defineProps<{
   draggingCursor: '',
   rotation: 0,
   title: '',
+  show: true,
 })
-let options = { ...props };
 const attrs = useAttrs();
 const slots = useSlots()
 const emit = defineEmits({});
-if (slots.default) {
-  console.log('slots.default', slots.default())
-  let MarkerIcon = slots.default().find((s) => (s.type as any).name == "MarkerIcon");
-  if (MarkerIcon) {
-    let merge_icon_props = mergePropsDefault(
-      MarkerIcon.props as any,
-      (MarkerIcon.type as any).props
-    );
-    if (merge_icon_props.src) {
-      (options as any).icon = merge_icon_props;
-    }
-  }
-}
+const bm = ref()
+const isShow = computed(() => state.value.inited && props.show);
+const options = computed(() => props)
 watch(
-  state.value,
+  () => isShow.value,
   (val) => {
-    if (val.inited) {
-      bindEvents(
-        addMaker(props.point, options),
+    if (val) {
+      let merge_props = {...options.value};
+      if (slots.default) {
+        let MarkerIcon = slots.default().find((s) => (s.type as any).name == "MarkerIcon");
+        if (MarkerIcon) {
+          let merge_icon_props = mergePropsDefault(
+            MarkerIcon.props as any,
+            (MarkerIcon.type as any).props
+          );
+          if (merge_icon_props.src) {
+            (merge_props as any).icon = merge_icon_props;
+          }
+        }
+      }
+      bm.value = bindEvents(
+        addMaker(props.point, merge_props),
         extractEmitEvents(attrs),
         emit
       );
+    }
+  },
+  {
+    immediate: true,
+  }
+);
+watch(
+  () => props.point,
+  (val) => {
+    if (bm.value) {
+      bm.value.setPosition(val);
     }
   },
   {

@@ -4,32 +4,53 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useAttrs, useSlots, watch } from "vue";
+import { computed, ref, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
 import { addLabel } from "@/lib/overlay";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
   content: string
-  position: [number, number]
+  position: {
+    lng: number;
+    lat: number;
+  }
   offset?: [number, number]
   enableMassClear?: boolean
-  styles?: Object
+  styles?: Object,
+  show?: boolean,
 }>(), {
   content: "",
-  position: () => [0, 0],
+  position: () => ({
+    lng: 0,
+    lat: 0
+  }),
   offset: () => [0, 0],
   enableMassClear: true,
   styles: () => ({}),
+  show: true,
 })
-let options = { ...props };
 const attrs = useAttrs();
 const slots = useSlots()
 const emit = defineEmits({});
+const bm = ref()
+const isShow = computed(() => state.value.inited && props.show);
+const options = computed(() => props)
 watch(
-  state.value,
+  () => isShow.value,
   (val) => {
-    if (val.inited) {
-      bindEvents(addLabel(options), extractEmitEvents(attrs), emit);
+    if (val) {
+      bm.value = bindEvents(addLabel(options.value), extractEmitEvents(attrs), emit);
+    }
+  },
+  {
+    immediate: true,
+  }
+);
+watch(
+  () => props.position,
+  (val) => {
+    if (bm.value) {
+      bm.value.setPosition(val);
     }
   },
   {

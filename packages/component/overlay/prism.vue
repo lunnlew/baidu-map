@@ -4,18 +4,22 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useAttrs, useSlots, watch } from "vue";
+import { computed, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
 import { addPrism } from "@/lib/overlay";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
-  points?: [number, number][]
+  points?: {
+    lng: number;
+    lat: number;
+  }[]
   altitude?: number
   topFillColor?: string
   topFillOpacity?: number
   sideFillColor?: string
   sideFillOpacity?: number
   enableMassClear?: boolean
+  show?: boolean
 }>(), {
   points: () => [],
   altitude: 5000,
@@ -24,17 +28,19 @@ const props = withDefaults(defineProps<{
   sideFillColor: "#5679ea",
   sideFillOpacity: 0.9,
   enableMassClear: true,
+  show: true,
 })
-let options = { ...props };
 const attrs = useAttrs();
 const slots = useSlots()
 const emit = defineEmits([]);
+const options = computed(() => props)
+const isShow = computed(() => state.value.inited && props.show);
 watch(
-  state.value,
+  () => isShow.value,
   (val) => {
-    if (val.inited) {
+    if (val) {
       bindEvents(
-        addPrism(props.points, options),
+        addPrism(props.points, options.value),
         extractEmitEvents(attrs),
         emit
       );

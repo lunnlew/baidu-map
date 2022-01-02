@@ -4,23 +4,27 @@
   </div>
 </template>
 <script setup lang="ts">
-import { watch } from "vue";
+import { computed, watch } from "vue";
 import { state } from "@/lib/map";
 import { addNavigationControl3D } from "@/lib/control";
 const props = withDefaults(defineProps<{
   anchor?: number,
   offset?: [number, number],
   type?: number
+  show?: boolean,
 }>(), {
   anchor: 0,
   offset: () => [50, 80],
-  type: 1
+  type: 1,
+  show: true,
 })
+const isShow = computed(() => state.value.inited && props.show);
+const options = computed(() => props)
 watch(
-  state.value,
+  () => isShow.value,
   (val) => {
-    if (val.inited) {
-      addNavigationControl3D(props);
+    if (val) {
+      addNavigationControl3D(options.value);
     }
   },
   {

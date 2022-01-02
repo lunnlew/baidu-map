@@ -34,7 +34,13 @@ export const map = ref<BMapGL.Map>();
 /**
  * 地图中心点坐标
  */
-export const map_center = ref<number[]>([116.403963, 39.915119]);
+export const map_center = ref<{
+    lng: number,
+    lat: number,
+}>({
+    lng: 116.403963,
+    lat: 39.915119
+});
 
 /**
  * 地图级别
@@ -66,7 +72,7 @@ export async function MapInitializer(container: string | HTMLElement, opts: BMap
                     throw new Error("container is not defined");
                 }
                 map.value = new BMapGLRef.value.Map(container as string | HTMLElement, opts)
-                map.value.centerAndZoom(new BMapGLRef.value.Point(map_center.value[0], map_center.value[1]), map_zoom.value);
+                map.value.centerAndZoom(new BMapGLRef.value.Point(map_center.value.lng, map_center.value.lat), map_zoom.value);
                 resolve({
                     BMap: BMapGLRef.value,
                     map: map.value,

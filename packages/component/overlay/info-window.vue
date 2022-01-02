@@ -9,12 +9,16 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, useAttrs, useSlots, watch } from "vue";
+import { computed, ref, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
 import { addInfoWindow } from "@/lib/overlay";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
-  content?: string
+  point: {
+    lng: number;
+    lat: number;
+  }
+  content: string
   width?: number
   height?: number
   maxWidth?: number
@@ -23,8 +27,12 @@ const props = withDefaults(defineProps<{
   enableAutoPan?: boolean
   enableMaximize?: boolean
   enableCloseOnClick?: boolean
-  addToMap?: boolean
+  show?: boolean
 }>(), {
+  point: () => ({
+    lng: 0,
+    lat: 0
+  }),
   content: "",
   width: 0,
   height: 0,
@@ -34,31 +42,43 @@ const props = withDefaults(defineProps<{
   enableAutoPan: true,
   enableMaximize: true,
   enableCloseOnClick: true,
-  addToMap: true
+  show: true
 })
 
-let options = { ...props };
 const info_content = ref();
 const info_title = ref();
 const attrs = useAttrs();
 const slots = useSlots()
 const emit = defineEmits({});
+const bm = ref()
+const isShow = computed(() => state.value.inited && props.show);
+const options = computed(() => props)
 watch(
-  state.value,
+  () => isShow.value,
   (val) => {
-    if (val.inited && props.addToMap) {
+    if (val) {
+      let merge_props = { ...options.value };
       if (slots.default) {
-        options.content = info_content.value;
+        merge_props.content = info_content.value;
       }
       // title 不支持 dom 形式
       if (slots.title) {
-        options.title = info_title.value?.innerHTML;
+        merge_props.title = info_title.value?.innerHTML;
       }
-      bindEvents(addInfoWindow(options), extractEmitEvents(attrs), emit);
+      bindEvents(addInfoWindow(merge_props), extractEmitEvents(attrs), emit);
     }
   },
   {
     immediate: true,
+  }
+);
+watch(
+  () => props.point,
+  (val) => {
+    console.log("point changed", val);
+  },
+  {
+    deep: true,
   }
 );
 </script>

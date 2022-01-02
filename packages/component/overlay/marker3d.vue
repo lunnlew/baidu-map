@@ -4,52 +4,74 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useAttrs, useSlots, watch } from "vue";
+import { computed, ref, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
 import { addMaker3D } from "@/lib/overlay";
 import { mergePropsDefault, bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
-  point: [number, number]
+  point: {
+    lng: number;
+    lat: number;
+  }
   height?: number,
   size?: number
   shape?: number
   fillColor?: string
   fillOpacity?: number,
+  show?: boolean
 }>(), {
-  point: () => [116.403963, 39.915119],
+  point: () => ({
+    lng: 116.403963,
+    lat: 39.915119
+  }),
   height: 200,
   size: 50,
   shape: 1,
   fillColor: "#FF0000",
   fillOpacity: 0.8,
+  show: true
 })
-let options = { ...props };
 const attrs = useAttrs();
 const slots = useSlots()
 const emit = defineEmits({});
-if (slots.default) {
-  let Marker3DIcon = slots
-    .default()
-    .find((s) => (s.type as any).name == "Marker3DIcon");
-  if (Marker3DIcon) {
-    let merge_icon_props = mergePropsDefault(
-      Marker3DIcon.props as any,
-      (Marker3DIcon.type as any).props
-    );
-    if (merge_icon_props.src) {
-      (options as any).icon = merge_icon_props;
-    }
-  }
-}
+const bm = ref()
+const isShow = computed(() => state.value.inited && props.show);
+const options = computed(() => props)
 watch(
-  state.value,
+  () => isShow.value,
   (val) => {
-    if (val.inited) {
-      bindEvents(
-        addMaker3D(props.point, options),
+    if (val) {
+      let merge_props = { ...options.value };
+      if (slots.default) {
+        let Marker3DIcon = slots
+          .default()
+          .find((s) => (s.type as any).name == "Marker3DIcon");
+        if (Marker3DIcon) {
+          let merge_icon_props = mergePropsDefault(
+            Marker3DIcon.props as any,
+            (Marker3DIcon.type as any).props
+          );
+          if (merge_icon_props.src) {
+            (merge_props as any).icon = merge_icon_props;
+          }
+        }
+      }
+      bm.value = bindEvents(
+        addMaker3D(props.point, merge_props),
         extractEmitEvents(attrs),
         emit
       );
+    }
+  },
+  {
+    immediate: true,
+  }
+);
+watch(
+  () => props.point,
+  (val) => {
+    if (bm.value) {
+      bm.value.setPosition(val);
     }
   },
   {
