@@ -4,9 +4,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, watch } from "vue";
+import { computed, useAttrs, watch } from "vue";
 import { state } from "@/lib/map";
 import { addNavigationControl3D } from "@/lib/control";
+import { bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
   anchor?: number,
   offset?: [number, number],
@@ -18,13 +19,19 @@ const props = withDefaults(defineProps<{
   type: 1,
   show: true,
 })
+const attrs = useAttrs();
+const emit = defineEmits({});
 const isShow = computed(() => state.value.inited && props.show);
 const options = computed(() => props)
 watch(
   () => isShow.value,
   (val) => {
     if (val) {
-      addNavigationControl3D(options.value);
+      bindEvents(
+        addNavigationControl3D(options.value),
+        extractEmitEvents(attrs),
+        emit
+      );
     }
   },
   {

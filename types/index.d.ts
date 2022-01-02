@@ -2004,6 +2004,8 @@ declare namespace BaiduMapVue3 {
             BMAP_UNIT_IMPERIAL = "BMAP_UNIT_IMPERIAL"
         }
 
+        type ScaleControlEvent = 'zoom_changed' | 'zoomstart' | 'zoomend'
+
         /**
          * 此类表示比例尺控件。
          */
@@ -2037,6 +2039,8 @@ declare namespace BaiduMapVue3 {
              */
             offset?: Size
         }
+
+        type ZoomControlEvent = 'zoomchange' | 'zoomstart' | 'zoomend'
 
         /**
          * 此类表示缩放控件。
@@ -2233,6 +2237,8 @@ declare namespace BaiduMapVue3 {
              */
             offset?: Size,
         }
+
+        type MapTypeControlEvent = 'maptypechange'
 
         /**
         * 此类表示地图类型控件。
@@ -2612,11 +2618,23 @@ declare namespace BaiduMapVue3 {
             /**
              * 拖动中触发此事件
              */
-            drag: OverlayEventPayload
+            dragging: OverlayEventPayload
             /**
              * 拖动结束触发此事件
              */
             dragend: OverlayEventPayload
+            /**
+             * 移动开始触发此事件
+             */
+            movestart: OverlayEventPayload
+            /**
+             * 鼠标移动触发此事件
+             */
+            mousemove: OverlayEventPayload
+            /**
+             * 移动结束触发此事件
+             */
+            moveend: OverlayEventPayload
         }
         type OverlayEvent = keyof OverlayEventEventMap;
         type OverlayEventPayload = {
