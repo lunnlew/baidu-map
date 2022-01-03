@@ -43,7 +43,7 @@ const props = withDefaults(defineProps<{
 const attrs = useAttrs();
 const emit = defineEmits({});
 const bm = ref()
-const isShow = computed(() => state.value.inited && props.show);
+const isShow = computed(() => state.value.inited && props.show && props.points.length > 0);
 const options = computed(() => props)
 watch(
     () => isShow.value,
