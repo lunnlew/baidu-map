@@ -5750,8 +5750,8 @@ declare namespace BaiduMapVue3 {
             /**
              * 其他坐标转百度坐标
              * @param points 其他坐标
-             * @param from_type 坐标的类型
-             * @param to_type 百度的坐标类型，固定为：COORDINATES_BD09=5
+             * @param from_type 要转换的坐标类型
+             * @param to_type 要得到的坐标类型
              * @param translateCallback 接收转换结果的回调函数
              */
             constructor(points: Array<Point>, from_type: CoordPointType, to_type: CoordPointType, translateCallback: Function)
@@ -5950,23 +5950,35 @@ declare namespace BaiduMapVue3 {
             */
             BezierCurve: { new(points: Array<Point>, controlPoints: any[]): BezierCurve };
             /**
-             * 创建一个驾车线路规划实例
+             * 创建一个驾车导航实例，其中location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由地图当前的中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
+             * @param location 
+             * @param opts 
              */
             DrivingRoute: { new(location: Map | Point | String, opts: DrivingRouteOptions): DrivingRoute }
             /**
-             * 创建一个公交线路规划实例
+             * 创建一个公交导航实例。location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会优先在该城市内进行
+             * @param location 
+             * @param opts 
              */
             TransitRoute: { new(location: Map | Point | String, opts: TransitRouteOptions): TransitRoute }
             /**
-             * 创建一个步行线路规划实例
+             * 创建一个步行导航实例。location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
+             * @param location 
+             * @param opts 
              */
             WalkingRoute: { new(location: Map | Point | String, opts: WalkingRouteOptions): WalkingRoute }
             /**
-             * 创建一个骑行线路规划实例
+             * 创建一个骑行导航实例。location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
+             * @param location 
+             * @param opts 
              */
             RidingRoute: { new(location: Map | Point | String, opts: RidingRouteOptions): RidingRoute }
             /**
-             * 坐标转换类
+             * 坐标转换
+             * @param points 其他坐标
+             * @param from_type 要转换的坐标类型
+             * @param to_type 要得到的坐标类型
+             * @param translateCallback 接收转换结果的回调函数
              */
             Convertor: { new(points: Array<Point>, from_type: CoordPointType, to_type: CoordPointType, translateCallback: Function): Convertor };
 
