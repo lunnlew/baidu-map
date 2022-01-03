@@ -6,24 +6,30 @@
 <script setup lang="ts">
 import { computed, ref, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
-import { addTrackAnimation, initTrackAnimation } from "@/lib/animation";
+import { addLushu, initLushu } from "@/lib/animation";
 import { bindEvents, extractEmitEvents, mergePropsDefault } from "@/utils/util";
 const props = withDefaults(defineProps<{
     points?: {
         lng: number
         lat: number
-    }[]
-    overallView?: boolean,
-    tilt?: number,
-    duration?: number,
-    delay?: number,
+    }[],
+    geodesic?: boolean,
+    autoCenter?: boolean,
+    defaultContent?: string,
+    autoView?: boolean,
+    speed?: number,
+    icon?: string,
+    enableRotation?: boolean,
     show?: boolean
 }>(), {
     points: () => [],
-    overallView: true,
-    tilt: 30,
-    duration: 20000,
-    delay: 3000,
+    defaultContent: '',
+    geodesic: false,
+    autoCenter: false,
+    autoView: true,
+    speed: 500,
+    icon: '',
+    enableRotation: true,
     show: true
 })
 const emit = defineEmits({})
@@ -45,17 +51,27 @@ watch(
                 );
                 (merge_props as any).polyline = merge_polyline_props;
             }
+            let MarkerIcon = slots.default().find((s) => (s.type as any).name == "MarkerIcon");
+            if (MarkerIcon) {
+                let merge_icon_props = mergePropsDefault(
+                    MarkerIcon.props as any,
+                    (MarkerIcon.type as any).props
+                );
+                if (merge_icon_props.src) {
+                    (merge_props as any).icon = merge_icon_props;
+                }
+            }
         }
         if (val) {
-            initTrackAnimation().then((result) => {
+            initLushu().then((result) => {
                 bm.value = bindEvents(
-                    addTrackAnimation(merge_props),
+                    addLushu(merge_props),
                     extractEmitEvents(attrs),
                     emit
                 );
             });
         } else {
-            bm.value && bm.value?.cancel()
+            bm.value && bm.value?.stop()
         }
     },
     {
@@ -64,9 +80,8 @@ watch(
 );
 defineExpose({
     start: () => bm.value && bm.value?.start(),
-    cancel: () => bm.value && bm.value?.cancel(),
+    stop: () => bm.value && bm.value?.stop(),
     pause: () => bm.value && bm.value?.pause(),
-    continue: () => bm.value && bm.value?.continue(),
 })
 </script>
 <script lang="ts">

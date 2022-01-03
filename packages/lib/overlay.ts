@@ -16,11 +16,16 @@ export function addMaker(point: {
         let marker_options = {} as {
             [key: string]: any
         } & Required<BMapGL.MarkerOptions>
-        if (marker_params.icon) {
+
+        if (typeof marker_params.icon === 'string') {
+            if (marker_params.icon) {
+                marker_options.icon = new BMapGLRef.value.Icon(marker_params.icon, new BMapGLRef.value.Size(48, 48), { anchor: new BMapGLRef.value.Size(24, 24) })
+            }
+        } else {
             let icon_props = marker_params.icon as Required<BmMarkerIconProps>
             marker_options.icon = new BMapGLRef.value.Icon(icon_props.src, new BMapGLRef.value.Size(icon_props.size[0], icon_props.size[1]), {
-                anchor: new BMapGLRef.value.Size(icon_props.anchor[0], icon_props.anchor[1]),
-                imageOffset: new BMapGLRef.value.Size(icon_props.imageOffset[0], icon_props.imageOffset[1])
+                anchor: typeof icon_props.anchor === 'undefined' ? new BMapGLRef.value.Size(icon_props.size[0] / 2, icon_props.size[1] / 2) : new BMapGLRef.value.Size(icon_props.anchor[0], icon_props.anchor[1]),
+                imageOffset: typeof icon_props.imageOffset === 'undefined' ? new BMapGLRef.value.Size(0, 0) : new BMapGLRef.value.Size(icon_props.imageOffset[0], icon_props.imageOffset[1])
             });
         }
         for (let key in marker_params) {
@@ -53,8 +58,8 @@ export function addMaker3D(point: {
         if (marker_params.icon) {
             let icon_props = marker_params.icon as Required<BmMarkerIconProps>
             marker_options.icon = new BMapGLRef.value.Icon(icon_props.src, new BMapGLRef.value.Size(icon_props.size[0], icon_props.size[1]), {
-                anchor: new BMapGLRef.value.Size(icon_props.anchor[0], icon_props.anchor[1]),
-                imageOffset: new BMapGLRef.value.Size(icon_props.imageOffset[0], icon_props.imageOffset[1])
+                anchor: typeof icon_props.anchor === 'undefined' ? new BMapGLRef.value.Size(icon_props.size[0] / 2, icon_props.size[1] / 2) : new BMapGLRef.value.Size(icon_props.anchor[0], icon_props.anchor[1]),
+                imageOffset: typeof icon_props.imageOffset === 'undefined' ? new BMapGLRef.value.Size(0, 0) : new BMapGLRef.value.Size(icon_props.imageOffset[0], icon_props.imageOffset[1])
             });
         }
         for (let key in marker_params) {
@@ -290,7 +295,7 @@ export function addContextMenu(menu_params: {
 export function addCircle(center: {
     lng: number;
     lat: number;
-  }, radius: number, circle_params: {
+}, radius: number, circle_params: {
     [key: string]: any
 } & Required<BmCircleProps>): BMapGL.Circle | undefined {
     if (BMapGLRef.value && map.value) {
