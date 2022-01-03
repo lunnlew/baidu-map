@@ -17,6 +17,10 @@ export const state = ref({
      * 路书动画库是否初始化完成
      */
     lushu_animation_lib_inited: false,
+    /**
+     *测距工具库是否初始化完成
+     */
+    distanc_tool_lib_inited: false,
 });
 
 /**
@@ -45,8 +49,8 @@ export const map = ref<BMapGL.Map>();
 export function initMap(container: string | HTMLElement, map_params: {
     [key: string]: any
 } & Required<BaiduMapProps>): undefined | Promise<{
-    BMap: BMapGL.BMapGL;
-    map: BMapGL.Map;
+    BMap: BMapGL.BMapGL | undefined;
+    map: BMapGL.Map | undefined;
     container: string | HTMLElement
 }> {
     return new Promise((resolve, reject) => {
@@ -87,6 +91,12 @@ export function initMap(container: string | HTMLElement, map_params: {
                 reject(new Error('BMap script load failed'))
             }
             document.body.appendChild(script);
+        } else {
+            resolve({
+                BMap: BMapGLRef.value,
+                map: map.value,
+                container: container as string | HTMLElement
+            })
         }
     })
 }

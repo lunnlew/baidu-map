@@ -71,6 +71,6 @@ defineExpose({
 </script>
 <script lang="ts">
 export default {
-    name: "ViewAnimation",
+    name: "TrackAnimation",
 }
 </script>

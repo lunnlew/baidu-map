@@ -17,7 +17,8 @@ const props = withDefaults(defineProps<{
   zoom?: number
   enableRotate?: boolean
   enableTilt?: boolean
-  mapType?: BMapGL.MapTypeId,
+  enableMapClick?: boolean
+  mapType?: BMapGL.MapTypeId
   onReady?: (state: any) => void
 }>(), {
   apiKey: '',
@@ -28,6 +29,7 @@ const props = withDefaults(defineProps<{
   zoom: 13,
   enableRotate: true,
   enableTilt: true,
+  enableMapClick: true,
   mapType: BMapGL.MapTypeId.BMAP_NORMAL_MAP,
   onReady: () => { },
 })
@@ -40,11 +42,11 @@ onMounted(() => {
   let merge_props = { ...options.value };
   initMap(container.value, merge_props)?.then((result) => {
     let events = extractEmitEvents(attrs) as string[]
-    bindEvents(result.map, events.filter((v: string) => ![
-      // 某些地图事件本身就有默认的事件处理，不需要再次注册，否则导致多次触发
+    // 启用了enableMapClick选项时，某些地图事件本身就有默认的事件处理，不需要再次注册，否则导致多次触发
+    bindEvents(result.map, events.filter((v: string) => (!merge_props.enableMapClick || ![
       'click',
       'mousedown',
-    ].includes(v)), emit);
+    ].includes(v))), emit);
     emit("ready", result)
   });
 })
