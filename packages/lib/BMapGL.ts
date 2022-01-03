@@ -77,7 +77,7 @@ namespace BMapGL {
     /**
      * 定位结果状态
      */
-    export enum GeolocationStatusCode {
+    export enum StatusCode {
         BMAP_STATUS_SUCCESS = 0,
         BMAP_STATUS_UNKNOWN_LOCATION = 2,
         BMAP_STATUS_PERMISSION_DENIED = 6,
