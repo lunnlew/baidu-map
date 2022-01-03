@@ -33,6 +33,7 @@ import BmTrackAnimation from './component/animation/track.vue';
 import BmLushu from './component/animation/lushu.vue';
 import BmDistanceTool from './component/tool/distance-tool.vue';
 import BmDrivingRoute from './component/tool/driving-route.vue';
+import BmTransitRoute from './component/tool/transit-route.vue';
 
 /**
  * 地图类型空间及根组件
@@ -85,7 +86,8 @@ export {
      * 地图工具
      */
     BmDistanceTool,
-    BmDrivingRoute
+    BmDrivingRoute,
+    BmTransitRoute
 };
 
 const bm = {
@@ -121,6 +123,7 @@ const bm = {
         app.component('bm-lushu', BmLushu);
         app.component('bm-distance-tool', BmDistanceTool);
         app.component('bm-driving-route', BmDrivingRoute);
+        app.component('bm-transit-route', BmTransitRoute);
     }
 }
 export default bm
