@@ -8,6 +8,9 @@ declare namespace BaiduMapOptions {
 }
 
 declare namespace BaiduMapVue3 {
+    
+    export function install(app: any): void;
+
     export interface BaiduMapProps {
         /**
          * 地图中心点坐标
