@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, useAttrs, useSlots, watch } from "vue";
+import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
 import { addContextMenu } from "@/lib/overlay";
 import { mergePropsDefault, bindEvents, extractEmitEvents } from "@/utils/util";
@@ -18,6 +18,7 @@ const slots = useSlots()
 const emit = defineEmits({});
 const isShow = computed(() => state.value.inited && props.show);
 const options = computed(() => props)
+const bm = ref()
 watch(
   () => isShow.value,
   (val) => {
@@ -34,13 +35,16 @@ watch(
           merge_props.menus.push(merge_item_props);
         }
       }
-      bindEvents(addContextMenu(merge_props), extractEmitEvents(attrs), emit);
+      bm.value = bindEvents(addContextMenu(merge_props), extractEmitEvents(attrs), emit);
     }
   },
   {
     immediate: true,
   }
 );
+onUnmounted(() => {
+  bm.value = null
+})
 </script>
 <script lang="ts">
 export default {

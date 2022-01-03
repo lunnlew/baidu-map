@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, ref, useAttrs, useSlots, watch } from "vue";
+import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
 import { addLabel } from "@/lib/overlay";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
@@ -57,6 +57,9 @@ watch(
     immediate: true,
   }
 );
+onUnmounted(() => {
+  bm.value = null
+})
 </script>
 <script lang="ts">
 export default {

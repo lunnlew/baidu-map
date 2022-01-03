@@ -9,7 +9,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, ref, useAttrs, useSlots, watch } from "vue";
+import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
 import { addInfoWindow } from "@/lib/overlay";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
@@ -65,7 +65,7 @@ watch(
       if (slots.title) {
         merge_props.title = info_title.value?.innerHTML;
       }
-      bindEvents(addInfoWindow(merge_props), extractEmitEvents(attrs), emit);
+      bm.value = bindEvents(addInfoWindow(merge_props), extractEmitEvents(attrs), emit);
     }
   },
   {
@@ -81,6 +81,9 @@ watch(
     deep: true,
   }
 );
+onUnmounted(() => {
+  bm.value = null
+})
 </script>
 <script lang="ts">
 export default {

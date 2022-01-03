@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useAttrs, useSlots, watch, computed } from "vue";
+import { useAttrs, useSlots, watch, computed, ref, onUnmounted } from "vue";
 import { state } from "@/lib/map";
 import { addGroundOverlay } from "@/lib/overlay";
 import { mergePropsDefault, bindEvents, extractEmitEvents } from "@/utils/util";
@@ -40,6 +40,7 @@ const slots = useSlots()
 const emit = defineEmits({});
 const options = computed(() => props)
 const isShow = computed(() => state.value.inited && props.show);
+const bm = ref()
 watch(
   () => isShow.value,
   (val) => {
@@ -57,7 +58,7 @@ watch(
           merge_props = Object.assign(merge_props, merge_image_props);
         }
       }
-      bindEvents(
+      bm.value = bindEvents(
         addGroundOverlay(props.startPoint, props.endPoint, merge_props),
         extractEmitEvents(attrs),
         emit
@@ -68,6 +69,9 @@ watch(
     immediate: true,
   }
 );
+onUnmounted(() => {
+  bm.value = null
+})
 </script>
 <script lang="ts">
 export default {

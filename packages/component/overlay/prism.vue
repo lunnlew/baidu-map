@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, useAttrs, useSlots, watch } from "vue";
+import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
 import { addPrism } from "@/lib/overlay";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
@@ -37,11 +37,12 @@ const slots = useSlots()
 const emit = defineEmits([]);
 const options = computed(() => props)
 const isShow = computed(() => state.value.inited && props.show && props.points.length > 0);
+const bm = ref()
 watch(
   () => isShow.value,
   (val) => {
     if (val) {
-      bindEvents(
+      bm.value = bindEvents(
         addPrism(props.points, options.value),
         extractEmitEvents(attrs),
         emit
@@ -52,6 +53,9 @@ watch(
     immediate: true,
   }
 );
+onUnmounted(() => {
+  bm.value = null
+})
 </script>
 <script lang="ts">
 export default {
