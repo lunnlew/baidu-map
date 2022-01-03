@@ -78,6 +78,14 @@ watch(
         immediate: true,
     }
 );
+watch(
+    () => props.speed,
+    (val) => {
+        bm.value && bm.value?._setOptions({
+            speed: val
+        })
+    }
+)
 defineExpose({
     start: () => bm.value && bm.value?.start(),
     stop: () => bm.value && bm.value?.stop(),
