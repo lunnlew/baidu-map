@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, useAttrs, watch } from "vue";
+import { computed, onUnmounted, ref, useAttrs, watch } from "vue";
 import { state } from "@/lib/map";
 import { addLocationControl } from "@/lib/control";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
@@ -21,11 +21,12 @@ const attrs = useAttrs();
 const emit = defineEmits({});
 const isShow = computed(() => state.value.inited && props.show);
 const options = computed(() => props)
+const bm = ref()
 watch(
   () => isShow.value,
   (val) => {
     if (val) {
-      bindEvents(
+      bm.value = bindEvents(
         addLocationControl(options.value),
         extractEmitEvents(attrs),
         emit
@@ -36,6 +37,9 @@ watch(
     immediate: true,
   }
 );
+onUnmounted(() => {
+  bm.value = null
+})
 </script>
 <script lang="ts">
 export default {

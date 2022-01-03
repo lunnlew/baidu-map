@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, ref, useAttrs, watch } from "vue";
+import { computed, onUnmounted, ref, useAttrs, watch } from "vue";
 import { state } from "@/lib/map";
 import { addBezierCurve } from "@/lib/overlay";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
@@ -60,6 +60,9 @@ watch(
         immediate: true,
     }
 );
+onUnmounted(() => {
+  bm.value = null
+})
 </script>
 <script lang="ts">
 export default {

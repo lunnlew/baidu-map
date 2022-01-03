@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, ref, useAttrs, watch } from "vue";
+import { computed, onUnmounted, ref, useAttrs, watch } from "vue";
 import { state } from "@/lib/map";
 import { addDistanceTool, initDistanceTool } from "@/lib/animation";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
@@ -41,6 +41,9 @@ watch(
         immediate: true,
     }
 );
+onUnmounted(() => {
+  bm.value = null
+})
 defineExpose({
     open: () => bm.value && bm.value.open(),
     close: () => bm.value && bm.value.close(),

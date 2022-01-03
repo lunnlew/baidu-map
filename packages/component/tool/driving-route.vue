@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, ref, useAttrs, watch } from "vue";
+import { computed, onUnmounted, ref, useAttrs, watch } from "vue";
 import { BMapGLRef, state } from "@/lib/map";
 import { addDrivingRoute } from "@/lib/tool";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
@@ -74,6 +74,9 @@ watch(
     }
 );
 const points = ref([])
+onUnmounted(() => {
+    bm.value = null
+})
 defineExpose({
     search: () => {
         if (BMapGLRef.value && bm.value) {

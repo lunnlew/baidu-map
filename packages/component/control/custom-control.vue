@@ -6,7 +6,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, ref, useAttrs, useSlots, watch } from "vue";
+import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
 import { addCustomControl } from "@/lib/control";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
@@ -27,6 +27,7 @@ const control = ref();
 const emit = defineEmits({});
 const isShow = computed(() => state.value.inited && props.show);
 const options = computed(() => props)
+const bm = ref()
 watch(
     () => isShow.value,
     (val) => {
@@ -35,7 +36,7 @@ watch(
             if (slots.default) {
                 merge_props.dom = control.value;
             }
-            bindEvents(
+            bm.value = bindEvents(
                 addCustomControl(merge_props),
                 extractEmitEvents(attrs),
                 emit
@@ -46,6 +47,9 @@ watch(
         immediate: true,
     }
 );
+onUnmounted(() => {
+  bm.value = null
+})
 </script>
 <script lang="ts">
 export default {

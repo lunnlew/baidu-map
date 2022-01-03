@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, ref, useAttrs, useSlots, watch } from "vue";
+import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from "vue";
 import { state } from "@/lib/map";
 import { addLushu, initLushu } from "@/lib/animation";
 import { bindEvents, extractEmitEvents, mergePropsDefault } from "@/utils/util";
@@ -86,6 +86,10 @@ watch(
         })
     }
 )
+onUnmounted(() => {
+    bm.value && bm.value.stop()
+    bm.value = null
+})
 defineExpose({
     start: () => bm.value && bm.value?.start(),
     stop: () => bm.value && bm.value?.stop(),

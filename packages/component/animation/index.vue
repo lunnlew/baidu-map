@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, ref, useAttrs, watch } from "vue";
+import { computed, onUnmounted, ref, useAttrs, watch } from "vue";
 import { map, state } from "@/lib/map";
 import { addViewAnimation } from "@/lib/animation";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
@@ -53,6 +53,10 @@ watch(
         immediate: true,
     }
 );
+onUnmounted(() => {
+    bm.value && map.value?.cancelViewAnimation(bm.value)
+    bm.value = null
+})
 defineExpose({
     start: () => map.value && bm.value && map.value.startViewAnimation(bm.value),
     cancel: () => map.value && bm.value && map.value.cancelViewAnimation(bm.value),
