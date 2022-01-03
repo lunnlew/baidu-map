@@ -45,9 +45,6 @@ const props = withDefaults(defineProps<{
     onPolylinesSet: () => { },
     show: true,
 })
-/**
- * 使用时建议禁用 Map enableMapClick
- */
 const emit = defineEmits({})
 const attrs = useAttrs();
 const isShow = computed(() => state.value.inited && props.show);
