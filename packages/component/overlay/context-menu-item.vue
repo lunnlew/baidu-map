@@ -9,12 +9,14 @@ const props = withDefaults(defineProps<{
   width?: number,
   text?: string,
   callback?: Function,
+  onClick?: Function,
   show?: boolean,
 }>(), {
   id: '',
   width: 300,
   text: "",
-  callback: () => { },
+  callback: undefined,
+  onClick: undefined,
   show: true,
 })
 </script>

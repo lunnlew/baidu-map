@@ -23,7 +23,7 @@ watch(
   () => isShow.value,
   (val) => {
     if (val) {
-      let merge_props = Object.assign(options.value, {
+      let merge_props = Object.assign({}, options.value, {
         menus: []
       } as any)
       if (slots.default) {
@@ -32,6 +32,9 @@ watch(
           .filter((s) => (s.type as any).name == "ContextMenuItem");
         for (let item of ContextMenuItems) {
           let merge_item_props = mergePropsDefault(item.props as any, (item.type as any).props);
+          if (merge_item_props.onClick && !merge_item_props.callback) {
+            merge_item_props.callback = merge_item_props.onClick
+          }
           merge_props.menus.push(merge_item_props);
         }
       }
