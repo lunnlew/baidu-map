@@ -1,4 +1,4 @@
-import { BMapGL, BmLushuAnimationProps, BmMarkerIconProps, BmTrackAnimationProps, BmViewAnimationKeyFramesProps, BmViewAnimationProps } from 'types';
+import { BMapGL, BmDistanceToolProps, BmLushuAnimationProps, BmMarkerIconProps, BmTrackAnimationProps, BmViewAnimationKeyFramesProps, BmViewAnimationProps } from 'types';
 import { BMapGLRef, BMapGLLibRef, map, state } from './map';
 
 /**
@@ -206,5 +206,51 @@ export function addLushu(animation_params: {
         map.value.setViewport(points);
         let animation = new BMapGLLibRef.value.LuShu(map.value, points, animation_options);
         return animation
+    }
+}
+
+/**
+ * 初始化测距工具库
+ */
+export function initDistanceTool(): Promise<{
+    BMapGLLib: BMapGL.BMapGLLib | undefined;
+}> {
+    return new Promise((resolve, reject) => {
+        if (!state.value.distanc_tool_lib_inited) {
+            let script = document.createElement("script");
+            script.src = `https://mapopen.cdn.bcebos.com/github/BMapGLLib/DistanceTool/src/DistanceTool.min.js`;
+            script.onerror = function () {
+                reject(new Error('BMap script load failed'))
+            }
+            script.onload = function (this: any) {
+                if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') {
+                    // @ts-ignore
+                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGL.BMapGLLib;
+                    state.value.distanc_tool_lib_inited = true;
+                    resolve({
+                        BMapGLLib: BMapGLLibRef.value
+                    })
+                }
+                script.onload = null;
+            }
+            document.body.appendChild(script);
+        } else {
+            resolve({
+                BMapGLLib: BMapGLLibRef.value
+            })
+        }
+    })
+}
+
+/**
+ * 添加测距工具库
+ * @param tool_params
+ */
+export function addDistanceTool(tool_params: {
+    [key: string]: any
+} & Required<BmDistanceToolProps>): BMapGL.DistanceTool | undefined {
+    if (BMapGLRef.value && map.value && BMapGLLibRef.value) {
+        let tool = new BMapGLLibRef.value.DistanceTool(map.value);
+        return tool
     }
 }

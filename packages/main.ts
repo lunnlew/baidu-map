@@ -30,6 +30,7 @@ import BmInfoWindow from './component/overlay/info-window.vue';
 import BmViewAnimation from './component/animation/index.vue';
 import BmTrackAnimation from './component/animation/track.vue';
 import BmLushu from './component/animation/lushu.vue';
+import BmDistanceTool from './component/tool/distance-tool.vue';
 
 /**
  * 地图类型空间及根组件
@@ -75,5 +76,10 @@ export {
      */
     BmViewAnimation,
     BmTrackAnimation,
-    BmLushu
+    BmLushu,
+
+    /**
+     * 地图工具
+     */
+    BmDistanceTool
 };

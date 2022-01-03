@@ -94,6 +94,6 @@ defineExpose({
 </script>
 <script lang="ts">
 export default {
-    name: "ViewAnimation",
+    name: "Lushu",
 }
 </script>

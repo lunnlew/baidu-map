@@ -30,6 +30,10 @@ declare namespace BaiduMapVue3 {
          */
         enableTilt?: boolean,
         /**
+         * 是否启用点击
+         */
+        enableMapClick?: boolean,
+        /**
          * 地图类型
          */
         mapType?: BMapGL.MapTypeId
@@ -845,6 +849,18 @@ declare namespace BaiduMapVue3 {
      */
     export const BmLushuAnimation: ComponentPublicInstance<BmLushuAnimationProps>
 
+    interface BmDistanceToolProps {
+        /**
+         * 是否显示
+         */
+        show?: boolean
+    }
+
+    /**
+     * 测距工具
+     */
+    export const BmDistanceTool: ComponentPublicInstance<BmDistanceToolProps>
+
     /**
      * BMapGL 名称空间
      */
@@ -1070,6 +1086,10 @@ declare namespace BaiduMapVue3 {
              * 开启地图倾斜，默认启用
              */
             enableTilt?: boolean;
+            /**
+             * 开启地图点击，默认启用
+             */
+            enableMapClick?: boolean;
         }
 
         /**
@@ -3147,6 +3167,31 @@ declare namespace BaiduMapVue3 {
              * 停止动画
              */
             stop(): void
+            /**
+             * 设置属性
+             */
+            _setOptions(opts: LushuAnimationOptions): void
+        }
+
+        type DistanceToolEvent = 'drawend' | 'addpoint' | 'removepolyline'
+
+        /**
+         * 地图测距工具类。
+         */
+        class DistanceTool {
+            /**
+             * 创建一个地图测距工具对象
+             * @param bmap 
+             */
+            constructor(bmap: Map)
+            /**
+             * 启动
+             */
+            open(): void
+            /**
+             * 关闭
+             */
+            close(): void
         }
 
         /**
@@ -4646,6 +4691,11 @@ declare namespace BaiduMapVue3 {
              * @param opts LushuAnimationOptions
              */
             LuShu: { new(bmap: Map, points: Array<Point>, opts: LushuAnimationOptions): LushuAnimation };
+            /**
+             * 创建一个测距工具对象
+             * @param bmap 
+             */
+            DistanceTool: { new(bmap: Map): DistanceTool };
         }
 
         type AllBMapGLType = keyof BMapGL.BMapGL;
