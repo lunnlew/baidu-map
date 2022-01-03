@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<{
   sideFillColor?: string
   sideFillOpacity?: number
   enableMassClear?: boolean
+  overallView?: boolean
   show?: boolean
 }>(), {
   points: () => [],
@@ -28,13 +29,14 @@ const props = withDefaults(defineProps<{
   sideFillColor: "#5679ea",
   sideFillOpacity: 0.9,
   enableMassClear: true,
+  overallView: true,
   show: true,
 })
 const attrs = useAttrs();
 const slots = useSlots()
 const emit = defineEmits([]);
 const options = computed(() => props)
-const isShow = computed(() => state.value.inited && props.show);
+const isShow = computed(() => state.value.inited && props.show && props.points.length > 0);
 watch(
   () => isShow.value,
   (val) => {

@@ -32,6 +32,7 @@ import BmViewAnimation from './component/animation/index.vue';
 import BmTrackAnimation from './component/animation/track.vue';
 import BmLushu from './component/animation/lushu.vue';
 import BmDistanceTool from './component/tool/distance-tool.vue';
+import BmDrivingRoute from './component/tool/driving-route.vue';
 
 /**
  * 地图类型空间及根组件
@@ -83,5 +84,6 @@ export {
     /**
      * 地图工具
      */
-    BmDistanceTool
+    BmDistanceTool,
+    BmDrivingRoute
 };

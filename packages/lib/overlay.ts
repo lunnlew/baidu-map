@@ -98,6 +98,9 @@ export function addPolyline(points: {
             polyline_points.push(new BMapGLRef.value.Point(point.lng, point.lat))
         }
         let polyline = new BMapGLRef.value.Polyline(polyline_points, marker_options)
+        if (polyline_params.overallView) {
+            map.value.setViewport(polyline_points)
+        }
         map.value.addOverlay(polyline);
         return polyline
     }
@@ -128,6 +131,9 @@ export function addPolygon(points: {
             polygon_points.push(new BMapGLRef.value.Point(point.lng, point.lat))
         }
         let polygon = new BMapGLRef.value.Polygon(polygon_points, marker_options)
+        if (polygon_params.overallView) {
+            map.value.setViewport(polygon_points)
+        }
         map.value.addOverlay(polygon);
         return polygon
     }
@@ -195,6 +201,9 @@ export function addPrism(points: {
             prism_points.push(new BMapGLRef.value.Point(point.lng, point.lat))
         }
         let prism = new BMapGLRef.value.Prism(prism_points, prism_params.altitude, marker_options)
+        if (prism_params.overallView) {
+            map.value.setViewport(prism_points)
+        }
         map.value.addOverlay(prism);
         return prism
     }

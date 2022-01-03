@@ -22,6 +22,7 @@ const props = withDefaults(defineProps<{
   enableMassClear?: boolean
   enableClicking?: boolean
   enableEditing?: boolean
+  overallView?: boolean
   show?: boolean
 }>(), {
   points: () => [],
@@ -34,12 +35,13 @@ const props = withDefaults(defineProps<{
   enableMassClear: true,
   enableClicking: true,
   enableEditing: false,
+  overallView: true,
   show: true,
 })
 const attrs = useAttrs();
 const slots = useSlots()
 const emit = defineEmits({});
-const isShow = computed(() => state.value.inited && props.show);
+const isShow = computed(() => state.value.inited && props.show && props.points.length > 0);
 const options = computed(() => props)
 watch(
   () => isShow.value,
