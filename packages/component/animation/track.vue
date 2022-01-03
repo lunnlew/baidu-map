@@ -67,6 +67,7 @@ onUnmounted(() => {
     bm.value = null
 })
 defineExpose({
+    bmobj: bm.value,
     start: () => bm.value && bm.value?.start(),
     cancel: () => bm.value && bm.value?.cancel(),
     pause: () => bm.value && bm.value?.pause(),
