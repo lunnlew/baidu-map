@@ -87,3 +87,40 @@ export {
     BmDistanceTool,
     BmDrivingRoute
 };
+
+const bm = {
+    install: function (app: { component: (arg0: string, arg1: any) => void; }) {
+        app.component('baidu-map', BaiduMap);
+        app.component('bm-scale-control', BmScaleControl);
+        app.component('bm-zoom-control', BmZoomControl);
+        app.component('bm-copyright-control', BmCopyrightControl);
+        app.component('bm-navigation-control', BmNavigationControl);
+        app.component('bm-navigation-threed-control', BmNavigationControl3D);
+        app.component('bm-city-list-control', BmCityListControl);
+        app.component('bm-location-control', BmLocationControl);
+        app.component('bm-map-type-control', BmMapTypeControl);
+        app.component('bm-custom-control', BmCustomControl);
+        app.component('bm-marker', BmMarker);
+        app.component('bm-marker-icon', BmMarkerIcon);
+        app.component('bm-marker-threed', BmMarker3D);
+        app.component('bm-marker-threed-icon', BmMarker3DIcon);
+        app.component('bm-polyline', BmPolyline);
+        app.component('bm-polygon', BmPolygon);
+        app.component('bm-city-boundary', BmCityBoundary);
+        app.component('bm-prism', BmPrism);
+        app.component('bm-label', BmLabel);
+        app.component('bm-ground-overlay', BmGroundOverlay);
+        app.component('bm-ground-overlay-image', BmGroundOverlayImage);
+        app.component('bm-context-menu', BmContextMenu);
+        app.component('bm-context-menu-item', BmContextMenuItem);
+        app.component('bm-circle', BmCircle);
+        app.component('bm-info-window', BmInfoWindow);
+        app.component('bm-bezier-curve', BmBezierCurve);
+        app.component('bm-view-animation', BmViewAnimation);
+        app.component('bm-track-animation', BmTrackAnimation);
+        app.component('bm-lushu', BmLushu);
+        app.component('bm-distance-tool', BmDistanceTool);
+        app.component('bm-driving-route', BmDrivingRoute);
+    }
+}
+export default bm
