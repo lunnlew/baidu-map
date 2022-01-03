@@ -35,6 +35,7 @@ import BmDistanceTool from './component/tool/distance-tool.vue';
 import BmDrivingRoute from './component/tool/driving-route.vue';
 import BmTransitRoute from './component/tool/transit-route.vue';
 import BmWalkingRoute from './component/tool/walking-route.vue';
+import BmRidingRoute from './component/tool/riding-route.vue';
 
 /**
  * 地图类型空间及根组件
@@ -89,7 +90,8 @@ export {
     BmDistanceTool,
     BmDrivingRoute,
     BmTransitRoute,
-    BmWalkingRoute
+    BmWalkingRoute,
+    BmRidingRoute
 };
 
 const bm = {
@@ -127,6 +129,7 @@ const bm = {
         app.component('bm-driving-route', BmDrivingRoute);
         app.component('bm-transit-route', BmTransitRoute);
         app.component('bm-walking-route', BmWalkingRoute);
+        app.component('bm-riding-route', BmRidingRoute);
     }
 }
 export default bm
