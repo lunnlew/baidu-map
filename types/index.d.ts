@@ -5705,6 +5705,58 @@ declare namespace BaiduMapVue3 {
             getStatus(): StatusCode
         }
 
+        /**
+         * 坐标类型
+         */
+        enum CoordPointType {
+            /**
+             * 大地坐标系
+             */
+            COORDINATES_WGS84 = 1,
+            /**
+             * 大地坐标系墨卡托米制坐标
+             */
+            COORDINATES_WGS84_MC = 2,
+            /**
+             * 火星坐标系
+             */
+            COORDINATES_GCJ02 = 3,
+            /**
+             * 火星坐标系墨卡托米制坐标
+             */
+            COORDINATES_GCJ02_MC = 4,
+            /**
+             * 百度坐标系
+             */
+            COORDINATES_BD09 = 5,
+            /**
+             * 百度坐标系墨卡托米制坐标
+             */
+            COORDINATES_BD09_MC = 6,
+            /**
+             * mapbar地图坐标
+             */
+            COORDINATES_MAPBAR = 7,
+            /**
+             * 51地图坐标
+             */
+            COORDINATES_51 = 8,
+        }
+
+        /**
+         * 其他坐标转百度坐标
+         */
+        class Convertor {
+            /**
+             * 其他坐标转百度坐标
+             * @param points 其他坐标
+             * @param from_type 坐标的类型
+             * @param to_type 百度的坐标类型，固定为：COORDINATES_BD09=5
+             * @param translateCallback 接收转换结果的回调函数
+             */
+            constructor(points: Array<Point>, from_type: CoordPointType, to_type: CoordPointType, translateCallback: Function)
+        }
+
         interface BMapGL {
             /**
              * 在指定的容器内创建地图实例，之后需要调用Map.centerAndZoom()方法对地图进行初始化。未进行初始化的地图将不能进行任何操作
@@ -5913,6 +5965,10 @@ declare namespace BaiduMapVue3 {
              * 创建一个骑行线路规划实例
              */
             RidingRoute: { new(location: Map | Point | String, opts: RidingRouteOptions): RidingRoute }
+            /**
+             * 坐标转换类
+             */
+            Convertor: { new(points: Array<Point>, from_type: CoordPointType, to_type: CoordPointType, translateCallback: Function): Convertor };
 
         }
 
