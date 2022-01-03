@@ -1123,6 +1123,76 @@ declare namespace BaiduMapVue3 {
      */
     export const BmWalkingRoute: ComponentPublicInstance<BmWalkingRouteProps>
 
+    interface BmRidingRouteProps {
+        /**
+         * 检索区域，类型可为地图实例、坐标点或城市名称的字符串
+         */
+        location: Object | {
+            lng: number,
+            lat: number
+        } | String
+        /**
+         * 起点
+         */
+        start?: {
+            lat: number;
+            lng: number;
+        } | Object,
+        /**
+         * 终点
+         */
+        end?: {
+            lat: number;
+            lng: number;
+        } | Object,
+        /**
+         * 结果呈现设置
+         */
+        renderOptions?: {
+            /**
+            * 展现结果的地图实例。当指定此参数后，搜索结果的标注、线路等均会自动添加到此地图上
+            */
+            map?: Object
+            /**
+             * 结果列表的HTML容器id或容器元素，提供此参数后，结果列表将在此容器中进行展示。此属性对LocalCity无效。驾车路线规划无效
+             */
+            panel?: string | HTMLElement
+            /**
+             * 是否选择第一个检索结果。此属性仅对LocalSearch有效
+             */
+            selectFirstResult?: boolean
+            /**
+             * 检索结束后是否自动调整地图视野。此属性对LocalCity无效
+             */
+            autoViewport?: boolean
+        }
+        /**
+         * 检索完成后的回调函数。 参数： results: RidingRouteResult
+         */
+        onSearchComplete: Function
+        /**
+         * 标注添加完成后的回调函数。 参数： pois: Array ，起点和目的地点数组，。通过marker属性可得到其对应的标注
+         */
+        onMarkersSet: Function
+        /**
+         * 折线添加完成后的回调函数。 参数： routes: Array ，骑行线路数组，通过Route.getPolyline()方法可得到对应的折线覆盖物
+         */
+        onPolylinesSet: Function
+        /**
+         * 标注气泡内容创建后的回调函数。 参数： poi: LocalResultPoi，通过其marker属性可得到当前的标注。 html: HTMLElement，气泡内的DOM元素
+         */
+        onInfoHtmlSet: Function
+        /**
+         * 结果列表添加完成后的回调函数。 参数： container: 结果列表所用的HTML元素
+         */
+        onResultsHtmlSet: Function
+    }
+
+    /**
+     * 骑行规划
+     */
+    export const BmRidingRoute: ComponentPublicInstance<BmRidingRouteProps>
+
     /**
      * BMapGL 名称空间
      */
@@ -4365,25 +4435,25 @@ declare namespace BaiduMapVue3 {
         }
 
         /**
-         * 用于获取公交线路规划方案。
+         * 用于获取骑行路线规划方案。
          */
-        class TransitRoute {
+        class RidingRoute {
             /**
-             * 创建一个公交导航实例。location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会优先在该城市内进行
+             * 创建一个骑行导航实例。location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
              * @param location 
              * @param opts 
              */
-            constructor(location: Map | Point | String, opts: TransitRouteOptions)
+            constructor(location: Map | Point | String, opts: RidingRouteOptions)
             /**
-             * 发起检索。 start: 起点，参数可以坐标点或者LocalSearchPoi实例。 end: 终点，参数可以是坐标点或者LocalSearchPoi实例，3.0版本暂不支持起终点参数为关键字，开发者可以先用检索接口确认关键字的坐标点
+             * 发起检索。 start: 起点，参数可以是关键字、坐标点（自1.1版本支持）或者LocalSearchPoi实例。 end: 终点，参数可以是关键字、坐标点（自1.1版本支持）或者LocalSearchPoi实例
              * @param start 
              * @param end 
              */
-            search(start: Point | LocalResultPoi, end: Point | LocalResultPoi): void
+            search(start: String | Point | LocalResultPoi, end: String | Point | LocalResultPoi): void
             /**
              * 返回最近一次检索的结果
              */
-            getResults(): TransitRouteResult
+            getResults(): RidingRouteResult
             /**
              * 清除最近一次检索的结果
              */
@@ -4393,46 +4463,31 @@ declare namespace BaiduMapVue3 {
              */
             enableAutoViewport(): void
             /**
-             * 	禁用自动调整地图层级
+             * 禁用自动调整地图层级
              */
             disableAutoViewport(): void
             /**
-             * 设置每页返回方案个数（1-5），默认为5
-             * @param capacity 
+             * 设置检索范围，参数类型可以为地图实例、坐标点或字符串。例：setLocation("北京市")
+             * @param location 
              */
-            setPageCapacity(capacity: Number): void
+            setLocation(location: Map | Point | String): void
             /**
-             * 设置城市内换乘策略
-             * @param policy 
-             */
-            setPolicy(policy: TransitPolicy): void
-            /**
-             * 设置跨城换乘策略
-             * @param intercityPolicy 
-             */
-            setIntercityPolicy(intercityPolicy: IntercityPolicy): void
-            /**
-             * 设置跨城交通方式策略
-             * @param transitTypePolicy 
-             */
-            setTransitTypePolicy(transitTypePolicy: TransitTypePolicy): void
-            /**
-             * 设置检索结束后的回调函数。 参数： results: TransitRouteResult，公交导航结果
+             * 设置检索结束后的回调函数。 参数： results: RidingRouteResult
              * @param callback 
              */
             setSearchCompleteCallback(callback: Function): void
             /**
-             * 设置添加标注后的回调函数。 参数： pois: Array ，起点和目的地数组。 transfers: Array ，公交车站数组
+             * 设置添加标注后的回调函数。 参数： pois: Array ，起点和目的地点数组。通过marker属性可得到其对应的标注
              * @param callback 
              */
             setMarkersSetCallback(callback: Function): void
             /**
-             * 设置气泡打开后的回调函数。 参数： poi: LocalResultPoi，表示当前气泡对应的点（可以是起点、终点或换乘车站） html: HTMLElement，气泡内的DOM元素
+             * 设置气泡打开后的回调函数。 参数： poi: LocalResultPoi，通过其marker属性可得到当前的标注。 html: HTMLElement，气泡内的DOM元素
              * @param callback 
              */
             setInfoHtmlSetCallback(callback: Function): void
             /**
-             * 设置添加路线后的回调函数。 参数： lines: Array ，公交线路数组。 routes: Array ，步行线路数组，通过Route.getPolyline()方法可得到对应的折线覆盖物
+             * 设置添加路线后的回调函数。 参数： routes: Array ，骑行线路数组，通过Route.getPolyline()方法可得到对应的折线覆盖物
              * @param callback 
              */
             setPolylinesSetCallback(callback: Function): void
@@ -4446,9 +4501,62 @@ declare namespace BaiduMapVue3 {
              */
             getStatus(): StatusCode
             /**
-             * 返回线路规划对象类型
+             * 返回类型说明
              */
             toString(): String
+        }
+
+        /**
+         * 此类表示RidingRoute构造函数的可选参数。
+         */
+        interface RidingRouteOptions {
+            /**
+             * 搜索结果呈现设置
+             */
+            renderOptions: RenderOptions
+            /**
+             * 检索完成后的回调函数。 参数： results: RidingRouteResult
+             */
+            onSearchComplete: Function
+            /**
+             * 标注添加完成后的回调函数。 参数： pois: Array ，起点和目的地点数组，。通过marker属性可得到其对应的标注
+             */
+            onMarkersSet: Function
+            /**
+             * 折线添加完成后的回调函数。 参数： routes: Array ，骑行线路数组，通过Route.getPolyline()方法可得到对应的折线覆盖物
+             */
+            onPolylinesSet: Function
+            /**
+             * 标注气泡内容创建后的回调函数。 参数： poi: LocalResultPoi，通过其marker属性可得到当前的标注。 html: HTMLElement，气泡内的DOM元素
+             */
+            onInfoHtmlSet: Function
+            /**
+             * 结果列表添加完成后的回调函数。 参数： container: 结果列表所用的HTML元素
+             */
+            onResultsHtmlSet: Function
+        }
+
+        /**
+         * 此类表示骑行路线导航的结果，没有构造函数，通过访问RidingRoute.getResults()方法或RidingRoute的onSearchComplete回调函数参数获得。
+         */
+        interface RidingRouteResult {
+            /**
+             * 返回起点
+             */
+            getStart(): LocalResultPoi
+            /**
+             * 返回终点
+             */
+            getEnd(): LocalResultPoi
+            /**
+             * 返回方案个数
+             */
+            getNumPlans(): Number
+            /**
+             * 返回索引指定的方案。索引0表示第一条方案
+             * @param i 
+             */
+            getPlan(i: Number): RoutePlan
         }
 
         /**
@@ -4574,6 +4682,93 @@ declare namespace BaiduMapVue3 {
              * @param i 
              */
             getPlan(i: Number): RoutePlan
+        }
+
+        /**
+         * 用于获取公交线路规划方案。
+         */
+        class TransitRoute {
+            /**
+             * 创建一个公交导航实例。location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会优先在该城市内进行
+             * @param location 
+             * @param opts 
+             */
+            constructor(location: Map | Point | String, opts: TransitRouteOptions)
+            /**
+             * 发起检索。 start: 起点，参数可以坐标点或者LocalSearchPoi实例。 end: 终点，参数可以是坐标点或者LocalSearchPoi实例，3.0版本暂不支持起终点参数为关键字，开发者可以先用检索接口确认关键字的坐标点
+             * @param start 
+             * @param end 
+             */
+            search(start: Point | LocalResultPoi, end: Point | LocalResultPoi): void
+            /**
+             * 返回最近一次检索的结果
+             */
+            getResults(): TransitRouteResult
+            /**
+             * 清除最近一次检索的结果
+             */
+            clearResults(): void
+            /**
+             * 启用自动调整地图层级，当指定了搜索结果所展现的地图时有效
+             */
+            enableAutoViewport(): void
+            /**
+             * 	禁用自动调整地图层级
+             */
+            disableAutoViewport(): void
+            /**
+             * 设置每页返回方案个数（1-5），默认为5
+             * @param capacity 
+             */
+            setPageCapacity(capacity: Number): void
+            /**
+             * 设置城市内换乘策略
+             * @param policy 
+             */
+            setPolicy(policy: TransitPolicy): void
+            /**
+             * 设置跨城换乘策略
+             * @param intercityPolicy 
+             */
+            setIntercityPolicy(intercityPolicy: IntercityPolicy): void
+            /**
+             * 设置跨城交通方式策略
+             * @param transitTypePolicy 
+             */
+            setTransitTypePolicy(transitTypePolicy: TransitTypePolicy): void
+            /**
+             * 设置检索结束后的回调函数。 参数： results: TransitRouteResult，公交导航结果
+             * @param callback 
+             */
+            setSearchCompleteCallback(callback: Function): void
+            /**
+             * 设置添加标注后的回调函数。 参数： pois: Array ，起点和目的地数组。 transfers: Array ，公交车站数组
+             * @param callback 
+             */
+            setMarkersSetCallback(callback: Function): void
+            /**
+             * 设置气泡打开后的回调函数。 参数： poi: LocalResultPoi，表示当前气泡对应的点（可以是起点、终点或换乘车站） html: HTMLElement，气泡内的DOM元素
+             * @param callback 
+             */
+            setInfoHtmlSetCallback(callback: Function): void
+            /**
+             * 设置添加路线后的回调函数。 参数： lines: Array ，公交线路数组。 routes: Array ，步行线路数组，通过Route.getPolyline()方法可得到对应的折线覆盖物
+             * @param callback 
+             */
+            setPolylinesSetCallback(callback: Function): void
+            /**
+             * 设置结果列表创建后的回调函数。 参数： container: 结果列表所用的HTML元素
+             * @param callback 
+             */
+            setResultsHtmlSetCallback(callback: Function): void
+            /**
+             * 返回状态码
+             */
+            getStatus(): StatusCode
+            /**
+             * 返回线路规划对象类型
+             */
+            toString(): String
         }
 
         /**
@@ -5714,6 +5909,10 @@ declare namespace BaiduMapVue3 {
              * 创建一个步行线路规划实例
              */
             WalkingRoute: { new(location: Map | Point | String, opts: WalkingRouteOptions): WalkingRoute }
+            /**
+             * 创建一个骑行线路规划实例
+             */
+            RidingRoute: { new(location: Map | Point | String, opts: RidingRouteOptions): RidingRoute }
 
         }
 
