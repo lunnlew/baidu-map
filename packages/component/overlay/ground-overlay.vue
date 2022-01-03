@@ -55,7 +55,7 @@ watch(
             GroundOverlayImage.props as any,
             (GroundOverlayImage.type as any).props
           );
-          merge_props = Object.assign(merge_props, merge_image_props);
+          merge_props = Object.assign({}, merge_props, merge_image_props);
         }
       }
       bm.value = bindEvents(
