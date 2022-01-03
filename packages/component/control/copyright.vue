@@ -40,6 +40,9 @@ watch(
 onUnmounted(() => {
   bm.value = null
 })
+defineExpose({
+    bmobj: bm.value,
+})
 </script>
 <script lang="ts">
 export default {

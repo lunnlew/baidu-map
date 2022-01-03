@@ -45,6 +45,7 @@ onUnmounted(() => {
   bm.value = null
 })
 defineExpose({
+    bmobj: bm.value,
     open: () => bm.value && bm.value.open(),
     close: () => bm.value && bm.value.close(),
 })
