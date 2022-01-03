@@ -1,5 +1,5 @@
 import { BMapGLRef, map } from './map';
-import { BMapGL, BmMarkerIconProps, BmMarkerProps, BmMarker3DProps, BmPolygonProps, BmPolylineProps, BmCityBoundaryProps, BmPrismProps, BmGroundOverlayProps, BmLabelProps, BmContextMenuProps, BmCircleProps, BmInfoWindowProps } from "types"
+import { BMapGL, BmMarkerIconProps, BmMarkerProps, BmMarker3DProps, BmPolygonProps, BmPolylineProps, BmCityBoundaryProps, BmPrismProps, BmGroundOverlayProps, BmLabelProps, BmContextMenuProps, BmCircleProps, BmInfoWindowProps, BmBezierCurveProps } from "types"
 
 /**
  * 添加点标注
@@ -333,5 +333,36 @@ export function addInfoWindow(info_params: {
         let info = new BMapGLRef.value.InfoWindow(info_params.content, marker_options)
         map.value.openInfoWindow(info, new BMapGLRef.value.Point(info_params.point.lng, info_params.point.lat));
         return info
+    }
+}
+
+/**
+ * 添加贝塞尔曲线
+ * @param center 
+ * @param radius 
+ * @param circle_params
+ */
+export function addBezierCurve(params: {
+    [key: string]: any
+} & Required<BmBezierCurveProps>): BMapGL.BezierCurve | undefined {
+    if (BMapGLRef.value && map.value) {
+        let points = []
+        for (let point of params.points) {
+            points.push(new BMapGLRef.value.Point(point.lng, point.lat))
+        }
+        let control_points_arr = []
+        for (let control_points of params.controlPoints) {
+            let control_point_arr = []
+            for (let control_point of control_points) {
+                control_point_arr.push(new BMapGLRef.value.Point(control_point.lng, control_point.lat))
+            }
+            control_points_arr.push(control_point_arr)
+        }
+        let bc = new BMapGLRef.value.BezierCurve(points, control_points_arr)
+        if (params.overallView) {
+            map.value.setViewport(points);
+        }
+        map.value.addOverlay(bc);
+        return bc
     }
 }

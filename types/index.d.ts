@@ -861,6 +861,40 @@ declare namespace BaiduMapVue3 {
      */
     export const BmDistanceTool: ComponentPublicInstance<BmDistanceToolProps>
 
+    interface BmBezierCurveProps {
+        /**
+         * 轨迹点
+         */
+        points: {
+            lng: number;
+            lat: number;
+        }[]
+        /**
+         * 控制点
+         */
+        controlPoints: [[{
+            lng: number;
+            lat: number;
+        }, {
+            lng: number;
+            lat: number;
+        }], [{
+            lng: number;
+            lat: number;
+        }]]
+        /**
+         * 是否总览显示
+         */
+        overallView?: boolean,
+        /**
+         * 是否显示
+         */
+        show?: boolean
+    }
+
+    export const BmBezierCurve: ComponentPublicInstance<BmBezierCurveProps>
+
+
     /**
      * BMapGL 名称空间
      */
@@ -3842,6 +3876,18 @@ declare namespace BaiduMapVue3 {
         }
 
         /**
+         * 地图贝塞尔曲线类。
+         */
+        class BezierCurve extends Overlay {
+            /**
+             * 创建一个贝塞尔曲线
+             * @param points 
+             * @param controlPoints 
+             */
+            constructor(points: Array<Point>, controlPoints: any[])
+        }
+
+        /**
          * 定位结果状态
          */
         enum StatusCode {
@@ -4673,6 +4719,12 @@ declare namespace BaiduMapVue3 {
              * @param opts ViewAnimationOptions
              */
             ViewAnimation: { new(keyFrames: Array<ViewAnimationKeyFrames>, opts: ViewAnimationOptions): ViewAnimation };
+            /**
+            * 创建一个贝塞尔曲线对象
+            * @param points 
+            * @param controlPoints 
+            */
+            BezierCurve: { new(points: Array<Point>, controlPoints: any[]): BezierCurve };
 
         }
 

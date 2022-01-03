@@ -26,6 +26,7 @@ import BmContextMenu from './component/overlay/context-menu.vue';
 import BmContextMenuItem from './component/overlay/context-menu-item.vue';
 import BmCircle from './component/overlay/circle.vue';
 import BmInfoWindow from './component/overlay/info-window.vue';
+import BmBezierCurve from './component/overlay/bezier-curve.vue';
 
 import BmViewAnimation from './component/animation/index.vue';
 import BmTrackAnimation from './component/animation/track.vue';
@@ -70,6 +71,7 @@ export {
     BmContextMenuItem,
     BmCircle,
     BmInfoWindow,
+    BmBezierCurve,
 
     /**
      * 地图动画
