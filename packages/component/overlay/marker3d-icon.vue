@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<{
 }>(), {
   src: '',
   size: () => [40, 40],
-  anchor: () => [0, 0],
+  anchor: undefined,
   imageOffset: () => [0, 0],
 })
 </script>

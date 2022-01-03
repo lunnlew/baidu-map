@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<{
 }>(), {
   size: () => [23, 15],
   src: "http://webmap0.bdimg.com/image/api/marker_red.png",
-  anchor: () => [0, 0],
+  anchor: undefined,
   imageOffset: () => [0, 0],
 })
 </script>

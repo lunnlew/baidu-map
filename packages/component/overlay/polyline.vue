@@ -19,7 +19,9 @@ const props = withDefaults(defineProps<{
   strokeStyle?: string
   enableMassClear?: boolean
   enableEditing?: boolean
-  enableClicking: boolean
+  enableClicking?: boolean
+  clip?: boolean,
+  geodesic?: boolean,
   show?: boolean
 }>(), {
   points: () => [],
@@ -30,6 +32,8 @@ const props = withDefaults(defineProps<{
   enableMassClear: true,
   enableEditing: false,
   enableClicking: true,
+  clip: true,
+  geodesic: false,
   show: true,
 })
 const attrs = useAttrs();

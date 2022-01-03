@@ -397,6 +397,12 @@ declare namespace BaiduMapVue3 {
          * 是否响应点击事件，默认为true
          */
         enableClicking: boolean
+
+        clip: boolean,
+        /**
+         * 大地线模式
+         */
+        geodesic: boolean,
         /**
          * 是否显示
          */
@@ -802,6 +808,42 @@ declare namespace BaiduMapVue3 {
      * 轨迹动画
      */
     export const BmTrackAnimation: ComponentPublicInstance<BmTrackAnimationProps>
+
+    interface BmLushuAnimationProps {
+        /**
+         * 信息窗口文案
+         */
+        defaultContent: string,
+        /**
+         * 是否开启自动视野调整，如果开启那么路书在运动过程中会根据视野自动调整
+         */
+        autoView: boolean,
+        /**
+         * 速度
+         */
+        speed: number,
+        /**
+         * 图标
+         */
+        icon: string,
+        /**
+         * 是否设置marker随着道路的走向进行旋转
+         */
+        enableRotation: boolean,
+        /**
+         * 是否大地线
+         */
+        geodesic: boolean,
+        /**
+         * 是否自动地图中心
+         */
+        autoCenter: boolean,
+    }
+
+    /**
+     * 路书动画
+     */
+    export const BmLushuAnimation: ComponentPublicInstance<BmLushuAnimationProps>
 
     /**
      * BMapGL 名称空间
@@ -1491,6 +1533,20 @@ declare namespace BaiduMapVue3 {
          * 此类表示Polyline构造函数的可选参数。它没有构造函数，但可通过对象字面量形式表示。
          */
         interface PolylineOptions {
+            /**
+             * 指定路径两端的形状
+             */
+            strokeLineCap: 'butt' | 'round' | 'square' | 'inherit',
+            /**
+             * 指定路径转角处使用的形状
+             */
+            strokeLineJoin: 'arcs' | 'bevel' | 'miter' | 'miter-clip' | 'round',
+            /**
+             * 显示大地线
+             */
+            geodesic: boolean,
+
+            clip: boolean,
             /**
              * 折线颜色
              */
@@ -2373,11 +2429,11 @@ declare namespace BaiduMapVue3 {
             /**
              * 图标的定位锚点。此点用来决定图标与地理位置的关系，是相对于图标左上角的偏移值，默认等于图标宽度和高度的中间值
              */
-            anchor: Size
+            anchor?: Size
             /**
              * 图片相对于可视区域的偏移值
              */
-            imageOffset: Size
+            imageOffset?: Size
         }
 
         /**
@@ -3027,6 +3083,70 @@ declare namespace BaiduMapVue3 {
              * 强制停止动画
              */
             cancel(): void
+            /**
+             * 暂时停止动画
+             */
+            pause(): void
+            /**
+             * 恢复动画
+             */
+            continue(): void
+        }
+
+        interface LushuAnimationOptions {
+            /**
+             * 信息窗口文案
+             */
+            defaultContent: string,
+            /**
+             * 是否开启自动视野调整，如果开启那么路书在运动过程中会根据视野自动调整
+             */
+            autoView: boolean,
+            /**
+             * 速度
+             */
+            speed: number,
+            /**
+             * 图标
+             */
+            icon: Icon,
+            /**
+             * 是否设置marker随着道路的走向进行旋转
+             */
+            enableRotation: boolean,
+            /**
+             * 是否大地线
+             */
+            geodesic: boolean,
+            /**
+             * 是否自动地图中心
+             */
+            autoCenter: boolean,
+        }
+
+        /**
+        * 地图路书动画类。
+        */
+        class LushuAnimation {
+            /**
+             * 创建一个地图路书动画对象
+             * @param bmap 
+             * @param pl 
+             * @param opts 
+             */
+            constructor(bmap: Map, pl: Polyline, opts: LushuAnimationOptions)
+            /**
+             * 启动动画
+             */
+            start(): void
+            /**
+             * 暂停动画
+             */
+            pause(): void
+            /**
+             * 停止动画
+             */
+            stop(): void
         }
 
         /**
@@ -3304,7 +3424,7 @@ declare namespace BaiduMapVue3 {
              * @param view 
              * @param viewportOptions 
              */
-            setViewport(view: Array<Point> | Viewport, viewportOptions: ViewportOptions): void;
+            setViewport(view: Array<Point> | Viewport, viewportOptions?: ViewportOptions): void;
             /**
              * 根据提供的地理区域或坐标获得最佳的地图视野，返回的对象中包含center和zoom属性，分别表示地图的中心点和级别。此方法仅返回视野信息，不会将新的中心点和级别做用到当前地图上
              * @param view 
@@ -4519,6 +4639,13 @@ declare namespace BaiduMapVue3 {
             * @param opts TrackAnimationOptions
             */
             TrackAnimation: { new(bmap: Map, pl: Polyline, opts: TrackAnimationOptions): TrackAnimation };
+            /**
+             * 创建一个地图路书动画对象
+             * @param bmap 
+             * @param points 
+             * @param opts LushuAnimationOptions
+             */
+            LuShu: { new(bmap: Map, points: Array<Point>, opts: LushuAnimationOptions): LushuAnimation };
         }
 
         type AllBMapGLType = keyof BMapGL.BMapGL;

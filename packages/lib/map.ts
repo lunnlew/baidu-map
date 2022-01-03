@@ -13,6 +13,10 @@ export const state = ref({
      * 轨迹动画库是否初始化完成
      */
     track_animation_lib_inited: false,
+    /**
+     * 路书动画库是否初始化完成
+     */
+    lushu_animation_lib_inited: false,
 });
 
 /**

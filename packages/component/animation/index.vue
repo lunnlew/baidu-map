@@ -53,6 +53,10 @@ watch(
         immediate: true,
     }
 );
+defineExpose({
+    start: () => map.value && bm.value && map.value.startViewAnimation(bm.value),
+    cancel: () => map.value && bm.value && map.value.cancelViewAnimation(bm.value),
+})
 </script>
 <script lang="ts">
 export default {
