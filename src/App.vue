@@ -33,10 +33,10 @@ body {
     background-color: #fff;
 }
 .logo {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     color: #333;
-    padding: 24px 0;
+    padding: 20px 0;
     text-align: center;
 }
 .sideleft {
@@ -46,7 +46,7 @@ body {
     border-right: 1px solid #eee;
 }
 .page-content {
-    padding: 28px;
+    padding: 10px 28px;
 }
 .map {
     width: 100%;
@@ -57,12 +57,12 @@ body {
     border-bottom: 1px solid #eee;
 }
 .code-title {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     padding-bottom: 10px;
 }
 .code-content {
-    padding-top: 10px;
+    padding: 0;
 }
 .code-snippet {
     border-radius: 4px;
@@ -70,7 +70,7 @@ body {
 }
 .code-snippet pre {
     border: 0;
-    font-size: 18px;
+    font-size: 16px;
 }
 .code-snippet code {
     padding: 10px;

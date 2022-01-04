@@ -6,12 +6,12 @@
             </div>
             <div class="code-content">
                 <div class="code-snippet">
-                    <highlightjs language="typescript" :code="usecode"></highlightjs>
+                    <highlightjs :code="usecode"></highlightjs>
                 </div>
             </div>
             <div class="code-content">
                 <div class="code-snippet">
-                    <highlightjs language="css" :code="usecode1"></highlightjs>
+                    <highlightjs :code="usecode1"></highlightjs>
                 </div>
             </div>
         </div>

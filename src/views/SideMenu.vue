@@ -51,7 +51,7 @@ onMounted(() => {
 .sidemenu-item {
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
     cursor: pointer;
     &:hover {
         background-color: #f2f2f2;
@@ -70,6 +70,6 @@ onMounted(() => {
     }
 }
 .sidemenu-item-text {
-    font-size: 16px;
+    font-size: 14px;
 }
 </style>
