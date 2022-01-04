@@ -6,49 +6,48 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from "vue";
-import { map, state } from "@/lib/map";
-import { addCustomControl } from "@/lib/control";
-import { bindEvents, extractEmitEvents } from "@/utils/util";
-const props = withDefaults(defineProps<{
-    dom?: HTMLElement,
-    anchor?: number,
-    offset?: [number, number],
-    show?: boolean,
-}>(), {
-    dom: undefined,
-    anchor: 0,
-    offset: () => [50, 80],
-    show: true,
-})
-const attrs = useAttrs();
+import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
+import { map, state } from '@/lib/map'
+import { addCustomControl } from '@/lib/control'
+import { bindEvents, extractEmitEvents } from '@/utils/util'
+const props = withDefaults(
+    defineProps<{
+        dom?: HTMLElement
+        anchor?: number
+        offset?: [number, number]
+        show?: boolean
+    }>(),
+    {
+        dom: undefined,
+        anchor: 0,
+        offset: () => [50, 80],
+        show: true,
+    }
+)
+const attrs = useAttrs()
 const slots = useSlots()
-const control = ref();
-const emit = defineEmits({});
-const isShow = computed(() => state.value.inited && props.show);
+const control = ref()
+const emit = defineEmits({})
+const isShow = computed(() => state.value.inited && props.show)
 const options = computed(() => props)
 const bm = ref()
 watch(
     () => isShow.value,
-    (val) => {
+    val => {
         if (val) {
-            let merge_props = { ...options.value };
+            let merge_props = { ...options.value }
             if (slots.default) {
-                merge_props.dom = control.value;
+                merge_props.dom = control.value
             }
-            bm.value = bindEvents(
-                addCustomControl(merge_props),
-                extractEmitEvents(attrs),
-                emit
-            );
+            bm.value = bindEvents(addCustomControl(merge_props), extractEmitEvents(attrs), emit)
         }
     },
     {
         immediate: true,
     }
-);
+)
 onUnmounted(() => {
-    map.value?.removeControl(bm.value);
+    map.value?.removeControl(bm.value)
     bm.value = null
 })
 defineExpose({
@@ -57,6 +56,6 @@ defineExpose({
 </script>
 <script lang="ts">
 export default {
-    name: "Marker",
+    name: 'Marker',
 }
 </script>

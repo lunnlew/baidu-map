@@ -4,41 +4,40 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, onUnmounted, ref, useAttrs, watch } from "vue";
-import { map, state } from "@/lib/map";
-import { addCopyrightControl } from "@/lib/control";
-import { bindEvents, extractEmitEvents } from "@/utils/util";
-const props = withDefaults(defineProps<{
-    anchor?: number,
-    offset?: [number, number],
-    show?: boolean,
-}>(), {
-    anchor: 0,
-    offset: () => [50, 80],
-    show: true,
-})
-const attrs = useAttrs();
-const emit = defineEmits({});
-const isShow = computed(() => state.value.inited && props.show);
+import { computed, onUnmounted, ref, useAttrs, watch } from 'vue'
+import { map, state } from '@/lib/map'
+import { addCopyrightControl } from '@/lib/control'
+import { bindEvents, extractEmitEvents } from '@/utils/util'
+const props = withDefaults(
+    defineProps<{
+        anchor?: number
+        offset?: [number, number]
+        show?: boolean
+    }>(),
+    {
+        anchor: 0,
+        offset: () => [50, 80],
+        show: true,
+    }
+)
+const attrs = useAttrs()
+const emit = defineEmits({})
+const isShow = computed(() => state.value.inited && props.show)
 const options = computed(() => props)
 const bm = ref()
 watch(
     () => isShow.value,
-    (val) => {
+    val => {
         if (val) {
-            bm.value = bindEvents(
-                addCopyrightControl(options.value),
-                extractEmitEvents(attrs),
-                emit
-            );
+            bm.value = bindEvents(addCopyrightControl(options.value), extractEmitEvents(attrs), emit)
         }
     },
     {
         immediate: true,
     }
-);
+)
 onUnmounted(() => {
-    map.value?.removeControl(bm.value);
+    map.value?.removeControl(bm.value)
     bm.value = null
 })
 defineExpose({
@@ -47,6 +46,6 @@ defineExpose({
 </script>
 <script lang="ts">
 export default {
-    name: "CopyrightControl",
+    name: 'CopyrightControl',
 }
 </script>

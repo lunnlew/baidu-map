@@ -1,12 +1,14 @@
-import { BMapGL, BmDrivingRouteProps, BmRidingRouteProps, BmTransitRouteProps, BmWalkingRouteProps } from "types"
-import { BMapGLRef, map } from "./map"
+import { BMapGL, BmDrivingRouteProps, BmRidingRouteProps, BmTransitRouteProps, BmWalkingRouteProps } from 'types'
+import { BMapGLRef, map } from './map'
 
 /**
  * 添加驾驶线路规划
  */
-export function addDrivingRoute(params: {
-    [key: string]: any
-} & Required<BmDrivingRouteProps>): BMapGL.DrivingRoute | undefined {
+export function addDrivingRoute(
+    params: {
+        [key: string]: any
+    } & Required<BmDrivingRouteProps>
+): BMapGL.DrivingRoute | undefined {
     if (BMapGLRef.value && map.value) {
         let options = {} as {
             [key: string]: any
@@ -43,9 +45,11 @@ export function addDrivingRoute(params: {
 /**
  * 添加公交线路规划
  */
-export function addTransitRoute(params: {
-    [key: string]: any
-} & Required<BmTransitRouteProps>): BMapGL.TransitRoute | undefined {
+export function addTransitRoute(
+    params: {
+        [key: string]: any
+    } & Required<BmTransitRouteProps>
+): BMapGL.TransitRoute | undefined {
     if (BMapGLRef.value && map.value) {
         let options = {} as {
             [key: string]: any
@@ -82,9 +86,11 @@ export function addTransitRoute(params: {
 /**
  * 添加步行线路规划
  */
-export function addWalkingRoute(params: {
-    [key: string]: any
-} & Required<BmWalkingRouteProps>): BMapGL.WalkingRoute | undefined {
+export function addWalkingRoute(
+    params: {
+        [key: string]: any
+    } & Required<BmWalkingRouteProps>
+): BMapGL.WalkingRoute | undefined {
     if (BMapGLRef.value && map.value) {
         let options = {} as {
             [key: string]: any
@@ -121,9 +127,11 @@ export function addWalkingRoute(params: {
 /**
  * 添加骑行线路规划
  */
-export function addRidingRoute(params: {
-    [key: string]: any
-} & Required<BmRidingRouteProps>): BMapGL.RidingRoute | undefined {
+export function addRidingRoute(
+    params: {
+        [key: string]: any
+    } & Required<BmRidingRouteProps>
+): BMapGL.RidingRoute | undefined {
     if (BMapGLRef.value && map.value) {
         let options = {} as {
             [key: string]: any

@@ -2,40 +2,39 @@ import { ComponentPublicInstance } from 'vue'
 
 declare namespace BaiduMapOptions {
     type center = {
-        lng: number;
-        lat: number;
-    };
+        lng: number
+        lat: number
+    }
 }
 
 declare namespace BaiduMapVue3 {
-
-    export function install(app: any): void;
+    export function install(app: any): void
 
     export interface BaiduMapProps {
         /**
          * 地图中心点坐标
          */
-        center: BaiduMapOptions.center,
+        center: BaiduMapOptions.center
         /**
          * 百度地图APIKEY
          */
-        apiKey: string,
+        apiKey: string
         /**
          * 地图缩放级别
          */
-        zoom?: number,
+        zoom?: number
         /**
          * 是否启用旋转
          */
-        enableRotate?: boolean,
+        enableRotate?: boolean
         /**
          * 是否启用倾斜
          */
-        enableTilt?: boolean,
+        enableTilt?: boolean
         /**
          * 是否启用点击
          */
-        enableMapClick?: boolean,
+        enableMapClick?: boolean
         /**
          * 地图类型
          */
@@ -49,11 +48,11 @@ declare namespace BaiduMapVue3 {
         /**
          * 控件停靠位置
          */
-        anchor?: BMapGL.ControlAnchor,
+        anchor?: BMapGL.ControlAnchor
         /**
          * 控件偏移量
          */
-        offset?: [number, number],
+        offset?: [number, number]
         /**
          * 是否显示
          */
@@ -67,11 +66,11 @@ declare namespace BaiduMapVue3 {
         /**
          * 控件停靠位置
          */
-        anchor?: BMapGL.ControlAnchor,
+        anchor?: BMapGL.ControlAnchor
         /**
          * 控件偏移量
          */
-        offset?: [number, number],
+        offset?: [number, number]
         /**
          * 是否显示
          */
@@ -85,7 +84,7 @@ declare namespace BaiduMapVue3 {
         /**
          * 控件停靠位置
          */
-        anchor?: BMapGL.ControlAnchor,
+        anchor?: BMapGL.ControlAnchor
         /**
          * 控件偏移量
          */
@@ -108,7 +107,7 @@ declare namespace BaiduMapVue3 {
         /**
          * 控件停靠位置
          */
-        anchor?: BMapGL.ControlAnchor,
+        anchor?: BMapGL.ControlAnchor
         /**
          * 控件偏移量
          */
@@ -123,15 +122,15 @@ declare namespace BaiduMapVue3 {
         /**
          * 控件停靠位置
          */
-        anchor?: BMapGL.ControlAnchor,
+        anchor?: BMapGL.ControlAnchor
         /**
          * 控件偏移量
          */
-        offset?: [number, number],
+        offset?: [number, number]
         /**
          * 控件类型
          */
-        type?: BMapGL.NavigationControlType,
+        type?: BMapGL.NavigationControlType
         /**
          * 是否显示
          */
@@ -145,11 +144,11 @@ declare namespace BaiduMapVue3 {
         /**
          * 控件停靠位置
          */
-        anchor?: BMapGL.ControlAnchor,
+        anchor?: BMapGL.ControlAnchor
         /**
          * 控件偏移量
          */
-        offset?: [number, number],
+        offset?: [number, number]
         /**
          * 控件类型
          */
@@ -168,7 +167,7 @@ declare namespace BaiduMapVue3 {
         /**
          * 控件停靠位置
          */
-        anchor?: BMapGL.ControlAnchor,
+        anchor?: BMapGL.ControlAnchor
         /**
          * 控件偏移量
          */
@@ -187,7 +186,7 @@ declare namespace BaiduMapVue3 {
         /**
          * 控件停靠位置
          */
-        anchor?: BMapGL.ControlAnchor,
+        anchor?: BMapGL.ControlAnchor
         /**
          * 控件偏移量
          */
@@ -205,11 +204,11 @@ declare namespace BaiduMapVue3 {
         /**
          * 控件停靠位置
          */
-        anchor?: number,
+        anchor?: number
         /**
          * 控件偏移量
          */
-        offset?: [number, number],
+        offset?: [number, number]
         /**
          * 是否显示
          */
@@ -227,8 +226,8 @@ declare namespace BaiduMapVue3 {
          * 标注坐标
          */
         point: {
-            lng: number;
-            lat: number;
+            lng: number
+            lat: number
         }
         /**
          * 标注的位置偏移值
@@ -278,16 +277,16 @@ declare namespace BaiduMapVue3 {
          * 标注位置
          */
         point: {
-            lng: number;
-            lat: number;
+            lng: number
+            lat: number
         }
         /**
-        * 点的高度
-        */
+         * 点的高度
+         */
         height?: number
         /**
-        * 点的大小，默认为50
-        */
+         * 点的大小，默认为50
+         */
         size?: number
         /**
          * 点的形状，1 为圆形，2 为正方形，默认为 1。也可以使用对应的常量 BMAP_SHAPE_CIRCLE 和 BMAP_SHAPE_RECT
@@ -300,7 +299,7 @@ declare namespace BaiduMapVue3 {
         /**
          * 点的透明度，范围0-1，默认0.8
          */
-        fillOpacity?: number,
+        fillOpacity?: number
         /**
          * 是否显示
          */
@@ -320,12 +319,12 @@ declare namespace BaiduMapVue3 {
          * 文本标注的地理位置
          */
         position: {
-            lng: number;
-            lat: number;
+            lng: number
+            lat: number
         }
         /**
-        * 文本标注的位置偏移值
-        */
+         * 文本标注的位置偏移值
+         */
         offset?: [number, number]
         /**
          * 是否在调用map.clearOverlays时清除此覆盖物，默认为true
@@ -349,15 +348,15 @@ declare namespace BaiduMapVue3 {
         /**
          * 图标地址
          */
-        src: string,
+        src: string
         /**
          * 图标大小
          */
-        size?: [number, number],
+        size?: [number, number]
         /**
          * 图标定位锚点
          */
-        anchor?: [number, number],
+        anchor?: [number, number]
         /**
          * 图标可视区偏移
          */
@@ -373,8 +372,8 @@ declare namespace BaiduMapVue3 {
          * 折线点集
          */
         points: {
-            lng: number;
-            lat: number;
+            lng: number
+            lat: number
         }[]
         /**
          * 折线颜色
@@ -405,11 +404,11 @@ declare namespace BaiduMapVue3 {
          */
         enableClicking: boolean
 
-        clip: boolean,
+        clip: boolean
         /**
          * 大地线模式
          */
-        geodesic: boolean,
+        geodesic: boolean
         /**
          * 是否显示
          */
@@ -424,8 +423,8 @@ declare namespace BaiduMapVue3 {
          * 多边形点集
          */
         points: {
-            lng: number;
-            lat: number;
+            lng: number
+            lat: number
         }[]
         /**
          * 边线颜色
@@ -462,7 +461,7 @@ declare namespace BaiduMapVue3 {
         /**
          * 是否响应点击事件，默认为true
          */
-        enableClicking?: boolean,
+        enableClicking?: boolean
         /**
          * 是否显示
          */
@@ -474,11 +473,11 @@ declare namespace BaiduMapVue3 {
         /**
          * 城市区域区域字符串
          */
-        name?: string,
+        name?: string
         /**
          * 是否显示
          */
-        show?: boolean,
+        show?: boolean
     }
     export const BmCityBoundary: ComponentPublicInstance<BmCityBoundaryProps>
 
@@ -487,16 +486,16 @@ declare namespace BaiduMapVue3 {
          * 点集
          */
         points: {
-            lng: number;
-            lat: number;
+            lng: number
+            lat: number
         }[]
         /**
          * 高度
          */
         altitude: number
         /**
-        * 顶面填充颜色
-        */
+         * 顶面填充颜色
+         */
         topFillColor?: string
         /**
          * 顶面填充颜色透明度，取值范围0 - 1
@@ -526,15 +525,15 @@ declare namespace BaiduMapVue3 {
          * 矩形对角左上坐标
          */
         startPoint: {
-            lng: number;
-            lat: number;
+            lng: number
+            lat: number
         }
         /**
          * 矩形对角右下坐标
          */
         endPoint: {
-            lng: number;
-            lat: number;
+            lng: number
+            lat: number
         }
         /**
          * 'image' | 'video' | 'canvas'，默认为image
@@ -547,11 +546,11 @@ declare namespace BaiduMapVue3 {
         /**
          * 图层地址
          */
-        url?: string,
+        url?: string
         /**
          * 是否显示
          */
-        show?: boolean,
+        show?: boolean
     }
     export const BmGroundOverlay: ComponentPublicInstance<BmGroundOverlayProps>
     export interface BmGroundOverlayImageProps {
@@ -577,15 +576,15 @@ declare namespace BaiduMapVue3 {
         /**
          * 图标地址
          */
-        src: string,
+        src: string
         /**
          * 图标大小
          */
-        size?: [number, number],
+        size?: [number, number]
         /**
          * 图标定位锚点
          */
-        anchor?: [number, number],
+        anchor?: [number, number]
         /**
          * 图标可视区偏移
          */
@@ -605,19 +604,19 @@ declare namespace BaiduMapVue3 {
         /**
          * 子菜单ID
          */
-        id: string,
+        id: string
         /**
          * 菜单宽度
          */
-        width: number,
+        width: number
         /**
          * 菜单文本
          */
-        text: string,
+        text: string
         /**
          * 菜单点击回调
          */
-        callback: Function,
+        callback: Function
         /**
          * 是否显示
          */
@@ -630,16 +629,16 @@ declare namespace BaiduMapVue3 {
          * 圆心坐标
          */
         center: {
-            lng: number;
-            lat: number;
-        },
+            lng: number
+            lat: number
+        }
         /**
          * 半径
          */
-        radius: number,
+        radius: number
         /**
-        * 圆形边线颜色
-        */
+         * 圆形边线颜色
+         */
         strokeColor?: string
         /**
          * 圆形填充颜色。当参数为空时，圆形将没有填充效果
@@ -672,7 +671,7 @@ declare namespace BaiduMapVue3 {
         /**
          * 是否响应点击事件，默认为true
          */
-        enableClicking?: boolean,
+        enableClicking?: boolean
         /**
          * 是否显示
          */
@@ -685,9 +684,9 @@ declare namespace BaiduMapVue3 {
          * 信息窗口的坐标
          */
         point: {
-            lng: number;
-            lat: number;
-        },
+            lng: number
+            lat: number
+        }
         /**
          * 信息窗口的内容，支持HTML内容
          */
@@ -733,8 +732,8 @@ declare namespace BaiduMapVue3 {
 
     export interface BmViewAnimationProps {
         /**
-        * 动画开始延迟时间，单位ms，默认0
-        */
+         * 动画开始延迟时间，单位ms，默认0
+         */
         delay: number
         /**
          * 	动画持续时间，单位ms，默认1000
@@ -755,21 +754,21 @@ declare namespace BaiduMapVue3 {
          * 定义关键帧帧地图中心点
          */
         center: {
-            lng: number;
-            lat: number;
-        },
+            lng: number
+            lat: number
+        }
         /**
          *  定义关键帧地图等级
          */
-        zoom: number,
+        zoom: number
         /**
          * 定义关键帧地图倾斜角度
          */
-        tilt: number,
+        tilt: number
         /**
          * 定义关键帧地图旋转方向
          */
-        heading: number,
+        heading: number
         /**
          * 定义关键帧处于动画过程的百分比，取值范围0~1
          */
@@ -786,25 +785,25 @@ declare namespace BaiduMapVue3 {
          * 轨迹点
          */
         points: {
-            lng: number;
-            lat: number;
+            lng: number
+            lat: number
         }[]
         /**
          *  动画完成后自动调整视野到总览
          */
-        overallView?: boolean,
+        overallView?: boolean
         /**
          * 轨迹播放的角度，默认为55
          */
-        tilt?: number,
+        tilt?: number
         /**
          * 动画持续时长，默认为10000，单位ms
          */
-        duration?: number,
+        duration?: number
         /**
          * 动画开始的延迟，默认0，单位ms
          */
-        delay?: number,
+        delay?: number
         /**
          * 是否显示
          */
@@ -820,31 +819,31 @@ declare namespace BaiduMapVue3 {
         /**
          * 信息窗口文案
          */
-        defaultContent: string,
+        defaultContent: string
         /**
          * 是否开启自动视野调整，如果开启那么路书在运动过程中会根据视野自动调整
          */
-        autoView: boolean,
+        autoView: boolean
         /**
          * 速度
          */
-        speed: number,
+        speed: number
         /**
          * 图标
          */
-        icon: string,
+        icon: string
         /**
          * 是否设置marker随着道路的走向进行旋转
          */
-        enableRotation: boolean,
+        enableRotation: boolean
         /**
          * 是否大地线
          */
-        geodesic: boolean,
+        geodesic: boolean
         /**
          * 是否自动地图中心
          */
-        autoCenter: boolean,
+        autoCenter: boolean
     }
 
     /**
@@ -869,26 +868,34 @@ declare namespace BaiduMapVue3 {
          * 轨迹点
          */
         points: {
-            lng: number;
-            lat: number;
+            lng: number
+            lat: number
         }[]
         /**
          * 控制点
          */
-        controlPoints: [[{
-            lng: number;
-            lat: number;
-        }, {
-            lng: number;
-            lat: number;
-        }], [{
-            lng: number;
-            lat: number;
-        }]]
+        controlPoints: [
+            [
+                {
+                    lng: number
+                    lat: number
+                },
+                {
+                    lng: number
+                    lat: number
+                }
+            ],
+            [
+                {
+                    lng: number
+                    lat: number
+                }
+            ]
+        ]
         /**
          * 是否总览显示
          */
-        overallView?: boolean,
+        overallView?: boolean
         /**
          * 是否显示
          */
@@ -901,31 +908,38 @@ declare namespace BaiduMapVue3 {
         /**
          * 检索区域，类型可为地图实例、坐标点或城市名称的字符串
          */
-        location: Object | {
-            lng: number,
-            lat: number
-        } | String
+        location:
+            | Object
+            | {
+                  lng: number
+                  lat: number
+              }
+            | String
         /**
          * 起点
          */
-        start?: {
-            lat: number;
-            lng: number;
-        } | Object,
+        start?:
+            | {
+                  lat: number
+                  lng: number
+              }
+            | Object
         /**
          * 终点
          */
-        end?: {
-            lat: number;
-            lng: number;
-        } | Object,
+        end?:
+            | {
+                  lat: number
+                  lng: number
+              }
+            | Object
         /**
          * 结果呈现设置
          */
         renderOptions?: {
             /**
-            * 展现结果的地图实例。当指定此参数后，搜索结果的标注、线路等均会自动添加到此地图上
-            */
+             * 展现结果的地图实例。当指定此参数后，搜索结果的标注、线路等均会自动添加到此地图上
+             */
             map?: Object
             /**
              * 结果列表的HTML容器id或容器元素，提供此参数后，结果列表将在此容器中进行展示。此属性对LocalCity无效。驾车路线规划无效
@@ -971,31 +985,38 @@ declare namespace BaiduMapVue3 {
         /**
          * 检索区域，类型可为地图实例、坐标点或城市名称的字符串
          */
-        location: Object | {
-            lng: number,
-            lat: number
-        } | String
+        location:
+            | Object
+            | {
+                  lng: number
+                  lat: number
+              }
+            | String
         /**
          * 起点
          */
-        start?: {
-            lat: number;
-            lng: number;
-        } | Object,
+        start?:
+            | {
+                  lat: number
+                  lng: number
+              }
+            | Object
         /**
          * 终点
          */
-        end?: {
-            lat: number;
-            lng: number;
-        } | Object,
+        end?:
+            | {
+                  lat: number
+                  lng: number
+              }
+            | Object
         /**
          * 结果呈现设置
          */
         renderOptions?: {
             /**
-            * 展现结果的地图实例。当指定此参数后，搜索结果的标注、线路等均会自动添加到此地图上
-            */
+             * 展现结果的地图实例。当指定此参数后，搜索结果的标注、线路等均会自动添加到此地图上
+             */
             map?: Object
             /**
              * 结果列表的HTML容器id或容器元素，提供此参数后，结果列表将在此容器中进行展示。此属性对LocalCity无效。驾车路线规划无效
@@ -1057,31 +1078,38 @@ declare namespace BaiduMapVue3 {
         /**
          * 检索区域，类型可为地图实例、坐标点或城市名称的字符串
          */
-        location: Object | {
-            lng: number,
-            lat: number
-        } | String
+        location:
+            | Object
+            | {
+                  lng: number
+                  lat: number
+              }
+            | String
         /**
          * 起点
          */
-        start?: {
-            lat: number;
-            lng: number;
-        } | Object,
+        start?:
+            | {
+                  lat: number
+                  lng: number
+              }
+            | Object
         /**
          * 终点
          */
-        end?: {
-            lat: number;
-            lng: number;
-        } | Object,
+        end?:
+            | {
+                  lat: number
+                  lng: number
+              }
+            | Object
         /**
          * 结果呈现设置
          */
         renderOptions?: {
             /**
-            * 展现结果的地图实例。当指定此参数后，搜索结果的标注、线路等均会自动添加到此地图上
-            */
+             * 展现结果的地图实例。当指定此参数后，搜索结果的标注、线路等均会自动添加到此地图上
+             */
             map?: Object
             /**
              * 结果列表的HTML容器id或容器元素，提供此参数后，结果列表将在此容器中进行展示。此属性对LocalCity无效。驾车路线规划无效
@@ -1127,31 +1155,38 @@ declare namespace BaiduMapVue3 {
         /**
          * 检索区域，类型可为地图实例、坐标点或城市名称的字符串
          */
-        location: Object | {
-            lng: number,
-            lat: number
-        } | String
+        location:
+            | Object
+            | {
+                  lng: number
+                  lat: number
+              }
+            | String
         /**
          * 起点
          */
-        start?: {
-            lat: number;
-            lng: number;
-        } | Object,
+        start?:
+            | {
+                  lat: number
+                  lng: number
+              }
+            | Object
         /**
          * 终点
          */
-        end?: {
-            lat: number;
-            lng: number;
-        } | Object,
+        end?:
+            | {
+                  lat: number
+                  lng: number
+              }
+            | Object
         /**
          * 结果呈现设置
          */
         renderOptions?: {
             /**
-            * 展现结果的地图实例。当指定此参数后，搜索结果的标注、线路等均会自动添加到此地图上
-            */
+             * 展现结果的地图实例。当指定此参数后，搜索结果的标注、线路等均会自动添加到此地图上
+             */
             map?: Object
             /**
              * 结果列表的HTML容器id或容器元素，提供此参数后，结果列表将在此容器中进行展示。此属性对LocalCity无效。驾车路线规划无效
@@ -1197,7 +1232,6 @@ declare namespace BaiduMapVue3 {
      * BMapGL 名称空间
      */
     export namespace BMapGL {
-
         /**
          * 此类代表视野，不可实例化，通过对象字面量形式表示。
          */
@@ -1241,24 +1275,23 @@ declare namespace BaiduMapVue3 {
             /**
              * 地理经度
              */
-            lng: number;
+            lng: number
             /**
              * 	地理纬度
              */
-            lat: number;
+            lat: number
             /**
              * 以指定的经度和纬度创建一个地理点坐标
-             * @param lng 
-             * @param lat 
+             * @param lng
+             * @param lat
              */
-            constructor(lng: number, lat: number);
+            constructor(lng: number, lat: number)
             /**
              * 判断坐标点是否相等，当且仅当两点的经度和纬度均相等时返回true
              * @param other Point
              */
-            equals(other: Point): boolean;
+            equals(other: Point): boolean
         }
-
 
         /**
          * 此类表示地图上的一点，单位为像素。
@@ -1267,29 +1300,29 @@ declare namespace BaiduMapVue3 {
             /**
              * x坐标
              */
-            x: number;
+            x: number
             /**
              * y坐标
              */
-            y: number;
+            y: number
             /**
              * 创建像素点对象实例。像素坐标的坐标原点为地图区域的左上角
-             * @param x 
-             * @param y 
+             * @param x
+             * @param y
              */
-            constructor(x: number, y: number);
+            constructor(x: number, y: number)
             /**
              * 判断坐标点是否相等，当且仅当两点的x坐标和y坐标均相等时返回true
              * @param other Pixel
              */
-            equals(other: Pixel): boolean;
+            equals(other: Pixel): boolean
         }
 
         class Bounds {
             /**
              * 创建一个包含所有给定点坐标的矩形区域。其中sw表示矩形区域的西南角，参数ne表示矩形区域的东北角
-             * @param sw 
-             * @param ne 
+             * @param sw
+             * @param ne
              */
             constructor(sw: Point, ne: Point)
             /**
@@ -1299,7 +1332,7 @@ declare namespace BaiduMapVue3 {
             equals(other: Bounds): boolean
             /**
              * 如果点的地理坐标位于此矩形内，则返回true
-             * @param point 
+             * @param point
              */
             containsPoint(point: Point): boolean
             /**
@@ -1314,7 +1347,7 @@ declare namespace BaiduMapVue3 {
             intersects(other: Bounds): Bounds
             /**
              * 放大此矩形，使其包含给定的点
-             * @param point 
+             * @param point
              */
             extend(point: Point): void
             /**
@@ -1346,22 +1379,22 @@ declare namespace BaiduMapVue3 {
             /**
              * 宽度/水平方向的数值
              */
-            width: number;
+            width: number
             /**
              * 高度/竖直方向的数值
              */
-            height: number;
+            height: number
             /**
              * 以指定的宽度和高度创建一个矩形区域大小对象
-             * @param width 
-             * @param height 
+             * @param width
+             * @param height
              */
             constructor(width: number, height: number)
             /**
              * 当且仅当此矩形中的宽度和高度都等于其他矩形的宽度和高度时，返回true
              * @param other Size
              */
-            equals(other: Size): boolean;
+            equals(other: Size): boolean
         }
 
         /**
@@ -1371,23 +1404,23 @@ declare namespace BaiduMapVue3 {
             /**
              * 此地图类型展示普通街道视图
              */
-            BMAP_NORMAL_MAP = "B_NORMAL_MAP",
+            BMAP_NORMAL_MAP = 'B_NORMAL_MAP',
             /**
              * 此地图类型展示地球卫星视图
              */
-            BMAP_EARTH_MAP = "B_EARTH_MAP",
+            BMAP_EARTH_MAP = 'B_EARTH_MAP',
             /**
-             * 
+             *
              */
-            BMAP_NONE_MAP = "B_NONE_MAP",
+            BMAP_NONE_MAP = 'B_NONE_MAP',
             /**
              * 此地图类型展示卫星视图
              */
-            BMAP_SATELLITE_MAP = "B_SATELLITE_MAP",
+            BMAP_SATELLITE_MAP = 'B_SATELLITE_MAP',
             /**
              * 此地图类型展示普通街道视图
              */
-            BMAP_STREET_MAP = "B_STREET_MAP",
+            BMAP_STREET_MAP = 'B_STREET_MAP',
         }
 
         /**
@@ -1397,31 +1430,31 @@ declare namespace BaiduMapVue3 {
             /**
              * 地图允许展示的最小级别
              */
-            minZoom?: number;
+            minZoom?: number
             /**
              * 地图允许展示的最大级别
              */
-            maxZoom?: number;
+            maxZoom?: number
             /**
              * 地图类型，默认为BMAP_NORMAL_MAP
              */
-            mapType?: MapTypeId;
+            mapType?: MapTypeId
             /**
              * 开启自动适应地图容器变化，默认启用
              */
-            enableAutoResize?: boolean;
+            enableAutoResize?: boolean
             /**
              * 开启地图旋转，默认启用
              */
-            enableRotate?: boolean;
+            enableRotate?: boolean
             /**
              * 开启地图倾斜，默认启用
              */
-            enableTilt?: boolean;
+            enableTilt?: boolean
             /**
              * 开启地图点击，默认启用
              */
-            enableMapClick?: boolean;
+            enableMapClick?: boolean
         }
 
         /**
@@ -1487,9 +1520,9 @@ declare namespace BaiduMapVue3 {
              */
             clickclose: InfoWindowPayload
         }
-        type InfoWindowEvent = keyof InfoWindowEventEventMap;
-        type InfoWindowPayload = { type: string, target: InfoWindow }
-        type OnInfoWindowEventPayload<T extends InfoWindowEvent> = InfoWindowEventEventMap[T];
+        type InfoWindowEvent = keyof InfoWindowEventEventMap
+        type InfoWindowPayload = { type: string; target: InfoWindow }
+        type OnInfoWindowEventPayload<T extends InfoWindowEvent> = InfoWindowEventEventMap[T]
 
         /**
          * 此类表示地图上包含信息的窗口。
@@ -1497,18 +1530,18 @@ declare namespace BaiduMapVue3 {
         class InfoWindow {
             /**
              * 创建一个信息窗实例，其中content支持HTML内容。
-             * @param content 
-             * @param opts 
+             * @param content
+             * @param opts
              */
             constructor(content: string | HTMLElement, opts: InfoWindowOptions)
             /**
              * 设置信息窗口的宽度，单位像素。取值范围：220 - 730
-             * @param width 
+             * @param width
              */
             setWidth(width: number): void
             /**
              * 设置信息窗口的高度，单位像素。取值范围：60 - 650
-             * @param height 
+             * @param height
              */
             setHeight(height: number): void
             /**
@@ -1517,7 +1550,7 @@ declare namespace BaiduMapVue3 {
             redraw(): void
             /**
              * 设置信息窗口标题。支持HTML内容。1.2版本开始title参数支持传入DOM结点
-             * @param title 
+             * @param title
              */
             setTitle(title: string | HTMLElement): void
             /**
@@ -1526,7 +1559,7 @@ declare namespace BaiduMapVue3 {
             getTitle(): string | HTMLElement
             /**
              * 设置信息窗口内容。支持HTML内容。1.2版本开始content参数支持传入DOM结点
-             * @param content 
+             * @param content
              */
             setContent(content: string | HTMLElement): void
             /**
@@ -1551,7 +1584,7 @@ declare namespace BaiduMapVue3 {
             isOpen(): boolean
             /**
              * 信息窗口最大化时所显示内容，支持HTML内容
-             * @param content 
+             * @param content
              */
             setMaxContent(content: string): void
             /**
@@ -1580,22 +1613,28 @@ declare namespace BaiduMapVue3 {
             disableCloseOnClick(): void
             /**
              * 添加事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
-            addEventListener<T extends InfoWindowEvent>(event: T, handler: (data: OnInfoWindowEventPayload<T>) => void): void
+            addEventListener<T extends InfoWindowEvent>(
+                event: T,
+                handler: (data: OnInfoWindowEventPayload<T>) => void
+            ): void
             /**
              * 移除事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
-            removeEventListener<T extends InfoWindowEvent>(event: T, handler: (data: OnInfoWindowEventPayload<T>) => void): void
+            removeEventListener<T extends InfoWindowEvent>(
+                event: T,
+                handler: (data: OnInfoWindowEventPayload<T>) => void
+            ): void
             /**
              * 事件处理函数
-             * @param event 
-             * @param listener 
+             * @param event
+             * @param listener
              */
-            on<T extends InfoWindowEvent>(event: T, listener: (data: OnInfoWindowEventPayload<T>) => void): this;
+            on<T extends InfoWindowEvent>(event: T, listener: (data: OnInfoWindowEventPayload<T>) => void): this
         }
 
         /**
@@ -1617,7 +1656,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 样式表
              */
-            styles?: Object,
+            styles?: Object
         }
 
         /**
@@ -1626,23 +1665,23 @@ declare namespace BaiduMapVue3 {
         class Label extends Overlay {
             /**
              * 创建一个文本标注实例。point参数指定了文本标注所在的地理位置
-             * @param content 
-             * @param opts 
+             * @param content
+             * @param opts
              */
             constructor(content: string, opts: LabelOptions)
             /**
              * 设置文本标注样式，该样式将作用于文本标注的容器元素上。其中styles为JavaScript对象常量，比如： setStyle({ color : "red", fontSize : "12px" }) 注意：如果css的属性名中包含连字符，需要将连字符去掉并将其后的字母进行大写处理，例如：背景色属性要写成：backgroundColor
-             * @param styles 
+             * @param styles
              */
             setStyle(styles: Object): void
             /**
              * 设置文本标注的内容。支持HTML
-             * @param content 
+             * @param content
              */
             setContent(content: string): void
             /**
              * 设置文本标注坐标。仅当通过Map.addOverlay()方法添加的文本标注有效
-             * @param position 
+             * @param position
              */
             setPosition(position: Point): void
             /**
@@ -1651,7 +1690,7 @@ declare namespace BaiduMapVue3 {
             getPosition(): Point
             /**
              * 设置文本标注的偏移值
-             * @param offset 
+             * @param offset
              */
             setOffset(offset: Size): void
             /**
@@ -1660,7 +1699,7 @@ declare namespace BaiduMapVue3 {
             getOffset(): Size
             /**
              * 设置文本标注的标题，当鼠标移至标注上时显示此标题
-             * @param title 
+             * @param title
              */
             setTitle(title: string): void
             /**
@@ -1677,12 +1716,12 @@ declare namespace BaiduMapVue3 {
             disableMassClear(): void
             /**
              * 设置覆盖物的zIndex
-             * @param zIndex 
+             * @param zIndex
              */
             setZIndex(zIndex: number): void
             /**
              * 设置地理坐标
-             * @param position 
+             * @param position
              */
             setPosition(position: Point): void
             /**
@@ -1691,22 +1730,25 @@ declare namespace BaiduMapVue3 {
             getMap(): Map
             /**
              * 添加事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
             addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
-            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
+            removeEventListener<T extends OverlayEvent>(
+                event: T,
+                handler: (data: OnOverlayEventPayload<T>) => void
+            ): void
             /**
              * 事件处理函数
-             * @param event 
-             * @param listener 
+             * @param event
+             * @param listener
              */
-            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this
         }
 
         /**
@@ -1754,65 +1796,65 @@ declare namespace BaiduMapVue3 {
             /**
              * 圆形，默认半径为1px
              */
-            BMap_Symbol_SHAPE_CIRCLE = "BMap_Symbol_SHAPE_CIRCLE",
+            BMap_Symbol_SHAPE_CIRCLE = 'BMap_Symbol_SHAPE_CIRCLE',
             /**
              * 矩形，默认宽度4px、高度2px
              */
-            BMap_Symbol_SHAPE_RECTANGLE = "BMap_Symbol_SHAPE_RECTANGLE",
+            BMap_Symbol_SHAPE_RECTANGLE = 'BMap_Symbol_SHAPE_RECTANGLE',
             /**
              * 菱形，默认外接圆半径10px
              */
-            BMap_Symbol_SHAPE_RHOMBUS = "BMap_Symbol_SHAPE_RHOMBUS",
+            BMap_Symbol_SHAPE_RHOMBUS = 'BMap_Symbol_SHAPE_RHOMBUS',
             /**
              * 五角星，五角星外接圆半径为10px
              */
-            BMap_Symbol_SHAPE_STAR = "BMap_Symbol_SHAPE_STAR",
+            BMap_Symbol_SHAPE_STAR = 'BMap_Symbol_SHAPE_STAR',
             /**
              * 箭头方向向下的闭合箭头
              */
-            BMap_Symbol_SHAPE_BACKWARD_CLOSED_ARROW = "BMap_Symbol_SHAPE_BACKWARD_CLOSED_ARROW",
+            BMap_Symbol_SHAPE_BACKWARD_CLOSED_ARROW = 'BMap_Symbol_SHAPE_BACKWARD_CLOSED_ARROW',
             /**
              * 箭头方向向上的闭合箭头
              */
-            BMap_Symbol_SHAPE_FORWARD_CLOSED_ARROW = "BMap_Symbol_SHAPE_FORWARD_CLOSED_ARROW",
+            BMap_Symbol_SHAPE_FORWARD_CLOSED_ARROW = 'BMap_Symbol_SHAPE_FORWARD_CLOSED_ARROW',
             /**
              * 箭头方向向下的非闭合箭头
              */
-            BMap_Symbol_SHAPE_BACKWARD_OPEN_ARROW = "BMap_Symbol_SHAPE_BACKWARD_OPEN_ARROW",
+            BMap_Symbol_SHAPE_BACKWARD_OPEN_ARROW = 'BMap_Symbol_SHAPE_BACKWARD_OPEN_ARROW',
             /**
              * 箭头方向向上的非闭合箭头
              */
-            BMap_Symbol_SHAPE_FORWARD_OPEN_ARROW = "BMap_Symbol_SHAPE_FORWARD_OPEN_ARROW",
+            BMap_Symbol_SHAPE_FORWARD_OPEN_ARROW = 'BMap_Symbol_SHAPE_FORWARD_OPEN_ARROW',
             /**
              * 定位点图标
              */
-            BMap_Symbol_SHAPE_POINT = "BMap_Symbol_SHAPE_POINT",
+            BMap_Symbol_SHAPE_POINT = 'BMap_Symbol_SHAPE_POINT',
             /**
              * 预设的飞机形状
              */
-            BMap_Symbol_SHAPE_PLANE = "BMap_Symbol_SHAPE_PLANE",
+            BMap_Symbol_SHAPE_PLANE = 'BMap_Symbol_SHAPE_PLANE',
             /**
              * 预设的照相机形状
              */
-            BMap_Symbol_SHAPE_CAMERA = "BMap_Symbol_SHAPE_CAMERA",
+            BMap_Symbol_SHAPE_CAMERA = 'BMap_Symbol_SHAPE_CAMERA',
             /**
              * 预设的警告符号
              */
-            BMap_Symbol_SHAPE_WARNING = "BMap_Symbol_SHAPE_WARNING",
+            BMap_Symbol_SHAPE_WARNING = 'BMap_Symbol_SHAPE_WARNING',
             /**
              * 预设的笑脸形状
              */
-            BMap_Symbol_SHAPE_SMILE = "BMap_Symbol_SHAPE_SMILE",
+            BMap_Symbol_SHAPE_SMILE = 'BMap_Symbol_SHAPE_SMILE',
             /**
              * 预设的钟表形状
              */
-            BMap_Symbol_SHAPE_CLOCK = "BMap_Symbol_SHAPE_CLOCK",
+            BMap_Symbol_SHAPE_CLOCK = 'BMap_Symbol_SHAPE_CLOCK',
         }
 
         /**
          * 未知的定义 SymbolShape
          */
-        interface SymbolShape { }
+        interface SymbolShape {}
 
         /**
          * 此类表示通过svg的path string创建的矢量图标类。
@@ -1820,53 +1862,53 @@ declare namespace BaiduMapVue3 {
         class SvgSymbol {
             /**
              * 创建一个矢量图标实例。path为svg中的path字符串或者已定义的符号常量,opts为矢量图标的样式
-             * @param path 
-             * @param opts 
+             * @param path
+             * @param opts
              */
             constructor(path: string | SymbolShapeType, opts: SymbolOptions)
             /**
              * 设置矢量图标的路径
-             * @param path 
+             * @param path
              */
             setPath(path: string | SymbolShape): void
             /**
              * 设置矢量图标的定位点,该定位点的位置以图标自身为基准
-             * @param anchor 
+             * @param anchor
              */
             setAnchor(anchor: Size): void
             /**
              * 设置矢量图标的旋转角度,参数为角度
-             * @param rotation 
+             * @param rotation
              */
             setRotation(rotation: number): void
             /**
              * 设置矢量图标的缩放比例
-             * @param scale 
+             * @param scale
              */
             setScale(scale: number): void
             /**
              * 设置矢量图标的线宽
-             * @param strokeWeight 
+             * @param strokeWeight
              */
             setStrokeWeight(strokeWeight: number): void
             /**
              * 设置矢量图标的线填充颜色,支持颜色常量字符串、十六进制、RGB、RGBA等格式
-             * @param color 
+             * @param color
              */
             setStrokeColor(color: string): void
             /**
              * 设置矢量图标线的透明度,opacity范围0~1
-             * @param opacity 
+             * @param opacity
              */
             setStrokeOpacity(opacity: number): void
             /**
              * 设置矢量图标填充透明度,opacity范围0~1
-             * @param opacity 
+             * @param opacity
              */
             setFillOpacity(opacity: number): void
             /**
              * 设置矢量图标的填充颜色。支持颜色常量字符串、十六进制、RGB、RGBA等格式
-             * @param color 
+             * @param color
              */
             setFillColor(color: string): void
         }
@@ -1888,17 +1930,17 @@ declare namespace BaiduMapVue3 {
             /**
              * 指定路径两端的形状
              */
-            strokeLineCap: 'butt' | 'round' | 'square' | 'inherit',
+            strokeLineCap: 'butt' | 'round' | 'square' | 'inherit'
             /**
              * 指定路径转角处使用的形状
              */
-            strokeLineJoin: 'arcs' | 'bevel' | 'miter' | 'miter-clip' | 'round',
+            strokeLineJoin: 'arcs' | 'bevel' | 'miter' | 'miter-clip' | 'round'
             /**
              * 显示大地线
              */
-            geodesic: boolean,
+            geodesic: boolean
 
-            clip: boolean,
+            clip: boolean
             /**
              * 折线颜色
              */
@@ -1939,13 +1981,13 @@ declare namespace BaiduMapVue3 {
         class Polyline extends Overlay {
             /**
              * 创建折线覆盖物对象
-             * @param points 
-             * @param opts 
+             * @param points
+             * @param opts
              */
             constructor(points: Array<Point>, opts: PolylineOptions)
             /**
              * 设置折线的点数组
-             * @param path 
+             * @param path
              */
             setPath(path: Array<Point>): void
             /**
@@ -1954,7 +1996,7 @@ declare namespace BaiduMapVue3 {
             getPath(): Array<Point>
             /**
              * 设置折线的颜色
-             * @param color 
+             * @param color
              */
             setStrokeColor(color: string): void
             /**
@@ -1963,7 +2005,7 @@ declare namespace BaiduMapVue3 {
             getStrokeColor(): string
             /**
              * 设置透明度，取值范围0 - 1
-             * @param opacity 
+             * @param opacity
              */
             setStrokeOpacity(opacity: number): void
             /**
@@ -1972,7 +2014,7 @@ declare namespace BaiduMapVue3 {
             getStrokeOpacity(): number
             /**
              * 设置线的宽度，范围为大于等于1的整数
-             * @param weight 
+             * @param weight
              */
             setStrokeWeight(weight: number): void
             /**
@@ -1981,7 +2023,7 @@ declare namespace BaiduMapVue3 {
             getStrokeWeight(): number
             /**
              * 设置是为实线或虚线，solid或dashed
-             * @param style 
+             * @param style
              */
             setStrokeStyle(style: string): void
             /**
@@ -2010,8 +2052,8 @@ declare namespace BaiduMapVue3 {
             disableMassClear(): void
             /**
              * 修改指定位置的坐标。索引index从0开始计数。例如setPointAt(2, point)代表将折线的第3个点的坐标设为point
-             * @param index 
-             * @param point 
+             * @param index
+             * @param point
              */
             setPositionAt(index: number, point: Point): void
             /**
@@ -2020,22 +2062,25 @@ declare namespace BaiduMapVue3 {
             getMap(): Map
             /**
              * 添加事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
             addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
-            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
+            removeEventListener<T extends OverlayEvent>(
+                event: T,
+                handler: (data: OnOverlayEventPayload<T>) => void
+            ): void
             /**
              * 事件处理函数
-             * @param event 
-             * @param listener 
+             * @param event
+             * @param listener
              */
-            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this
         }
 
         /**
@@ -2091,7 +2136,7 @@ declare namespace BaiduMapVue3 {
              */
             constructor(points: Array<Point>, opts: PolygonOptions)
             /**
-             * 
+             *
              * @param path 设置多边型的点数组
              */
             setPath(path: Array<Point>): void
@@ -2100,7 +2145,7 @@ declare namespace BaiduMapVue3 {
              */
             getPath(): Array<Point>
             /**
-             * 
+             *
              * @param color 设置多边型的边线颜色，参数为合法的CSS颜色值
              */
             setStrokeColor(color: string): void
@@ -2110,7 +2155,7 @@ declare namespace BaiduMapVue3 {
             getStrokeColor(): string
             /**
              * 设置多边形的填充颜色，参数为合法的CSS颜色值。当参数为空字符串时，折线覆盖物将没有填充效果
-             * @param color 
+             * @param color
              */
             setFillColor(color: string): void
             /**
@@ -2119,7 +2164,7 @@ declare namespace BaiduMapVue3 {
             getFillColor(): string
             /**
              * 设置多边形的边线透明度，取值范围0 - 1
-             * @param opacity 
+             * @param opacity
              */
             setStrokeOpacity(opacity: number): void
             /**
@@ -2128,7 +2173,7 @@ declare namespace BaiduMapVue3 {
             getStrokeOpacity(): number
             /**
              *  设置多边形的填充透明度，取值范围0 - 1
-             * @param opacity 
+             * @param opacity
              */
             setFillOpacity(opacity: number): void
             /**
@@ -2137,7 +2182,7 @@ declare namespace BaiduMapVue3 {
             getFillOpacity(): number
             /**
              * 设置多边形边线的宽度，取值为大于等于1的整数
-             * @param weight 
+             * @param weight
              */
             setStrokeWeight(weight: number): void
             /**
@@ -2146,7 +2191,7 @@ declare namespace BaiduMapVue3 {
             getStrokeWeight(): number
             /**
              * 设置多边形边线样式为实线或虚线，取值solid或dashed
-             * @param style 
+             * @param style
              */
             setStrokeStyle(style: string): void
             /**
@@ -2175,8 +2220,8 @@ declare namespace BaiduMapVue3 {
             disableMassClear(): void
             /**
              * 修改指定位置的坐标。索引index从0开始计数。例如setPositionAt(2, point)代表将折线的第3个点的坐标设为point
-             * @param index 
-             * @param point 
+             * @param index
+             * @param point
              */
             setPositionAt(index: number, point: Point): void
             /**
@@ -2185,22 +2230,25 @@ declare namespace BaiduMapVue3 {
             getMap(): Map
             /**
              * 添加事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
             addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
-            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
+            removeEventListener<T extends OverlayEvent>(
+                event: T,
+                handler: (data: OnOverlayEventPayload<T>) => void
+            ): void
             /**
              * 事件处理函数
-             * @param event 
-             * @param listener 
+             * @param event
+             * @param listener
              */
-            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this
         }
 
         /**
@@ -2258,7 +2306,7 @@ declare namespace BaiduMapVue3 {
             constructor(center: Point, radius: number, opts: CircleOptions)
             /**
              * 设置圆形的中心点坐标
-             * @param center 
+             * @param center
              */
             setCenter(center: Point): void
             /**
@@ -2267,7 +2315,7 @@ declare namespace BaiduMapVue3 {
             getCenter(): Point
             /**
              * 设置圆形的半径，单位为米
-             * @param radius 
+             * @param radius
              */
             setRadius(radius: number): void
             /**
@@ -2280,7 +2328,7 @@ declare namespace BaiduMapVue3 {
             getBounds(): Bounds
             /**
              * 设置圆形的边线颜色，参数为合法的CSS颜色值
-             * @param color 
+             * @param color
              */
             setStrokeColor(color: string): void
             /**
@@ -2289,7 +2337,7 @@ declare namespace BaiduMapVue3 {
             getStrokeColor(): string
             /**
              * 设置圆形的填充颜色，参数为合法的CSS颜色值。当参数为空字符串时，圆形覆盖物将没有填充效果
-             * @param color 
+             * @param color
              */
             setFillColor(color: string): void
             /**
@@ -2298,7 +2346,7 @@ declare namespace BaiduMapVue3 {
             getFillColor(): string
             /**
              * 设置圆形的边线透明度，取值范围0 - 1
-             * @param opacity 
+             * @param opacity
              */
             setStrokeOpacity(opacity: number): void
             /**
@@ -2307,7 +2355,7 @@ declare namespace BaiduMapVue3 {
             getStrokeOpacity(): number
             /**
              * 设置圆形的填充透明度，取值范围0 - 1
-             * @param opacity 
+             * @param opacity
              */
             setFillOpacity(opacity: number): void
             /**
@@ -2316,7 +2364,7 @@ declare namespace BaiduMapVue3 {
             getFillOpacity(): number
             /**
              * 设置圆形边线的宽度，取值为大于等于1的整数
-             * @param weight 
+             * @param weight
              */
             setStrokeWeight(weight: number): void
             /**
@@ -2325,7 +2373,7 @@ declare namespace BaiduMapVue3 {
             getStrokeWeight(): number
             /**
              * 设置圆形边线样式为实线或虚线，取值solid或dashed
-             * @param style 
+             * @param style
              */
             setStrokeStyle(style: string): void
             /**
@@ -2354,22 +2402,25 @@ declare namespace BaiduMapVue3 {
             getMap(): Map
             /**
              * 添加事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
             addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
-            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
+            removeEventListener<T extends OverlayEvent>(
+                event: T,
+                handler: (data: OnOverlayEventPayload<T>) => void
+            ): void
             /**
              * 事件处理函数
-             * @param event 
-             * @param listener 
+             * @param event
+             * @param listener
              */
-            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this
         }
 
         /**
@@ -2404,13 +2455,13 @@ declare namespace BaiduMapVue3 {
         class GroundOverlay extends Overlay {
             /**
              * 创建地面叠加层
-             * @param bounds 
-             * @param opts 
+             * @param bounds
+             * @param opts
              */
             constructor(bounds: Bounds, opts: GroundOverlayOptions)
             /**
              * 设置图层显示的矩形区域
-             * @param bounds 
+             * @param bounds
              */
             setBounds(bounds: Bounds): void
             /**
@@ -2419,7 +2470,7 @@ declare namespace BaiduMapVue3 {
             getBounds(): Bounds
             /**
              * 设置图层的透明度
-             * @param opcity 
+             * @param opcity
              */
             setOpacity(opcity: number): void
             /**
@@ -2428,7 +2479,7 @@ declare namespace BaiduMapVue3 {
             getOpacity(): number
             /**
              * 返回图层地址
-             * @param url 
+             * @param url
              */
             setImageURL(url: string): void
             /**
@@ -2437,7 +2488,7 @@ declare namespace BaiduMapVue3 {
             getImageURL(): string
             /**
              * 设置图层显示的最小级别
-             * @param level 
+             * @param level
              */
             setDisplayOnMinLevel(level: number): void
             /**
@@ -2446,7 +2497,7 @@ declare namespace BaiduMapVue3 {
             getDisplayOnMinLevel(): number
             /**
              * 设置图层显示的最大级别
-             * @param level 
+             * @param level
              */
             setDispalyOnMaxLevel(level: number): void
             /**
@@ -2455,22 +2506,25 @@ declare namespace BaiduMapVue3 {
             getDispalyOnMaxLevel(): number
             /**
              * 添加事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
             addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
-            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
+            removeEventListener<T extends OverlayEvent>(
+                event: T,
+                handler: (data: OnOverlayEventPayload<T>) => void
+            ): void
             /**
              * 事件处理函数
-             * @param event 
-             * @param listener 
+             * @param event
+             * @param listener
              */
-            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this
         }
 
         /**
@@ -2494,11 +2548,11 @@ declare namespace BaiduMapVue3 {
             /**
              * 公制单位
              */
-            BMAP_UNIT_METRIC = "BMAP_UNIT_METRIC",
+            BMAP_UNIT_METRIC = 'BMAP_UNIT_METRIC',
             /**
              * 英制单位
              */
-            BMAP_UNIT_IMPERIAL = "BMAP_UNIT_IMPERIAL"
+            BMAP_UNIT_IMPERIAL = 'BMAP_UNIT_IMPERIAL',
         }
 
         type ScaleControlEvent = 'zoom_changed' | 'zoomstart' | 'zoomend'
@@ -2509,7 +2563,7 @@ declare namespace BaiduMapVue3 {
         class ScaleControl extends Control {
             /**
              * 创建一个比例尺控件
-             * @param opts 
+             * @param opts
              */
             constructor(opts?: ScaleControlOptions)
             /**
@@ -2518,14 +2572,14 @@ declare namespace BaiduMapVue3 {
             getUnit(): LengthUnit
             /**
              * 设置比例尺单位制
-             * @param unit 
+             * @param unit
              */
             setUnit(unit: LengthUnit): void
         }
 
         /**
-        * 类表示ZoomControl构造函数的可选参数。它没有构造函数，但可通过对象字面量形式表示。
-        */
+         * 类表示ZoomControl构造函数的可选参数。它没有构造函数，但可通过对象字面量形式表示。
+         */
         interface ZoomControlOptions {
             /**
              * 控件的停靠位置
@@ -2545,7 +2599,7 @@ declare namespace BaiduMapVue3 {
         class ZoomControl extends Control {
             /**
              * 创建一个缩放控件
-             * @param opts 
+             * @param opts
              */
             constructor(opts: ZoomControlOptions)
         }
@@ -2570,14 +2624,14 @@ declare namespace BaiduMapVue3 {
         class CopyrightControl extends Control {
             /**
              * 创建一个版权控件
-             * @param opts 
+             * @param opts
              */
             constructor(opts: CopyrightControlOptions)
         }
 
         /**
-             * 此类表示自定义控件
-             */
+         * 此类表示自定义控件
+         */
         interface CustomControlOptions {
             /**
              * 控件的停靠位置
@@ -2610,9 +2664,9 @@ declare namespace BaiduMapVue3 {
              */
             BMAP_NAVIGATION_CONTROL_ZOOM = 3,
             /**
-             * 
+             *
              */
-            BMAP_NAVIGATION_CONTROL_ANIM = 4
+            BMAP_NAVIGATION_CONTROL_ANIM = 4,
         }
 
         /**
@@ -2626,7 +2680,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 控件的偏移值
              */
-            offset?: Size,
+            offset?: Size
             /**
              * 控件的类型
              */
@@ -2634,12 +2688,12 @@ declare namespace BaiduMapVue3 {
         }
 
         /**
-        * 此类表示缩放平移控件。
-        */
+         * 此类表示缩放平移控件。
+         */
         class NavigationControl extends Control {
             /**
              * 创建一个缩放平移控件
-             * @param opts 
+             * @param opts
              */
             constructor(opts: NavigationControlOptions)
         }
@@ -2655,16 +2709,16 @@ declare namespace BaiduMapVue3 {
             /**
              * 控件的偏移值
              */
-            offset?: Size,
+            offset?: Size
         }
 
         /**
-        *此类表示地图的3D控件，可以对地图进行旋转以及切换地图2D、3D展示效果。
-        */
+         *此类表示地图的3D控件，可以对地图进行旋转以及切换地图2D、3D展示效果。
+         */
         class NavigationControl3D extends Control {
             /**
              * 创建一个特定样式的地图平移缩放控件
-             * @param opts 
+             * @param opts
              */
             constructor(opts: NavigationControl3DOptions)
         }
@@ -2680,20 +2734,19 @@ declare namespace BaiduMapVue3 {
             /**
              * 控件的偏移值
              */
-            offset?: Size,
+            offset?: Size
         }
 
         /**
-        * 此类表示定位控件。
-        */
+         * 此类表示定位控件。
+         */
         class LocationControl extends Control {
             /**
              * 创建一个定位控件
-             * @param opts 
+             * @param opts
              */
             constructor(opts: LocationControlOptions)
         }
-
 
         /**
          * 类表示CityListControl构造函数的可选参数。它没有构造函数，但可通过对象字面量形式表示。
@@ -2706,7 +2759,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 控件的偏移值
              */
-            offset?: Size,
+            offset?: Size
         }
 
         /**
@@ -2715,11 +2768,10 @@ declare namespace BaiduMapVue3 {
         class CityListControl extends Control {
             /**
              * 创建一个城市选择控件
-             * @param opts 
+             * @param opts
              */
             constructor(opts: CityListControlOptions)
         }
-
 
         /**
          * 类表示MapTypeControl构造函数的可选参数。它没有构造函数，但可通过对象字面量形式表示。
@@ -2732,18 +2784,18 @@ declare namespace BaiduMapVue3 {
             /**
              * 控件的偏移值
              */
-            offset?: Size,
+            offset?: Size
         }
 
         type MapTypeControlEvent = 'maptypechange'
 
         /**
-        * 此类表示地图类型控件。
-        */
+         * 此类表示地图类型控件。
+         */
         class MapTypeControl extends Control {
             /**
              * 创建一个地图类型控件
-             * @param opts 
+             * @param opts
              */
             constructor(opts: MapTypeControlOptions)
         }
@@ -2818,34 +2870,34 @@ declare namespace BaiduMapVue3 {
             printImageUrl: string
             /**
              * 以给定的图像地址和大小创建图标对象实例
-             * @param url 
-             * @param size 
-             * @param opts 
+             * @param url
+             * @param size
+             * @param opts
              */
             constructor(url: string, size: Size, opts: IconOptions)
             /**
              * 设置图片资源的地址
-             * @param imageUrl 
+             * @param imageUrl
              */
             setImageUrl(imageUrl: string): void
             /**
              * 设置图标可视区域的大小
-             * @param size 
+             * @param size
              */
             setSize(size: Size): void
             /**
              * 设置图标的大小
-             * @param offset 
+             * @param offset
              */
             setImageSize(offset: Size): void
             /**
              * 设置图标定位点相对于其左上角的偏移值
-             * @param anchor 
+             * @param anchor
              */
             setAnchor(anchor: Size): void
             /**
              * 设置图片相对于可视区域的偏移值
-             * @param offset 
+             * @param offset
              */
             setImageOffset(offset: Size): void
         }
@@ -2898,13 +2950,13 @@ declare namespace BaiduMapVue3 {
         class Marker extends Overlay {
             /**
              * 创建一个图像标注实例。point参数指定了图像标注所在的地理位置
-             * @param point 
-             * @param opts 
+             * @param point
+             * @param opts
              */
             constructor(point: Point, opts: MarkerOptions)
             /**
              * 设置标注所用的图标对象
-             * @param icon 
+             * @param icon
              */
             setIcon(icon: Icon): void
             /**
@@ -2913,7 +2965,7 @@ declare namespace BaiduMapVue3 {
             getIcon(): Icon
             /**
              * 设置标注的地理坐标
-             * @param position 
+             * @param position
              */
             setPosition(position: Point): void
             /**
@@ -2922,7 +2974,7 @@ declare namespace BaiduMapVue3 {
             getPosition(): Point
             /**
              * 设置标注的偏移值
-             * @param offset 
+             * @param offset
              */
             setOffset(offset: Size): void
             /**
@@ -2931,7 +2983,7 @@ declare namespace BaiduMapVue3 {
             getOffset(): Size
             /**
              * 设置标注的标题，当鼠标移至标注上时显示此标题
-             * @param title 
+             * @param title
              */
             setTitle(title: String): void
             /**
@@ -2940,7 +2992,7 @@ declare namespace BaiduMapVue3 {
             getTitle(): String
             /**
              * 为标注添加文本标注
-             * @param label 
+             * @param label
              */
             setLabel(label: Label): void
             /**
@@ -2965,7 +3017,7 @@ declare namespace BaiduMapVue3 {
             disableMassClear(): void
             /**
              * 设置覆盖物的zIndex
-             * @param zIndex 
+             * @param zIndex
              */
             setZIndex(zIndex: Number): void
             /**
@@ -2974,7 +3026,7 @@ declare namespace BaiduMapVue3 {
             getMap(): Map
             /**
              * 设置点的旋转角度
-             * @param rotation 
+             * @param rotation
              */
             setRotation(rotation: Number): void
             /**
@@ -2983,22 +3035,25 @@ declare namespace BaiduMapVue3 {
             getRotation(): Number
             /**
              * 添加事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
             addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
-            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
+            removeEventListener<T extends OverlayEvent>(
+                event: T,
+                handler: (data: OnOverlayEventPayload<T>) => void
+            ): void
             /**
              * 事件处理函数
-             * @param event 
-             * @param listener 
+             * @param event
+             * @param listener
              */
-            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this
         }
 
         /**
@@ -3012,7 +3067,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 正方形
              */
-            BMAP_SHAPE_RECT = 2
+            BMAP_SHAPE_RECT = 2,
         }
 
         /**
@@ -3026,7 +3081,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 点的形状，1 为圆形，2 为正方形，默认为 1。也可以使用对应的常量 BMAP_SHAPE_CIRCLE 和 BMAP_SHAPE_RECT
              */
-            shape?: Marker3DShapeType,
+            shape?: Marker3DShapeType
             /**
              * 点的颜色，格式为 '#xxxxxx'，比如'#f00'
              */
@@ -3034,7 +3089,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 点的透明度，范围0-1，默认0.8
              */
-            fillOpacity?: number,
+            fillOpacity?: number
             /**
              * 点的纹理贴图，格式为通过Icon创建的Icon对象
              */
@@ -3042,34 +3097,37 @@ declare namespace BaiduMapVue3 {
         }
 
         /**
-        * 此类表示地图上的带高度的点覆盖物绘制。
-        */
+         * 此类表示地图上的带高度的点覆盖物绘制。
+         */
         class Marker3D extends Overlay {
             /**
              * 创建一个图像标注实例。point参数指定了图像标注所在的地理位置
-             * @param point 
+             * @param point
              * @param height
-             * @param opts 
+             * @param opts
              */
             constructor(point: Point, height: number, opts: Marker3DOptions)
             /**
              * 添加事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
             addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
-            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
+            removeEventListener<T extends OverlayEvent>(
+                event: T,
+                handler: (data: OnOverlayEventPayload<T>) => void
+            ): void
             /**
              * 事件处理函数
-             * @param event 
-             * @param listener 
+             * @param event
+             * @param listener
              */
-            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this
         }
 
         /**
@@ -3133,7 +3191,7 @@ declare namespace BaiduMapVue3 {
              */
             moveend: OverlayEventPayload
         }
-        type OverlayEvent = keyof OverlayEventEventMap;
+        type OverlayEvent = keyof OverlayEventEventMap
         type OverlayEventPayload = {
             cancelBubble: boolean
             currentTarget: keyof BMapGL.BMapGL
@@ -3146,15 +3204,15 @@ declare namespace BaiduMapVue3 {
             target: keyof BMapGL.BMapGL
             type: string
         }
-        type OnOverlayEventPayload<T extends OverlayEvent> = OverlayEventEventMap[T];
+        type OnOverlayEventPayload<T extends OverlayEvent> = OverlayEventEventMap[T]
 
         /**
          * 覆盖物的抽象基类，所有覆盖物均继承基类的方法。此类不可实例化。
          */
         abstract class Overlay {
             /**抽象方法，用于初始化覆盖物，当调用map.addOverlay时，API将调用此方法。自定义覆盖物时需要实现此方法。自定义覆盖物时需要将覆盖物对应的HTML元素返回
-             * 
-             * @param map 
+             *
+             * @param map
              */
             initialize(map: Map): HTMLElement
             /**
@@ -3175,22 +3233,25 @@ declare namespace BaiduMapVue3 {
             hide(): void
             /**
              * 添加事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
             addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
-            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
+            removeEventListener<T extends OverlayEvent>(
+                event: T,
+                handler: (data: OnOverlayEventPayload<T>) => void
+            ): void
             /**
              * 事件处理函数
-             * @param event 
-             * @param listener 
+             * @param event
+             * @param listener
              */
-            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this
         }
 
         /**
@@ -3212,7 +3273,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 控件将定位到地图的右下角
              */
-            BMAP_ANCHOR_BOTTOM_RIGHT = 3
+            BMAP_ANCHOR_BOTTOM_RIGHT = 3,
         }
 
         /**
@@ -3233,12 +3294,12 @@ declare namespace BaiduMapVue3 {
             constructor()
             /**
              * 抽象方法。调用Map.addControl()方法添加控件时将调用此方法，从而实现该控件的初始化。自定义控件时需要实现此方法，并将元素的DOM元素在该方法中返回。DOM元素需要添加到地图的容器中，使用map.getContainer()方法可获得地图容器元素
-             * @param map 
+             * @param map
              */
             initialize(map: Map): HTMLElement
             /**
              * 设置控件停靠的位置
-             * @param anchor 
+             * @param anchor
              */
             setAnchor(anchor: ControlAnchor): void
             /**
@@ -3247,7 +3308,7 @@ declare namespace BaiduMapVue3 {
             getAnchor(): ControlAnchor
             /**
              * 设置控件停靠的偏移量
-             * @param offset 
+             * @param offset
              */
             setOffset(offset: Size): void
             /**
@@ -3292,7 +3353,7 @@ declare namespace BaiduMapVue3 {
             constructor(text: string, callback: Function, opts: MenuItemOptions)
             /**
              * 设置菜单项显示的文本
-             * @param text 
+             * @param text
              */
             setText(text: string): void
             /**
@@ -3315,17 +3376,17 @@ declare namespace BaiduMapVue3 {
             constructor()
             /**
              * 添加菜单项
-             * @param item 
+             * @param item
              */
             addItem(item: MenuItem): void
             /**
              * 返回指定索引位置的菜单项，第一个菜单项的索引为0
-             * @param index 
+             * @param index
              */
             getItem(index: number): MenuItem
             /**
              * 移除菜单项
-             * @param item 
+             * @param item
              */
             removeItem(item: MenuItem): void
             /**
@@ -3334,7 +3395,7 @@ declare namespace BaiduMapVue3 {
             addSeparator(): void
             /**
              * 移除指定索引位置的分隔符，第一个分隔符的索引为0
-             * @param index 
+             * @param index
              */
             removeSeparator(index: number): void
         }
@@ -3391,8 +3452,8 @@ declare namespace BaiduMapVue3 {
         class ViewAnimation {
             /**
              * 创建地图视角动画对象，通过关键帧的形式对动画进行定义
-             * @param keyFrames 
-             * @param opts 
+             * @param keyFrames
+             * @param opts
              */
             constructor(keyFrames: Array<ViewAnimationKeyFrames>, opts: ViewAnimationOptions)
         }
@@ -3401,15 +3462,15 @@ declare namespace BaiduMapVue3 {
             /**
              *  动画完成后自动调整视野到总览
              */
-            overallView: boolean,
+            overallView: boolean
             /**
              * 轨迹播放的角度，默认为55
              */
-            tilt: number,
+            tilt: number
             /**
              * 动画持续时长，默认为10000，单位ms
              */
-            duration: number,
+            duration: number
             /**
              * 动画开始的延迟，默认0，单位ms
              */
@@ -3417,14 +3478,14 @@ declare namespace BaiduMapVue3 {
         }
 
         /**
-        * 地图轨迹动画类。
-        */
+         * 地图轨迹动画类。
+         */
         class TrackAnimation {
             /**
              * 创建一个地图轨迹动画对象
-             * @param bmap 
-             * @param pl 
-             * @param opts 
+             * @param bmap
+             * @param pl
+             * @param opts
              */
             constructor(bmap: Map, pl: Polyline, opts: TrackAnimationOptions)
             /**
@@ -3449,42 +3510,42 @@ declare namespace BaiduMapVue3 {
             /**
              * 信息窗口文案
              */
-            defaultContent: string,
+            defaultContent: string
             /**
              * 是否开启自动视野调整，如果开启那么路书在运动过程中会根据视野自动调整
              */
-            autoView: boolean,
+            autoView: boolean
             /**
              * 速度
              */
-            speed: number,
+            speed: number
             /**
              * 图标
              */
-            icon: Icon,
+            icon: Icon
             /**
              * 是否设置marker随着道路的走向进行旋转
              */
-            enableRotation: boolean,
+            enableRotation: boolean
             /**
              * 是否大地线
              */
-            geodesic: boolean,
+            geodesic: boolean
             /**
              * 是否自动地图中心
              */
-            autoCenter: boolean,
+            autoCenter: boolean
         }
 
         /**
-        * 地图路书动画类。
-        */
+         * 地图路书动画类。
+         */
         class LushuAnimation {
             /**
              * 创建一个地图路书动画对象
-             * @param bmap 
-             * @param pl 
-             * @param opts 
+             * @param bmap
+             * @param pl
+             * @param opts
              */
             constructor(bmap: Map, pl: Polyline, opts: LushuAnimationOptions)
             /**
@@ -3513,7 +3574,7 @@ declare namespace BaiduMapVue3 {
         class DistanceTool {
             /**
              * 创建一个地图测距工具对象
-             * @param bmap 
+             * @param bmap
              */
             constructor(bmap: Map)
             /**
@@ -3527,32 +3588,32 @@ declare namespace BaiduMapVue3 {
         }
 
         /**
-        *  Map 事件
-        */
+         *  Map 事件
+         */
         interface MapEventEventMap {
-            tilesloaded: MapPayload,
-            click: MapPayload,
-            dblclick: MapPayload,
-            mousedown: MapPayload,
-            mouseup: MapPayload,
-            mousemove: MapPayload,
-            mouseover: MapPayload,
-            mouseout: MapPayload,
-            moveend: MapPayload,
-            movestart: MapPayload,
-            mousewheel: MapPayload,
-            rightclick: MapPayload,
-            resize: MapPayload,
-            touchstart: MapPayload,
-            touchmove: MapPayload,
-            touchend: MapPayload,
+            tilesloaded: MapPayload
+            click: MapPayload
+            dblclick: MapPayload
+            mousedown: MapPayload
+            mouseup: MapPayload
+            mousemove: MapPayload
+            mouseover: MapPayload
+            mouseout: MapPayload
+            moveend: MapPayload
+            movestart: MapPayload
+            mousewheel: MapPayload
+            rightclick: MapPayload
+            resize: MapPayload
+            touchstart: MapPayload
+            touchmove: MapPayload
+            touchend: MapPayload
             touchcancel: MapPayload
         }
-        type MapEvent = keyof MapEventEventMap;
+        type MapEvent = keyof MapEventEventMap
         type MapPayload = {
-            latlng: Point,
+            latlng: Point
         }
-        type OnMapEventPayload<T extends MapEvent> = MapEventEventMap[T];
+        type OnMapEventPayload<T extends MapEvent> = MapEventEventMap[T]
 
         /**
          * 此类是地图API的核心类，用来实例化一个地图。请注意WebGL版本的地图API的命名空间是BMapGL。
@@ -3564,127 +3625,127 @@ declare namespace BaiduMapVue3 {
              * @param container String | HTMLElement
              * @param opts MapOptions
              */
-            constructor(container: string | HTMLElement, opts: MapOptions);
+            constructor(container: string | HTMLElement, opts: MapOptions)
             /**
              * 启用地图拖拽，默认启用
              */
-            enableDragging(): void;
+            enableDragging(): void
             /**
              * 禁用地图拖拽
              */
-            disableDragging(): void;
+            disableDragging(): void
             /**
              * 启用地图惯性拖拽，默认禁用
              */
-            enableInertialDragging(): void;
+            enableInertialDragging(): void
             /**
              * 禁用地图惯性拖拽
              */
-            disableInertialDragging(): void;
+            disableInertialDragging(): void
             /**
              * 允许地图可被鼠标滚轮缩放，默认禁用
              */
-            enableScrollWheelZoom(): void;
+            enableScrollWheelZoom(): void
             /**
              * 禁止地图被鼠标滚轮缩放
              */
-            disableScrollWheelZoom(): void;
+            disableScrollWheelZoom(): void
             /**
              * 开启双击平滑缩放效果
              */
-            enableContinuousZoom(): void;
+            enableContinuousZoom(): void
             /**
              * 关闭双击平滑缩放效果
              */
-            disableContinuousZoom(): void;
+            disableContinuousZoom(): void
             /**
              * 开启图区resize中心点不变
              */
-            enableResizeOnCenter(): void;
+            enableResizeOnCenter(): void
             /**
              * 关闭图区resize中心点不变
              */
-            disableResizeOnCenter(): void;
+            disableResizeOnCenter(): void
             /**
              * 启用地图双击缩放，左键双击放大、右键双击缩小
              */
-            enableDoubleClickZoom(): void;
+            enableDoubleClickZoom(): void
             /**
              * 取消地图双击缩放
              */
-            disableDoubleClickZoom(): void;
+            disableDoubleClickZoom(): void
             /**
              * 启用键盘操作，默认禁用。键盘的上、下、左、右键可连续移动地图。同时按下其中两个键可使地图进行对角移动。PgUp、PgDn、Home和End键会使地图平移其1/2的大小。+、-键会使地图放大或缩小一级
              */
-            enableKeyboard(): void;
+            enableKeyboard(): void
             /**
              * 禁用键盘操作
              */
-            disableKeyboard(): void;
+            disableKeyboard(): void
             /**
              * 启用双指缩放地图。
              */
-            enablePinchToZoom(): void;
-            /* 
+            enablePinchToZoom(): void
+            /*
              * 禁用双指缩放地图。
              */
-            disablePinchToZoom(): void;
+            disablePinchToZoom(): void
             /**
              * 是否允许通过手势旋转地图。
              */
-            enableRotateGestures(): void;
+            enableRotateGestures(): void
             /**
              * 是否允许通过手势倾斜地图。
              */
-            enableTiltGestures(): void;
+            enableTiltGestures(): void
             /**
              * 启用自动适应容器尺寸变化，默认启用
              */
-            enableAutoResize(): void;
+            enableAutoResize(): void
             /**
              * 禁用自动适应容器尺寸变化
              */
-            disableAutoResize(): void;
+            disableAutoResize(): void
             /**
              * 地图容器变化后调用此方法用来重新铺图
              */
-            checkResize(): void;
+            checkResize(): void
             /**
              * 强制地图调整尺寸，此时会以当前容器尺寸为基准重新计算视野所需图像数据并重新绘制。当关闭自动调整视野时（`enableAutoResize` 配置），需要调用此方法来强制地图刷新。
              */
-            resize(): void;
+            resize(): void
             /**
              * 返回地图当前尺寸，以像素表示
              */
-            getSize(): Size;
+            getSize(): Size
             /**
              * 获取地图容器尺寸
              */
-            getContainerSize(): Size;
+            getContainerSize(): Size
             /**
              * 返回当前地图级别，一个像素对应多少单位的平面墨卡托坐标
              */
-            getZoomUnits(): number;
+            getZoomUnits(): number
             /**
              * 返回地图的DOM容器元素。当创建用户自定义控件时，需要自行实现Control.initialize()方法，并将控件的容器元素添加到地图上，通过此方法可获得地图容器
              */
-            getContainer(): HTMLElement;
+            getContainer(): HTMLElement
             /**
              * 像素坐标转换为经纬度坐标
              * @param pixel 像素坐标
              */
-            pixelToPoint(pixel: Pixel): Point;
+            pixelToPoint(pixel: Pixel): Point
             /**
              * 经纬度坐标转换为像素坐标
              * @param point 经纬度坐标
              */
-            pointToPixel(point: Point): Pixel;
+            pointToPixel(point: Point): Pixel
             /**
              * 经纬度球体坐标转换为墨卡托平面坐标
              * @param lng 经纬度球体经度坐标
              * @param lat 经纬度球体维度坐标
              */
-            lnglatToMercator(lng: number, lat: number): [number, number];
+            lnglatToMercator(lng: number, lat: number): [number, number]
             /**
              * 墨卡托平面坐标转换为经纬度球体坐标
              * @param x 墨卡托平面横坐标
@@ -3694,168 +3755,168 @@ declare namespace BaiduMapVue3 {
             /**
              * 返回地图是否经过centerAndZoom进行初始化
              */
-            isLoaded(): boolean;
+            isLoaded(): boolean
             /**
              * 添加地点区域，作为地图上的虚拟可点击区域。其中参数spots为热区点数组，options为可选配置参数；返回区域id。
-             * @param spots 
-             * @param options 
+             * @param spots
+             * @param options
              */
-            addSpots(spots: Array<any>, options: Object): number;
+            addSpots(spots: Array<any>, options: Object): number
             /**
              * 根据id返回地点区域数组
-             * @param id 
+             * @param id
              */
-            getSpots(id: number): Array<any>;
+            getSpots(id: number): Array<any>
             /**
              * 根据id移除区域数组
-             * @param id 
+             * @param id
              */
-            removeSpots(id: number): void;
+            removeSpots(id: number): void
             /**
              * 清除地点区域，此操作将清空所有虚拟可点数据
              */
-            clearSpots(): void;
+            clearSpots(): void
             /**
              * 清空当前map所有的自定义底图标注
              */
-            clearLabels(): void;
+            clearLabels(): void
             /**
              * 	在底图上添加文字，这些文字会和底图文字一同参与避让。
-             * @param labels 
+             * @param labels
              */
-            removeLabelsFromMapTile(labels: Array<any>): void;
+            removeLabelsFromMapTile(labels: Array<any>): void
             /**
              * 	从底图上移除文字标注，参数为uid数组，根据数组里的uid进行移除
-             * @param labels 
+             * @param labels
              */
-            removeLabelsFromMapTile(labelUids: Array<Number | String>): void;
+            removeLabelsFromMapTile(labelUids: Array<Number | String>): void
             /**
              * 通过点击坐标获取当前点中的底图icon，如果获取到返回其{name, uid, position}，否则返回null
-             * @param clickPosition 
+             * @param clickPosition
              */
             getIconByClickPosition(clickPosition: Pixel): Object | null
             /**
              * 设置地图可拖动区域，参数为地图拖拽的区域范围
              */
-            setBounds(bounds: Bounds): void;
+            setBounds(bounds: Bounds): void
             /**
              * 获取地图当前视野范围的矩形区域，以地理坐标表示。如果地图尚未初始化则返回一个空的 `Bounds` 实例。
              */
-            getBounds(): Bounds;
+            getBounds(): Bounds
             /**
              * 获取地图坐标类型，为CoordType常量
              */
-            getCoordType(): string;
+            getCoordType(): string
             /**
              * 	获取当前地图样式id，对于内置样式则返回样式名称；对于自定义样式，则返回内部自动生成的样式id
              */
-            getMapStyleId(): string;
+            getMapStyleId(): string
             /**
              * 获取覆盖物容器元素，返回地图覆盖物容器对象
              */
-            getPanes(): MapPanes;
+            getPanes(): MapPanes
             /**
              * 获取当前打开的信息窗口实例，如果当前地图没有处于打开状态信息窗口，则返回 `null`
              */
-            getInfoWindow(): InfoWindow | null;
+            getInfoWindow(): InfoWindow | null
             /**
              * 设置地图默认的鼠标指针样式。参数cursor应符合CSS的cursor属性规范
-             * @param cursor 
+             * @param cursor
              */
-            setDefaultCursor(cursor: string): void;
+            setDefaultCursor(cursor: string): void
             /**
              * 获取地图默认的鼠标指针样式，返回cursor值
              */
-            getDefaultCursor(): string;
+            getDefaultCursor(): string
             /**
              * 	设置拖拽地图时的鼠标指针样式。参数cursor应符合CSS的cursor属性规范
-             * @param cursor 
+             * @param cursor
              */
-            setDraggingCursor(cursor: string): void;
+            setDraggingCursor(cursor: string): void
             /**
              * 	返回拖拽地图时的鼠标指针样式
              */
-            getDraggingCursor(): string;
+            getDraggingCursor(): string
             /**
              * 设置地图允许的最小级别。取值不得小于地图类型所允许的最小级别
-             * @param zoom 
+             * @param zoom
              */
-            getMinZoom(): number;
+            getMinZoom(): number
             /**
              * 	设置地图允许的最大级别。取值不得大于地图类型所允许的最大级别
-             * @param zoom 
+             * @param zoom
              */
-            setMaxZoom(zoom: number): void;
+            setMaxZoom(zoom: number): void
             /**
              * 返回两点之间的距离，单位是米
              * @param start Point
              * @param end Point
              */
-            getDistance(start: Point, end: Point): number;
+            getDistance(start: Point, end: Point): number
             /**
              * 返回地图类型
              */
-            getMapType(): MapTypeId;
+            getMapType(): MapTypeId
             /**
              * 根据提供的地理区域或坐标设置地图视野，调整后的视野会保证包含提供的地理区域或坐标
-             * @param view 
-             * @param viewportOptions 
+             * @param view
+             * @param viewportOptions
              */
-            setViewport(view: Array<Point> | Viewport, viewportOptions?: ViewportOptions): void;
+            setViewport(view: Array<Point> | Viewport, viewportOptions?: ViewportOptions): void
             /**
              * 根据提供的地理区域或坐标获得最佳的地图视野，返回的对象中包含center和zoom属性，分别表示地图的中心点和级别。此方法仅返回视野信息，不会将新的中心点和级别做用到当前地图上
-             * @param view 
-             * @param viewportOptions 
+             * @param view
+             * @param viewportOptions
              */
-            getViewport(view: Array<Point>, viewportOptions: ViewportOptions): Viewport;
+            getViewport(view: Array<Point>, viewportOptions: ViewportOptions): Viewport
             /**
              * 设初始化地图。 如果center类型为Point时，zoom必须赋值，范围3-19级，若调用高清底图（针对移动端开发）时，zoom可赋值范围为3-18级。如果center类型为字符串时，比如“北京”，zoom可以忽略，地图将自动根据center适配最佳zoom级别
-             * @param center 
-             * @param zoom 
+             * @param center
+             * @param zoom
              */
-            centerAndZoom(center: Point, zoom: number): void;
+            centerAndZoom(center: Point, zoom: number): void
             /**
              * 	将地图的中心点更改为给定的点，跳转到指定中心点进行渲染。如果该点在当前的地图视图中已经可见，则会以平滑动画的方式移动到中心点位置。可以通过配置强制移动过程不使用动画效果
-             * @param center 
+             * @param center
              */
-            panTo(center: Point): void;
+            panTo(center: Point): void
             /**
              * 	将地图在水平位置上移动x像素，垂直位置上移动y像素。如果指定的像素大于可视区域范围或者在配置中指定没有动画效果，则不执行滑动效果
-             * @param x 
-             * @param y 
+             * @param x
+             * @param y
              */
-            panBy(x: number, y: number): void;
+            panBy(x: number, y: number): void
             /**
              * 	飞到指定的中心点和级别，提供给定位缩放地图使用
-             * @param center 
-             * @param zoom 
+             * @param center
+             * @param zoom
              */
-            flyTo(center: Point, zoom: number): void;
+            flyTo(center: Point, zoom: number): void
             /**
              * 设置地图中心点。center除了可以为坐标点以外，还支持城市名。可选配置参数包括'noAnimation: boolean'是否禁用动画效果；'callback: function'动画结束后调用此方法，如果没有动画则立即调用
-             * @param center 
-             * @param options 
+             * @param center
+             * @param options
              */
-            setCenter(center: Point | String, options?: Object): void;
+            setCenter(center: Point | String, options?: Object): void
             /**
              * 返回地图当前中心点
              */
-            getCenter(): Point;
+            getCenter(): Point
             /**
              * 设置地图类型
              * @param mapTypeId MapTypeId
              */
-            setMapType(mapTypeId: MapTypeId): void;
+            setMapType(mapTypeId: MapTypeId): void
             /**
              * 将视图切换到指定的缩放等级，中心点坐标不变。注意：当有信息窗口在地图上打开时，地图缩放将保证信息窗口所在的坐标位置不动。可选配置参数包括'noAnimation：boolean'是否禁用动画效果；'callback:function'动画结束后会调用此方法，如果没有动画则立即调用；'zoomCenter：Point'缩放中心点，默认以地图中心点为基准缩放
-             * @param zoom 
-             * @param options 
+             * @param zoom
+             * @param options
              */
-            setZoom(zoom: number, options?: Object): void;
+            setZoom(zoom: number, options?: Object): void
             /**
              * 返回地图当前缩放级别
              */
-            getZoom(): number;
+            getZoom(): number
             /**
              * 放大一级视图
              */
@@ -3866,50 +3927,50 @@ declare namespace BaiduMapVue3 {
             zoomOut(): void
             /**
              * 将控件添加到地图，一个控件实例只能向地图中添加一次
-             * @param control 
+             * @param control
              */
-            addControl(control: Control): void;
+            addControl(control: Control): void
             /**
              * 从地图中移除控件。如果控件从未被添加到地图中，则该移除不起任何作用
-             * @param control 
+             * @param control
              */
-            removeControl(control: Control): void;
+            removeControl(control: Control): void
             /**
              * 添加右键菜单
              */
-            addContextMenu(menu: ContextMenu): void;
+            addContextMenu(menu: ContextMenu): void
             /**
              * 移除右键菜单
              */
-            removeContextMenu(menu: ContextMenu): void;
+            removeContextMenu(menu: ContextMenu): void
             /**
              * 	将覆盖物添加到地图中，一个覆盖物实例只能向地图中添加一次
-             * @param overlay 
+             * @param overlay
              */
-            addOverlay(overlay: Overlay): void;
+            addOverlay(overlay: Overlay): void
             /**
              * 	从地图中移除覆盖物。如果覆盖物从未被添加到地图中，则该移除不起任何作用
-             * @param overlay 
+             * @param overlay
              */
-            removeOverlay(overlay: Overlay): void;
+            removeOverlay(overlay: Overlay): void
             /**
              * 清除地图上所有覆盖物
              */
-            clearOverlays(): void;
+            clearOverlays(): void
             /**
              * 	根据地理坐标获取对应的覆盖物容器的坐标，此方法用于自定义覆盖物
-             * @param point 
+             * @param point
              */
-            pointToOverlayPixel(point: Point): Pixel;
+            pointToOverlayPixel(point: Point): Pixel
             /**
              * 根据覆盖物容器的坐标获取对应的地理坐标
-             * @param pixel 
+             * @param pixel
              */
-            overlayPixelToPoint(pixel: Pixel): Point;
+            overlayPixelToPoint(pixel: Pixel): Point
             /**
              * 获取当前地图上的所有覆盖物，返回覆盖物对象的集合
              */
-            getOverlays(): Array<Overlay>;
+            getOverlays(): Array<Overlay>
             /**
              * 	返回地图覆盖物容器列表
              */
@@ -3917,121 +3978,121 @@ declare namespace BaiduMapVue3 {
             /**
              * 获取当前地图允许的最大倾斜角度
              */
-            getCurrentMaxTilt(): number;
+            getCurrentMaxTilt(): number
             /**
              * 根据 uid 将底图上的 poi 高亮显示，其中参数tilePosStr为label的位置字符串
-             * @param uid 
-             * @param tilePosStr 
+             * @param uid
+             * @param tilePosStr
              */
-            hightlightSpotByUid(uid: string, tilePosStr: string): void;
+            hightlightSpotByUid(uid: string, tilePosStr: string): void
             /**
              * 重置热区状态，即将高亮的热区点取消
              */
-            resetSpotStatus(): void;
+            resetSpotStatus(): void
             /**
              * 增加热区数组
              */
-            addAreaSpot(areas: Array<any>[]): string;
+            addAreaSpot(areas: Array<any>[]): string
             /**
              * 返回地点区域数组
              */
             getAreaSpot(id: string): Array<any>[]
             /**
              * 移除区域数组
-             * @param id 
+             * @param id
              */
-            removeAreaSpot(id: string): void;
+            removeAreaSpot(id: string): void
             /**
              * 清除地点区域，此操作将清空所有虚拟可点数据
              */
-            clearAreaSpots(): void;
+            clearAreaSpots(): void
             /**
              * 开启路况图层
              */
-            setTrafficOn(): void;
+            setTrafficOn(): void
             /**
              * 关闭路况图层
              */
-            setTrafficOff(): void;
+            setTrafficOff(): void
             /**
              * 显示覆盖物
              */
-            showOverlayContainer(): void;
+            showOverlayContainer(): void
             /**
              * 不显示覆盖物
              */
-            hideOverlayContainer(): void;
+            hideOverlayContainer(): void
             /**
              * 设置个性化地图，参数为个性化配置对象
-             * @param config 
+             * @param config
              */
-            setMapStyleV2(config: Object): void;
+            setMapStyleV2(config: Object): void
             /**
              * 启动视角动画
-             * @param viewAnimation 
+             * @param viewAnimation
              */
             startViewAnimation(viewAnimation: ViewAnimation): number
             /**
              * 停止视角动画
-             * @param viewAnimation 
+             * @param viewAnimation
              */
             cancelViewAnimation(viewAnimation: ViewAnimation): void
             /**
              * 获取地图截图，地球模式不支持。需要初始化地图配置preserveDrawingBuffer：true，否则是黑屏
              */
-            getMapScreenshot(): string;
+            getMapScreenshot(): string
             /**
              * 加载地图当前样式所需要的样式文件，callback为加载成功后的回调函数
-             * @param callback 
+             * @param callback
              */
-            loadMapStyleFiles(callback: Function): void;
+            loadMapStyleFiles(callback: Function): void
             /**
              * 设置版权信息位置，其中logo为logo位置，copyright为文字位置
-             * @param logo 
-             * @param cpy 
+             * @param logo
+             * @param cpy
              */
-            setCopyrightOffset(logo: Object, cpy: Object): void;
+            setCopyrightOffset(logo: Object, cpy: Object): void
             /**
              * 销毁地图，当使用 WebGL 渲染地图时，如果确认不再使用该地图实例，则需要调用本方法销毁 WebGL 上下文，否则频繁创建新地图实例会导致浏览器报：too many WebGL context 的警告
              */
-            destroy(): void;
+            destroy(): void
             /**
              * 判断浏览器是否支持地球,支持返回true,否则返回false
              */
-            isSupportEarth(): boolean;
+            isSupportEarth(): boolean
             /**
              * 设置地图旋转角度
              */
-            setHeading(rotate: number): void;
+            setHeading(rotate: number): void
             /**
              * 设置地图的倾斜角度
              */
-            setTilt(tilt: number): void;
+            setTilt(tilt: number): void
             /**
              * 打开信息窗口
-             * @param infoWindow 
-             * @param point 
+             * @param infoWindow
+             * @param point
              */
-            openInfoWindow(infoWindow: InfoWindow, point: Point): void;
+            openInfoWindow(infoWindow: InfoWindow, point: Point): void
 
             /**
              * 添加事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
             addEventListener<T extends MapEvent>(event: T, handler: (data: OnMapEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
             removeEventListener<T extends MapEvent>(event: T, handler: (data: OnMapEventPayload<T>) => void): void
             /**
              * 事件处理函数
-             * @param event 
-             * @param listener 
+             * @param event
+             * @param listener
              */
-            on<T extends MapEvent>(event: T, listener: (data: OnMapEventPayload<T>) => void): this;
+            on<T extends MapEvent>(event: T, listener: (data: OnMapEventPayload<T>) => void): this
         }
 
         /**
@@ -4044,8 +4105,8 @@ declare namespace BaiduMapVue3 {
             constructor()
             /**
              * 返回行政区域的边界。 name: 查询省、直辖市、地级市、或县的名称。 callback:执行查询后，数据返回到客户端的回调函数，数据以回调函数的参数形式返回。返回结果是一个数组，数据格式如下： arr[0] = "x1, y1; x2, y2; x3, y3; ..." arr[1] = "x1, y1; x2, y2; x3, y3; ..." arr[2] = "x1, y1; x2, y2; ..." … 否则回调函数的参数为null
-             * @param name 
-             * @param callback 
+             * @param name
+             * @param callback
              */
             get(name: string, callback: Function): void
         }
@@ -4082,14 +4143,14 @@ declare namespace BaiduMapVue3 {
         class Prism extends Overlay {
             /**
              * 创建棱柱覆盖物，构造函数中需要定义底面和高度
-             * @param points 
-             * @param altitude 
-             * @param opts 
+             * @param points
+             * @param altitude
+             * @param opts
              */
             constructor(points: Array<Point>, altitude: number, opts: PrismOptions)
             /**
              * 设置底面多边形的点数组
-             * @param path 
+             * @param path
              */
             setPath(path: Array<Point>): void
             /**
@@ -4098,7 +4159,7 @@ declare namespace BaiduMapVue3 {
             getPath(): Array<Point>
             /**
              * 设置棱柱的高，单位：米
-             * @param altitude 
+             * @param altitude
              */
             setAltitude(altitude: number): void
             /**
@@ -4107,7 +4168,7 @@ declare namespace BaiduMapVue3 {
             getAltitude(): number
             /**
              * 设置棱柱顶面的填充颜色
-             * @param color 
+             * @param color
              */
             setTopFillColor(color: string): void
             /**
@@ -4116,7 +4177,7 @@ declare namespace BaiduMapVue3 {
             getTopFillColor(): string
             /**
              * 设置棱柱顶面透明度，取值范围0 - 1
-             * @param opacity 
+             * @param opacity
              */
             setTopFillOpacity(opacity: number): void
             /**
@@ -4125,7 +4186,7 @@ declare namespace BaiduMapVue3 {
             getTopFillOpacity(): number
             /**
              * 设置棱柱侧面的填充颜色
-             * @param color 
+             * @param color
              */
             setSideFillColor(color: string): void
             /**
@@ -4134,7 +4195,7 @@ declare namespace BaiduMapVue3 {
             getSideFillColor(): string
             /**
              * 设置棱柱侧面透明度，取值范围0 - 1
-             * @param opacity 
+             * @param opacity
              */
             setSideFillOpacity(opacity: number): void
             /**
@@ -4155,22 +4216,25 @@ declare namespace BaiduMapVue3 {
             getMap(): Map
             /**
              * 添加事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
             addEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
             /**
              * 移除事件监听函数
-             * @param event 
-             * @param handler 
+             * @param event
+             * @param handler
              */
-            removeEventListener<T extends OverlayEvent>(event: T, handler: (data: OnOverlayEventPayload<T>) => void): void
+            removeEventListener<T extends OverlayEvent>(
+                event: T,
+                handler: (data: OnOverlayEventPayload<T>) => void
+            ): void
             /**
              * 事件处理函数
-             * @param event 
-             * @param listener 
+             * @param event
+             * @param listener
              */
-            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this;
+            on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this
         }
 
         /**
@@ -4179,8 +4243,8 @@ declare namespace BaiduMapVue3 {
         class BezierCurve extends Overlay {
             /**
              * 创建一个贝塞尔曲线
-             * @param points 
-             * @param controlPoints 
+             * @param points
+             * @param controlPoints
              */
             constructor(points: Array<Point>, controlPoints: any[])
         }
@@ -4237,7 +4301,7 @@ declare namespace BaiduMapVue3 {
             getNumPlans(): Number
             /**
              * 返回索引指定的方案。索引0表示第一条方案
-             * @param i 
+             * @param i
              */
             getPlan(i: Number): RoutePlan
         }
@@ -4252,17 +4316,17 @@ declare namespace BaiduMapVue3 {
             getNumRoutes(): Number
             /**
              * 返回方案中索引指定的线路。索引0表示第一条线路
-             * @param i 
+             * @param i
              */
             getRoute(i: Number): Route
             /**
              * 返回方案总距离。当format参数为true时，返回方案距离字符串（包含单位），当format为false时，仅返回数值（单位为米）信息。默认参数为true
-             * @param format 
+             * @param format
              */
             getDistance(format: Boolean): String | Number
             /**
              * 返回方案总时间。当format参数为true时，返回描述时间的字符串（包含单位），当format为false时，仅返回数值（单位为秒）信息。默认参数为true
-             * @param format 
+             * @param format
              */
             getDuration(format: Boolean): String | Number
         }
@@ -4277,12 +4341,12 @@ declare namespace BaiduMapVue3 {
             getNumSteps(): Number
             /**
              * 返回索引指定的关键点，驾车和步行适用。索引0表示第一个关键点
-             * @param i 
+             * @param i
              */
             getStep(i: Number): Step
             /**
              * 返回路线距离，当format为false时仅返回数值
-             * @param format 
+             * @param format
              */
             getDistance(format: Boolean): String | Number
             /**
@@ -4317,12 +4381,12 @@ declare namespace BaiduMapVue3 {
             getIndex(): Number
             /**
              * 返回关键点描述文本，默认包含HTML标签。当includeHtml为false时，描述文本不包含HTML标签。不支持驾车路线规划
-             * @param includeHtml 
+             * @param includeHtml
              */
             getDescription(includeHtml: Boolean): String
             /**
              * 返回到下一个关键点的距离，当format为false时仅返回数值（单位为米）
-             * @param format 
+             * @param format
              */
             getDistance(format: Boolean): String | Number
         }
@@ -4342,7 +4406,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 骑行线路
              */
-            BMAP_ROUTE_TYPE_RIDING = 6
+            BMAP_ROUTE_TYPE_RIDING = 6,
         }
 
         /**
@@ -4364,7 +4428,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 避开拥堵
              */
-            BMAP_DRIVING_POLICY_AVOID_CONGESTION = 5
+            BMAP_DRIVING_POLICY_AVOID_CONGESTION = 5,
         }
 
         /**
@@ -4373,14 +4437,14 @@ declare namespace BaiduMapVue3 {
         class DrivingRoute {
             /**
              * 创建一个驾车导航实例，其中location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由地图当前的中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
-             * @param location 
-             * @param opts 
+             * @param location
+             * @param opts
              */
             constructor(location: Map | Point | String, opts: DrivingRouteOptions)
             /**
              * 发起检索。 start: 起点，参数可以是坐标点和LocalSearchPoi实例。 end: 终点，参数可以是坐标点或LocalSearchPoi实例
-             * @param start 
-             * @param end 
+             * @param start
+             * @param end
              */
             search(start: Point | LocalResultPoi, end: Point | LocalResultPoi): void
             /**
@@ -4401,27 +4465,27 @@ declare namespace BaiduMapVue3 {
             disableAutoViewport(): void
             /**
              * 设置路线规划策略，参数为策略常量
-             * @param policy 
+             * @param policy
              */
             setPolicy(policy: DrivingPolicy): void
             /**
              * 设置检索结束后的回调函数。 参数： results: DrivingRouteResult
-             * @param callback 
+             * @param callback
              */
             setSearchCompleteCallback(callback: Function): void
             /**
              * 设置添加标注后的回调函数。 参数： pois: Array，起点和目的地点数组，通过marker属性可得到其对应的标注
-             * @param callback 
+             * @param callback
              */
             setMarkersSetCallback(callback: Function): void
             /**
              * 设置气泡打开后的回调函数。 参数： poi: LocalResultPoi，通过marker属性可得到当前的标注。html: HTMLElement，气泡内的DOM元素
-             * @param callback 
+             * @param callback
              */
             setInfoHtmlSetCallback(callback: Function): void
             /**
              * 设置添加路线后的回调函数。 参数： routes: Array ，驾车线路数组，通过Route.getPolyline()方法可得到对应的折线覆盖物
-             * @param callback 
+             * @param callback
              */
             setPolylinesSetCallback(callback: Function): void
             /**
@@ -4440,14 +4504,14 @@ declare namespace BaiduMapVue3 {
         class RidingRoute {
             /**
              * 创建一个骑行导航实例。location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
-             * @param location 
-             * @param opts 
+             * @param location
+             * @param opts
              */
             constructor(location: Map | Point | String, opts: RidingRouteOptions)
             /**
              * 发起检索。 start: 起点，参数可以是关键字、坐标点（自1.1版本支持）或者LocalSearchPoi实例。 end: 终点，参数可以是关键字、坐标点（自1.1版本支持）或者LocalSearchPoi实例
-             * @param start 
-             * @param end 
+             * @param start
+             * @param end
              */
             search(start: String | Point | LocalResultPoi, end: String | Point | LocalResultPoi): void
             /**
@@ -4468,32 +4532,32 @@ declare namespace BaiduMapVue3 {
             disableAutoViewport(): void
             /**
              * 设置检索范围，参数类型可以为地图实例、坐标点或字符串。例：setLocation("北京市")
-             * @param location 
+             * @param location
              */
             setLocation(location: Map | Point | String): void
             /**
              * 设置检索结束后的回调函数。 参数： results: RidingRouteResult
-             * @param callback 
+             * @param callback
              */
             setSearchCompleteCallback(callback: Function): void
             /**
              * 设置添加标注后的回调函数。 参数： pois: Array ，起点和目的地点数组。通过marker属性可得到其对应的标注
-             * @param callback 
+             * @param callback
              */
             setMarkersSetCallback(callback: Function): void
             /**
              * 设置气泡打开后的回调函数。 参数： poi: LocalResultPoi，通过其marker属性可得到当前的标注。 html: HTMLElement，气泡内的DOM元素
-             * @param callback 
+             * @param callback
              */
             setInfoHtmlSetCallback(callback: Function): void
             /**
              * 设置添加路线后的回调函数。 参数： routes: Array ，骑行线路数组，通过Route.getPolyline()方法可得到对应的折线覆盖物
-             * @param callback 
+             * @param callback
              */
             setPolylinesSetCallback(callback: Function): void
             /**
              * 设置结果列表创建后的回调函数。 参数： container: 结果列表所用的HTML元素
-             * @param callback 
+             * @param callback
              */
             setResultsHtmlSetCallback(callback: Function): void
             /**
@@ -4554,7 +4618,7 @@ declare namespace BaiduMapVue3 {
             getNumPlans(): Number
             /**
              * 返回索引指定的方案。索引0表示第一条方案
-             * @param i 
+             * @param i
              */
             getPlan(i: Number): RoutePlan
         }
@@ -4565,14 +4629,14 @@ declare namespace BaiduMapVue3 {
         class WalkingRoute {
             /**
              * 创建一个步行导航实例。location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
-             * @param location 
-             * @param opts 
+             * @param location
+             * @param opts
              */
             constructor(location: Map | Point | String, opts: WalkingRouteOptions)
             /**
              * 发起检索。 start: 起点，参数可以是关键字、坐标点（自1.1版本支持）或者LocalSearchPoi实例。 end: 终点，参数可以是关键字、坐标点（自1.1版本支持）或者LocalSearchPoi实例
-             * @param start 
-             * @param end 
+             * @param start
+             * @param end
              */
             search(start: String | Point | LocalResultPoi, end: String | Point | LocalResultPoi): void
             /**
@@ -4593,32 +4657,32 @@ declare namespace BaiduMapVue3 {
             disableAutoViewport(): void
             /**
              * 设置检索范围，参数类型可以为地图实例、坐标点或字符串。例：setLocation("北京市")
-             * @param location 
+             * @param location
              */
             setLocation(location: Map | Point | String): void
             /**
              * 设置检索结束后的回调函数。 参数： results: WalkingRouteResult
-             * @param callback 
+             * @param callback
              */
             setSearchCompleteCallback(callback: Function): void
             /**
              * 设置添加标注后的回调函数。 参数： pois: Array ，起点和目的地点数组。通过marker属性可得到其对应的标注
-             * @param callback 
+             * @param callback
              */
             setMarkersSetCallback(callback: Function): void
             /**
              * 设置气泡打开后的回调函数。 参数： poi: LocalResultPoi，通过其marker属性可得到当前的标注。 html: HTMLElement，气泡内的DOM元素
-             * @param callback 
+             * @param callback
              */
             setInfoHtmlSetCallback(callback: Function): void
             /**
              * 设置添加路线后的回调函数。 参数： routes: Array ，步行线路数组，通过Route.getPolyline()方法可得到对应的折线覆盖物
-             * @param callback 
+             * @param callback
              */
             setPolylinesSetCallback(callback: Function): void
             /**
              * 设置结果列表创建后的回调函数。 参数： container: 结果列表所用的HTML元素
-             * @param callback 
+             * @param callback
              */
             setResultsHtmlSetCallback(callback: Function): void
             /**
@@ -4679,7 +4743,7 @@ declare namespace BaiduMapVue3 {
             getNumPlans(): Number
             /**
              * 返回索引指定的方案。索引0表示第一条方案
-             * @param i 
+             * @param i
              */
             getPlan(i: Number): RoutePlan
         }
@@ -4690,14 +4754,14 @@ declare namespace BaiduMapVue3 {
         class TransitRoute {
             /**
              * 创建一个公交导航实例。location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会优先在该城市内进行
-             * @param location 
-             * @param opts 
+             * @param location
+             * @param opts
              */
             constructor(location: Map | Point | String, opts: TransitRouteOptions)
             /**
              * 发起检索。 start: 起点，参数可以坐标点或者LocalSearchPoi实例。 end: 终点，参数可以是坐标点或者LocalSearchPoi实例，3.0版本暂不支持起终点参数为关键字，开发者可以先用检索接口确认关键字的坐标点
-             * @param start 
-             * @param end 
+             * @param start
+             * @param end
              */
             search(start: Point | LocalResultPoi, end: Point | LocalResultPoi): void
             /**
@@ -4718,47 +4782,47 @@ declare namespace BaiduMapVue3 {
             disableAutoViewport(): void
             /**
              * 设置每页返回方案个数（1-5），默认为5
-             * @param capacity 
+             * @param capacity
              */
             setPageCapacity(capacity: Number): void
             /**
              * 设置城市内换乘策略
-             * @param policy 
+             * @param policy
              */
             setPolicy(policy: TransitPolicy): void
             /**
              * 设置跨城换乘策略
-             * @param intercityPolicy 
+             * @param intercityPolicy
              */
             setIntercityPolicy(intercityPolicy: IntercityPolicy): void
             /**
              * 设置跨城交通方式策略
-             * @param transitTypePolicy 
+             * @param transitTypePolicy
              */
             setTransitTypePolicy(transitTypePolicy: TransitTypePolicy): void
             /**
              * 设置检索结束后的回调函数。 参数： results: TransitRouteResult，公交导航结果
-             * @param callback 
+             * @param callback
              */
             setSearchCompleteCallback(callback: Function): void
             /**
              * 设置添加标注后的回调函数。 参数： pois: Array ，起点和目的地数组。 transfers: Array ，公交车站数组
-             * @param callback 
+             * @param callback
              */
             setMarkersSetCallback(callback: Function): void
             /**
              * 设置气泡打开后的回调函数。 参数： poi: LocalResultPoi，表示当前气泡对应的点（可以是起点、终点或换乘车站） html: HTMLElement，气泡内的DOM元素
-             * @param callback 
+             * @param callback
              */
             setInfoHtmlSetCallback(callback: Function): void
             /**
              * 设置添加路线后的回调函数。 参数： lines: Array ，公交线路数组。 routes: Array ，步行线路数组，通过Route.getPolyline()方法可得到对应的折线覆盖物
-             * @param callback 
+             * @param callback
              */
             setPolylinesSetCallback(callback: Function): void
             /**
              * 设置结果列表创建后的回调函数。 参数： container: 结果列表所用的HTML元素
-             * @param callback 
+             * @param callback
              */
             setResultsHtmlSetCallback(callback: Function): void
             /**
@@ -4798,7 +4862,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 优先地铁
              */
-            BMAP_TRANSIT_POLICY_FIRST_SUBWAYS = 5
+            BMAP_TRANSIT_POLICY_FIRST_SUBWAYS = 5,
         }
 
         /**
@@ -4816,7 +4880,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 价格低
              */
-            BMAP_INTERCITY_POLICY_CHEAP_PRICE = 2
+            BMAP_INTERCITY_POLICY_CHEAP_PRICE = 2,
         }
 
         /**
@@ -4834,7 +4898,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 大巴优先
              */
-            BMAP_TRANSIT_TYPE_POLICY_COACH = 2
+            BMAP_TRANSIT_TYPE_POLICY_COACH = 2,
         }
 
         /**
@@ -4867,7 +4931,7 @@ declare namespace BaiduMapVue3 {
             getNumPlans(): Number
             /**
              * 返回索引指定的方案。索引0表示第一条方案
-             * @param i 
+             * @param i
              */
             getPlan(i: Number): TransitRoutePlan
             /**
@@ -4910,12 +4974,12 @@ declare namespace BaiduMapVue3 {
             getPolyline(): Polyline
             /**
              * 当format为true时，返回本段公交线路的距离字符串（包含单位），当format为false时仅返回数值（单位为米）。默认参数为true
-             * @param format 
+             * @param format
              */
             getDistance(format: Boolean): String | Number
         }
 
-        interface TransitPlanType { }
+        interface TransitPlanType {}
 
         /**
          * 此类表示一条公交出行方案。没有构造函数，通过TransitRouteResult.getPlan()方法获得。
@@ -4927,7 +4991,7 @@ declare namespace BaiduMapVue3 {
             getNumLines(): Number
             /**
              * 返回方案包含的某条公交线路(如果是跨城检索，还包括飞机、火车、大巴线路)
-             * @param i 
+             * @param i
              */
             getLine(i: Number): Line
             /**
@@ -4936,7 +5000,7 @@ declare namespace BaiduMapVue3 {
             getNumRoutes(): Number
             /**
              * 返回方案中索引指定的线路。索引0表示第一条线路
-             * @param i 
+             * @param i
              */
             getRoute(i: Number): Route
             /**
@@ -4945,22 +5009,22 @@ declare namespace BaiduMapVue3 {
             getDistance(format: Boolean): String | Number
             /**
              * 返回方案总时间。当format参数为true时，返回描述时间的字符串（包含单位），当format为false时，仅返回数值（单位为秒）信息。默认参数为true
-             * @param format 
+             * @param format
              */
             getDuration(format: Boolean): String | Number
             /**
              * 返回方案描述文本，默认包含HTML标签。当includeHtml为false时，方案描述不包含HTML标签
-             * @param includeHtml 
+             * @param includeHtml
              */
             getDescription(includeHtml: Boolean): String
             /**
              * 返回指定路段的交通方式类型，分别对应Line和Route
-             * @param i 
+             * @param i
              */
             getTotalType(i: Number): TransitPlanType
             /**
              * 返回整个方案包含的某段线路，根据方案的数据情况，返回值可能是步行对象Route也有可能是线路对象Line
-             * @param i 
+             * @param i
              */
             getTotal(i: Number): Route | Line
             /**
@@ -4980,7 +5044,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 国内跨城换乘
              */
-            BMAP_TRANSIT_TYPE_CROSS_CITY = 1
+            BMAP_TRANSIT_TYPE_CROSS_CITY = 1,
         }
 
         /**
@@ -5010,7 +5074,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 大巴
              */
-            BMAP_LINE_TYPE_COACH = 5
+            BMAP_LINE_TYPE_COACH = 5,
         }
 
         /**
@@ -5066,7 +5130,7 @@ declare namespace BaiduMapVue3 {
             BMAP_STATUS_SUCCESS = 0,
             BMAP_STATUS_UNKNOWN_LOCATION = 2,
             BMAP_STATUS_PERMISSION_DENIED = 6,
-            BMAP_STATUS_TIMEOUT = 8
+            BMAP_STATUS_TIMEOUT = 8,
         }
 
         /**
@@ -5123,8 +5187,8 @@ declare namespace BaiduMapVue3 {
             constructor()
             /**
              * 返回用户当前位置。定位完成时（包括成功、失败、超时等情况），回调参数为GeolocationResult对象，否则为null
-             * @param callback 
-             * @param opts 
+             * @param callback
+             * @param opts
              */
             getCurrentPosition(callback: Function, opts: PositionOptions): void
             /**
@@ -5197,7 +5261,7 @@ declare namespace BaiduMapVue3 {
         class LocalCity {
             /**
              * 创建一个获取本地城市位置的实例
-             * @param opts 
+             * @param opts
              */
             constructor(opts: LocalCityOptions)
             /**
@@ -5242,7 +5306,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 地铁线路位置点
              */
-            BMAP_POI_TYPE_SUBLINE = 4
+            BMAP_POI_TYPE_SUBLINE = 4,
         }
 
         /**
@@ -5335,16 +5399,16 @@ declare namespace BaiduMapVue3 {
             constructor()
             /**
              * 对指定的地址进行解析。如果地址定位成功，则以地址所在的坐标点Point为参数调用回调函数。否则，回调函数的参数为null。city为地址所在的城市名，例如“北京市”
-             * @param address 
-             * @param callback 
-             * @param city 
+             * @param address
+             * @param callback
+             * @param city
              */
             getPoint(address: String, callback: Function, city: String): void
             /**
              * 对指定的坐标点进行反地址解析。如果解析成功，则回调函数的参数为GeocoderResult对象，否则回调函数的参数为null
-             * @param point 
-             * @param callback 
-             * @param options 
+             * @param point
+             * @param callback
+             * @param options
              */
             getLocation(point: Point, callback: Function, options: LocationOptions): void
         }
@@ -5373,13 +5437,13 @@ declare namespace BaiduMapVue3 {
         class TileLayer {
             /**
              * 创建一个地图图层实例
-             * @param opts 
+             * @param opts
              */
             constructor(opts: TileLayerOptions)
             /**
              * 抽象。向地图返回地图图块的网址，图块索引由tileCoord的x和y属性在指定的缩放级别zoom提供。如果您在TileLayerOptions中提供了tileUrlTemplate参数，则可不实现此接口
-             * @param tileCoord 
-             * @param zoom 
+             * @param tileCoord
+             * @param zoom
              */
             getTilesUrl(tileCoord: Pixel, zoom: Number): string
             /**
@@ -5388,7 +5452,7 @@ declare namespace BaiduMapVue3 {
             isTransparentPng(): number
         }
 
-        type transformType = "EPSG3857" | "BD09MC"
+        type transformType = 'EPSG3857' | 'BD09MC'
 
         /**
          * XYZLayer的构造参数
@@ -5398,7 +5462,7 @@ declare namespace BaiduMapVue3 {
              * 坐标转换设置默认 {source："EPSG3857", target："BD09MC"}
              */
             transform: {
-                source: transformType,
+                source: transformType
                 target: transformType
             }
             /**
@@ -5457,12 +5521,12 @@ declare namespace BaiduMapVue3 {
         class XYZLayer {
             /**
              * XYZLayer实例化TileLayer，用于添加第三方标准图层，通过options设置图层瓦片请求地址、显示等级、显示范围等。
-             * @param options 
+             * @param options
              */
             constructor(options: XYZLayerOptions)
             /**
              * 设置图层掩膜。boundaries可通过BMapGL.Boundary()获取行政区域的坐标数据。
-             * @param boundaries 
+             * @param boundaries
              */
             addBoundary(boundaries: any[]): void
             /**
@@ -5470,7 +5534,7 @@ declare namespace BaiduMapVue3 {
              */
             clearBoundary(): void
             /**
-             * 
+             *
              * @param index 设置图层显示层级，数字越大，显示越靠上。
              */
             setZIndex(index: Number): void
@@ -5586,7 +5650,7 @@ declare namespace BaiduMapVue3 {
              */
             suggestions: Array<String>
             /**
-             * 
+             *
              * @param i 返回索引指定的结果。索引0表示第1条结果
              */
             getPoi(i: Number): LocalResultPoi
@@ -5618,31 +5682,36 @@ declare namespace BaiduMapVue3 {
         class LocalSearch {
             /**
              * 创建一个搜索类实例，其中location表示检索区域，其类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定，且搜索结果的标注将自动加载到地图上，并支持调整地图视野层级；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
-             * @param location 
-             * @param opts 
+             * @param location
+             * @param opts
              */
             constructor(location: Map | Point | String, opts: LocalSearchOptions)
             /**
              * 根据检索词发起检索。当keyword为数组时将同时执行多关键字的查询，最多支持10个关键字，多关键字自 1.2 版本支持。option:{forceLocal:Boolean, customData:CustomData} forceLocal表示是否将搜索范围约束在当前城市，customData表示检索lbs云服务的数据
-             * @param keyword 
-             * @param option 
+             * @param keyword
+             * @param option
              */
             search(keyword: String | Array<String>, option: Object): void
             /**
              * 根据范围和检索词发起范围检索。当keyword为数组时将同时执行多关键字检索，最多支持10个关键字，多关键字自 1.2 版本支持。option:{customData:CustomData} customData表示检索lbs云服务的数据
-             * @param keyword 
-             * @param bounds 
-             * @param option 
+             * @param keyword
+             * @param bounds
+             * @param option
              */
             searchInBounds(keyword: String | Array<String>, bounds: Bounds, option: Object): void
             /**
              * 根据中心点、半径与检索词发起周边检索。当keyword为数组时将同时执行多关键字的检索，最多支持10个关键字，多关键字自 1.2 版本支持。当center为字符串时，半径参数将忽略。注意：Point类型的中心点自 1.1 版本支持。option: { customData: CustomData } customData表示检索lbs云服务的数据
-             * @param keyword 
-             * @param center 
-             * @param radius 
-             * @param option 
+             * @param keyword
+             * @param center
+             * @param radius
+             * @param option
              */
-            searchNearby(keyword: String | Array<String>, center: LocalResultPoi | String | Point, radius: Number, option: Object): void
+            searchNearby(
+                keyword: String | Array<String>,
+                center: LocalResultPoi | String | Point,
+                radius: Number,
+                option: Object
+            ): void
             /**
              * 返回最近一次检索的结果。如果是多关键字范围检索，则返回一个LocalResult的数组，数组中的结果顺序和范围检索中多关键字数组中顺序一致
              */
@@ -5754,7 +5823,12 @@ declare namespace BaiduMapVue3 {
              * @param to_type 要得到的坐标类型
              * @param translateCallback 接收转换结果的回调函数
              */
-            constructor(points: Array<Point>, from_type: CoordPointType, to_type: CoordPointType, translateCallback: Function)
+            constructor(
+                points: Array<Point>,
+                from_type: CoordPointType,
+                to_type: CoordPointType,
+                translateCallback: Function
+            )
         }
 
         /**
@@ -5763,18 +5837,18 @@ declare namespace BaiduMapVue3 {
         class BusLineSearch {
             /**
              * 创建公交线搜索类。其中location表示检索区域，其类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
-             * @param location 
-             * @param options 
+             * @param location
+             * @param options
              */
             constructor(location: Map | Point | String, options: BusLineSearchOptions)
             /**
              * 在用户配置的回调函数中返回公交列表结果，其类型为BusListResult
-             * @param keyword 
+             * @param keyword
              */
             getBusList(keyword: String): void
             /**
              * 在用户配置的回调函数中返回该条线路的公交信息，其类型为BusLine类型
-             * @param busLstItem 
+             * @param busLstItem
              */
             getBusLine(busLstItem: BusListItem): void
             /**
@@ -5791,7 +5865,7 @@ declare namespace BaiduMapVue3 {
             disableAutoViewport(): void
             /**
              * 设置检索范围，参数类型可以为地图实例、坐标点或字符串。例：setLocation("北京市")
-             * @param location 
+             * @param location
              */
             setLocation(location: Map | Point | String): void
             /**
@@ -5804,23 +5878,23 @@ declare namespace BaiduMapVue3 {
             toString(): String
             /**
              * 设置公交列表查询后的回调函数。参数：rs: BusListResult类型
-             * @param callback 
+             * @param callback
              */
             setGetBusListCompleteCallback(callback: Function): void
             /**
              * 设置公交线路查询后的回调函数。参数：rs: BusLine类型
-             * @param callback 
+             * @param callback
              */
             setGetBusLineCompleteCallback(callback: Function): void
             /**
              * 公交列表结果页渲染后回调函数。参数：container: HTMLElement，结果列表所用的HTML元素
-             * @param callback 
+             * @param callback
              */
             setBusListHtmlSetCallback(callback: Function): void
             /**
              * 公交线路结果页渲染后回调函数。参数：container: HTMLElement，结果列表所用的HTML元素
-             * @param callback 
-             * @returns 
+             * @param callback
+             * @returns
              */
             setBusLineHtmlSetCallback(callback: Function): void
             /**
@@ -5919,7 +5993,7 @@ declare namespace BaiduMapVue3 {
             getNumBusStations(): Number
             /**
              * 获取某一个具体的公交站对象
-             * @param i 
+             * @param i
              */
             getBusStation(i: Number): BusStation
             /**
@@ -5961,7 +6035,7 @@ declare namespace BaiduMapVue3 {
         class Autocomplete {
             /**
              * 	创建自动完成的实例
-             * @param options 
+             * @param options
              */
             constructor(options: AutocompleteOptions)
             /**
@@ -5974,17 +6048,17 @@ declare namespace BaiduMapVue3 {
             hide(): void
             /**
              * 修改请求数据类型。types定义方法详见AutocompleteOptions
-             * @param types 
+             * @param types
              */
             setTypes(types: Array<string>): void
             /**
              * 设置检索区域
-             * @param location 
+             * @param location
              */
             setLocation(location: String | Map | Point): void
             /**
              * 发起某个关键字的提示请求，会引起onSearchComplete的回调
-             * @param keywords 
+             * @param keywords
              */
             search(keywords: string): void
             /**
@@ -5993,7 +6067,7 @@ declare namespace BaiduMapVue3 {
             getResults(): AutocompleteResult
             /**
              * 	设置绑定的input控件的值，且不会出现下拉列表
-             * @param keyword 
+             * @param keyword
              */
             setInputValue(keyword: string): void
             /**
@@ -6002,10 +6076,13 @@ declare namespace BaiduMapVue3 {
             dispose(): void
             /**
              * 事件处理函数
-             * @param event 
-             * @param listener 
+             * @param event
+             * @param listener
              */
-            on<T extends 'confirm' | 'highlight'>(event: T, listener: (type: any, target: any, fromitem: any, toitem: any) => void): this;
+            on<T extends 'confirm' | 'highlight'>(
+                event: T,
+                listener: (type: any, target: any, fromitem: any, toitem: any) => void
+            ): this
         }
 
         /**
@@ -6036,7 +6113,7 @@ declare namespace BaiduMapVue3 {
             keyword: String
             /**
              * 结果数组
-             * @param i 
+             * @param i
              */
             getPoi(i: Number): AutocompleteResultPoi
             /**
@@ -6081,216 +6158,216 @@ declare namespace BaiduMapVue3 {
              * @param container String | HTMLElement
              * @param opts MapOptions
              */
-            Map: { new(container: string | HTMLElement, opts: MapOptions): Map };
+            Map: { new (container: string | HTMLElement, opts: MapOptions): Map }
             /**
              * 创建一个信息窗实例，其中content支持HTML内容。
              * @param content String | HTMLElement
              * @param opts InfoWindowOptions
              */
-            InfoWindow: { new(content: string | HTMLElement, opts: InfoWindowOptions): InfoWindow };
+            InfoWindow: { new (content: string | HTMLElement, opts: InfoWindowOptions): InfoWindow }
             /**
              * 以指定的经度和纬度创建一个地理点坐标
              * @param lng Number
              * @param lat Number
              */
-            Point: { new(lng: number, lat: number): Point };
+            Point: { new (lng: number, lat: number): Point }
             /**
              * 创建像素点对象实例。像素坐标的坐标原点为地图区域的左上角
-             * @param x 
-             * @param y 
+             * @param x
+             * @param y
              */
-            Pixel: { new(x: number, y: number): Pixel };
+            Pixel: { new (x: number, y: number): Pixel }
             /**
              * 创建一个图像标注实例。point参数指定了图像标注所在的地理位置
              * @param point Point
              * @param opts MarkerOptions
              */
-            Marker: { new(point: Point, opts?: MarkerOptions): Marker };
+            Marker: { new (point: Point, opts?: MarkerOptions): Marker }
             /**
              * 创建一个图像标注实例。point参数指定了图像标注所在的地理位置
              * @param point Point
              * @param opts Marker3DOptions
              */
-            Marker3D: { new(point: Point, height: number, opts?: Marker3DOptions): Marker3D };
+            Marker3D: { new (point: Point, height: number, opts?: Marker3DOptions): Marker3D }
             /**
              * 创建一个文本标注实例。point参数指定了文本标注所在的地理位置
              * @param content String
              * @param opts LabelOptions
              */
-            Label: { new(content: string, opts: LabelOptions): Label };
+            Label: { new (content: string, opts: LabelOptions): Label }
             /**
              * 创建折线覆盖物对象
              * @param points Array<Point>
              * @param opts PolylineOptions
              */
-            Polyline: { new(points: Array<Point>, opts?: PolylineOptions): Polyline };
+            Polyline: { new (points: Array<Point>, opts?: PolylineOptions): Polyline }
             /**
              * 创建多边形覆盖物
              * @param points Array<Point>
              * @param opts PolygonOptions
              */
-            Polygon: { new(points: Array<Point>, opts?: PolygonOptions): Polygon };
+            Polygon: { new (points: Array<Point>, opts?: PolygonOptions): Polygon }
             /**
              * 创建圆覆盖物
              * @param center Point
              * @param radius Number
              * @param opts CircleOptions
              */
-            Circle: { new(center: Point, radius: number, opts: CircleOptions): Circle };
+            Circle: { new (center: Point, radius: number, opts: CircleOptions): Circle }
             /**
              * 创建地面叠加层
              * @param bounds Bounds
              * @param opts GroundOverlayOptions
              */
-            GroundOverlay: { new(bounds: Bounds, opts: GroundOverlayOptions): GroundOverlay };
+            GroundOverlay: { new (bounds: Bounds, opts: GroundOverlayOptions): GroundOverlay }
             /**
              * 以指定的宽度和高度创建一个矩形区域大小对象
-             * @param width 
-             * @param height 
+             * @param width
+             * @param height
              */
-            Size: { new(width: number, height: number): Size };
+            Size: { new (width: number, height: number): Size }
             /**
              * 以给定的图像地址和大小创建图标对象实例
              * @param url String
              * @param size Size
              * @param opts IconOptions
              */
-            Icon: { new(url: string, size: Size, opts: IconOptions): Icon };
+            Icon: { new (url: string, size: Size, opts: IconOptions): Icon }
             /**
              * 创建一个比例尺控件
              * 默认位于地图左下方，显示地图的比例关系
              * @param opts ScaleControlOptions
              */
-            ScaleControl: { new(opts?: ScaleControlOptions): ScaleControl };
+            ScaleControl: { new (opts?: ScaleControlOptions): ScaleControl }
             /**
              * 创建一个缩放控件
              * @param opts ZoomControlOptions
              */
-            ZoomControl: { new(opts?: ZoomControlOptions): ZoomControl };
+            ZoomControl: { new (opts?: ZoomControlOptions): ZoomControl }
             /**
              * 创建一个版权控件
              * @param opts CopyrightControlOptions
              */
-            CopyrightControl: { new(opts?: CopyrightControlOptions): CopyrightControl };
+            CopyrightControl: { new (opts?: CopyrightControlOptions): CopyrightControl }
             /**
              * 创建一个缩放平移控件
              * PC端默认位于地图左上方，它包含控制地图的平移和缩放的功能。移动端提供缩放控件，默认位于地图右下方
              * @param opts NavigationControlOptions
              */
-            NavigationControl: { new(opts?: NavigationControlOptions): NavigationControl };
+            NavigationControl: { new (opts?: NavigationControlOptions): NavigationControl }
             /**
-            * 创建一个特定样式的地图平移缩放控件
-            * @param opts NavigationControl3DOptions
-            */
-            NavigationControl3D: { new(opts?: NavigationControl3DOptions): NavigationControl3D };
+             * 创建一个特定样式的地图平移缩放控件
+             * @param opts NavigationControl3DOptions
+             */
+            NavigationControl3D: { new (opts?: NavigationControl3DOptions): NavigationControl3D }
             /**
              * 创建一个定位控件
              * @param opts LocationControlOptions
              */
-            LocationControl: { new(opts?: LocationControlOptions): LocationControl };
+            LocationControl: { new (opts?: LocationControlOptions): LocationControl }
             /**
              * 创建一个地图类型控件
              * @param opts MapTypeControlOptions
              */
-            MapTypeControl: { new(opts?: MapTypeControlOptions): MapTypeControl };
+            MapTypeControl: { new (opts?: MapTypeControlOptions): MapTypeControl }
             /**
-            * 创建一个城市选择控件
-            * @param opts CityListControlOptions
-            */
-            CityListControl: { new(opts?: CityListControlOptions): CityListControl };
+             * 创建一个城市选择控件
+             * @param opts CityListControlOptions
+             */
+            CityListControl: { new (opts?: CityListControlOptions): CityListControl }
             /**
              * 创建一个自定义控件
              * @param opts CustomControlOptions
              */
-            Control: { new(opts: CustomControlOptions): Control };
+            Control: { new (opts: CustomControlOptions): Control }
             /**
-            * 创建一个分界范围区域
-            */
-            Boundary: { new(): Boundary };
+             * 创建一个分界范围区域
+             */
+            Boundary: { new (): Boundary }
             /**
              * 创建棱柱覆盖物，构造函数中需要定义底面和高度
-             * @param points 
-             * @param altitude 
+             * @param points
+             * @param altitude
              * @param opts PrismOptions
-            */
-            Prism: { new(points: Array<Point>, altitude: number, opts: PrismOptions): Prism };
+             */
+            Prism: { new (points: Array<Point>, altitude: number, opts: PrismOptions): Prism }
             /**
              * 创建一个包含所有给定点坐标的矩形区域。其中sw表示矩形区域的西南角，参数ne表示矩形区域的东北角
-             * @param sw 
+             * @param sw
              * @param ne
              */
-            Bounds: { new(sw: Point, ne: Point): Bounds };
+            Bounds: { new (sw: Point, ne: Point): Bounds }
             /**
-            * 创建一个右键菜单实例
-            */
-            ContextMenu: { new(): ContextMenu };
+             * 创建一个右键菜单实例
+             */
+            ContextMenu: { new (): ContextMenu }
             /**
-            * 创建一个右键菜单项实例
-            * @param text string
-            * @param callback Function
-            * @param opts MenuItemOptions
-            */
-            MenuItem: { new(text: string, callback: Function, opts: MenuItemOptions): MenuItem };
+             * 创建一个右键菜单项实例
+             * @param text string
+             * @param callback Function
+             * @param opts MenuItemOptions
+             */
+            MenuItem: { new (text: string, callback: Function, opts: MenuItemOptions): MenuItem }
             /**
              * 创建Geolocation对象实例
              */
-            Geolocation: { new(): Geolocation };
+            Geolocation: { new (): Geolocation }
             /**
              * 创建一个获取本地城市位置的实例
              * @param opts LocalCityOptions
              */
-            LocalCity: { new(opts: LocalCityOptions): LocalCity };
+            LocalCity: { new (opts: LocalCityOptions): LocalCity }
             /**
              * 创建一个地址解析器的实例
              */
-            Geocoder: { new(): Geocoder };
+            Geocoder: { new (): Geocoder }
             /**
              * 创建一个地图图层实例
              * @param opts TileLayerOptions
              */
-            TileLayer: { new(opts: TileLayerOptions): TileLayer };
+            TileLayer: { new (opts: TileLayerOptions): TileLayer }
             /**
              * 创建一个搜索类实例，其中location表示检索区域，其类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定，且搜索结果的标注将自动加载到地图上，并支持调整地图视野层级；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
-             * @param location 
-             * @param opts 
+             * @param location
+             * @param opts
              */
-            LocalSearch: { new(location: Map | Point | String, opts: LocalSearchOptions): LocalSearch };
+            LocalSearch: { new (location: Map | Point | String, opts: LocalSearchOptions): LocalSearch }
             /**
              * 创建地图视角动画对象，通过关键帧的形式对动画进行定义
              * @param keyFrames Array<ViewAnimationKeyFrames>
              * @param opts ViewAnimationOptions
              */
-            ViewAnimation: { new(keyFrames: Array<ViewAnimationKeyFrames>, opts: ViewAnimationOptions): ViewAnimation };
+            ViewAnimation: { new (keyFrames: Array<ViewAnimationKeyFrames>, opts: ViewAnimationOptions): ViewAnimation }
             /**
-            * 创建一个贝塞尔曲线对象
-            * @param points 
-            * @param controlPoints 
-            */
-            BezierCurve: { new(points: Array<Point>, controlPoints: any[]): BezierCurve };
+             * 创建一个贝塞尔曲线对象
+             * @param points
+             * @param controlPoints
+             */
+            BezierCurve: { new (points: Array<Point>, controlPoints: any[]): BezierCurve }
             /**
              * 创建一个驾车导航实例，其中location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由地图当前的中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
-             * @param location 
-             * @param opts 
+             * @param location
+             * @param opts
              */
-            DrivingRoute: { new(location: Map | Point | String, opts: DrivingRouteOptions): DrivingRoute }
+            DrivingRoute: { new (location: Map | Point | String, opts: DrivingRouteOptions): DrivingRoute }
             /**
              * 创建一个公交导航实例。location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会优先在该城市内进行
-             * @param location 
-             * @param opts 
+             * @param location
+             * @param opts
              */
-            TransitRoute: { new(location: Map | Point | String, opts: TransitRouteOptions): TransitRoute }
+            TransitRoute: { new (location: Map | Point | String, opts: TransitRouteOptions): TransitRoute }
             /**
              * 创建一个步行导航实例。location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
-             * @param location 
-             * @param opts 
+             * @param location
+             * @param opts
              */
-            WalkingRoute: { new(location: Map | Point | String, opts: WalkingRouteOptions): WalkingRoute }
+            WalkingRoute: { new (location: Map | Point | String, opts: WalkingRouteOptions): WalkingRoute }
             /**
              * 创建一个骑行导航实例。location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
-             * @param location 
-             * @param opts 
+             * @param location
+             * @param opts
              */
-            RidingRoute: { new(location: Map | Point | String, opts: RidingRouteOptions): RidingRoute }
+            RidingRoute: { new (location: Map | Point | String, opts: RidingRouteOptions): RidingRoute }
             /**
              * 坐标转换
              * @param points 其他坐标
@@ -6298,43 +6375,50 @@ declare namespace BaiduMapVue3 {
              * @param to_type 要得到的坐标类型
              * @param translateCallback 接收转换结果的回调函数
              */
-            Convertor: { new(points: Array<Point>, from_type: CoordPointType, to_type: CoordPointType, translateCallback: Function): Convertor };
+            Convertor: {
+                new (
+                    points: Array<Point>,
+                    from_type: CoordPointType,
+                    to_type: CoordPointType,
+                    translateCallback: Function
+                ): Convertor
+            }
             /**
              * 创建自动完成的实例
-             * @param options 
+             * @param options
              */
-            Autocomplete: { new(options: AutocompleteOptions): Autocomplete };
+            Autocomplete: { new (options: AutocompleteOptions): Autocomplete }
             /**
              * 创建公交线搜索类。其中location表示检索区域，其类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
-             * @param location 
-             * @param options 
+             * @param location
+             * @param options
              */
-            BusLineSearch: { new(location: Map | Point | String, options: BusLineSearchOptions): BusLineSearch };
+            BusLineSearch: { new (location: Map | Point | String, options: BusLineSearchOptions): BusLineSearch }
         }
 
         interface BMapGLLib {
             /**
-            * 创建地图轨迹动画对象，通过折线轨迹形式对动画进行定义
-            * @param bmap 
-            * @param pl 
-            * @param opts TrackAnimationOptions
-            */
-            TrackAnimation: { new(bmap: Map, pl: Polyline, opts: TrackAnimationOptions): TrackAnimation };
+             * 创建地图轨迹动画对象，通过折线轨迹形式对动画进行定义
+             * @param bmap
+             * @param pl
+             * @param opts TrackAnimationOptions
+             */
+            TrackAnimation: { new (bmap: Map, pl: Polyline, opts: TrackAnimationOptions): TrackAnimation }
             /**
              * 创建一个地图路书动画对象
-             * @param bmap 
-             * @param points 
+             * @param bmap
+             * @param points
              * @param opts LushuAnimationOptions
              */
-            LuShu: { new(bmap: Map, points: Array<Point>, opts: LushuAnimationOptions): LushuAnimation };
+            LuShu: { new (bmap: Map, points: Array<Point>, opts: LushuAnimationOptions): LushuAnimation }
             /**
              * 创建一个测距工具对象
-             * @param bmap 
+             * @param bmap
              */
-            DistanceTool: { new(bmap: Map): DistanceTool };
+            DistanceTool: { new (bmap: Map): DistanceTool }
         }
 
-        type AllBMapGLType = keyof BMapGL.BMapGL;
+        type AllBMapGLType = keyof BMapGL.BMapGL
     }
 }
 

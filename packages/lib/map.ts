@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { BaiduMapProps, BMapGL } from "types"
+import { BaiduMapProps, BMapGL } from 'types'
 
 /**
  * 地图状态
@@ -21,53 +21,58 @@ export const state = ref({
      *测距工具库是否初始化完成
      */
     distanc_tool_lib_inited: false,
-});
+})
 
 /**
  * 百度地图容器
  */
-export const containerRef = ref();
+export const containerRef = ref()
 
 /**
  * 百度地图类
  */
-export const BMapGLRef = ref<BMapGL.BMapGL>();
+export const BMapGLRef = ref<BMapGL.BMapGL>()
 
 /**
  * 百度地图三方库
  */
-export const BMapGLLibRef = ref<BMapGL.BMapGLLib>();
+export const BMapGLLibRef = ref<BMapGL.BMapGLLib>()
 
 /**
  * 百度地图实例
  */
-export const map = ref<BMapGL.Map>();
+export const map = ref<BMapGL.Map>()
 
 /**
  * 初始化百度地图
  */
-export function initMap(container: string | HTMLElement, map_params: {
-    [key: string]: any
-} & Required<BaiduMapProps>): undefined | Promise<{
-    BMap: BMapGL.BMapGL | undefined;
-    map: BMapGL.Map | undefined;
-    container: string | HTMLElement
-}> {
+export function initMap(
+    container: string | HTMLElement,
+    map_params: {
+        [key: string]: any
+    } & Required<BaiduMapProps>
+):
+    | undefined
+    | Promise<{
+          BMap: BMapGL.BMapGL | undefined
+          map: BMapGL.Map | undefined
+          container: string | HTMLElement
+      }> {
     return new Promise((resolve, reject) => {
-        containerRef.value = container;
+        containerRef.value = container
         if (!state.value.inited) {
             if (!map_params.apiKey) {
-                throw Error("请提供百度地图APIKEY参数：apiKey");
+                throw Error('请提供百度地图APIKEY参数：apiKey')
             }
             // @ts-ignore
-            // 地图脚本加载完成后执行的初始化函数 
+            // 地图脚本加载完成后执行的初始化函数
             globalThis.initializeMap = function () {
-                state.value.inited = true;
+                state.value.inited = true
                 // @ts-ignore
-                BMapGLRef.value = globalThis.BMapGL as BMapGL.BMapGL;
-                console.log('MapOptions', map_params);
+                BMapGLRef.value = globalThis.BMapGL as BMapGL.BMapGL
+                console.log('MapOptions', map_params)
                 if (!container) {
-                    throw new Error("container is not defined");
+                    throw new Error('container is not defined')
                 }
                 let map_options = {} as {
                     [key: string]: any
@@ -78,24 +83,27 @@ export function initMap(container: string | HTMLElement, map_params: {
                     }
                 }
                 map.value = new BMapGLRef.value.Map(container as string | HTMLElement, map_options)
-                map.value.centerAndZoom(new BMapGLRef.value.Point(map_params.center.lng, map_params.center.lat), map_params.zoom);
+                map.value.centerAndZoom(
+                    new BMapGLRef.value.Point(map_params.center.lng, map_params.center.lat),
+                    map_params.zoom
+                )
                 resolve({
                     BMap: BMapGLRef.value,
                     map: map.value,
-                    container: container as string | HTMLElement
+                    container: container as string | HTMLElement,
                 })
             }
-            let script = document.createElement("script");
-            script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${map_params.apiKey}&callback=initializeMap`;
+            let script = document.createElement('script')
+            script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${map_params.apiKey}&callback=initializeMap`
             script.onerror = function () {
                 reject(new Error('BMap script load failed'))
             }
-            document.body.appendChild(script);
+            document.body.appendChild(script)
         } else {
             resolve({
                 BMap: BMapGLRef.value,
                 map: map.value,
-                container: container as string | HTMLElement
+                container: container as string | HTMLElement,
             })
         }
     })

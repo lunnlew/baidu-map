@@ -1,4 +1,4 @@
-class BMapGL { }
+class BMapGL {}
 
 namespace BMapGL {
     /**
@@ -8,23 +8,23 @@ namespace BMapGL {
         /**
          * 此地图类型展示普通街道视图
          */
-        BMAP_NORMAL_MAP = "B_NORMAL_MAP",
+        BMAP_NORMAL_MAP = 'B_NORMAL_MAP',
         /**
          * 此地图类型展示地球卫星视图
          */
-        BMAP_EARTH_MAP = "B_EARTH_MAP",
+        BMAP_EARTH_MAP = 'B_EARTH_MAP',
         /**
          * 此地图类型展示空地图
          */
-        BMAP_NONE_MAP = "B_NONE_MAP",
+        BMAP_NONE_MAP = 'B_NONE_MAP',
         /**
          * 此地图类型展示卫星视图
          */
-        BMAP_SATELLITE_MAP = "B_SATELLITE_MAP",
+        BMAP_SATELLITE_MAP = 'B_SATELLITE_MAP',
         /**
          * 此地图类型展示普通街道视图
          */
-        BMAP_STREET_MAP = "B_STREET_MAP",
+        BMAP_STREET_MAP = 'B_STREET_MAP',
     }
 
     /**
@@ -46,18 +46,18 @@ namespace BMapGL {
         /**
          * 控件将定位到地图的右下角
          */
-        BMAP_ANCHOR_BOTTOM_RIGHT = 3
+        BMAP_ANCHOR_BOTTOM_RIGHT = 3,
     }
 
     /**
      * NavigationControl控件的类型
-    */
+     */
     export enum NavigationControlType {
         BMAP_NAVIGATION_CONTROL_LARGE = 0,
         BMAP_NAVIGATION_CONTROL_SMALL = 1,
         BMAP_NAVIGATION_CONTROL_PAN = 2,
         BMAP_NAVIGATION_CONTROL_ZOOM = 3,
-        BMAP_NAVIGATION_CONTROL_ANIM = 4
+        BMAP_NAVIGATION_CONTROL_ANIM = 4,
     }
 
     /**
@@ -71,7 +71,7 @@ namespace BMapGL {
         /**
          * 正方形
          */
-        BMAP_SHAPE_RECT = 2
+        BMAP_SHAPE_RECT = 2,
     }
 
     /**
@@ -81,7 +81,7 @@ namespace BMapGL {
         BMAP_STATUS_SUCCESS = 0,
         BMAP_STATUS_UNKNOWN_LOCATION = 2,
         BMAP_STATUS_PERMISSION_DENIED = 6,
-        BMAP_STATUS_TIMEOUT = 8
+        BMAP_STATUS_TIMEOUT = 8,
     }
 
     /**
@@ -121,6 +121,5 @@ namespace BMapGL {
          */
         COORDINATES_51 = 8,
     }
-
 }
-export default BMapGL;
+export default BMapGL
