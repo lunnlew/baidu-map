@@ -10,7 +10,7 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
-import { state } from '@/lib/map'
+import { map, state } from '@/lib/map'
 import { addInfoWindow } from '@/lib/overlay'
 import { bindEvents, extractEmitEvents } from '@/utils/util'
 const props = withDefaults(
@@ -69,6 +69,9 @@ watch(
                 merge_props.title = info_title.value?.innerHTML
             }
             bm.value = bindEvents(addInfoWindow(merge_props), extractEmitEvents(attrs), emit)
+        } else {
+            map.value && map.value.closeInfoWindow()
+            bm.value = null
         }
     },
     {
@@ -85,6 +88,7 @@ watch(
     }
 )
 onUnmounted(() => {
+    map.value && map.value.closeInfoWindow()
     bm.value = null
 })
 defineExpose({

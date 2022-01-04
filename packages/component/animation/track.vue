@@ -55,6 +55,7 @@ watch(
             })
         } else {
             bm.value && bm.value?.cancel()
+            bm.value = null
         }
     },
     {

@@ -48,6 +48,7 @@ watch(
             bm.value = bindEvents(addViewAnimation(options.value), extractEmitEvents(attrs), emit)
         } else {
             bm.value && map.value?.cancelViewAnimation(bm.value)
+            bm.value = null
         }
     },
     {

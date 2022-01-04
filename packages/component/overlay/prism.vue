@@ -46,6 +46,9 @@ watch(
     val => {
         if (val) {
             bm.value = bindEvents(addPrism(props.points, options.value), extractEmitEvents(attrs), emit)
+        } else {
+            bm.value && map.value?.removeOverlay(bm.value)
+            bm.value = null
         }
     },
     {
@@ -53,7 +56,7 @@ watch(
     }
 )
 onUnmounted(() => {
-    map.value?.removeOverlay(bm.value)
+    bm.value && map.value?.removeOverlay(bm.value)
     bm.value = null
 })
 defineExpose({

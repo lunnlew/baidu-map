@@ -33,7 +33,8 @@ watch(
                 bm.value = bindEvents(addDistanceTool(merge_props), extractEmitEvents(attrs), emit)
             })
         } else {
-            bm.value?.close()
+            bm.value && bm.value.close()
+            bm.value = null
         }
     },
     {
@@ -41,7 +42,7 @@ watch(
     }
 )
 onUnmounted(() => {
-    bm.value?.close()
+    bm.value && bm.value.close()
     bm.value = null
 })
 defineExpose({
