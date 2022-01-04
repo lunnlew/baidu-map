@@ -6,8 +6,8 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, useAttrs, watch } from 'vue'
 import BMapGL from '../../lib/BMapGL'
-import { bindEvents, extractEmitEvents } from '@/utils/util'
-import { addMap, initMap } from '@/lib/map'
+import { bindEvents, extractEmitEvents } from '../../utils/util'
+import { addMap, initMap } from '../../lib/map'
 const props = withDefaults(
     defineProps<{
         apiKey: string

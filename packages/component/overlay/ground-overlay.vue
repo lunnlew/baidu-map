@@ -5,9 +5,9 @@
 </template>
 <script setup lang="ts">
 import { useAttrs, useSlots, watch, computed, ref, onUnmounted } from 'vue'
-import { map, state } from '@/lib/map'
-import { addGroundOverlay } from '@/lib/overlay'
-import { mergePropsDefault, bindEvents, extractEmitEvents } from '@/utils/util'
+import { map, state } from '../../lib/map'
+import { addGroundOverlay } from '../../lib/overlay'
+import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
 const props = withDefaults(
     defineProps<{
         startPoint: {

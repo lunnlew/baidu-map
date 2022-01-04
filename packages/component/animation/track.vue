@@ -5,9 +5,9 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
-import { state } from '@/lib/map'
-import { addTrackAnimation, initTrackAnimation } from '@/lib/animation'
-import { bindEvents, extractEmitEvents, mergePropsDefault } from '@/utils/util'
+import { state } from '../../lib/map'
+import { addTrackAnimation, initTrackAnimation } from '../../lib/animation'
+import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/util'
 const props = withDefaults(
     defineProps<{
         points?: {

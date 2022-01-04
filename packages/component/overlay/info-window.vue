@@ -10,9 +10,9 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
-import { map, state } from '@/lib/map'
-import { addInfoWindow } from '@/lib/overlay'
-import { bindEvents, extractEmitEvents } from '@/utils/util'
+import { map, state } from '../../lib/map'
+import { addInfoWindow } from '../../lib/overlay'
+import { bindEvents, extractEmitEvents } from '../../utils/util'
 const props = withDefaults(
     defineProps<{
         point: {
