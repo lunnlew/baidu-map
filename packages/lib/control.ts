@@ -1,39 +1,49 @@
-import { BMapGL, BmCityListControlProps, BmCopyrightControlProps, BmLocationControlProps, BmMapTypeControlProps, BmNavigationControlProps, BmNavigationThreedControlProps, BmScaleControlProps, BmZoomControlProps } from 'types';
-import { BMapGLRef, map } from './map';
+import {
+    BMapGL,
+    BmCityListControlProps,
+    BmCopyrightControlProps,
+    BmLocationControlProps,
+    BmMapTypeControlProps,
+    BmNavigationControlProps,
+    BmNavigationThreedControlProps,
+    BmScaleControlProps,
+    BmZoomControlProps,
+} from 'types'
+import { BMapGLRef, map } from './map'
 
 /**
  * 添加比例尺控件
- * @param props 
+ * @param props
  */
 export function addScaleControl(props: Required<BmScaleControlProps>) {
     if (BMapGLRef.value && map.value) {
         let control = new BMapGLRef.value.ScaleControl({
             anchor: props.anchor,
             offset: new BMapGLRef.value.Size(props.offset[0], props.offset[1]),
-        });
-        map.value.addControl(control);
+        })
+        map.value.addControl(control)
         return control
     }
 }
 
 /**
  * 添加缩放控件
- * @param props 
+ * @param props
  */
 export function addZoomControl(props: Required<BmZoomControlProps>) {
     if (BMapGLRef.value && map.value) {
         let control = new BMapGLRef.value.ZoomControl({
             anchor: props.anchor,
             offset: new BMapGLRef.value.Size(props.offset[0], props.offset[1]),
-        });
-        map.value.addControl(control);
+        })
+        map.value.addControl(control)
         return control
     }
 }
 
 /**
  * 添加版权控件
- * @param props 
+ * @param props
  */
 export function addCopyrightControl(props: Required<BmCopyrightControlProps>) {
     if (BMapGLRef.value && map.value) {
@@ -41,110 +51,112 @@ export function addCopyrightControl(props: Required<BmCopyrightControlProps>) {
             anchor: props.anchor,
             offset: new BMapGLRef.value.Size(props.offset[0], props.offset[1]),
         })
-        map.value.addControl(control);
+        map.value.addControl(control)
         return control
     }
 }
 
 /**
  * 添加缩放平移控件
- * @param props 
+ * @param props
  */
 export function addNavigationControl(props: Required<BmNavigationControlProps>) {
     if (BMapGLRef.value && map.value) {
         let control = new BMapGLRef.value.NavigationControl({
             anchor: props.anchor,
             offset: new BMapGLRef.value.Size(props.offset[0], props.offset[1]),
-            type: props.type
-        });
-        map.value.addControl(control);
+            type: props.type,
+        })
+        map.value.addControl(control)
         return control
     }
 }
 
 /**
  * 添加一个特定样式的地图平移缩放控件
- * @param props 
+ * @param props
  */
 export function addNavigationControl3D(props: Required<BmNavigationThreedControlProps>) {
     if (BMapGLRef.value && map.value) {
         let control = new BMapGLRef.value.NavigationControl3D({
             anchor: props.anchor,
             offset: new BMapGLRef.value.Size(props.offset[0], props.offset[1]),
-        });
-        map.value.addControl(control);
+        })
+        map.value.addControl(control)
         return control
     }
 }
 
 /**
  * 添加定位控件
- * @param props 
+ * @param props
  */
 export function addLocationControl(props: Required<BmLocationControlProps>) {
     if (BMapGLRef.value && map.value) {
         let control = new BMapGLRef.value.LocationControl({
             anchor: props.anchor,
-            offset: new BMapGLRef.value.Size(props.offset[0], props.offset[1])
-        });
-        map.value.addControl(control);
+            offset: new BMapGLRef.value.Size(props.offset[0], props.offset[1]),
+        })
+        map.value.addControl(control)
         return control
     }
 }
 
 /**
  * 添加地图类型控件
- * @param props 
+ * @param props
  */
 export function addMapTypeControl(props: Required<BmMapTypeControlProps>) {
     if (BMapGLRef.value && map.value) {
         let control = new BMapGLRef.value.MapTypeControl({
             anchor: props.anchor,
-            offset: new BMapGLRef.value.Size(props.offset[0], props.offset[1])
-        });
-        map.value.addControl(control);
+            offset: new BMapGLRef.value.Size(props.offset[0], props.offset[1]),
+        })
+        map.value.addControl(control)
         return control
     }
 }
 
 /**
  * 添加城市列表控件
- * @param props 
+ * @param props
  */
 export function addCityListControl(props: Required<BmCityListControlProps>) {
     if (BMapGLRef.value && map.value) {
         let control = new BMapGLRef.value.CityListControl({
             anchor: props.anchor,
-            offset: new BMapGLRef.value.Size(props.offset[0], props.offset[1])
-        });
-        map.value.addControl(control);
+            offset: new BMapGLRef.value.Size(props.offset[0], props.offset[1]),
+        })
+        map.value.addControl(control)
         return control
     }
 }
 
 /**
  * 添加自定义控件
- * @param props 
+ * @param props
  */
-export function addCustomControl(props: Required<{
-    dom?: HTMLElement,
-    anchor?: number,
-    offset?: [number, number],
-}>) {
+export function addCustomControl(
+    props: Required<{
+        dom?: HTMLElement
+        anchor?: number
+        offset?: [number, number]
+    }>
+) {
     if (BMapGLRef.value && map.value) {
         const Control = function (this: any) {
-            this.defaultAnchor = props.anchor;
+            this.defaultAnchor = props.anchor
             if (BMapGLRef.value) {
-                this.defaultOffset = new BMapGLRef.value.Size(props.offset[0], props.offset[1]);
+                this.defaultOffset = new BMapGLRef.value.Size(props.offset[0], props.offset[1])
             }
         }
         Control.prototype = new BMapGLRef.value.Control({
             anchor: props.anchor,
-            offset: new BMapGLRef.value.Size(props.offset[0], props.offset[1])
+            offset: new BMapGLRef.value.Size(props.offset[0], props.offset[1]),
         })
         Control.prototype.initialize = (map: BMapGL.Map) => map.getContainer().appendChild(props.dom)
-        let control = new (Control as any)();
-        map.value.addControl(control);
+        let control = new (Control as any)()
+        map.value.addControl(control)
         return control
     }
 }

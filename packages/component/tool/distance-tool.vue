@@ -4,35 +4,34 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, onUnmounted, ref, useAttrs, watch } from "vue";
-import { state } from "@/lib/map";
-import { addDistanceTool, initDistanceTool } from "@/lib/animation";
-import { bindEvents, extractEmitEvents } from "@/utils/util";
-const props = withDefaults(defineProps<{
-    show?: boolean,
-}>(), {
-    show: true,
-})
+import { computed, onUnmounted, ref, useAttrs, watch } from 'vue'
+import { state } from '@/lib/map'
+import { addDistanceTool, initDistanceTool } from '@/lib/animation'
+import { bindEvents, extractEmitEvents } from '@/utils/util'
+const props = withDefaults(
+    defineProps<{
+        show?: boolean
+    }>(),
+    {
+        show: true,
+    }
+)
 /**
  * 使用时建议禁用 Map enableMapClick
  */
 const emit = defineEmits({})
-const attrs = useAttrs();
-const isShow = computed(() => state.value.inited && props.show);
+const attrs = useAttrs()
+const isShow = computed(() => state.value.inited && props.show)
 const options = computed(() => props)
 const bm = ref()
 watch(
     () => isShow.value,
-    (val) => {
-        let merge_props = { ...options.value };
+    val => {
+        let merge_props = { ...options.value }
         if (val) {
-            initDistanceTool().then((result) => {
-                bm.value = bindEvents(
-                    addDistanceTool(merge_props),
-                    extractEmitEvents(attrs),
-                    emit
-                );
-            });
+            initDistanceTool().then(result => {
+                bm.value = bindEvents(addDistanceTool(merge_props), extractEmitEvents(attrs), emit)
+            })
         } else {
             bm.value?.close()
         }
@@ -40,7 +39,7 @@ watch(
     {
         immediate: true,
     }
-);
+)
 onUnmounted(() => {
     bm.value = null
 })
@@ -52,6 +51,6 @@ defineExpose({
 </script>
 <script lang="ts">
 export default {
-    name: "DistanceTool",
+    name: 'DistanceTool',
 }
 </script>
