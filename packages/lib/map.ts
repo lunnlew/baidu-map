@@ -51,13 +51,29 @@ export function initMap(apiKey: string): Promise<{
     BMap: BMapGL.BMapGL | undefined
 }> {
     return new Promise((resolve, reject) => {
-        if (!state.value.inited) {
-            if (!apiKey) {
-                throw Error('请提供百度地图APIKEY参数：apiKey')
-            }
+        if (!state.value.inited || !BMapGLRef.value) {
             // @ts-ignore
-            // 地图脚本加载完成后执行的初始化函数
-            globalThis.initializeMap = function () {
+            if (!globalThis.BMapGL) {
+                if (!apiKey) {
+                    throw Error('请提供百度地图APIKEY参数：apiKey')
+                }
+                // @ts-ignore
+                // 地图脚本加载完成后执行的初始化函数
+                globalThis.initializeMap = function () {
+                    state.value.inited = true
+                    // @ts-ignore
+                    BMapGLRef.value = globalThis.BMapGL as BMapGL.BMapGL
+                    resolve({
+                        BMap: BMapGLRef.value,
+                    })
+                }
+                let script = document.createElement('script')
+                script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${apiKey}&callback=initializeMap`
+                script.onerror = function () {
+                    reject(new Error('BMap script load failed'))
+                }
+                document.body.appendChild(script)
+            } else {
                 state.value.inited = true
                 // @ts-ignore
                 BMapGLRef.value = globalThis.BMapGL as BMapGL.BMapGL
@@ -65,12 +81,6 @@ export function initMap(apiKey: string): Promise<{
                     BMap: BMapGLRef.value,
                 })
             }
-            let script = document.createElement('script')
-            script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${apiKey}&callback=initializeMap`
-            script.onerror = function () {
-                reject(new Error('BMap script load failed'))
-            }
-            document.body.appendChild(script)
         } else {
             resolve({
                 BMap: BMapGLRef.value,
@@ -91,10 +101,10 @@ export function addMap(
     } & Required<BaiduMapProps>
 ):
     | {
-          BMap: BMapGL.BMapGL | undefined
-          map: BMapGL.Map | undefined
-          container: string | HTMLElement
-      }
+        BMap: BMapGL.BMapGL | undefined
+        map: BMapGL.Map | undefined
+        container: string | HTMLElement
+    }
     | undefined {
     if (BMapGLRef.value) {
         console.log('MapOptions', map_params)
