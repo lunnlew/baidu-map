@@ -40,6 +40,9 @@ watch(
                 merge_props.dom = control.value
             }
             bm.value = bindEvents(addCustomControl(merge_props), extractEmitEvents(attrs), emit)
+        } else {
+            bm.value && map.value?.removeControl(bm.value)
+            bm.value = null
         }
     },
     {
@@ -47,7 +50,7 @@ watch(
     }
 )
 onUnmounted(() => {
-    map.value?.removeControl(bm.value)
+    bm.value && map.value?.removeControl(bm.value)
     bm.value = null
 })
 defineExpose({

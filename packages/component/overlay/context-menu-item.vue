@@ -14,9 +14,9 @@ const props = withDefaults(
         show?: boolean
     }>(),
     {
-        id: "",
+        id: '',
         width: 300,
-        text: "",
+        text: '',
         callback: undefined,
         onClick: undefined,
         show: true,
@@ -25,6 +25,6 @@ const props = withDefaults(
 </script>
 <script lang="ts">
 export default {
-    name: "ContextMenuItem",
+    name: 'ContextMenuItem',
 }
 </script>

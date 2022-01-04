@@ -28,6 +28,9 @@ watch(
     val => {
         if (val) {
             bm.value = bindEvents(addZoomControl(options.value), extractEmitEvents(attrs), emit)
+        } else {
+            bm.value && map.value?.removeControl(bm.value)
+            bm.value = null
         }
     },
     {
@@ -35,7 +38,7 @@ watch(
     }
 )
 onUnmounted(() => {
-    map.value?.removeControl(bm.value)
+    bm.value && map.value?.removeControl(bm.value)
     bm.value = null
 })
 defineExpose({

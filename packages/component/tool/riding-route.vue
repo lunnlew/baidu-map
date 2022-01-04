@@ -73,6 +73,9 @@ watch(
                 }
             }
             bm.value = bindEvents(addRidingRoute(merge_props), extractEmitEvents(attrs), emit)
+        } else {
+            bm.value && bm.value.clearResults()
+            bm.value = null
         }
     },
     {
@@ -81,6 +84,7 @@ watch(
 )
 const points = ref([])
 onUnmounted(() => {
+    bm.value && bm.value.clearResults()
     bm.value = null
 })
 defineExpose({

@@ -69,6 +69,9 @@ watch(
     val => {
         if (val) {
             bm.value = bindEvents(addBezierCurve(options.value), extractEmitEvents(attrs), emit)
+        } else {
+            bm.value && map.value?.removeOverlay(bm.value)
+            bm.value = null
         }
     },
     {
@@ -76,7 +79,7 @@ watch(
     }
 )
 onUnmounted(() => {
-    map.value?.removeOverlay(bm.value)
+    bm.value && map.value?.removeOverlay(bm.value)
     bm.value = null
 })
 defineExpose({

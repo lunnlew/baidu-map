@@ -4074,7 +4074,10 @@ declare namespace BaiduMapVue3 {
              * @param point
              */
             openInfoWindow(infoWindow: InfoWindow, point: Point): void
-
+            /**
+             * 关闭地图上打开的信息窗口
+             */
+            closeInfoWindow(): void
             /**
              * 添加事件监听函数
              * @param event
