@@ -41,6 +41,7 @@ watch(
     }
 )
 onUnmounted(() => {
+    bm.value?.close()
     bm.value = null
 })
 defineExpose({
