@@ -10,11 +10,11 @@ import { bindEvents, extractEmitEvents } from '../../utils/util'
 import { addMap, initMap } from '../../lib/map'
 const props = withDefaults(
     defineProps<{
-        apiKey: string
         center: {
             lng: number
             lat: number
         }
+        apiKey?: string
         zoom?: number
         enableRotate?: boolean
         enableTilt?: boolean
@@ -23,11 +23,11 @@ const props = withDefaults(
         onReady?: (state: any) => void
     }>(),
     {
-        apiKey: '',
         center: () => ({
             lng: 116.403963,
             lat: 116.403963,
         }),
+        apiKey: '',
         zoom: 13,
         enableRotate: true,
         enableTilt: true,
