@@ -6,9 +6,13 @@ import { BaiduMapProps, BMapGL } from 'types'
  */
 export const state = ref({
     /**
+     * 地图JS环境是否加载完成
+     */
+    map_loaded: false,
+    /**
      * 地图是否初始化完成
      */
-    inited: false,
+    map_inited: false,
     /**
      * 轨迹动画库是否初始化完成
      */
@@ -51,7 +55,7 @@ export function initMap(apiKey: string): Promise<{
     BMap: BMapGL.BMapGL | undefined
 }> {
     return new Promise((resolve, reject) => {
-        if (!state.value.inited || !BMapGLRef.value) {
+        if (!state.value.map_loaded || !BMapGLRef.value) {
             // @ts-ignore
             if (!globalThis.BMapGL) {
                 if (!apiKey) {
@@ -60,7 +64,7 @@ export function initMap(apiKey: string): Promise<{
                 // @ts-ignore
                 // 地图脚本加载完成后执行的初始化函数
                 globalThis.initializeMap = function () {
-                    state.value.inited = true
+                    state.value.map_loaded = true
                     // @ts-ignore
                     BMapGLRef.value = globalThis.BMapGL as BMapGL.BMapGL
                     resolve({
@@ -74,7 +78,7 @@ export function initMap(apiKey: string): Promise<{
                 }
                 document.body.appendChild(script)
             } else {
-                state.value.inited = true
+                state.value.map_loaded = true
                 // @ts-ignore
                 BMapGLRef.value = globalThis.BMapGL as BMapGL.BMapGL
                 resolve({
@@ -124,6 +128,7 @@ export function addMap(
             new BMapGLRef.value.Point(map_params.center.lng, map_params.center.lat),
             map_params.zoom
         )
+        state.value.map_inited = true
         return {
             BMap: BMapGLRef.value,
             map: map.value,
