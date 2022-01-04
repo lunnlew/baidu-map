@@ -73,7 +73,6 @@ body {
     font-size: 18px;
 }
 .code-snippet code {
-    width: 100%;
     padding: 10px;
     background-color: #f2f2f2;
 }
