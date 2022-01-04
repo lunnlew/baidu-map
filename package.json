@@ -14,8 +14,11 @@
     "url": "https://github.com/lunnlew/baidu-map.git"
   },
   "dependencies": {
+    "@highlightjs/vue-plugin": "^2.1.0",
     "baidu-map-vue3": "0.2.2",
-    "vue": "^3.2.26"
+    "highlight.js": "^11.3.1",
+    "vue": "^3.2.26",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@types/node": "^17.0.5",
