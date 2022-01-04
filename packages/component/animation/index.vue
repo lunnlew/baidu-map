@@ -23,12 +23,14 @@ const props = withDefaults(defineProps<{
     delay?: number,
     interation?: number | string,
     anchor?: number,
+    overallView?: boolean,
     show?: boolean,
 }>(), {
     keyFrames: () => [],
     duration: 10000,
     delay: 3000,
     interation: 2,
+    overallView: true,
     show: true,
 })
 const emit = defineEmits({})
