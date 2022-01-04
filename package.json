@@ -1,0 +1,28 @@
+{
+  "name": "baidu-map-vue3-guide",
+  "version": "0.0.1",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "scripts": {
+    "dev": "vite --host",
+    "build-guide": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "url": "https://github.com/lunnlew/baidu-map.git"
+  },
+  "dependencies": {
+    "baidu-map-vue3": "0.2.2",
+    "vue": "^3.2.26"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.5",
+    "@vitejs/plugin-vue": "^2.0.1",
+    "less": "^4.1.2",
+    "typescript": "^4.5.4",
+    "vite": "^2.7.3",
+    "vue-tsc": "^0.29.8"
+  }
+}
