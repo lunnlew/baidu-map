@@ -5,9 +5,9 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, watch } from 'vue'
-import { BMapGLRef, state } from '@/lib/map'
-import { addWalkingRoute } from '@/lib/tool'
-import { bindEvents, extractEmitEvents } from '@/utils/util'
+import { BMapGLRef, state } from '../../lib/map'
+import { addWalkingRoute } from '../../lib/tool'
+import { bindEvents, extractEmitEvents } from '../../utils/util'
 const props = withDefaults(
     defineProps<{
         location?:

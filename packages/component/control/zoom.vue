@@ -3,9 +3,9 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, watch } from 'vue'
-import { map, state } from '@/lib/map'
-import { addZoomControl } from '@/lib/control'
-import { bindEvents, extractEmitEvents } from '@/utils/util'
+import { map, state } from '../../lib/map'
+import { addZoomControl } from '../../lib/control'
+import { bindEvents, extractEmitEvents } from '../../utils/util'
 const props = withDefaults(
     defineProps<{
         anchor?: number
