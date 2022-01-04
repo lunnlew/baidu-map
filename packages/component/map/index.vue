@@ -46,7 +46,7 @@ onMounted(() => {
     initMap(container.value, merge_props)?.then(result => {
         let events = extractEmitEvents(attrs) as string[]
         // 启用了enableMapClick选项时，某些地图事件本身就有默认的事件处理，不需要再次注册，否则导致多次触发
-        bindEvents(
+        bm.value = bindEvents(
             result.map,
             events.filter((v: string) => !merge_props.enableMapClick || !['click', 'mousedown'].includes(v)),
             emit
@@ -66,6 +66,12 @@ watch(
     }
 )
 onUnmounted(() => {
+    if (bm.value) {
+        bm.value.clearOverlays()
+        bm.value.clearSpots()
+        bm.value.clearAreaSpots()
+        bm.value.destroy()
+    }
     bm.value = null
 })
 defineExpose({
