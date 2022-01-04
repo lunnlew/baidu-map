@@ -7,7 +7,7 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from "vue";
-import { state } from "@/lib/map";
+import { map, state } from "@/lib/map";
 import { addCustomControl } from "@/lib/control";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
@@ -48,7 +48,8 @@ watch(
     }
 );
 onUnmounted(() => {
-  bm.value = null
+    map.value?.removeControl(bm.value);
+    bm.value = null
 })
 defineExpose({
     bmobj: bm.value,

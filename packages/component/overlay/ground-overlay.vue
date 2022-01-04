@@ -5,7 +5,7 @@
 </template>
 <script setup lang="ts">
 import { useAttrs, useSlots, watch, computed, ref, onUnmounted } from "vue";
-import { state } from "@/lib/map";
+import { map, state } from "@/lib/map";
 import { addGroundOverlay } from "@/lib/overlay";
 import { mergePropsDefault, bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
@@ -70,10 +70,11 @@ watch(
   }
 );
 onUnmounted(() => {
+  map.value?.removeOverlay(bm.value);
   bm.value = null
 })
 defineExpose({
-    bmobj: bm.value,
+  bmobj: bm.value,
 })
 </script>
 <script lang="ts">

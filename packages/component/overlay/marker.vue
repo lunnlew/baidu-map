@@ -5,7 +5,7 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from "vue";
-import { state } from "@/lib/map";
+import { map, state } from "@/lib/map";
 import { addMaker } from "@/lib/overlay";
 import { mergePropsDefault, bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
@@ -47,7 +47,7 @@ watch(
   () => isShow.value,
   (val) => {
     if (val) {
-      let merge_props = {...options.value};
+      let merge_props = { ...options.value };
       if (slots.default) {
         let MarkerIcon = slots.default().find((s) => (s.type as any).name == "MarkerIcon");
         if (MarkerIcon) {
@@ -83,10 +83,11 @@ watch(
   }
 );
 onUnmounted(() => {
+  map.value?.removeOverlay(bm.value);
   bm.value = null
 })
 defineExpose({
-    bmobj: bm.value,
+  bmobj: bm.value,
 })
 </script>
 <script lang="ts">

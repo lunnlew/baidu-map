@@ -85,7 +85,7 @@ onUnmounted(() => {
   bm.value = null
 })
 defineExpose({
-    bmobj: bm.value,
+  bmobj: bm.value,
 })
 </script>
 <script lang="ts">

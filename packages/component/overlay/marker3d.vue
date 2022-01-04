@@ -5,7 +5,7 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from "vue";
-import { state } from "@/lib/map";
+import { map, state } from "@/lib/map";
 import { addMaker3D } from "@/lib/overlay";
 import { mergePropsDefault, bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
@@ -79,10 +79,11 @@ watch(
   }
 );
 onUnmounted(() => {
+  map.value?.removeOverlay(bm.value);
   bm.value = null
 })
 defineExpose({
-    bmobj: bm.value,
+  bmobj: bm.value,
 })
 </script>
 <script lang="ts">

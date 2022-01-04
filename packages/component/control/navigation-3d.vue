@@ -5,7 +5,7 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, watch } from "vue";
-import { state } from "@/lib/map";
+import { map, state } from "@/lib/map";
 import { addNavigationControl3D } from "@/lib/control";
 import { bindEvents, extractEmitEvents } from "@/utils/util";
 const props = withDefaults(defineProps<{
@@ -40,10 +40,11 @@ watch(
   }
 );
 onUnmounted(() => {
+  map.value?.removeControl(bm.value);
   bm.value = null
 })
 defineExpose({
-    bmobj: bm.value,
+  bmobj: bm.value,
 })
 </script>
 <script lang="ts">
