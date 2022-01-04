@@ -7,7 +7,7 @@
 import { computed, onMounted, onUnmounted, ref, useAttrs, watch } from 'vue'
 import BMapGL from '../../lib/BMapGL'
 import { bindEvents, extractEmitEvents } from '@/utils/util'
-import { initMap } from '@/lib/map'
+import { addMap, initMap } from '@/lib/map'
 const props = withDefaults(
     defineProps<{
         apiKey: string
@@ -43,11 +43,12 @@ const attrs = useAttrs()
 const options = computed(() => props)
 onMounted(() => {
     let merge_props = { ...options.value }
-    initMap(container.value, merge_props)?.then(result => {
+    initMap(merge_props.apiKey)?.then(() => {
         let events = extractEmitEvents(attrs) as string[]
         // 启用了enableMapClick选项时，某些地图事件本身就有默认的事件处理，不需要再次注册，否则导致多次触发
+        let result = addMap(container.value, merge_props)
         bm.value = bindEvents(
-            result.map,
+            result?.map,
             events.filter((v: string) => !merge_props.enableMapClick || !['click', 'mousedown'].includes(v)),
             emit
         )
