@@ -42,7 +42,7 @@ const attrs = useAttrs()
 const slots = useSlots()
 const emit = defineEmits({})
 const options = computed(() => props)
-const isShow = computed(() => state.value.inited && props.show)
+const isShow = computed(() => state.value.map_inited && props.show)
 const bm = ref()
 watch(
     () => isShow.value,

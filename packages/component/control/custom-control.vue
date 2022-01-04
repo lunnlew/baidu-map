@@ -28,7 +28,7 @@ const attrs = useAttrs()
 const slots = useSlots()
 const control = ref()
 const emit = defineEmits({})
-const isShow = computed(() => state.value.inited && props.show)
+const isShow = computed(() => state.value.map_inited && props.show)
 const options = computed(() => props)
 const bm = ref()
 watch(
