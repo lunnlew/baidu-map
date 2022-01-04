@@ -41,6 +41,14 @@ const slots = useSlots()
 const isShow = computed(() => state.value.inited && props.show && props.points.length > 0)
 const options = computed(() => props)
 const bm = ref()
+function clear() {
+    if (bm.value) {
+        bm.value.animation.stop()
+        bm.value.animation = null
+        bm.value.clearOverlays()
+        bm.value = null
+    }
+}
 watch(
     () => isShow.value,
     val => {
@@ -64,10 +72,11 @@ watch(
         }
         if (val) {
             initLushu().then(result => {
-                bm.value = bindEvents(addLushu(merge_props), extractEmitEvents(attrs), emit)
+                bm.value = addLushu(merge_props)
+                bindEvents(bm.value.animation, extractEmitEvents(attrs), emit)
             })
         } else {
-            bm.value && bm.value?.stop()
+            clear()
         }
     },
     {
@@ -78,20 +87,19 @@ watch(
     () => props.speed,
     val => {
         bm.value &&
-            bm.value?._setOptions({
+            bm.value?.animation._setOptions({
                 speed: val,
             })
     }
 )
 onUnmounted(() => {
-    bm.value && bm.value.stop()
-    bm.value = null
+    clear()
 })
 defineExpose({
-    bmobj: bm.value,
-    start: () => bm.value && bm.value?.start(),
-    stop: () => bm.value && bm.value?.stop(),
-    pause: () => bm.value && bm.value?.pause(),
+    bmobj: bm.value?.animation,
+    start: () => bm.value && bm.value?.animation.start(),
+    stop: () => bm.value && bm.value?.animation.stop(),
+    pause: () => bm.value && bm.value?.animation.pause(),
 })
 </script>
 <script lang="ts">
