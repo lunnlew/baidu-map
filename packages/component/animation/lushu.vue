@@ -8,6 +8,7 @@ import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { state } from '../../lib/map'
 import { addLushu, initLushu } from '../../lib/animation'
 import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/util'
+import BaiduMapVue3 from '../../../types'
 const props = withDefaults(
     defineProps<{
         points?: {
@@ -40,10 +41,13 @@ const attrs = useAttrs()
 const slots = useSlots()
 const isShow = computed(() => state.value.map_inited && props.show && props.points.length > 0)
 const options = computed(() => props)
-const bm = ref()
+const bm = ref<{
+    animation: BaiduMapVue3.BMapGL.LushuAnimation | null
+    clearOverlays: Function
+} | null>()
 function clear() {
     if (bm.value) {
-        bm.value.animation.stop()
+        bm.value.animation?.stop()
         bm.value.animation = null
         bm.value.clearOverlays()
         bm.value = null
@@ -73,7 +77,7 @@ watch(
         if (val) {
             initLushu().then(result => {
                 bm.value = addLushu(merge_props)
-                bindEvents(bm.value.animation, extractEmitEvents(attrs), emit)
+                bindEvents(bm.value?.animation, extractEmitEvents(attrs), emit)
             })
         } else {
             clear()
@@ -87,7 +91,7 @@ watch(
     () => props.speed,
     val => {
         bm.value &&
-            bm.value?.animation._setOptions({
+            bm.value?.animation?._setOptions({
                 speed: val,
             })
     }
@@ -97,9 +101,9 @@ onUnmounted(() => {
 })
 defineExpose({
     bmobj: bm.value?.animation,
-    start: () => bm.value && bm.value?.animation.start(),
-    stop: () => bm.value && bm.value?.animation.stop(),
-    pause: () => bm.value && bm.value?.animation.pause(),
+    start: () => bm.value && bm.value?.animation?.start(),
+    stop: () => bm.value && bm.value?.animation?.stop(),
+    pause: () => bm.value && bm.value?.animation?.pause(),
 })
 </script>
 <script lang="ts">

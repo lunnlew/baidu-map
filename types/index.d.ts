@@ -3192,6 +3192,11 @@ declare namespace BaiduMapVue3 {
              */
             constructor(point: Point, height: number, opts: Marker3DOptions)
             /**
+             * 设置标注的地理坐标
+             * @param position
+             */
+            setPosition(position: Point): void
+            /**
              * 添加事件监听函数
              * @param event
              * @param handler
@@ -3594,31 +3599,31 @@ declare namespace BaiduMapVue3 {
             /**
              * 信息窗口文案
              */
-            defaultContent: string
+            defaultContent?: string
             /**
              * 是否开启自动视野调整，如果开启那么路书在运动过程中会根据视野自动调整
              */
-            autoView: boolean
+            autoView?: boolean
             /**
              * 速度
              */
-            speed: number
+            speed?: number
             /**
              * 图标
              */
-            icon: Icon
+            icon?: Icon
             /**
              * 是否设置marker随着道路的走向进行旋转
              */
-            enableRotation: boolean
+            enableRotation?: boolean
             /**
              * 是否大地线
              */
-            geodesic: boolean
+            geodesic?: boolean
             /**
              * 是否自动地图中心
              */
-            autoCenter: boolean
+            autoCenter?: boolean
         }
 
         /**
@@ -3647,7 +3652,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 设置属性
              */
-            _setOptions(opts: LushuAnimationOptions): void
+            _setOptions(opt?: LushuAnimationOptions): void
         }
 
         type DistanceToolEvent = 'drawend' | 'addpoint' | 'removepolyline'

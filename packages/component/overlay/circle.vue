@@ -5,9 +5,10 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, watch } from 'vue'
-import { map, state } from '../../lib/map'
+import { BMapGLRef, map, state } from '../../lib/map'
 import { addCircle } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
+import BaiduMapVue3 from '../../../types'
 const props = withDefaults(
     defineProps<{
         center: {
@@ -46,7 +47,7 @@ const props = withDefaults(
 )
 const attrs = useAttrs()
 const emit = defineEmits({})
-const bm = ref()
+const bm = ref<BaiduMapVue3.BMapGL.Circle | null>()
 const isShow = computed(() => state.value.map_inited && props.show)
 const options = computed(() => props)
 watch(
@@ -66,8 +67,8 @@ watch(
 watch(
     () => props.center,
     val => {
-        if (bm.value) {
-            bm.value.setCenter(val)
+        if (bm.value && BMapGLRef.value) {
+            bm.value.setCenter(new BMapGLRef.value.Point(val.lng, val.lat))
         }
     },
     {
