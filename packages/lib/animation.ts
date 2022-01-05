@@ -168,9 +168,9 @@ export function addLushu(
     } & Required<BmLushuAnimationProps>
 ):
     | {
-          animation: BMapGL.LushuAnimation
-          clearOverlays: Function
-      }
+        animation: BMapGL.LushuAnimation | null
+        clearOverlays: Function
+    }
     | undefined {
     if (BMapGLRef.value && map.value && BMapGLLibRef.value) {
         let animation_options = {} as {

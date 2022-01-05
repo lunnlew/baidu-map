@@ -5,9 +5,10 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
-import { map, state } from '../../lib/map'
+import { BMapGLRef, map, state } from '../../lib/map'
 import { addMaker } from '../../lib/overlay'
 import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
+import BaiduMapVue3 from '../../../types'
 const props = withDefaults(
     defineProps<{
         point: {
@@ -43,7 +44,7 @@ const props = withDefaults(
 const attrs = useAttrs()
 const slots = useSlots()
 const emit = defineEmits({})
-const bm = ref()
+const bm = ref<BaiduMapVue3.BMapGL.Marker | null>()
 const isShow = computed(() => state.value.map_inited && props.show)
 const options = computed(() => props)
 watch(
@@ -73,8 +74,8 @@ watch(
 watch(
     () => props.point,
     val => {
-        if (bm.value) {
-            bm.value.setPosition(val)
+        if (bm.value && BMapGLRef.value) {
+            bm.value.setPosition(new BMapGLRef.value.Point(val.lng, val.lat))
         }
     },
     {

@@ -8,6 +8,7 @@ import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { state } from '../../lib/map'
 import { addTrackAnimation, initTrackAnimation } from '../../lib/animation'
 import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/util'
+import BaiduMapVue3 from '../../../types'
 const props = withDefaults(
     defineProps<{
         points?: {
@@ -34,7 +35,7 @@ const attrs = useAttrs()
 const slots = useSlots()
 const isShow = computed(() => state.value.map_inited && props.show && props.points.length > 0)
 const options = computed(() => props)
-const bm = ref()
+const bm = ref<BaiduMapVue3.BMapGL.TrackAnimation | null>()
 watch(
     () => isShow.value,
     val => {

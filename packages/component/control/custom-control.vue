@@ -10,6 +10,7 @@ import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { map, state } from '../../lib/map'
 import { addCustomControl } from '../../lib/control'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
+import BaiduMapVue3 from '../../../types'
 const props = withDefaults(
     defineProps<{
         dom?: HTMLElement
@@ -30,7 +31,7 @@ const control = ref()
 const emit = defineEmits({})
 const isShow = computed(() => state.value.map_inited && props.show)
 const options = computed(() => props)
-const bm = ref()
+const bm = ref<BaiduMapVue3.BMapGL.Control | null>()
 watch(
     () => isShow.value,
     val => {

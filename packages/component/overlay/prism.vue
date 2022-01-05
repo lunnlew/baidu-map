@@ -8,6 +8,7 @@ import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { map, state } from '../../lib/map'
 import { addPrism } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
+import BaiduMapVue3 from '../../../types'
 const props = withDefaults(
     defineProps<{
         points?: {
@@ -40,7 +41,7 @@ const slots = useSlots()
 const emit = defineEmits([])
 const options = computed(() => props)
 const isShow = computed(() => state.value.map_inited && props.show && props.points.length > 0)
-const bm = ref()
+const bm = ref<BaiduMapVue3.BMapGL.Prism | null>()
 watch(
     () => isShow.value,
     val => {

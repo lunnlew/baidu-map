@@ -8,6 +8,7 @@ import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { map, state } from '../../lib/map'
 import { addCityBoundary } from '../../lib/overlay'
 import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
+import BaiduMapVue3 from '../../../types'
 const props = withDefaults(
     defineProps<{
         name: string
@@ -25,7 +26,10 @@ const slots = useSlots()
 const emit = defineEmits({})
 const options = computed(() => props)
 const isShow = computed(() => state.value.map_inited && props.show)
-const bm = ref()
+const bm = ref<{
+    boundary: BaiduMapVue3.BMapGL.Boundary | null
+    overlay: BaiduMapVue3.BMapGL.Overlay | null
+} | null>()
 watch(
     () => isShow.value,
     async val => {
@@ -42,10 +46,10 @@ watch(
                 }
             }
             bm.value = await addCityBoundary(options.value.name, merge_props)
-            bindEvents(bm.value.boundary, extractEmitEvents(attrs), emit)
+            bindEvents(bm.value?.boundary, extractEmitEvents(attrs), emit)
         } else {
             if (bm.value) {
-                map.value?.removeOverlay(bm.value.overlay)
+                map.value?.removeOverlay(bm.value?.overlay as BaiduMapVue3.BMapGL.Overlay)
                 bm.value.boundary = null
                 bm.value.overlay = null
                 bm.value = null
@@ -58,7 +62,7 @@ watch(
 )
 onUnmounted(() => {
     if (bm.value) {
-        map.value?.removeOverlay(bm.value.overlay)
+        map.value?.removeOverlay(bm.value?.overlay as BaiduMapVue3.BMapGL.Overlay)
         bm.value.boundary = null
         bm.value.overlay = null
         bm.value = null

@@ -8,6 +8,7 @@ import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { map, state } from '../../lib/map'
 import { addContextMenu } from '../../lib/overlay'
 import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
+import BaiduMapVue3 from '../../../types'
 const props = withDefaults(
     defineProps<{
         show?: boolean
@@ -21,7 +22,7 @@ const slots = useSlots()
 const emit = defineEmits({})
 const isShow = computed(() => state.value.map_inited && props.show)
 const options = computed(() => props)
-const bm = ref()
+const bm = ref<BaiduMapVue3.BMapGL.ContextMenu | null>()
 watch(
     () => isShow.value,
     val => {

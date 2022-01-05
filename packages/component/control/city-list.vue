@@ -8,6 +8,7 @@ import { watch, computed, useAttrs, ref, onUnmounted } from 'vue'
 import { map, state } from '../../lib/map'
 import { addCityListControl } from '../../lib/control'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
+import BaiduMapVue3 from '../../../types'
 const props = withDefaults(
     defineProps<{
         anchor?: number
@@ -24,7 +25,7 @@ const attrs = useAttrs()
 const emit = defineEmits({})
 const isShow = computed(() => state.value.map_inited && props.show)
 const options = computed(() => props)
-const bm = ref()
+const bm = ref<BaiduMapVue3.BMapGL.CityListControl | null>()
 watch(
     () => isShow.value,
     val => {
