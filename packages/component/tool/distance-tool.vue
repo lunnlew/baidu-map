@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, watch } from 'vue'
 import { state } from '../../lib/map'
-import { addDistanceTool, initDistanceTool } from '../../lib/animation'
+import { addDistanceTool, initDistanceTool } from '../../lib/tool'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(

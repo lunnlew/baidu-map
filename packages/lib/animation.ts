@@ -55,7 +55,7 @@ export function initTrackAnimation(): Promise<{
     return new Promise((resolve, reject) => {
         if (!state.value.track_animation_lib_inited) {
             let script = document.createElement('script')
-            script.src = `https://api.map.baidu.com/library/TrackAnimation/src/TrackAnimation_min.js`
+            script.src = `//api.map.baidu.com/library/TrackAnimation/src/TrackAnimation_min.js`
             script.onerror = function () {
                 reject(new Error('BMap script load failed'))
             }
@@ -134,7 +134,7 @@ export function initLushu(): Promise<{
     return new Promise((resolve, reject) => {
         if (!state.value.lushu_animation_lib_inited) {
             let script = document.createElement('script')
-            script.src = `https://bj.bcebos.com/v1/mapopen/github/BMapGLLib/Lushu/src/Lushu.min.js`
+            script.src = `//bj.bcebos.com/v1/mapopen/github/BMapGLLib/Lushu/src/Lushu.min.js`
             script.onerror = function () {
                 reject(new Error('BMap script load failed'))
             }
@@ -248,53 +248,5 @@ export function addLushu(
                 map.value?.removeOverlay(overlay)
             },
         }
-    }
-}
-
-/**
- * 初始化测距工具库
- */
-export function initDistanceTool(): Promise<{
-    BMapGLLib: BMapGL.BMapGLLib | undefined
-}> {
-    return new Promise((resolve, reject) => {
-        if (!state.value.distanc_tool_lib_inited) {
-            let script = document.createElement('script')
-            script.src = `https://mapopen.cdn.bcebos.com/github/BMapGLLib/DistanceTool/src/DistanceTool.min.js`
-            script.onerror = function () {
-                reject(new Error('BMap script load failed'))
-            }
-            script.onload = function (this: any) {
-                if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') {
-                    // @ts-ignore
-                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGL.BMapGLLib
-                    state.value.distanc_tool_lib_inited = true
-                    resolve({
-                        BMapGLLib: BMapGLLibRef.value,
-                    })
-                }
-                script.onload = null
-            }
-            document.body.appendChild(script)
-        } else {
-            resolve({
-                BMapGLLib: BMapGLLibRef.value,
-            })
-        }
-    })
-}
-
-/**
- * 添加测距工具库
- * @param tool_params
- */
-export function addDistanceTool(
-    tool_params: {
-        [key: string]: any
-    } & Required<BmDistanceToolProps>
-): BMapGL.DistanceTool | undefined {
-    if (BMapGLRef.value && map.value && BMapGLLibRef.value) {
-        let tool = new BMapGLLibRef.value.DistanceTool(map.value)
-        return tool
     }
 }

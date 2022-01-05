@@ -1,5 +1,5 @@
-import { BMapGL, BmDrivingRouteProps, BmRidingRouteProps, BmTransitRouteProps, BmWalkingRouteProps } from 'typings'
-import { BMapGLRef, map } from './map'
+import { BMapGL, BmDistanceToolProps, BmDrawingManagerProps, BmDrivingRouteProps, BmRidingRouteProps, BmTransitRouteProps, BmWalkingRouteProps } from 'typings'
+import { BMapGLLibRef, BMapGLRef, map, state } from './map'
 
 /**
  * 添加驾驶线路规划
@@ -162,5 +162,108 @@ export function addRidingRoute(
         }
         let dr = new BMapGLRef.value.RidingRoute(options.location, options)
         return dr
+    }
+}
+
+/**
+ * 初始化测距工具库
+ */
+export function initDistanceTool(): Promise<{
+    BMapGLLib: BMapGL.BMapGLLib | undefined
+}> {
+    return new Promise((resolve, reject) => {
+        if (!state.value.distance_tool_lib_inited) {
+            let script = document.createElement('script')
+            script.src = `//mapopen.cdn.bcebos.com/github/BMapGLLib/DistanceTool/src/DistanceTool.min.js`
+            script.onerror = function () {
+                reject(new Error('BMap script load failed'))
+            }
+            script.onload = function (this: any) {
+                if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') {
+                    // @ts-ignore
+                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGL.BMapGLLib
+                    state.value.distance_tool_lib_inited = true
+                    resolve({
+                        BMapGLLib: BMapGLLibRef.value,
+                    })
+                }
+                script.onload = null
+            }
+            document.body.appendChild(script)
+        } else {
+            resolve({
+                BMapGLLib: BMapGLLibRef.value,
+            })
+        }
+    })
+}
+
+/**
+ * 添加测距工具库
+ * @param tool_params
+ */
+export function addDistanceTool(
+    tool_params: {
+        [key: string]: any
+    } & Required<BmDistanceToolProps>
+): BMapGL.DistanceTool | undefined {
+    if (BMapGLRef.value && map.value && BMapGLLibRef.value) {
+        let tool = new BMapGLLibRef.value.DistanceTool(map.value)
+        return tool
+    }
+}
+
+/**
+ * 初始化绘制工具库
+ */
+export function initDrawingManager(): Promise<{
+    BMapGLLib: BMapGL.BMapGLLib | undefined
+}> {
+    return new Promise((resolve, reject) => {
+        if (!state.value.drawing_tool_lib_inited) {
+            var style = document.createElement('link');
+            style.href = '//mapopen.cdn.bcebos.com/github/BMapGLLib/DrawingManager/src/DrawingManager.min.css';
+            style.rel = 'stylesheet';
+            style.type = 'text/css';
+            document.getElementsByTagName('HEAD')?.item(0)?.appendChild(style);
+
+
+            let script = document.createElement('script')
+            script.src = `//mapopen.cdn.bcebos.com/github/BMapGLLib/DrawingManager/src/DrawingManager.min.js`
+            script.onerror = function () {
+                reject(new Error('BMap script load failed'))
+            }
+            script.onload = function (this: any) {
+                if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') {
+                    // @ts-ignore
+                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGL.BMapGLLib
+                    state.value.drawing_tool_lib_inited = true
+                    resolve({
+                        BMapGLLib: BMapGLLibRef.value,
+                    })
+                }
+                script.onload = null
+            }
+            document.body.appendChild(script)
+        } else {
+            resolve({
+                BMapGLLib: BMapGLLibRef.value,
+            })
+        }
+    })
+}
+
+/**
+ * 添加测距工具库
+ * @param tool_params
+ */
+export function addDrawingManager(
+    tool_params: {
+        [key: string]: any
+    } & Required<BmDrawingManagerProps>
+): BMapGL.DrawingManager | undefined {
+    if (BMapGLRef.value && map.value && BMapGLLibRef.value) {
+        let tool = new BMapGLLibRef.value.DrawingManager(map.value)
+        return tool
     }
 }
