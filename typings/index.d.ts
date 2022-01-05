@@ -562,6 +562,10 @@ declare namespace BaiduMapVue3 {
          * 是否显示
          */
         show?: boolean
+        /**
+         * 是否预先加载区域数据
+         */
+        firstLoad?: boolean
     }
     export const BmCityBoundary: ComponentPublicInstance<BmCityBoundaryProps>
 
