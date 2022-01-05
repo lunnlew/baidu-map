@@ -951,6 +951,80 @@ declare namespace BaiduMapVue3 {
      */
     export const BmDistanceTool: ComponentPublicInstance<BmDistanceToolProps>
 
+    interface DrawingStyleOptions {
+        /**
+         * 边线颜色
+         */
+        strokeColor?: string,
+        /**
+         * 填充颜色。当参数为空时，圆形没有填充颜色
+         */
+        fillColor?: string,
+        /**
+         * 边线宽度，以像素为单位
+         */
+        strokeWeight?: number,
+        /**
+         * 边线透明度，取值范围0-1
+         */
+        strokeOpacity?: number,
+        /**
+         * 填充透明度，取值范围0-1
+         */
+        fillOpacity?: number
+    }
+
+    interface DrawingLabelOptions { }
+
+    interface BmDrawingManagerProps {
+        /**
+         * 是否开启绘制模式
+         */
+        isOpen?: boolean
+        /**
+         * 绘制是否进行测距测面
+         */
+        enableCalculate?: boolean
+        /**
+         * 是否开启边界吸附功能
+         */
+        enableSorption?: boolean
+        /**
+         * 边界吸附距离
+         */
+        sorptiondistance?: number
+        /**
+         * 圆的样式
+         */
+        circleOptions?: DrawingStyleOptions
+        /**
+         * 线的样式
+         */
+        polylineOptions?: DrawingStyleOptions
+        /**
+         * 多边形的样式
+         */
+        polygonOptions?: DrawingStyleOptions
+        /**
+         * 矩形的样式
+         */
+        rectangleOptions?: DrawingStyleOptions
+        /**
+         * label样式
+         */
+        labelOptions?: DrawingLabelOptions
+        /**
+         * 是否显示
+         */
+        show?: boolean
+    }
+
+    /**
+     * 绘制工具
+     */
+    export const BmDrawingManager: ComponentPublicInstance<BmDrawingManagerProps>
+
+
     interface BmBezierCurveProps {
         /**
          * 轨迹点
@@ -1509,6 +1583,17 @@ declare namespace BaiduMapVue3 {
              * 此地图类型展示普通街道视图
              */
             BMAP_STREET_MAP = 'B_STREET_MAP',
+        }
+
+        /**
+         * DrawingManager 绘制类型
+         */
+        enum DrawingType {
+            BMAP_DRAWING_MARKER = "marker",
+            BMAP_DRAWING_POLYLINE = "polyline",
+            BMAP_DRAWING_RECTANGLE = "rectangle",
+            BMAP_DRAWING_POLYGON = "polygon",
+            BMAP_DRAWING_CIRCLE = "circle"
         }
 
         /**
@@ -3678,6 +3763,38 @@ declare namespace BaiduMapVue3 {
              * 关闭
              */
             close(): void
+        }
+
+        /**
+         * 地图绘制工具类。
+         */
+        class DrawingManager {
+            /**
+             * 创建一个地图绘制工具对象
+             * @param bmap
+             */
+            constructor(bmap: Map)
+            /**
+             * 启动
+             */
+            open(): void
+            /**
+             * 关闭
+             */
+            close(): void
+            /**
+             * 设置绘制模式
+             * @param mode
+             */
+            setDrawingMode(mode: string): void
+            /**
+             * 获取绘制模式
+             */
+            getDrawingMode(): string
+            /**
+             * 是否开启
+             */
+            _isOpen: boolean
         }
 
         /**
@@ -6564,6 +6681,11 @@ declare namespace BaiduMapVue3 {
              * @param bmap
              */
             DistanceTool: { new(bmap: Map): DistanceTool }
+            /**
+             * 创建一个地图绘制工具对象
+             * @param bmap
+             */
+            DrawingManager: { new(bmap: Map): DrawingManager }
         }
 
         type AllBMapGLType = keyof BMapGL.BMapGL

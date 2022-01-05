@@ -1,10 +1,11 @@
 <template>
     <div ref="container">
+        <div ref="mapView" class="mapView"></div>
         <slot></slot>
     </div>
 </template>
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, useAttrs, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import BMapGL from '../../lib/BMapGL'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import { addMap, BMapGLRef, initMap } from '../../lib/map'
@@ -109,13 +110,22 @@ const emit = defineEmits({})
 const bm = ref<BaiduMapVue3.BMapGL.Map | null>()
 const container = ref()
 const attrs = useAttrs()
+const slots = useSlots()
 const options = computed(() => props)
+const mapView = ref()
 onMounted(() => {
     let merge_props = { ...options.value }
     initMap(merge_props.apiKey)?.then(() => {
         let events = extractEmitEvents(attrs) as string[]
+        let map_dom = container.value
+        if (slots.default) {
+            let MapView = slots.default().find(s => (s.type as any).name == 'MapView')
+            if (MapView) {
+                map_dom = mapView.value
+            }
+        }
         // 启用了enableMapClick选项时，某些地图事件本身就有默认的事件处理，不需要再次注册，否则导致多次触发
-        let result = addMap(container.value, merge_props)
+        let result = addMap(map_dom, merge_props)
         // "on" + e + "_changed"
         bm.value = bindEvents(
             result?.map,
@@ -375,3 +385,9 @@ export default {
     name: 'BaiduMap',
 }
 </script>
+<style lang="less" scoped>
+.mapView {
+    width: 100%;
+    height: 100%;
+}
+</style>

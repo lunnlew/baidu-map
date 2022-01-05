@@ -1,5 +1,7 @@
-import BaiduMap from './component/map/index.vue'
 import BMapGL from './lib/BMapGL'
+
+import BaiduMap from './component/map/index.vue'
+import BmView from './component/map/view.vue'
 
 import BmScaleControl from './component/control/scale.vue'
 import BmZoomControl from './component/control/zoom.vue'
@@ -32,6 +34,7 @@ import BmViewAnimation from './component/animation/index.vue'
 import BmTrackAnimation from './component/animation/track.vue'
 import BmLushu from './component/animation/lushu.vue'
 import BmDistanceTool from './component/tool/distance-tool.vue'
+import BmDrawingManager from './component/tool/drawing-manager.vue'
 import BmDrivingRoute from './component/tool/driving-route.vue'
 import BmTransitRoute from './component/tool/transit-route.vue'
 import BmWalkingRoute from './component/tool/walking-route.vue'
@@ -43,6 +46,7 @@ import BmRidingRoute from './component/tool/riding-route.vue'
 export {
     BMapGL,
     BaiduMap,
+    BmView,
     /**
      * 地图控件
      */
@@ -84,6 +88,7 @@ export {
      * 地图工具
      */
     BmDistanceTool,
+    BmDrawingManager,
     BmDrivingRoute,
     BmTransitRoute,
     BmWalkingRoute,
@@ -122,6 +127,7 @@ const bm = {
         app.component('bm-track-animation', BmTrackAnimation)
         app.component('bm-lushu', BmLushu)
         app.component('bm-distance-tool', BmDistanceTool)
+        app.component('bm-drawing-manager', BmDrawingManager)
         app.component('bm-driving-route', BmDrivingRoute)
         app.component('bm-transit-route', BmTransitRoute)
         app.component('bm-walking-route', BmWalkingRoute)

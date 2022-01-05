@@ -24,7 +24,11 @@ export const state = ref({
     /**
      *测距工具库是否初始化完成
      */
-    distanc_tool_lib_inited: false,
+    distance_tool_lib_inited: false,
+    /**
+     *绘制工具库是否初始化完成
+     */
+    drawing_tool_lib_inited: false,
 })
 
 /**
@@ -72,7 +76,7 @@ export function initMap(apiKey: string): Promise<{
                     })
                 }
                 let script = document.createElement('script')
-                script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${apiKey}&callback=initializeMap`
+                script.src = `//api.map.baidu.com/api?v=1.0&type=webgl&ak=${apiKey}&callback=initializeMap`
                 script.onerror = function () {
                     reject(new Error('BMap script load failed'))
                 }
