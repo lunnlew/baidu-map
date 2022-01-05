@@ -28,17 +28,21 @@
             <button @click="toggleNavigationControl">{{ toggleNavigationControlText }}</button>
             <button @click="toggleNavigationThreeControl">{{ toggleNavigationThreeControlText }}</button>
             <button @click="toggleCityBoundary">{{ toggleCityBoundaryText }}</button>
+            <button @click="togglePolygon">{{ togglePolygonText }}</button>
+            <button @click="togglePolyline">{{ togglePolylineText }}</button>
+            <button @click="toggleCircle">{{ toggleCircleText }}</button>
         </div>
         <baidu-map
             class="map"
             ref="map"
             :apiKey="'z7ngXdkrDCY1oFfaFLxyvL6UtiXu0f88'"
             :center="point"
-            :zoom="zoom"
+            :zoom="zoomVal"
             :zoomCenter="zoomCenter"
             :enableMapClick="true"
             :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
             @zoom_changed="zoomChange"
+            @center_changed="centerChange"
         >
             <bm-marker :point="point" :show="isShowMaker" @click="isShowMakerInfo = !isShowMakerInfo">
                 <bm-marker-icon :size="[23, 25]" :anchor="[10, 15]" :imageOffset="[0, 0]"></bm-marker-icon>
@@ -100,6 +104,14 @@
                 :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
                 :offset="[60, 60]"
             ></bm-city-boundary>
+            <bm-polygon :points="points" :overallView="true" :show="isShowPolygon" @click="onPolygonClick"></bm-polygon>
+            <bm-polyline
+                :points="points"
+                :overallView="true"
+                :show="isShowPolyline"
+                @click="onPolylineClick"
+            ></bm-polyline>
+            <bm-circle :center="point" :radius="1000" :show="isShowCircle" @click="onCircleClick"></bm-circle>
         </baidu-map>
     </div>
 </template>
@@ -127,21 +139,57 @@ const center = ref({
     lng: 116.403963,
     lat: 39.915119,
 })
-const point = ref(center.value)
 const zoom = ref(13)
 const zoomCenter = ref({
     lng: 116.403963,
     lat: 39.915119,
 })
+const points = ref([
+    {
+        lng: 116.297611,
+        lat: 40.047363,
+    },
+    {
+        lng: 116.302839,
+        lat: 40.048219,
+    },
+    {
+        lng: 116.308301,
+        lat: 40.050566,
+    },
+    {
+        lng: 116.305732,
+        lat: 40.054957,
+    },
+    {
+        lng: 116.304754,
+        lat: 40.057953,
+    },
+    {
+        lng: 116.306487,
+        lat: 40.058312,
+    },
+    {
+        lng: 116.307223,
+        lat: 40.056379,
+    },
+])
+
+const point = ref(center.value)
+const zoomVal = ref(zoom.value)
+
 function zoomChange(e: any) {
-    zoom.value = e.target.getZoom()
+    zoomVal.value = e.target.getZoom()
+}
+function centerChange(e: any) {
+    center.value = e.target.getCenter()
 }
 
 const backCenter = function () {
     point.value = center.value
     setTimeout(() => {
         zoomCenter.value = center.value
-        zoom.value = 13
+        zoomVal.value = zoom.value
     }, 1000)
 }
 
@@ -216,6 +264,33 @@ const isShowCityBoundary = ref(false)
 const toggleCityBoundaryText = computed(() => (isShowCityBoundary.value ? '隐藏城市边界' : '显示城市边界'))
 const toggleCityBoundary = function () {
     isShowCityBoundary.value = !isShowCityBoundary.value
+}
+
+const isShowPolygon = ref(false)
+const togglePolygonText = computed(() => (isShowPolygon.value ? '隐藏多边形' : '显示多边形'))
+const togglePolygon = function () {
+    isShowPolygon.value = !isShowPolygon.value
+}
+function onPolygonClick(e: any) {
+    isShowPolygon.value = false
+}
+
+const isShowPolyline = ref(false)
+const togglePolylineText = computed(() => (isShowPolyline.value ? '隐藏折线' : '显示折线'))
+const togglePolyline = function () {
+    isShowPolyline.value = !isShowPolyline.value
+}
+function onPolylineClick(e: any) {
+    isShowPolygon.value = false
+}
+
+const isShowCircle = ref(false)
+const toggleCircleText = computed(() => (isShowCircle.value ? '隐藏圆形' : '显示圆形'))
+const toggleCircle = function () {
+    isShowCircle.value = !isShowCircle.value
+}
+function onCircleClick(e: any) {
+    isShowCircle.value = false
 }
 </script>
 <style lang="less">
