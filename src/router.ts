@@ -7,6 +7,14 @@ const routes = [
         meta: {
             title: "开始使用"
         }
+    },
+    {
+        path: "/map",
+        name: "map",
+        component: () => import(/* webpackChunkName: "home" */ './views/Map.vue'),
+        meta: {
+            title: "展示地图"
+        }
     }
 ]
 const router = createRouter({

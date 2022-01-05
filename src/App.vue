@@ -81,6 +81,7 @@ body {
     box-sizing: border-box;
     button {
         margin-left: 10px;
+        margin-top: 10px;
     }
 }
 </style>

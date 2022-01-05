@@ -1,0 +1,3 @@
+npm install --save baidu-map-vue3
+// 或者
+yarn add baidu-map-vue3

@@ -29,7 +29,7 @@ const menus = ref<
     }[]
 >()
 function handleClick(item: { icon: string; title: string }) {
-    console.log(item)
+    router.push(item.path)
 }
 onMounted(() => {
     menus.value = router.options.routes.map(item => {

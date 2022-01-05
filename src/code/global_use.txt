@@ -1,0 +1,7 @@
+import { createApp } from 'vue'
+import App from './App.vue'
+import BaiduMapVue3 from 'baidu-map-vue3'
+
+const app = createApp(App)
+app.use(BaiduMapVue3)
+app.mount('#app')
