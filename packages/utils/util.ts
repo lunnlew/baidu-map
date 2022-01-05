@@ -44,7 +44,8 @@ interface AllEventMap {
     ScaleControl: BMapGL.ScaleControlEvent
     MapTypeControl: BMapGL.MapTypeControlEvent
     ViewAnimation: BMapGL.ViewAnimationEvent
-    DistanceTool: BMapGL.DistanceToolEvent
+    DistanceTool: BMapGL.DistanceToolEvent,
+    DrawingManager: BMapGL.DrawingManagerEvent,
 }
 type AllEvent = keyof AllEventMap
 type OnBMapGLEventPayload<T extends AllEvent> = AllEventMap[T]
