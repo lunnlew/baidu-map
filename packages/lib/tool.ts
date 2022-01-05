@@ -1,4 +1,4 @@
-import { BMapGL, BmDistanceToolProps, BmDrawingManagerProps, BmDrivingRouteProps, BmRidingRouteProps, BmTransitRouteProps, BmWalkingRouteProps } from 'typings'
+import { BMapGL, BmDistanceToolProps, BmDrawingManagerProps, BmDrivingRouteProps, BmRichMarkerProps, BmRidingRouteProps, BmTransitRouteProps, BmWalkingRouteProps } from 'typings'
 import { BMapGLLibRef, BMapGLRef, map, state } from './map'
 
 /**
@@ -264,6 +264,58 @@ export function addDrawingManager(
 ): BMapGL.DrawingManager | undefined {
     if (BMapGLRef.value && map.value && BMapGLLibRef.value) {
         let tool = new BMapGLLibRef.value.DrawingManager(map.value)
+        return tool
+    }
+}
+
+/**
+ * 初始化富文本标记库
+ */
+export function initRichMarker(): Promise<{
+    BMapGLLib: BMapGL.BMapGLLib | undefined
+}> {
+    return new Promise((resolve, reject) => {
+        if (!state.value.richmarker_lib_inited) {
+            let script = document.createElement('script')
+            script.src = `//mapopen.bj.bcebos.com/github/BMapGLLib/RichMarker/src/RichMarker.min.js`
+            script.onerror = function () {
+                reject(new Error('BMap script load failed'))
+            }
+            script.onload = function (this: any) {
+                if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') {
+                    // @ts-ignore
+                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGL.BMapGLLib
+                    state.value.richmarker_lib_inited = true
+                    resolve({
+                        BMapGLLib: BMapGLLibRef.value,
+                    })
+                }
+                script.onload = null
+            }
+            document.body.appendChild(script)
+        } else {
+            resolve({
+                BMapGLLib: BMapGLLibRef.value,
+            })
+        }
+    })
+}
+
+/**
+ * 添加富文本标记库
+ * @param tool_params
+ */
+export function addRichMarker(
+    tool_params: {
+        [key: string]: any
+    } & Required<BmRichMarkerProps>
+): BMapGL.RichMarker | undefined {
+    if (BMapGLRef.value && map.value && BMapGLLibRef.value) {
+        let tool = new BMapGLLibRef.value.RichMarker(tool_params.html, new BMapGLRef.value.Point(tool_params.point.lng, tool_params.point.lat), {
+            anchor: new BMapGLRef.value.Size(tool_params.anchor[0], tool_params.anchor[1]),
+            enableDragging: tool_params.enableDragging,
+        })
+        map.value.addOverlay(tool);
         return tool
     }
 }

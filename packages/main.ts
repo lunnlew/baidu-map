@@ -17,6 +17,7 @@ import BmMarker from './component/overlay/marker.vue'
 import BmMarkerIcon from './component/overlay/marker-icon.vue'
 import BmMarker3D from './component/overlay/marker3d.vue'
 import BmMarker3DIcon from './component/overlay/marker3d-icon.vue'
+import BmRichMarker from './component/overlay/rich-marker.vue'
 import BmPolyline from './component/overlay/polyline.vue'
 import BmPolygon from './component/overlay/polygon.vue'
 import BmCityBoundary from './component/overlay/city-boundary.vue'
@@ -39,6 +40,7 @@ import BmDrivingRoute from './component/tool/driving-route.vue'
 import BmTransitRoute from './component/tool/transit-route.vue'
 import BmWalkingRoute from './component/tool/walking-route.vue'
 import BmRidingRoute from './component/tool/riding-route.vue'
+
 
 /**
  * 地图类型空间及根组件
@@ -67,6 +69,7 @@ export {
     BmMarkerIcon,
     BmMarker3D as BmMarkerThreed,
     BmMarker3DIcon as BmMarkerThreedIcon,
+    BmRichMarker,
     BmPolyline,
     BmPolygon,
     BmCityBoundary,
@@ -108,6 +111,7 @@ const bm = {
         app.component('bm-map-type-control', BmMapTypeControl)
         app.component('bm-custom-control', BmCustomControl)
         app.component('bm-marker', BmMarker)
+        app.component('bm-rich-marker', BmRichMarker)
         app.component('bm-marker-icon', BmMarkerIcon)
         app.component('bm-marker-threed', BmMarker3D)
         app.component('bm-marker-threed-icon', BmMarker3DIcon)

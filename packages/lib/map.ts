@@ -29,6 +29,10 @@ export const state = ref({
      *绘制工具库是否初始化完成
      */
     drawing_tool_lib_inited: false,
+    /**
+     *富文本标注库是否初始化完成
+     */
+    richmarker_lib_inited: false,
 })
 
 /**
