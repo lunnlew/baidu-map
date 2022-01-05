@@ -8,7 +8,7 @@ import { computed, onMounted, onUnmounted, ref, useAttrs, watch } from 'vue'
 import BMapGL from '../../lib/BMapGL'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import { addMap, BMapGLRef, initMap } from '../../lib/map'
-import BaiduMapVue3 from 'types'
+import BaiduMapVue3 from '../../../types'
 const props = withDefaults(
     defineProps<{
         center: {
@@ -139,8 +139,12 @@ watch(
 watch(
     () => props.zoom,
     val => {
-        if (bm.value) {
-            bm.value.setZoom(val)
+        if (bm.value && BMapGLRef.value) {
+            bm.value.setZoom(val, {
+                zoomCenter: props.zoomCenter
+                    ? new BMapGLRef.value.Point(props.zoomCenter.lng, props.zoomCenter.lat)
+                    : null,
+            })
         }
     },
     {

@@ -3726,6 +3726,16 @@ declare namespace BaiduMapVue3 {
         type OnMapEventPayload<T extends MapEvent> = MapEventEventMap[T]
 
         /**
+         * 缩放选项
+         */
+        interface zoomOptions {
+            /**
+             * 缩放中心点
+             */
+            zoomCenter?: Point | null
+        }
+
+        /**
          * 此类是地图API的核心类，用来实例化一个地图。请注意WebGL版本的地图API的命名空间是BMapGL。
          * 示例：const map = new BMapGL.Map('container');
          */
@@ -4038,7 +4048,7 @@ declare namespace BaiduMapVue3 {
              * @param zoom
              * @param options
              */
-            setZoom(zoom: number, options?: Object): void
+            setZoom(zoom: number, options?: zoomOptions): void
             /**
              * 返回地图当前缩放级别
              */
