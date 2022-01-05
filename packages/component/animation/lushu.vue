@@ -8,7 +8,7 @@ import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { state } from '../../lib/map'
 import { addLushu, initLushu } from '../../lib/animation'
 import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/util'
-import BaiduMapVue3 from '../../../types'
+import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
         points?: {

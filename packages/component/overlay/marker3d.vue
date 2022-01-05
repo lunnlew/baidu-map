@@ -8,7 +8,7 @@ import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { BMapGLRef, map, state } from '../../lib/map'
 import { addMaker3D } from '../../lib/overlay'
 import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../types'
+import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
         point: {

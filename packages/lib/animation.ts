@@ -6,7 +6,7 @@ import {
     BmTrackAnimationProps,
     BmViewAnimationKeyFramesProps,
     BmViewAnimationProps,
-} from 'types'
+} from 'typings'
 import { BMapGLRef, BMapGLLibRef, map, state } from './map'
 
 /**

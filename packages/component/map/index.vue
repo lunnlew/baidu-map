@@ -8,7 +8,7 @@ import { computed, onMounted, onUnmounted, ref, useAttrs, watch } from 'vue'
 import BMapGL from '../../lib/BMapGL'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import { addMap, BMapGLRef, initMap } from '../../lib/map'
-import BaiduMapVue3 from '../../../types'
+import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
         center: {

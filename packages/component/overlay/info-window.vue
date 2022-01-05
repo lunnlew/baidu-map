@@ -13,7 +13,7 @@ import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { map, state } from '../../lib/map'
 import { addInfoWindow } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../types'
+import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
         point: {

@@ -17,7 +17,7 @@
     ],
     "typeRoots": [
       "node_modules/@types",
-      "types/**.d.ts"
+      "typings/**.d.ts"
     ]
   },
   "include": [

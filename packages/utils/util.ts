@@ -1,4 +1,4 @@
-import { BMapGL } from 'types'
+import { BMapGL } from 'typings'
 /**
  * 合并实际的属性值
  * @param used_props
@@ -90,7 +90,7 @@ export function bindEvents<U, T extends PickEvent<AllEventMap>>(
 ): U {
     if (obj) {
         for (let eName of events) {
-            ;(obj as unknown as EventL).addEventListener(eName, e => {
+            ; (obj as unknown as EventL).addEventListener(eName, e => {
                 /**
                  * 重新绑定百度地图事件代理中缺失的方法
                  */
