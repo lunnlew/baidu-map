@@ -37,6 +37,7 @@
             :zoom="zoom"
             :enableMapClick="true"
             :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+            @zoom_changed="zoomChange"
         >
             <bm-marker :point="point" :show="isShowMaker" @click="isShowMakerInfo = !isShowMakerInfo">
                 <bm-marker-icon :size="[23, 25]" :anchor="[10, 15]" :imageOffset="[0, 0]"></bm-marker-icon>
@@ -126,6 +127,9 @@ const point = ref({
     lat: 39.915119,
 })
 const zoom = ref(13)
+function zoomChange(e: any) {
+    zoom.value = e.target.getZoom()
+}
 
 const backCenter = function () {
     zoom.value = 13
