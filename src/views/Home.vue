@@ -121,7 +121,7 @@ const usecode = ref(`<baidu-map
 </baidu-map>`)
 const usecode1 = ref(`.map {
     width: 100%;
-    height: 300px;
+    height: 400px;
 }`)
 const center = ref({
     lng: 116.403963,
