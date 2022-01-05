@@ -44,10 +44,12 @@ watch(
             bm.value = await addCityBoundary(options.value.name, merge_props)
             bindEvents(bm.value.boundary, extractEmitEvents(attrs), emit)
         } else {
-            bm.value && map.value?.removeOverlay(bm.value.overlay)
-            bm.value.boundary = null
-            bm.value.overlay = null
-            bm.value = null
+            if (bm.value) {
+                map.value?.removeOverlay(bm.value.overlay)
+                bm.value.boundary = null
+                bm.value.overlay = null
+                bm.value = null
+            }
         }
     },
     {
@@ -55,10 +57,12 @@ watch(
     }
 )
 onUnmounted(() => {
-    bm.value && map.value?.removeOverlay(bm.value.overlay)
-    bm.value.boundary = null
-    bm.value.overlay = null
-    bm.value = null
+    if (bm.value) {
+        map.value?.removeOverlay(bm.value.overlay)
+        bm.value.boundary = null
+        bm.value.overlay = null
+        bm.value = null
+    }
 })
 defineExpose({
     bmobj: bm.value,
