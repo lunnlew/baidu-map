@@ -11,10 +11,12 @@ import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/ut
 const props = withDefaults(
     defineProps<{
         name: string
+        overallView?: boolean
         show?: boolean
     }>(),
     {
         name: '北京市',
+        overallView: true,
         show: true,
     }
 )
@@ -26,7 +28,7 @@ const isShow = computed(() => state.value.map_inited && props.show)
 const bm = ref()
 watch(
     () => isShow.value,
-    val => {
+    async val => {
         if (val) {
             let merge_props = { ...options.value }
             if (slots.default) {
@@ -39,9 +41,12 @@ watch(
                     ;(merge_props as any).polygon = merge_polygon_props
                 }
             }
-            bm.value = bindEvents(addCityBoundary(options.value.name, merge_props), extractEmitEvents(attrs), emit)
+            bm.value = await addCityBoundary(options.value.name, merge_props)
+            bindEvents(bm.value.boundary, extractEmitEvents(attrs), emit)
         } else {
-            bm.value && map.value?.removeOverlay(bm.value)
+            bm.value && map.value?.removeOverlay(bm.value.overlay)
+            bm.value.boundary = null
+            bm.value.overlay = null
             bm.value = null
         }
     },
@@ -50,7 +55,9 @@ watch(
     }
 )
 onUnmounted(() => {
-    bm.value && map.value?.removeOverlay(bm.value)
+    bm.value && map.value?.removeOverlay(bm.value.overlay)
+    bm.value.boundary = null
+    bm.value.overlay = null
     bm.value = null
 })
 defineExpose({
