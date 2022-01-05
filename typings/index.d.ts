@@ -1045,6 +1045,32 @@ declare namespace BaiduMapVue3 {
      */
     export const BmDrawingManager: ComponentPublicInstance<BmDrawingManagerProps>
 
+    interface BmRichMarkerProps {
+        /**
+         * 标记的坐标
+         */
+        point: {
+            lng: number
+            lat: number
+        }
+        /**
+         * 图标定位锚点
+         */
+        anchor?: [number, number]
+        /**
+         * 是否允许拖动
+         */
+        enableDragging?: boolean
+        /**
+         * 是否显示
+         */
+        show?: boolean
+    }
+    /**
+     * 富文本标记
+     */
+    export const BmRichMarker: ComponentPublicInstance<BmRichMarkerProps>
+
 
     interface BmBezierCurveProps {
         /**
@@ -3451,6 +3477,27 @@ declare namespace BaiduMapVue3 {
              * @param listener
              */
             on<T extends OverlayEvent>(event: T, listener: (data: OnOverlayEventPayload<T>) => void): this
+        }
+
+        /**
+         * 富文本标注选项
+         */
+        interface RichMarkerOptions {
+            "anchor"?: Size,
+            "enableDragging"?: boolean
+        }
+
+        /**
+         * 富文本标注
+         */
+        class RichMarker extends Overlay {
+            /**
+             * 创建一个富文本标注对象
+             * @param html 
+             * @param point 
+             * @param opts 
+             */
+            constructor(html: string, point: Point, opts?: RichMarkerOptions)
         }
 
         /**
@@ -6709,6 +6756,11 @@ declare namespace BaiduMapVue3 {
              * @param bmap
              */
             DrawingManager: { new(bmap: Map): DrawingManager }
+            /**
+             * 创建一个富文本标注对象
+             * @param bmap
+             */
+            RichMarker: { new(html: string, point: Point, opts?: RichMarkerOptions): RichMarker }
         }
 
         type AllBMapGLType = keyof BMapGL.BMapGL
