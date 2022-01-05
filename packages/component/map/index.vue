@@ -7,7 +7,8 @@
 import { computed, onMounted, onUnmounted, ref, useAttrs, watch } from 'vue'
 import BMapGL from '../../lib/BMapGL'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
-import { addMap, initMap } from '../../lib/map'
+import { addMap, BMapGLRef, initMap } from '../../lib/map'
+import BaiduMapVue3 from 'types'
 const props = withDefaults(
     defineProps<{
         center: {
@@ -16,10 +17,45 @@ const props = withDefaults(
         }
         apiKey?: string
         zoom?: number
+        bottomOffset?: number
+        clickInterval?: number
+        enableDragging?: boolean
         enableRotate?: boolean
         enableTilt?: boolean
+        enableKeyboard?: boolean
+        enableDblclickZoom?: boolean
+        enableContinuousZoom?: boolean
+        enableWheelZoom?: boolean
+        enableRotateGestures?: boolean
+        enableTiltGestures?: boolean
+        enablePinchZoom?: boolean
+        fixCenterWhenPinch?: boolean
         enableMapClick?: boolean
+        enableAutoResize?: boolean
+        zoomCenter?: {
+            lng: number
+            lat: number
+        } | null
+        zoomerDuration?: number
+        actionDuration?: number
         mapType?: BMapGL.MapTypeId
+        enableInertialDragging?: boolean
+        drawMargin?: number
+        drawMarginGL?: number
+        enableFulltimeSpotClick?: boolean
+        enableResizeOnCenter?: boolean
+        showControls?: boolean
+        showRealSunlight?: boolean
+        showMilkyway?: boolean
+        showStreetLayer?: boolean
+        minZoom?: number | null
+        maxZoom?: number | null
+        style?: string
+        backgroundColor?: string | null
+        enableIconClick?: boolean
+        autoSafeArea?: boolean
+        restrictCenter?: boolean
+        preserveDrawingBuffer?: boolean
         onReady?: (state: any) => void
     }>(),
     {
@@ -29,15 +65,48 @@ const props = withDefaults(
         }),
         apiKey: '',
         zoom: 13,
+        bottomOffset: 0,
+        clickInterval: 200,
+        enableDragging: true,
         enableRotate: true,
         enableTilt: true,
+        enableKeyboard: false,
+        enableDblclickZoom: true,
+        enableContinuousZoom: true,
+        enableWheelZoom: false,
+        enableRotateGestures: true,
+        enableTiltGestures: true,
+        enablePinchZoom: true,
+        fixCenterWhenPinch: false,
         enableMapClick: true,
+        enableAutoResize: true,
+        zoomCenter: null,
+        zoomerDuration: 240,
+        actionDuration: 450,
         mapType: BMapGL.MapTypeId.BMAP_NORMAL_MAP,
+        enableInertialDragging: true,
+        drawMargin: 500,
+        drawMarginGL: 500,
+        enableFulltimeSpotClick: false,
+        enableResizeOnCenter: false,
+        showControls: false,
+        showRealSunlight: true,
+        showMilkyway: true,
+        earthBackground: null,
+        showStreetLayer: true,
+        minZoom: null,
+        maxZoom: null,
+        style: 'default',
+        backgroundColor: null,
+        enableIconClick: false,
+        autoSafeArea: false,
+        restrictCenter: true,
+        preserveDrawingBuffer: false,
         onReady: () => {},
     }
 )
 const emit = defineEmits({})
-const bm = ref()
+const bm = ref<BaiduMapVue3.BMapGL.Map | null>()
 const container = ref()
 const attrs = useAttrs()
 const options = computed(() => props)
@@ -47,6 +116,7 @@ onMounted(() => {
         let events = extractEmitEvents(attrs) as string[]
         // 启用了enableMapClick选项时，某些地图事件本身就有默认的事件处理，不需要再次注册，否则导致多次触发
         let result = addMap(container.value, merge_props)
+        // "on" + e + "_changed"
         bm.value = bindEvents(
             result?.map,
             events.filter((v: string) => !merge_props.enableMapClick || !['click', 'mousedown'].includes(v)),
@@ -58,8 +128,225 @@ onMounted(() => {
 watch(
     () => props.center,
     val => {
+        if (bm.value && BMapGLRef.value) {
+            bm.value.panTo(new BMapGLRef.value.Point(val.lng, val.lat))
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.zoom,
+    val => {
         if (bm.value) {
-            bm.value.panTo(val)
+            bm.value.setZoom(val)
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.mapType,
+    val => {
+        if (bm.value) {
+            bm.value.setMapType(val)
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.enableRotate,
+    val => {
+        if (bm.value) {
+            if (val) {
+                bm.value.enableRotate()
+            } else {
+                bm.value.disableRotate()
+            }
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.enableWheelZoom,
+    val => {
+        if (bm.value) {
+            if (val) {
+                bm.value.enableScrollWheelZoom()
+            } else {
+                bm.value.disableScrollWheelZoom()
+            }
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.enableContinuousZoom,
+    val => {
+        if (bm.value) {
+            if (val) {
+                bm.value.enableContinuousZoom()
+            } else {
+                bm.value.disableContinuousZoom()
+            }
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.enableResizeOnCenter,
+    val => {
+        if (bm.value) {
+            if (val) {
+                bm.value.enableResizeOnCenter()
+            } else {
+                bm.value.disableResizeOnCenter()
+            }
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.enableDblclickZoom,
+    val => {
+        if (bm.value) {
+            if (val) {
+                bm.value.enableDoubleClickZoom()
+            } else {
+                bm.value.disableDoubleClickZoom()
+            }
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.enableKeyboard,
+    val => {
+        if (bm.value) {
+            if (val) {
+                bm.value.enableKeyboard()
+            } else {
+                bm.value.disableKeyboard()
+            }
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.enablePinchZoom,
+    val => {
+        if (bm.value) {
+            if (val) {
+                bm.value.enablePinchToZoom()
+            } else {
+                bm.value.disablePinchToZoom()
+            }
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.enableRotate,
+    val => {
+        if (bm.value) {
+            if (val) {
+                bm.value.enableRotate()
+            } else {
+                bm.value.disableRotate()
+            }
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.enableRotateGestures,
+    val => {
+        if (bm.value) {
+            if (val) {
+                bm.value.enableRotateGestures()
+            } else {
+                bm.value.disableRotateGestures()
+            }
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.enableTiltGestures,
+    val => {
+        if (bm.value) {
+            if (val) {
+                bm.value.enableTiltGestures()
+            } else {
+                bm.value.disableTiltGestures()
+            }
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.enableAutoResize,
+    val => {
+        if (bm.value) {
+            if (val) {
+                bm.value.enableAutoResize()
+            } else {
+                bm.value.disableAutoResize()
+            }
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.enableDragging,
+    val => {
+        if (bm.value) {
+            if (val) {
+                bm.value.enableDragging()
+            } else {
+                bm.value.disableDragging()
+            }
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.enableInertialDragging,
+    val => {
+        if (bm.value) {
+            if (val) {
+                bm.value.enableInertialDragging()
+            } else {
+                bm.value.disableInertialDragging()
+            }
         }
     },
     {

@@ -23,6 +23,12 @@ declare namespace BaiduMapVue3 {
          * 地图缩放级别
          */
         zoom?: number
+        bottomOffset?: number
+        clickInterval?: number
+        /**
+         * 是否启用拖动
+         */
+        enableDragging?: boolean
         /**
          * 是否启用旋转
          */
@@ -32,13 +38,91 @@ declare namespace BaiduMapVue3 {
          */
         enableTilt?: boolean
         /**
+         * 是否启用键盘操作
+         */
+        enableKeyboard?: boolean
+        /**
+         * 是否启用双击放大
+         */
+        enableDblclickZoom?: boolean
+        /**
+         * 是否启用连续缩放效果。
+         */
+        enableContinuousZoom?: boolean
+        /**
+         * 是否启用滚轮缩放
+         */
+        enableWheelZoom?: boolean
+        /**
+         * 是否允许旋转地图
+         */
+        enableRotateGestures?: boolean
+        /**
+         * 是否倾斜旋转地图
+         */
+        enableTiltGestures?: boolean
+        /**
+         * 是否启用手势缩放
+         */
+        enablePinchZoom?: boolean
+        /**
+         * 手势缩放时地图中心保持在当前缩放级别的屏幕中心
+         */
+        fixCenterWhenPinch?: boolean
+        /**
          * 是否启用点击
          */
         enableMapClick?: boolean
         /**
+         * 启用自动适应容器尺寸
+         */
+        enableAutoResize?: boolean
+        /**
+         * 缩放的中心点
+         */
+        zoomCenter?: {
+            lng: number
+            lat: number
+        } | null
+        zoomerDuration?: number
+        actionDuration?: number
+        /**
          * 地图类型
          */
         mapType?: BMapGL.MapTypeId
+        /**
+         * 启用地图惯性拖拽
+         */
+        enableInertialDragging?: boolean
+        drawMargin?: number
+        drawMarginGL?: number
+        enableFulltimeSpotClick?: boolean
+        enableResizeOnCenter?: boolean
+        showControls?: boolean
+        showRealSunlight?: boolean
+        showMilkyway?: boolean
+        showStreetLayer?: boolean
+        /**
+         * 最小缩放级别
+         */
+        minZoom?: number | null
+        /**
+         * 最大缩放级别
+         */
+        maxZoom?: number | null
+        style?: string
+        backgroundColor?: string | null
+        enableIconClick?: boolean
+        autoSafeArea?: boolean
+        restrictCenter?: boolean
+        /**
+         * 截图时需要开启用以清理gl缓存
+         */
+        preserveDrawingBuffer?: boolean
+        /**
+         * 地图加载完成后的事件
+         */
+        onReady?: (state: any) => void
     }
     /**
      * 百度地图组件
@@ -909,30 +993,30 @@ declare namespace BaiduMapVue3 {
          * 检索区域，类型可为地图实例、坐标点或城市名称的字符串
          */
         location:
-            | Object
-            | {
-                  lng: number
-                  lat: number
-              }
-            | String
+        | Object
+        | {
+            lng: number
+            lat: number
+        }
+        | String
         /**
          * 起点
          */
         start?:
-            | {
-                  lat: number
-                  lng: number
-              }
-            | Object
+        | {
+            lat: number
+            lng: number
+        }
+        | Object
         /**
          * 终点
          */
         end?:
-            | {
-                  lat: number
-                  lng: number
-              }
-            | Object
+        | {
+            lat: number
+            lng: number
+        }
+        | Object
         /**
          * 结果呈现设置
          */
@@ -986,30 +1070,30 @@ declare namespace BaiduMapVue3 {
          * 检索区域，类型可为地图实例、坐标点或城市名称的字符串
          */
         location:
-            | Object
-            | {
-                  lng: number
-                  lat: number
-              }
-            | String
+        | Object
+        | {
+            lng: number
+            lat: number
+        }
+        | String
         /**
          * 起点
          */
         start?:
-            | {
-                  lat: number
-                  lng: number
-              }
-            | Object
+        | {
+            lat: number
+            lng: number
+        }
+        | Object
         /**
          * 终点
          */
         end?:
-            | {
-                  lat: number
-                  lng: number
-              }
-            | Object
+        | {
+            lat: number
+            lng: number
+        }
+        | Object
         /**
          * 结果呈现设置
          */
@@ -1079,30 +1163,30 @@ declare namespace BaiduMapVue3 {
          * 检索区域，类型可为地图实例、坐标点或城市名称的字符串
          */
         location:
-            | Object
-            | {
-                  lng: number
-                  lat: number
-              }
-            | String
+        | Object
+        | {
+            lng: number
+            lat: number
+        }
+        | String
         /**
          * 起点
          */
         start?:
-            | {
-                  lat: number
-                  lng: number
-              }
-            | Object
+        | {
+            lat: number
+            lng: number
+        }
+        | Object
         /**
          * 终点
          */
         end?:
-            | {
-                  lat: number
-                  lng: number
-              }
-            | Object
+        | {
+            lat: number
+            lng: number
+        }
+        | Object
         /**
          * 结果呈现设置
          */
@@ -1156,30 +1240,30 @@ declare namespace BaiduMapVue3 {
          * 检索区域，类型可为地图实例、坐标点或城市名称的字符串
          */
         location:
-            | Object
-            | {
-                  lng: number
-                  lat: number
-              }
-            | String
+        | Object
+        | {
+            lng: number
+            lat: number
+        }
+        | String
         /**
          * 起点
          */
         start?:
-            | {
-                  lat: number
-                  lng: number
-              }
-            | Object
+        | {
+            lat: number
+            lng: number
+        }
+        | Object
         /**
          * 终点
          */
         end?:
-            | {
-                  lat: number
-                  lng: number
-              }
-            | Object
+        | {
+            lat: number
+            lng: number
+        }
+        | Object
         /**
          * 结果呈现设置
          */
@@ -1854,7 +1938,7 @@ declare namespace BaiduMapVue3 {
         /**
          * 未知的定义 SymbolShape
          */
-        interface SymbolShape {}
+        interface SymbolShape { }
 
         /**
          * 此类表示通过svg的path string创建的矢量图标类。
@@ -3599,8 +3683,9 @@ declare namespace BaiduMapVue3 {
             mousemove: MapPayload
             mouseover: MapPayload
             mouseout: MapPayload
-            moveend: MapPayload
             movestart: MapPayload
+            moveing: MapPayload
+            moveend: MapPayload
             mousewheel: MapPayload
             rightclick: MapPayload
             resize: MapPayload
@@ -3608,6 +3693,31 @@ declare namespace BaiduMapVue3 {
             touchmove: MapPayload
             touchend: MapPayload
             touchcancel: MapPayload
+            zoomstart: MapPayload
+            zoomend: MapPayload
+            zooming: MapPayload
+            zoom_changed: MapPayload
+            center_changed: MapPayload
+            animation_start: MapPayload
+            animation_end: MapPayload
+            size_changed: MapPayload
+            addcontrol: MapPayload
+            removecontrol: MapPayload
+            addcontextmenu: MapPayload
+            removecontextmenu: MapPayload
+            beforeaddoverlay: MapPayload
+            addoverlay: MapPayload
+            clearoverlays: MapPayload
+            removeoverlay: MapPayload
+            addtilelayer: MapPayload
+            removetilelayer: MapPayload
+            maptypechange: MapPayload
+            style_willchange: MapPayload
+            style_changed: MapPayload
+            heading_changed: MapPayload
+            dragging: MapPayload
+            dragend: MapPayload
+            dragstart: MapPayload
         }
         type MapEvent = keyof MapEventEventMap
         type MapPayload = {
@@ -3691,13 +3801,29 @@ declare namespace BaiduMapVue3 {
              */
             disablePinchToZoom(): void
             /**
-             * 是否允许通过手势旋转地图。
+             * 启用地图旋转
+             */
+            enableRotate(): void
+            /**
+             * 禁用地图旋转
+             */
+            disableRotate(): void
+            /**
+             * 允许通过手势旋转地图。
              */
             enableRotateGestures(): void
             /**
-             * 是否允许通过手势倾斜地图。
+             * 是否允许通过手势旋转地图。
+             */
+            disableRotateGestures(): void
+            /**
+             * 禁用自通过手势倾斜地图。
              */
             enableTiltGestures(): void
+            /**
+             * 禁用自通过手势倾斜地图。
+             */
+            disableTiltGestures(): void
             /**
              * 启用自动适应容器尺寸变化，默认启用
              */
@@ -3784,7 +3910,7 @@ declare namespace BaiduMapVue3 {
              * 	在底图上添加文字，这些文字会和底图文字一同参与避让。
              * @param labels
              */
-            removeLabelsFromMapTile(labels: Array<any>): void
+            addLabelsToMapTile(labels: Array<any>): void
             /**
              * 	从底图上移除文字标注，参数为uid数组，根据数组里的uid进行移除
              * @param labels
@@ -4982,7 +5108,7 @@ declare namespace BaiduMapVue3 {
             getDistance(format: Boolean): String | Number
         }
 
-        interface TransitPlanType {}
+        interface TransitPlanType { }
 
         /**
          * 此类表示一条公交出行方案。没有构造函数，通过TransitRouteResult.getPlan()方法获得。
@@ -6161,216 +6287,216 @@ declare namespace BaiduMapVue3 {
              * @param container String | HTMLElement
              * @param opts MapOptions
              */
-            Map: { new (container: string | HTMLElement, opts: MapOptions): Map }
+            Map: { new(container: string | HTMLElement, opts: MapOptions): Map }
             /**
              * 创建一个信息窗实例，其中content支持HTML内容。
              * @param content String | HTMLElement
              * @param opts InfoWindowOptions
              */
-            InfoWindow: { new (content: string | HTMLElement, opts: InfoWindowOptions): InfoWindow }
+            InfoWindow: { new(content: string | HTMLElement, opts: InfoWindowOptions): InfoWindow }
             /**
              * 以指定的经度和纬度创建一个地理点坐标
              * @param lng Number
              * @param lat Number
              */
-            Point: { new (lng: number, lat: number): Point }
+            Point: { new(lng: number, lat: number): Point }
             /**
              * 创建像素点对象实例。像素坐标的坐标原点为地图区域的左上角
              * @param x
              * @param y
              */
-            Pixel: { new (x: number, y: number): Pixel }
+            Pixel: { new(x: number, y: number): Pixel }
             /**
              * 创建一个图像标注实例。point参数指定了图像标注所在的地理位置
              * @param point Point
              * @param opts MarkerOptions
              */
-            Marker: { new (point: Point, opts?: MarkerOptions): Marker }
+            Marker: { new(point: Point, opts?: MarkerOptions): Marker }
             /**
              * 创建一个图像标注实例。point参数指定了图像标注所在的地理位置
              * @param point Point
              * @param opts Marker3DOptions
              */
-            Marker3D: { new (point: Point, height: number, opts?: Marker3DOptions): Marker3D }
+            Marker3D: { new(point: Point, height: number, opts?: Marker3DOptions): Marker3D }
             /**
              * 创建一个文本标注实例。point参数指定了文本标注所在的地理位置
              * @param content String
              * @param opts LabelOptions
              */
-            Label: { new (content: string, opts: LabelOptions): Label }
+            Label: { new(content: string, opts: LabelOptions): Label }
             /**
              * 创建折线覆盖物对象
              * @param points Array<Point>
              * @param opts PolylineOptions
              */
-            Polyline: { new (points: Array<Point>, opts?: PolylineOptions): Polyline }
+            Polyline: { new(points: Array<Point>, opts?: PolylineOptions): Polyline }
             /**
              * 创建多边形覆盖物
              * @param points Array<Point>
              * @param opts PolygonOptions
              */
-            Polygon: { new (points: Array<Point>, opts?: PolygonOptions): Polygon }
+            Polygon: { new(points: Array<Point>, opts?: PolygonOptions): Polygon }
             /**
              * 创建圆覆盖物
              * @param center Point
              * @param radius Number
              * @param opts CircleOptions
              */
-            Circle: { new (center: Point, radius: number, opts: CircleOptions): Circle }
+            Circle: { new(center: Point, radius: number, opts: CircleOptions): Circle }
             /**
              * 创建地面叠加层
              * @param bounds Bounds
              * @param opts GroundOverlayOptions
              */
-            GroundOverlay: { new (bounds: Bounds, opts: GroundOverlayOptions): GroundOverlay }
+            GroundOverlay: { new(bounds: Bounds, opts: GroundOverlayOptions): GroundOverlay }
             /**
              * 以指定的宽度和高度创建一个矩形区域大小对象
              * @param width
              * @param height
              */
-            Size: { new (width: number, height: number): Size }
+            Size: { new(width: number, height: number): Size }
             /**
              * 以给定的图像地址和大小创建图标对象实例
              * @param url String
              * @param size Size
              * @param opts IconOptions
              */
-            Icon: { new (url: string, size: Size, opts: IconOptions): Icon }
+            Icon: { new(url: string, size: Size, opts: IconOptions): Icon }
             /**
              * 创建一个比例尺控件
              * 默认位于地图左下方，显示地图的比例关系
              * @param opts ScaleControlOptions
              */
-            ScaleControl: { new (opts?: ScaleControlOptions): ScaleControl }
+            ScaleControl: { new(opts?: ScaleControlOptions): ScaleControl }
             /**
              * 创建一个缩放控件
              * @param opts ZoomControlOptions
              */
-            ZoomControl: { new (opts?: ZoomControlOptions): ZoomControl }
+            ZoomControl: { new(opts?: ZoomControlOptions): ZoomControl }
             /**
              * 创建一个版权控件
              * @param opts CopyrightControlOptions
              */
-            CopyrightControl: { new (opts?: CopyrightControlOptions): CopyrightControl }
+            CopyrightControl: { new(opts?: CopyrightControlOptions): CopyrightControl }
             /**
              * 创建一个缩放平移控件
              * PC端默认位于地图左上方，它包含控制地图的平移和缩放的功能。移动端提供缩放控件，默认位于地图右下方
              * @param opts NavigationControlOptions
              */
-            NavigationControl: { new (opts?: NavigationControlOptions): NavigationControl }
+            NavigationControl: { new(opts?: NavigationControlOptions): NavigationControl }
             /**
              * 创建一个特定样式的地图平移缩放控件
              * @param opts NavigationControl3DOptions
              */
-            NavigationControl3D: { new (opts?: NavigationControl3DOptions): NavigationControl3D }
+            NavigationControl3D: { new(opts?: NavigationControl3DOptions): NavigationControl3D }
             /**
              * 创建一个定位控件
              * @param opts LocationControlOptions
              */
-            LocationControl: { new (opts?: LocationControlOptions): LocationControl }
+            LocationControl: { new(opts?: LocationControlOptions): LocationControl }
             /**
              * 创建一个地图类型控件
              * @param opts MapTypeControlOptions
              */
-            MapTypeControl: { new (opts?: MapTypeControlOptions): MapTypeControl }
+            MapTypeControl: { new(opts?: MapTypeControlOptions): MapTypeControl }
             /**
              * 创建一个城市选择控件
              * @param opts CityListControlOptions
              */
-            CityListControl: { new (opts?: CityListControlOptions): CityListControl }
+            CityListControl: { new(opts?: CityListControlOptions): CityListControl }
             /**
              * 创建一个自定义控件
              * @param opts CustomControlOptions
              */
-            Control: { new (opts: CustomControlOptions): Control }
+            Control: { new(opts: CustomControlOptions): Control }
             /**
              * 创建一个分界范围区域
              */
-            Boundary: { new (): Boundary }
+            Boundary: { new(): Boundary }
             /**
              * 创建棱柱覆盖物，构造函数中需要定义底面和高度
              * @param points
              * @param altitude
              * @param opts PrismOptions
              */
-            Prism: { new (points: Array<Point>, altitude: number, opts: PrismOptions): Prism }
+            Prism: { new(points: Array<Point>, altitude: number, opts: PrismOptions): Prism }
             /**
              * 创建一个包含所有给定点坐标的矩形区域。其中sw表示矩形区域的西南角，参数ne表示矩形区域的东北角
              * @param sw
              * @param ne
              */
-            Bounds: { new (sw: Point, ne: Point): Bounds }
+            Bounds: { new(sw: Point, ne: Point): Bounds }
             /**
              * 创建一个右键菜单实例
              */
-            ContextMenu: { new (): ContextMenu }
+            ContextMenu: { new(): ContextMenu }
             /**
              * 创建一个右键菜单项实例
              * @param text string
              * @param callback Function
              * @param opts MenuItemOptions
              */
-            MenuItem: { new (text: string, callback: Function, opts: MenuItemOptions): MenuItem }
+            MenuItem: { new(text: string, callback: Function, opts: MenuItemOptions): MenuItem }
             /**
              * 创建Geolocation对象实例
              */
-            Geolocation: { new (): Geolocation }
+            Geolocation: { new(): Geolocation }
             /**
              * 创建一个获取本地城市位置的实例
              * @param opts LocalCityOptions
              */
-            LocalCity: { new (opts: LocalCityOptions): LocalCity }
+            LocalCity: { new(opts: LocalCityOptions): LocalCity }
             /**
              * 创建一个地址解析器的实例
              */
-            Geocoder: { new (): Geocoder }
+            Geocoder: { new(): Geocoder }
             /**
              * 创建一个地图图层实例
              * @param opts TileLayerOptions
              */
-            TileLayer: { new (opts: TileLayerOptions): TileLayer }
+            TileLayer: { new(opts: TileLayerOptions): TileLayer }
             /**
              * 创建一个搜索类实例，其中location表示检索区域，其类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定，且搜索结果的标注将自动加载到地图上，并支持调整地图视野层级；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
              * @param location
              * @param opts
              */
-            LocalSearch: { new (location: Map | Point | String, opts: LocalSearchOptions): LocalSearch }
+            LocalSearch: { new(location: Map | Point | String, opts: LocalSearchOptions): LocalSearch }
             /**
              * 创建地图视角动画对象，通过关键帧的形式对动画进行定义
              * @param keyFrames Array<ViewAnimationKeyFrames>
              * @param opts ViewAnimationOptions
              */
-            ViewAnimation: { new (keyFrames: Array<ViewAnimationKeyFrames>, opts: ViewAnimationOptions): ViewAnimation }
+            ViewAnimation: { new(keyFrames: Array<ViewAnimationKeyFrames>, opts: ViewAnimationOptions): ViewAnimation }
             /**
              * 创建一个贝塞尔曲线对象
              * @param points
              * @param controlPoints
              */
-            BezierCurve: { new (points: Array<Point>, controlPoints: any[]): BezierCurve }
+            BezierCurve: { new(points: Array<Point>, controlPoints: any[]): BezierCurve }
             /**
              * 创建一个驾车导航实例，其中location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由地图当前的中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
              * @param location
              * @param opts
              */
-            DrivingRoute: { new (location: Map | Point | String, opts: DrivingRouteOptions): DrivingRoute }
+            DrivingRoute: { new(location: Map | Point | String, opts: DrivingRouteOptions): DrivingRoute }
             /**
              * 创建一个公交导航实例。location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会优先在该城市内进行
              * @param location
              * @param opts
              */
-            TransitRoute: { new (location: Map | Point | String, opts: TransitRouteOptions): TransitRoute }
+            TransitRoute: { new(location: Map | Point | String, opts: TransitRouteOptions): TransitRoute }
             /**
              * 创建一个步行导航实例。location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
              * @param location
              * @param opts
              */
-            WalkingRoute: { new (location: Map | Point | String, opts: WalkingRouteOptions): WalkingRoute }
+            WalkingRoute: { new(location: Map | Point | String, opts: WalkingRouteOptions): WalkingRoute }
             /**
              * 创建一个骑行导航实例。location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
              * @param location
              * @param opts
              */
-            RidingRoute: { new (location: Map | Point | String, opts: RidingRouteOptions): RidingRoute }
+            RidingRoute: { new(location: Map | Point | String, opts: RidingRouteOptions): RidingRoute }
             /**
              * 坐标转换
              * @param points 其他坐标
@@ -6379,7 +6505,7 @@ declare namespace BaiduMapVue3 {
              * @param translateCallback 接收转换结果的回调函数
              */
             Convertor: {
-                new (
+                new(
                     points: Array<Point>,
                     from_type: CoordPointType,
                     to_type: CoordPointType,
@@ -6390,13 +6516,13 @@ declare namespace BaiduMapVue3 {
              * 创建自动完成的实例
              * @param options
              */
-            Autocomplete: { new (options: AutocompleteOptions): Autocomplete }
+            Autocomplete: { new(options: AutocompleteOptions): Autocomplete }
             /**
              * 创建公交线搜索类。其中location表示检索区域，其类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
              * @param location
              * @param options
              */
-            BusLineSearch: { new (location: Map | Point | String, options: BusLineSearchOptions): BusLineSearch }
+            BusLineSearch: { new(location: Map | Point | String, options: BusLineSearchOptions): BusLineSearch }
         }
 
         interface BMapGLLib {
@@ -6406,19 +6532,19 @@ declare namespace BaiduMapVue3 {
              * @param pl
              * @param opts TrackAnimationOptions
              */
-            TrackAnimation: { new (bmap: Map, pl: Polyline, opts: TrackAnimationOptions): TrackAnimation }
+            TrackAnimation: { new(bmap: Map, pl: Polyline, opts: TrackAnimationOptions): TrackAnimation }
             /**
              * 创建一个地图路书动画对象
              * @param bmap
              * @param points
              * @param opts LushuAnimationOptions
              */
-            LuShu: { new (bmap: Map, points: Array<Point>, opts: LushuAnimationOptions): LushuAnimation }
+            LuShu: { new(bmap: Map, points: Array<Point>, opts: LushuAnimationOptions): LushuAnimation }
             /**
              * 创建一个测距工具对象
              * @param bmap
              */
-            DistanceTool: { new (bmap: Map): DistanceTool }
+            DistanceTool: { new(bmap: Map): DistanceTool }
         }
 
         type AllBMapGLType = keyof BMapGL.BMapGL
