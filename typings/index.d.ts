@@ -990,6 +990,27 @@ declare namespace BaiduMapVue3 {
          */
         enableSorption?: boolean
         /**
+         * 是否开启延边裁剪功能
+         */
+        enableGpc?: boolean,
+        /**
+         * 是否开启超限提示
+         */
+        enableLimit?: boolean,
+        /**
+         * 超限值
+         */
+        limitOptions?: {
+            /**
+             * 面积超限值
+             */
+            area?: number,
+            /**
+             * 距离超限值
+             */
+            distance?: number
+        },
+        /**
          * 边界吸附距离
          */
         sorptiondistance?: number
@@ -3796,6 +3817,8 @@ declare namespace BaiduMapVue3 {
              */
             _isOpen: boolean
         }
+
+        type DrawingManagerEvent = 'overlaycomplete'
 
         /**
          *  Map 事件

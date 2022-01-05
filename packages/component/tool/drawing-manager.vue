@@ -26,6 +26,12 @@ const props = withDefaults(
         isOpen?: boolean
         enableCalculate?: boolean
         enableSorption?: boolean
+        enableGpc?: boolean
+        enableLimit?: boolean
+        limitOptions?: {
+            area?: number
+            distance?: number
+        }
         sorptiondistance?: number
         circleOptions?: BaiduMapVue3.DrawingStyleOptions
         polylineOptions?: BaiduMapVue3.DrawingStyleOptions
@@ -39,6 +45,12 @@ const props = withDefaults(
         drawingType: 'marker',
         enableCalculate: false,
         enableSorption: true,
+        enableGpc: false,
+        enableLimit: false,
+        limitOptions: () => ({
+            area: 50000000,
+            distance: 30000,
+        }),
         sorptiondistance: 20,
         circleOptions: () => ({
             strokeColor: '#5E87DB',
