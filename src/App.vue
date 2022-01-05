@@ -1,8 +1,10 @@
 <template>
     <div class="page">
         <div class="sideleft">
-            <div class="logo">Bmap-GL-Vue3</div>
-            <side-menu></side-menu>
+            <div class="sidefixed">
+                <div class="logo">Bmap-GL-Vue3</div>
+                <side-menu></side-menu>
+            </div>
         </div>
         <div class="content">
             <router-view></router-view>
@@ -14,23 +16,21 @@ import SideMenu from './views/SideMenu.vue'
 </script>
 <style lang="less">
 html,
-body {
-    height: 100%;
+body,
+#app {
     width: 100%;
+    height: 100%;
     padding: 0;
     margin: 0;
 }
-#app,
-.page {
-    height: 100%;
-    width: 100%;
-}
 .page {
     display: flex;
+    width: 100%;
 }
 .content {
     flex: 1;
     background-color: #fff;
+    padding-bottom: 64px;
 }
 .logo {
     font-size: 16px;
@@ -41,9 +41,15 @@ body {
 }
 .sideleft {
     width: 200px;
-    height: 100%;
     box-sizing: border-box;
     border-right: 1px solid #eee;
+}
+.sidefixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
 }
 .page-content {
     padding: 10px 28px;
