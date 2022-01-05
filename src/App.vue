@@ -54,7 +54,6 @@ body {
 }
 .code {
     padding: 20px 0;
-    border-bottom: 1px solid #eee;
 }
 .code-title {
     font-size: 14px;
@@ -75,5 +74,13 @@ body {
 .code-snippet code {
     padding: 10px;
     background-color: #f2f2f2;
+}
+.btns {
+    justify-content: space-between;
+    padding: 20px 0;
+    box-sizing: border-box;
+    button {
+        margin-left: 10px;
+    }
 }
 </style>

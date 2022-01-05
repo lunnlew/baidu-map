@@ -21,7 +21,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import router from '@/router'
-import { log } from 'console'
 const menus = ref<
     {
         icon: string
