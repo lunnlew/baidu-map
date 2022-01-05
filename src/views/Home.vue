@@ -35,6 +35,7 @@
             :apiKey="'z7ngXdkrDCY1oFfaFLxyvL6UtiXu0f88'"
             :center="point"
             :zoom="zoom"
+            :zoomCenter="zoomCenter"
             :enableMapClick="true"
             :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
             @zoom_changed="zoomChange"
@@ -122,21 +123,26 @@ const usecode1 = ref(`.map {
     width: 100%;
     height: 300px;
 }`)
-const point = ref({
+const center = ref({
     lng: 116.403963,
     lat: 39.915119,
 })
+const point = ref(center.value)
 const zoom = ref(13)
+const zoomCenter = ref({
+    lng: 116.403963,
+    lat: 39.915119,
+})
 function zoomChange(e: any) {
     zoom.value = e.target.getZoom()
 }
 
 const backCenter = function () {
-    zoom.value = 13
-    point.value = {
-        lng: 116.403963,
-        lat: 39.915119,
-    }
+    point.value = center.value
+    setTimeout(() => {
+        zoomCenter.value = center.value
+        zoom.value = 13
+    }, 1000)
 }
 
 const isShowMaker = ref(false)
