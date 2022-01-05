@@ -8,7 +8,7 @@ import {
     BmNavigationThreedControlProps,
     BmScaleControlProps,
     BmZoomControlProps,
-} from 'types'
+} from 'typings'
 import { BMapGLRef, map } from './map'
 
 /**

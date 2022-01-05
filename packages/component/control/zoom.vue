@@ -6,7 +6,7 @@ import { computed, onUnmounted, ref, useAttrs, watch } from 'vue'
 import { map, state } from '../../lib/map'
 import { addZoomControl } from '../../lib/control'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../types'
+import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
         anchor?: number

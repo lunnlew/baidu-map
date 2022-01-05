@@ -1,4 +1,4 @@
-import { BMapGL, BmDrivingRouteProps, BmRidingRouteProps, BmTransitRouteProps, BmWalkingRouteProps } from 'types'
+import { BMapGL, BmDrivingRouteProps, BmRidingRouteProps, BmTransitRouteProps, BmWalkingRouteProps } from 'typings'
 import { BMapGLRef, map } from './map'
 
 /**

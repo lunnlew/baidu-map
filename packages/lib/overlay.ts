@@ -14,7 +14,7 @@ import {
     BmCircleProps,
     BmInfoWindowProps,
     BmBezierCurveProps,
-} from 'types'
+} from 'typings'
 
 /**
  * 添加点标注

@@ -8,7 +8,7 @@ import { computed, onUnmounted, ref, useAttrs, watch } from 'vue'
 import { state } from '../../lib/map'
 import { addDistanceTool, initDistanceTool } from '../../lib/animation'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../types'
+import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
         show?: boolean

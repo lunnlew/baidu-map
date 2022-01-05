@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { BaiduMapProps, BMapGL } from 'types'
+import { BaiduMapProps, BMapGL } from 'typings'
 
 /**
  * 地图状态
