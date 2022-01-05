@@ -202,40 +202,60 @@ export function addCityBoundary(
     boundary_params: {
         [key: string]: any
     } & Required<BmCityBoundaryProps>
-): BMapGL.Boundary | undefined {
-    if (BMapGLRef.value && map.value) {
-        let marker_options = {} as {
-            [key: string]: any
-        }
-        if (boundary_params.polygon) {
-            for (let key in boundary_params.polygon) {
-                if (key !== 'points') {
-                    marker_options[key as string] = boundary_params.polygon[key]
+): Promise<{
+    boundary: BMapGL.Boundary,
+    overlay: BMapGL.Overlay,
+}> | undefined {
+    return new Promise((resolve, reject) => {
+        if (BMapGLRef.value && map.value) {
+            let marker_options = {} as {
+                [key: string]: any
+            }
+            if (boundary_params.polygon) {
+                for (let key in boundary_params.polygon) {
+                    if (key !== 'points') {
+                        marker_options[key as string] = boundary_params.polygon[key]
+                    }
                 }
             }
-        }
-        let boundary = new BMapGLRef.value.Boundary()
-        boundary.get(name, function (rs: { boundaries: BMapGL.Point[] }) {
-            if (BMapGLRef.value && map.value && rs.boundaries.length > 0) {
-                let hole
-                if (
-                    rs.boundaries.length == 2 ||
-                    !boundary_params.polygon ||
-                    !boundary_params.polygon.points ||
-                    boundary_params.polygon.points.length == 0
-                ) {
-                    hole = new BMapGLRef.value.Polygon(rs.boundaries, marker_options)
+            let boundary = new BMapGLRef.value.Boundary()
+            boundary.get(name, function (rs: { boundaries: BMapGL.Point[] }) {
+                if (BMapGLRef.value && map.value && rs.boundaries.length > 0) {
+                    if (boundary_params.overallView) {
+                        map.value.setViewport((rs.boundaries[0] as any).split(';').map(function (point: string) {
+                            let lnglat = point.split(',') as any
+                            if (BMapGLRef.value) {
+                                return new BMapGLRef.value.Point(lnglat[0], lnglat[1])
+                            }
+                        }))
+                    }
+                    let hole
+                    if (
+                        rs.boundaries.length == 2 ||
+                        !boundary_params.polygon ||
+                        !boundary_params.polygon.points ||
+                        boundary_params.polygon.points.length == 0
+                    ) {
+                        hole = new BMapGLRef.value.Polygon(rs.boundaries, marker_options)
+                    } else {
+                        hole = new BMapGLRef.value.Polygon(
+                            [rs.boundaries[0], boundary_params.polygon.points.map((v: number[]) => v.join(', ')).join(';')],
+                            marker_options
+                        )
+                    }
+                    map.value.addOverlay(hole)
+                    resolve({
+                        boundary,
+                        overlay: hole,
+                    })
                 } else {
-                    hole = new BMapGLRef.value.Polygon(
-                        [rs.boundaries[0], boundary_params.polygon.points.map((v: number[]) => v.join(', ')).join(';')],
-                        marker_options
-                    )
+                    reject(new Error('获取城市边界失败'))
                 }
-                map.value.addOverlay(hole)
-            }
-        })
-        return boundary
-    }
+            })
+        } else {
+            reject(new Error('获取城市边界失败'))
+        }
+    })
 }
 
 /**
