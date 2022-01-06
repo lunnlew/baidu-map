@@ -18,7 +18,7 @@ const props = withDefaults(
     }>(),
     {
         name: '北京市',
-        overallView: true,
+        overallView: false,
         firstLoad: true,
         show: true,
     }

@@ -36,7 +36,7 @@ const props = withDefaults(
         enableMassClear: true,
         enableEditing: false,
         enableClicking: true,
-        overallView: true,
+        overallView: false,
         clip: true,
         geodesic: false,
         show: true,

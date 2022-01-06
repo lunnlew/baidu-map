@@ -38,7 +38,7 @@ const props = withDefaults(
         enableMassClear: true,
         enableClicking: true,
         enableEditing: false,
-        overallView: true,
+        overallView: false,
         show: true,
     }
 )

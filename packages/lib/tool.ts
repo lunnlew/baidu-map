@@ -315,6 +315,9 @@ export function addRichMarker(
             anchor: new BMapGLRef.value.Size(tool_params.anchor[0], tool_params.anchor[1]),
             enableDragging: tool_params.enableDragging,
         })
+        if (!tool_params.show) {
+            tool.hide()
+        }
         map.value.addOverlay(tool);
         return tool
     }

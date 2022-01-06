@@ -56,7 +56,7 @@ const props = withDefaults(
                 },
             ],
         ],
-        overallView: true,
+        overallView: false,
         show: true,
     }
 )

@@ -24,7 +24,7 @@ const props = withDefaults(
     }>(),
     {
         points: () => [],
-        overallView: true,
+        overallView: false,
         tilt: 30,
         duration: 20000,
         delay: 3000,

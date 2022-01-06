@@ -34,7 +34,7 @@ const props = withDefaults(
         duration: 10000,
         delay: 3000,
         interation: 2,
-        overallView: true,
+        overallView: false,
         show: true,
         onReady: (el: any) => {},
     }
