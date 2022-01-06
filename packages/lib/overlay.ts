@@ -161,7 +161,7 @@ export function addPolyline(
             polyline_points.push(new BMapGLRef.value.Point(point.lng, point.lat))
         }
         let polyline = new BMapGLRef.value.Polyline(polyline_points, marker_options)
-        if (polyline_params.overallView) {
+        if (polyline_params.overallView && polyline_params.show) {
             map.value.setViewport(polyline_points)
         }
         map.value.addOverlay(polyline)
@@ -197,7 +197,7 @@ export function addPolygon(
             polygon_points.push(new BMapGLRef.value.Point(point.lng, point.lat))
         }
         let polygon = new BMapGLRef.value.Polygon(polygon_points, marker_options)
-        if (polygon_params.overallView) {
+        if (polygon_params.overallView && polygon_params.show) {
             map.value.setViewport(polygon_points)
         }
         map.value.addOverlay(polygon)
@@ -271,7 +271,7 @@ export function addCityBoundary(
                     boundaries_result.rs = rs
                 }
             }
-            if (boundary_params.overallView) {
+            if (boundary_params.overallView && boundary_params.show) {
                 map.value.setViewport((boundaries_result?.rs.boundaries[0] as any).split(';').map(function (point: string) {
                     let lnglat = point.split(',') as any
                     if (BMapGLRef.value) {
@@ -329,7 +329,7 @@ export function addPrism(
             prism_points.push(new BMapGLRef.value.Point(point.lng, point.lat))
         }
         let prism = new BMapGLRef.value.Prism(prism_points, prism_params.altitude, marker_options)
-        if (prism_params.overallView) {
+        if (prism_params.overallView && prism_params.show) {
             map.value.setViewport(prism_points)
         }
         map.value.addOverlay(prism)
@@ -522,7 +522,7 @@ export function addBezierCurve(
             control_points_arr.push(control_point_arr)
         }
         let bc = new BMapGLRef.value.BezierCurve(points, control_points_arr)
-        if (params.overallView) {
+        if (params.overallView && params.show) {
             map.value.setViewport(points)
         }
         map.value.addOverlay(bc)
@@ -571,7 +571,7 @@ export function addCustomPolyline(
         }
         CustomPolyline.prototype = new (BMapGLRef.value as BMapGL.BMapGL).Overlay()
         let polyline = new (CustomPolyline as any)(polyline_points, marker_options)
-        if (polyline_params.overallView) {
+        if (polyline_params.overallView && polyline_params.show) {
             map.value.setViewport(polyline_points)
         }
         map.value.addOverlay(polyline)
