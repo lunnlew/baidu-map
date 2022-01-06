@@ -78,6 +78,10 @@ declare namespace BaiduMapVue3 {
          */
         enableAutoResize?: boolean
         /**
+         * 是否启用交通流量图层
+         */
+        ebableTraffic?: boolean
+        /**
          * 缩放的中心点
          */
         zoomCenter?: {
@@ -1647,34 +1651,106 @@ declare namespace BaiduMapVue3 {
          * 此类表示Map构造函数的可选参数。它没有构造函数，但可通过对象字面量形式表示。
          */
         interface MapOptions {
+            bottomOffset?: number
+            clickInterval?: number
             /**
-             * 地图允许展示的最小级别
+             * 是否启用拖动
              */
-            minZoom?: number
+            enableDragging?: boolean
             /**
-             * 地图允许展示的最大级别
-             */
-            maxZoom?: number
-            /**
-             * 地图类型，默认为BMAP_NORMAL_MAP
-             */
-            mapType?: MapTypeId
-            /**
-             * 开启自动适应地图容器变化，默认启用
-             */
-            enableAutoResize?: boolean
-            /**
-             * 开启地图旋转，默认启用
+             * 是否启用旋转
              */
             enableRotate?: boolean
             /**
-             * 开启地图倾斜，默认启用
+             * 是否启用倾斜
              */
             enableTilt?: boolean
             /**
-             * 开启地图点击，默认启用
+             * 是否启用键盘操作
+             */
+            enableKeyboard?: boolean
+            /**
+             * 是否启用双击放大
+             */
+            enableDblclickZoom?: boolean
+            /**
+             * 是否启用连续缩放效果。
+             */
+            enableContinuousZoom?: boolean
+            /**
+             * 是否启用滚轮缩放
+             */
+            enableWheelZoom?: boolean
+            /**
+             * 是否允许旋转地图
+             */
+            enableRotateGestures?: boolean
+            /**
+             * 是否倾斜旋转地图
+             */
+            enableTiltGestures?: boolean
+            /**
+             * 是否启用手势缩放
+             */
+            enablePinchZoom?: boolean
+            /**
+             * 手势缩放时地图中心保持在当前缩放级别的屏幕中心
+             */
+            fixCenterWhenPinch?: boolean
+            /**
+             * 是否启用点击
              */
             enableMapClick?: boolean
+            /**
+             * 启用自动适应容器尺寸
+             */
+            enableAutoResize?: boolean
+            /**
+             * 是否启用交通流量图层
+             */
+            ebableTraffic?: boolean
+            /**
+             * 缩放的中心点
+             */
+            zoomCenter?: {
+                lng: number
+                lat: number
+            } | null
+            zoomerDuration?: number
+            actionDuration?: number
+            /**
+             * 地图类型
+             */
+            mapType?: BMapGL.MapTypeId
+            /**
+             * 启用地图惯性拖拽
+             */
+            enableInertialDragging?: boolean
+            drawMargin?: number
+            drawMarginGL?: number
+            enableFulltimeSpotClick?: boolean
+            enableResizeOnCenter?: boolean
+            showControls?: boolean
+            showRealSunlight?: boolean
+            showMilkyway?: boolean
+            showStreetLayer?: boolean
+            /**
+             * 最小缩放级别
+             */
+            minZoom?: number | null
+            /**
+             * 最大缩放级别
+             */
+            maxZoom?: number | null
+            style?: string
+            backgroundColor?: string | null
+            enableIconClick?: boolean
+            autoSafeArea?: boolean
+            restrictCenter?: boolean
+            /**
+             * 截图时需要开启用以清理gl缓存
+             */
+            preserveDrawingBuffer?: boolean
         }
 
         /**

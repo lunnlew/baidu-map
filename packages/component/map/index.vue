@@ -33,6 +33,7 @@ const props = withDefaults(
         fixCenterWhenPinch?: boolean
         enableMapClick?: boolean
         enableAutoResize?: boolean
+        ebableTraffic?: boolean
         zoomCenter?: {
             lng: number
             lat: number
@@ -81,6 +82,7 @@ const props = withDefaults(
         fixCenterWhenPinch: false,
         enableMapClick: true,
         enableAutoResize: true,
+        ebableTraffic: false,
         zoomCenter: null,
         zoomerDuration: 240,
         actionDuration: 450,
@@ -360,6 +362,21 @@ watch(
                 bm.value.enableInertialDragging()
             } else {
                 bm.value.disableInertialDragging()
+            }
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.ebableTraffic,
+    val => {
+        if (bm.value) {
+            if (val) {
+                bm.value.setTrafficOn()
+            } else {
+                bm.value.setTrafficOff()
             }
         }
     },
