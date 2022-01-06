@@ -102,6 +102,9 @@ const CustomPolyline = function (this: any) {
             this._CustomPolylineLine && this._CustomPolylineLine.draw();
         }
     }
+    this.getPath = function () {
+        return points;
+    }
     this.getContainer = function () {
         return this.canvas;
     };

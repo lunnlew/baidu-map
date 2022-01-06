@@ -62,7 +62,7 @@ watch(
                     }
                 }
             }
-            bm.value = bindEvents(addCustomPolyline(props.points, merge_props), extractEmitEvents(attrs), emit)
+            bm.value = bindEvents(addCustomPolyline(props.points, merge_props), extractEmitEvents(attrs), emit) as any
             isShow.value && bm.value?.show()
         }
     },
@@ -72,13 +72,26 @@ watch(
     () => state.value.map_inited && isShow.value,
     val => {
         if (val) {
-            bm.value && bm.value.show()
+            if (bm.value) {
+                if (props.overallView && map.value) {
+                    map.value.setViewport(bm.value.getPath())
+                }
+                bm.value.show()
+            }
         } else {
             bm.value && bm.value.hide()
         }
     },
     {
         immediate: true,
+    }
+)
+watch(
+    () => props.overallView && isShow.value,
+    val => {
+        if (val && map.value && bm.value) {
+            map.value.setViewport(bm.value.getPath())
+        }
     }
 )
 onUnmounted(() => {

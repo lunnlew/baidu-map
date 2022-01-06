@@ -5,7 +5,7 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
-import { map, state } from '../../lib/map'
+import { BMapGLRef, map, state } from '../../lib/map'
 import { addCityBoundary, initBoundariesResult } from '../../lib/overlay'
 import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
@@ -84,13 +84,41 @@ watch(
     () => state.value.map_inited && isShow.value,
     val => {
         if (val) {
-            bm.value && bm.value?.overlay?.show()
+            if (bm.value) {
+                if (props.overallView && map.value) {
+                    map.value.setViewport(
+                        (boundaries_result.value?.rs.boundaries[0] as any).split(';').map(function (point: string) {
+                            let lnglat = point.split(',') as any
+                            if (BMapGLRef.value) {
+                                return new BMapGLRef.value.Point(lnglat[0], lnglat[1])
+                            }
+                        })
+                    )
+                }
+                bm.value.overlay?.show()
+            }
         } else {
             bm.value && bm.value?.overlay?.hide()
         }
     },
     {
         immediate: true,
+    }
+)
+
+watch(
+    () => props.overallView && isShow.value,
+    val => {
+        if (val && map.value && bm.value) {
+            map.value.setViewport(
+                (boundaries_result.value?.rs.boundaries[0] as any).split(';').map(function (point: string) {
+                    let lnglat = point.split(',') as any
+                    if (BMapGLRef.value) {
+                        return new BMapGLRef.value.Point(lnglat[0], lnglat[1])
+                    }
+                })
+            )
+        }
     }
 )
 
