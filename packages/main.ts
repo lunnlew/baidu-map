@@ -99,7 +99,10 @@ export {
 }
 
 const bm = {
-    install: function (app: { component: (arg0: string, arg1: any) => void }) {
+    install: function (app: any, options?: {
+        apiKey: string,
+    }) {
+        app.config.globalProperties.$bm_apikey = options?.apiKey
         app.component('baidu-map', BaiduMap)
         app.component('bm-scale-control', BmScaleControl)
         app.component('bm-zoom-control', BmZoomControl)
