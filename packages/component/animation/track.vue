@@ -20,6 +20,7 @@ const props = withDefaults(
         duration?: number
         delay?: number
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         points: () => [],
@@ -28,6 +29,7 @@ const props = withDefaults(
         duration: 20000,
         delay: 3000,
         show: true,
+        onReady: (el: any) => {},
     }
 )
 const emit = defineEmits({})
@@ -53,6 +55,7 @@ watch(
         if (val) {
             initTrackAnimation().then(result => {
                 bm.value = bindEvents(addTrackAnimation(merge_props), extractEmitEvents(attrs), emit)
+                emit('ready', bm.value)
             })
         } else {
             bm.value && bm.value?.cancel()

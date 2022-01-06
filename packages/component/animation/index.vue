@@ -27,6 +27,7 @@ const props = withDefaults(
         anchor?: number
         overallView?: boolean
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         keyFrames: () => [],
@@ -35,6 +36,7 @@ const props = withDefaults(
         interation: 2,
         overallView: true,
         show: true,
+        onReady: (el: any) => {},
     }
 )
 const emit = defineEmits({})
@@ -47,6 +49,7 @@ watch(
     val => {
         if (val) {
             bm.value = bindEvents(addViewAnimation(options.value), extractEmitEvents(attrs), emit)
+            emit('ready', bm.value)
         } else {
             bm.value && map.value?.cancelViewAnimation(bm.value)
             bm.value = null
