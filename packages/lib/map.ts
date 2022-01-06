@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, getCurrentInstance } from 'vue'
 import { BaiduMapProps, BMapGL } from 'typings'
 
 /**
@@ -60,14 +60,18 @@ export const map = ref<BMapGL.Map>()
  * @param apiKey 百度地图API Key
  */
 export function initMap(apiKey: string): Promise<{
-    BMap: BMapGL.BMapGL | undefined
+    BMapGL: BMapGL.BMapGL | undefined
 }> {
     return new Promise((resolve, reject) => {
+        let instance = getCurrentInstance()
         if (!state.value.map_loaded || !BMapGLRef.value) {
             // @ts-ignore
             if (!globalThis.BMapGL) {
                 if (!apiKey) {
-                    throw Error('请提供百度地图APIKEY参数：apiKey')
+                    apiKey = instance?.appContext.config.globalProperties.$bm_apikey
+                    if (!apiKey) {
+                        throw Error('请提供百度地图APIKEY参数：apiKey')
+                    }
                 }
                 // @ts-ignore
                 // 地图脚本加载完成后执行的初始化函数
@@ -75,8 +79,9 @@ export function initMap(apiKey: string): Promise<{
                     state.value.map_loaded = true
                     // @ts-ignore
                     BMapGLRef.value = globalThis.BMapGL as BMapGL.BMapGL
+                    instance ? instance.appContext.config.globalProperties.$BMapGL = BMapGLRef.value : ''
                     resolve({
-                        BMap: BMapGLRef.value,
+                        BMapGL: BMapGLRef.value,
                     })
                 }
                 let script = document.createElement('script')
@@ -89,13 +94,15 @@ export function initMap(apiKey: string): Promise<{
                 state.value.map_loaded = true
                 // @ts-ignore
                 BMapGLRef.value = globalThis.BMapGL as BMapGL.BMapGL
+                instance ? instance.appContext.config.globalProperties.$BMapGL = BMapGLRef.value : ''
                 resolve({
-                    BMap: BMapGLRef.value,
+                    BMapGL: BMapGLRef.value,
                 })
             }
         } else {
+            instance ? instance.appContext.config.globalProperties.$BMapGL = BMapGLRef.value : ''
             resolve({
-                BMap: BMapGLRef.value,
+                BMapGL: BMapGLRef.value,
             })
         }
     })
