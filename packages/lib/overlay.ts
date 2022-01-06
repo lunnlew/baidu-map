@@ -15,6 +15,7 @@ import {
     BmInfoWindowProps,
     BmBezierCurveProps,
 } from 'typings'
+import CustomPolyline from './CustomPolyline'
 
 /**
  * 添加点标注
@@ -526,5 +527,54 @@ export function addBezierCurve(
         }
         map.value.addOverlay(bc)
         return bc
+    }
+}
+
+/**
+ * 添加自定义折线覆盖物实现
+ * @param points
+ * @param polyline_params
+ */
+export function addCustomPolyline(
+    points: {
+        lng: number
+        lat: number
+    }[],
+    polyline_params: {
+        [key: string]: any
+    } & Required<BmPolylineProps>
+): BMapGL.Overlay | undefined {
+    if (BMapGLRef.value && map.value) {
+        let marker_options = {} as {
+            [key: string]: any
+        } & Required<BMapGL.PolylineOptions>
+        for (let key in polyline_params) {
+            if (key !== 'points' && key !== 'icons') {
+                marker_options[key as string] = polyline_params[key]
+            }
+        }
+        if (polyline_params.icons) {
+            marker_options.icons = []
+            for (let icon of polyline_params.icons) {
+                if (!BMapGLRef.value.IconSequence) {
+                    console.error('BMapGL 暂不支持 IconSequence')
+                    break
+                }
+                marker_options.push(
+                    new BMapGLRef.value.IconSequence(new BMapGLRef.value.Symbol(icon.symbol, icon), icon.offset, icon.repeat, icon.fixedRotation)
+                )
+            }
+        }
+        let polyline_points = []
+        for (let point of points) {
+            polyline_points.push(new BMapGLRef.value.Point(point.lng, point.lat))
+        }
+        CustomPolyline.prototype = new (BMapGLRef.value as BMapGL.BMapGL).Overlay()
+        let polyline = new (CustomPolyline as any)(polyline_points, marker_options)
+        if (polyline_params.overallView) {
+            map.value.setViewport(polyline_points)
+        }
+        map.value.addOverlay(polyline)
+        return polyline
     }
 }

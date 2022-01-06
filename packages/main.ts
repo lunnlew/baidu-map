@@ -19,6 +19,7 @@ import BmMarker3D from './component/overlay/marker3d.vue'
 import BmMarker3DIcon from './component/overlay/marker3d-icon.vue'
 import BmRichMarker from './component/overlay/rich-marker.vue'
 import BmPolyline from './component/overlay/polyline.vue'
+import BmCustomPolyline from './component/custom/polyline.vue'
 import BmPolylineIconSequence from './component/overlay/polyline-icon-sequence.vue'
 import BmPolygon from './component/overlay/polygon.vue'
 import BmCityBoundary from './component/overlay/city-boundary.vue'
@@ -83,6 +84,7 @@ export {
     BmCircle,
     BmInfoWindow,
     BmBezierCurve,
+    BmCustomPolyline,
     /**
      * 地图动画
      */
@@ -121,6 +123,7 @@ const bm = {
         app.component('bm-marker-threed', BmMarker3D)
         app.component('bm-marker-threed-icon', BmMarker3DIcon)
         app.component('bm-polyline', BmPolyline)
+        app.component('bm-custom-polyline', BmCustomPolyline)
         app.component('bm-icon-sequence', BmPolylineIconSequence)
         app.component('bm-polygon', BmPolygon)
         app.component('bm-city-boundary', BmCityBoundary)
