@@ -9,6 +9,8 @@ import hljsVuePlugin from "@highlightjs/vue-plugin";
 
 const app = createApp(App)
 app.use(router)
-app.use(BaiduMapVue3)
+app.use(BaiduMapVue3, {
+    apiKey: 'z7ngXdkrDCY1oFfaFLxyvL6UtiXu0f88',
+});
 app.use(hljsVuePlugin)
 app.mount('#app')

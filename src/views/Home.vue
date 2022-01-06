@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="code-title">
-                <span>全局引入</span>
+                <span>全局导入</span>
             </div>
             <div class="code-content">
                 <div class="code-snippet">
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="code-title">
-                <span>组件引入</span>
+                <span>局部导入</span>
             </div>
             <div class="code-content">
                 <div class="code-snippet">
