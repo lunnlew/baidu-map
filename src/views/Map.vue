@@ -303,7 +303,7 @@ const togglePolyline = function () {
     isShowPolyline.value = !isShowPolyline.value
 }
 function onPolylineClick(e: any) {
-    isShowPolygon.value = false
+    isShowPolyline.value = false
 }
 
 const isShowCircle = ref(false)
