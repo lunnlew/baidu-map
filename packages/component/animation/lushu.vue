@@ -22,6 +22,7 @@ const props = withDefaults(
         speed?: number
         icon?: string
         enableRotation?: boolean
+        overallView?: boolean
         show?: boolean
         onReady?: (el: any) => void
     }>(),
@@ -34,6 +35,7 @@ const props = withDefaults(
         speed: 500,
         icon: '',
         enableRotation: true,
+        overallView: false,
         show: true,
         onReady: (el: any) => {},
     }
@@ -41,7 +43,7 @@ const props = withDefaults(
 const emit = defineEmits({})
 const attrs = useAttrs()
 const slots = useSlots()
-const isShow = computed(() => state.value.map_inited && props.show && props.points.length > 0)
+const isShow = computed(() => state.value.map_inited && props.show)
 const options = computed(() => props)
 const bm = ref<{
     animation: BaiduMapVue3.BMapGL.LushuAnimation | null
@@ -81,7 +83,12 @@ watch(
             initLushu().then(result => {
                 bm.value = addLushu(merge_props)
                 bindEvents(bm.value?.animation, extractEmitEvents(attrs), emit)
-                emit('ready', bm.value)
+                emit('ready', {
+                    bmobj: bm.value?.animation,
+                    start: () => bm.value && bm.value?.animation?.start(),
+                    stop: () => bm.value && bm.value?.animation?.stop(),
+                    pause: () => bm.value && bm.value?.animation?.pause(),
+                })
             })
         } else {
             clear()

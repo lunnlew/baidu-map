@@ -42,6 +42,7 @@ const props = withDefaults(
         onInfoHtmlSet?: Function
         onPolylinesSet?: Function
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         location: undefined,
@@ -54,6 +55,7 @@ const props = withDefaults(
         onInfoHtmlSet: () => {},
         onPolylinesSet: () => {},
         show: true,
+        onReady: (el: any) => {},
     }
 )
 const emit = defineEmits({})
@@ -74,6 +76,22 @@ watch(
                 }
             }
             bm.value = bindEvents(addDrivingRoute(merge_props), extractEmitEvents(attrs), emit)
+            emit('ready', {
+                bmobj: bm.value,
+                search: () => {
+                    if (BMapGLRef.value && bm.value) {
+                        let start = props.start
+                        let end = props.end
+                        if ('lng' in props.start && 'lat' in props.start) {
+                            start = new BMapGLRef.value.Point(props.start.lng, props.start.lat)
+                        }
+                        if ('lng' in props.end && 'lat' in props.end) {
+                            end = new BMapGLRef.value.Point(props.end.lng, props.end.lat)
+                        }
+                        bm.value.search(start as any, end as any)
+                    }
+                },
+            })
         } else {
             bm.value && bm.value.clearResults()
             bm.value = null

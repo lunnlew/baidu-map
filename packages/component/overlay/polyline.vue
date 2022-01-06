@@ -26,6 +26,7 @@ const props = withDefaults(
         geodesic?: boolean
         overallView?: boolean
         show?: boolean
+        init?: boolean
     }>(),
     {
         points: () => [],
@@ -40,6 +41,7 @@ const props = withDefaults(
         clip: true,
         geodesic: false,
         show: true,
+        init: true,
     }
 )
 const attrs = useAttrs()
@@ -49,7 +51,7 @@ const isShow = computed(() => props.show && props.points.length > 0)
 const options = computed(() => props)
 const bm = ref<BaiduMapVue3.BMapGL.Polyline | null>()
 watch(
-    () => state.value.map_inited,
+    () => state.value.map_inited && props.init,
     val => {
         if (val) {
             let merge_props = { ...options.value, icons: [] }

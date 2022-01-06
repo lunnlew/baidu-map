@@ -35,7 +35,7 @@ const props = withDefaults(
 const emit = defineEmits({})
 const attrs = useAttrs()
 const slots = useSlots()
-const isShow = computed(() => state.value.map_inited && props.show && props.points.length > 0)
+const isShow = computed(() => state.value.map_inited && props.show)
 const options = computed(() => props)
 const bm = ref<BaiduMapVue3.BMapGL.TrackAnimation | null>()
 watch(
@@ -55,7 +55,13 @@ watch(
         if (val) {
             initTrackAnimation().then(result => {
                 bm.value = bindEvents(addTrackAnimation(merge_props), extractEmitEvents(attrs), emit)
-                emit('ready', bm.value)
+                emit('ready', {
+                    bmobj: bm.value,
+                    start: () => bm.value && bm.value?.start(),
+                    cancel: () => bm.value && bm.value?.cancel(),
+                    pause: () => bm.value && bm.value?.pause(),
+                    continue: () => bm.value && bm.value?.continue(),
+                })
             })
         } else {
             bm.value && bm.value?.cancel()
