@@ -23,6 +23,7 @@ const props = withDefaults(
         icon?: string
         enableRotation?: boolean
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         points: () => [],
@@ -34,6 +35,7 @@ const props = withDefaults(
         icon: '',
         enableRotation: true,
         show: true,
+        onReady: (el: any) => {},
     }
 )
 const emit = defineEmits({})
@@ -78,6 +80,7 @@ watch(
             initLushu().then(result => {
                 bm.value = addLushu(merge_props)
                 bindEvents(bm.value?.animation, extractEmitEvents(attrs), emit)
+                emit('ready', bm.value)
             })
         } else {
             clear()
