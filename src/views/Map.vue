@@ -34,6 +34,8 @@
             <button @click="togglePolygon">{{ togglePolygonText }}</button>
             <button @click="togglePolyline">{{ togglePolylineText }}</button>
             <button @click="toggleCircle">{{ toggleCircleText }}</button>
+            <button @click="toggleContextMenu">{{ toggleContextMenuText }}</button>
+            <button @click="toggleViewAnimation">{{ toggleViewAnimationText }}</button>
         </div>
         <baidu-map
             class="map"
@@ -115,6 +117,18 @@
                 @click="onPolylineClick"
             ></bm-polyline>
             <bm-circle :center="point" :radius="1000" :show="isShowCircle" @click="onCircleClick"></bm-circle>
+            <bm-context-menu :show="isShowContextMenu" @click="onCircleClick">
+                <bm-context-menu-item @click="onContextMenuClick"></bm-context-menu-item>
+                <bm-context-menu-item @click="onContextMenuClick"></bm-context-menu-item>
+                <bm-context-menu-item @click="onContextMenuClick"></bm-context-menu-item>
+                <bm-context-menu-item @click="onContextMenuClick"></bm-context-menu-item>
+                <bm-context-menu-item @click="onContextMenuClick"></bm-context-menu-item>
+            </bm-context-menu>
+            <bm-view-animation
+                :show="isShowViewAnimation"
+                :keyFrames="keyFrames"
+                @ready="(el:any)=>el.start()"
+            ></bm-view-animation>
         </baidu-map>
     </div>
 </template>
@@ -189,11 +203,16 @@ function centerChange(e: any) {
 }
 
 const backCenter = function () {
+    center.value = {
+        lng: 116.403963,
+        lat: 39.915119,
+    }
+    zoom.value = 13
     point.value = center.value
     setTimeout(() => {
         zoomCenter.value = center.value
         zoomVal.value = zoom.value
-    }, 1000)
+    }, 300)
 }
 
 const isShowMaker = ref(false)
@@ -290,11 +309,59 @@ function onPolylineClick(e: any) {
 const isShowCircle = ref(false)
 const toggleCircleText = computed(() => (isShowCircle.value ? '隐藏圆形' : '显示圆形'))
 const toggleCircle = function () {
+    backCenter()
     isShowCircle.value = !isShowCircle.value
 }
 function onCircleClick(e: any) {
     isShowCircle.value = false
 }
+
+const isShowContextMenu = ref(false)
+const toggleContextMenuText = computed(() => (isShowContextMenu.value ? '禁用右键菜单' : '启用右键菜单'))
+const toggleContextMenu = function () {
+    isShowContextMenu.value = !isShowContextMenu.value
+}
+function onContextMenuClick(e: any) {
+    isShowContextMenu.value = false
+}
+
+const isShowViewAnimation = ref(false)
+const toggleViewAnimationText = computed(() => (isShowViewAnimation.value ? '禁用视图动画' : '启用视图动画'))
+const toggleViewAnimation = function () {
+    isShowViewAnimation.value = !isShowViewAnimation.value
+}
+const keyFrames = ref([
+    {
+        center: {
+            lng: 116.403963,
+            lat: 39.915119,
+        },
+        zoom: 18,
+        tilt: 60,
+        heading: 0,
+        percentage: 0,
+    },
+    {
+        center: {
+            lng: 116.403963,
+            lat: 39.915119,
+        },
+        zoom: 18,
+        tilt: 60,
+        heading: 180,
+        percentage: 0.5,
+    },
+    {
+        center: {
+            lng: 116.403963,
+            lat: 39.915119,
+        },
+        zoom: 18,
+        tilt: 60,
+        heading: 360,
+        percentage: 1,
+    },
+])
 </script>
 <style lang="less">
 .map {
