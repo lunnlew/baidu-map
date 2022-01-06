@@ -41,8 +41,11 @@ const emit = defineEmits({})
 const bm = ref<BaiduMapVue3.BMapGL.Marker3D | null>()
 const isShow = computed(() => props.show)
 const options = computed(() => props)
+/**
+ * 3D点标记 对于bm.show(), bm.hide()支持不良好，目前通过创建方法和删除方法来实现
+ */
 watch(
-    () => state.value.map_inited,
+    () => state.value.map_inited && isShow.value,
     val => {
         if (val) {
             let merge_props = { ...options.value }
@@ -59,20 +62,9 @@ watch(
                 }
             }
             bm.value = bindEvents(addMaker3D(props.point, merge_props), extractEmitEvents(attrs), emit)
-            isShow.value && bm.value?.show()
-        }
-    },
-    {
-        immediate: true,
-    }
-)
-watch(
-    () => state.value.map_inited && isShow.value,
-    val => {
-        if (val) {
-            bm.value && bm.value.show()
         } else {
-            bm.value && bm.value.hide()
+            bm.value && map.value?.removeOverlay(bm.value)
+            bm.value = null
         }
     },
     {

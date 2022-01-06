@@ -49,7 +49,11 @@ watch(
     val => {
         if (val) {
             bm.value = bindEvents(addViewAnimation(options.value), extractEmitEvents(attrs), emit)
-            emit('ready', bm.value)
+            emit('ready', {
+                bmobj: bm.value,
+                start: () => map.value && bm.value && map.value.startViewAnimation(bm.value),
+                cancel: () => map.value && bm.value && map.value.cancelViewAnimation(bm.value),
+            })
         } else {
             bm.value && map.value?.cancelViewAnimation(bm.value)
             bm.value = null

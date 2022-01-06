@@ -26,6 +26,7 @@ const props = withDefaults(
         enableEditing?: boolean
         overallView?: boolean
         show?: boolean
+        init?: boolean
     }>(),
     {
         points: () => [],
@@ -40,6 +41,7 @@ const props = withDefaults(
         enableEditing: false,
         overallView: false,
         show: true,
+        init: true,
     }
 )
 const attrs = useAttrs()
@@ -49,7 +51,7 @@ const isShow = computed(() => props.show && props.points.length > 0)
 const options = computed(() => props)
 const bm = ref<BaiduMapVue3.BMapGL.Polygon | null>()
 watch(
-    () => state.value.map_inited,
+    () => state.value.map_inited && props.init,
     val => {
         if (val) {
             bm.value = bindEvents(addPolygon(props.points, options.value), extractEmitEvents(attrs), emit)

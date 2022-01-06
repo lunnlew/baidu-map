@@ -119,9 +119,6 @@ export function addMaker3D(
             marker_params.height,
             marker_options
         )
-        if (!marker_params.show) {
-            marker.hide()
-        }
         map.value.addOverlay(marker)
         return marker
     }
@@ -281,16 +278,14 @@ export function addCityBoundary(
                     boundaries_result.rs = rs
                 }
             }
+
             let hole
-            if (
-                boundaries_result?.rs.boundaries.length == 2 || !boundary_params?.points || boundary_params?.points.length == 0
-            ) {
-                hole = new BMapGLRef.value.Polygon(boundaries_result?.rs.boundaries as any, marker_options)
+            if ((boundaries_result?.rs?.boundaries || []).length >= 1) {
+                hole = new BMapGLRef.value.Polygon([boundaries_result?.rs.boundaries[0]] as any, marker_options)
             } else {
-                hole = new BMapGLRef.value.Polygon(
-                    [boundaries_result?.rs.boundaries[0], boundary_params.polygon.points.map((v: number[]) => v.join(', ')).join(';')],
-                    marker_options
-                )
+                return {
+                    boundary: boundaries_result?.boundary,
+                }
             }
             if (boundary_params.show) {
                 boundary_params.overallView && map.value.setViewport((boundaries_result?.rs.boundaries[0] as any).split(';').map(function (point: string) {
