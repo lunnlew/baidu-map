@@ -128,6 +128,8 @@ declare namespace BaiduMapVue3 {
          */
         onReady?: (state: any) => void
     }
+
+    export class CustomPolyline extends BMapGL.Overlay { }
     /**
      * 百度地图组件
      */
@@ -503,13 +505,13 @@ declare namespace BaiduMapVue3 {
         /**
          * 是否响应点击事件，默认为true
          */
-        enableClicking: boolean
+        enableClicking?: boolean
 
-        clip: boolean
+        clip?: boolean
         /**
          * 大地线模式
          */
-        geodesic: boolean
+        geodesic?: boolean
         /**
          * 是否显示
          */
@@ -2283,6 +2285,14 @@ declare namespace BaiduMapVue3 {
              * 折线的样式，solid或dashed
              */
             strokeStyle: string
+            /**
+             * 折线末端的样式，支持以下样式：
+             */
+            lineCap: 'butt' | 'round' | 'square' | 'inherit'
+            /**
+             * 折线的连接的样式，支持以下样式：
+             */
+            lineJoin: 'arcs' | 'bevel' | 'miter' | 'miter-clip' | 'round'
             /**
              * 是否在调用map.clearOverlays清除此覆盖物，默认为true
              */
@@ -6624,6 +6634,10 @@ declare namespace BaiduMapVue3 {
              * @param opts MarkerOptions
              */
             Marker: { new(point: Point, opts?: MarkerOptions): Marker }
+            /**
+             * 创建一个覆盖物
+             */
+            Overlay: { new(): Overlay }
             /**
              * 创建一个图像标注实例。point参数指定了图像标注所在的地理位置
              * @param point Point
