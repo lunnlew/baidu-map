@@ -51,10 +51,10 @@ const attrs = useAttrs()
 const slots = useSlots()
 const emit = defineEmits({})
 const bm = ref<BaiduMapVue3.BMapGL.Marker | null>()
-const isShow = computed(() => state.value.map_inited && props.show)
+const isShow = computed(() => props.show)
 const options = computed(() => props)
 watch(
-    () => isShow.value,
+    () => state.value.map_inited,
     val => {
         if (val) {
             let merge_props = { ...options.value }
@@ -68,9 +68,20 @@ watch(
                 }
             }
             bm.value = bindEvents(addMaker(props.point, merge_props), extractEmitEvents(attrs), emit)
+            isShow.value && bm.value?.show()
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => state.value.map_inited && isShow.value,
+    val => {
+        if (val) {
+            bm.value && bm.value.show()
         } else {
-            bm.value && map.value?.removeOverlay(bm.value)
-            bm.value = null
+            bm.value && bm.value.hide()
         }
     },
     {

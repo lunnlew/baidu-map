@@ -27,7 +27,7 @@ const attrs = useAttrs()
 const slots = useSlots()
 const emit = defineEmits({})
 const options = computed(() => props)
-const isShow = computed(() => state.value.map_inited && props.show)
+const isShow = computed(() => props.show)
 const bm = ref<{
     boundary: BaiduMapVue3.BMapGL.Boundary | null
     overlay: BaiduMapVue3.BMapGL.Overlay | null
@@ -44,7 +44,7 @@ watch(
     () => need_init_load.value,
     async () => {
         boundaries_result.value = await initBoundariesResult(props.name)
-        bindEvents(bm.value?.boundary, extractEmitEvents(attrs), emit)
+        bindEvents(boundaries_result.value?.boundary, extractEmitEvents(attrs), emit)
     }
 )
 
@@ -62,23 +62,31 @@ async function loadBoundary() {
         }
     }
     bm.value = await addCityBoundary(options.value.name, merge_props, boundaries_result.value)
+    isShow.value && bm.value?.overlay?.show()
     if (boundaries_result.value?.rs.boundaries) {
         boundaries_result.value.rs.boundaries = []
     }
 }
 
 watch(
-    () => isShow.value,
+    () => state.value.map_inited,
     async val => {
         if (val) {
             loadBoundary()
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+
+watch(
+    () => state.value.map_inited && isShow.value,
+    val => {
+        if (val) {
+            bm.value && bm.value?.overlay?.show()
         } else {
-            if (bm.value) {
-                map.value?.removeOverlay(bm.value?.overlay as BaiduMapVue3.BMapGL.Overlay)
-                bm.value.boundary = null
-                bm.value.overlay = null
-                bm.value = null
-            }
+            bm.value && bm.value?.overlay?.hide()
         }
     },
     {
