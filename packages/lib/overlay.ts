@@ -139,8 +139,20 @@ export function addPolyline(
             [key: string]: any
         } & Required<BMapGL.PolylineOptions>
         for (let key in polyline_params) {
-            if (key !== 'points') {
+            if (key !== 'points' && key !== 'icons') {
                 marker_options[key as string] = polyline_params[key]
+            }
+        }
+        if (polyline_params.icons) {
+            marker_options.icons = []
+            for (let icon of polyline_params.icons) {
+                if (!BMapGLRef.value.IconSequence) {
+                    console.error('BMapGL 暂不支持 IconSequence')
+                    break
+                }
+                marker_options.push(
+                    new BMapGLRef.value.IconSequence(new BMapGLRef.value.Symbol(icon.symbol, icon), icon.offset, icon.repeat, icon.fixedRotation)
+                )
             }
         }
         let polyline_points = []

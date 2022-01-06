@@ -19,6 +19,7 @@ import BmMarker3D from './component/overlay/marker3d.vue'
 import BmMarker3DIcon from './component/overlay/marker3d-icon.vue'
 import BmRichMarker from './component/overlay/rich-marker.vue'
 import BmPolyline from './component/overlay/polyline.vue'
+import BmPolylineIconSequence from './component/overlay/polyline-icon-sequence.vue'
 import BmPolygon from './component/overlay/polygon.vue'
 import BmCityBoundary from './component/overlay/city-boundary.vue'
 import BmPrism from './component/overlay/prism.vue'
@@ -71,6 +72,7 @@ export {
     BmMarker3DIcon as BmMarkerThreedIcon,
     BmRichMarker,
     BmPolyline,
+    BmPolylineIconSequence as BmIconSequence,
     BmPolygon,
     BmCityBoundary,
     BmPrism,
@@ -119,6 +121,7 @@ const bm = {
         app.component('bm-marker-threed', BmMarker3D)
         app.component('bm-marker-threed-icon', BmMarker3DIcon)
         app.component('bm-polyline', BmPolyline)
+        app.component('bm-icon-sequence', BmPolylineIconSequence)
         app.component('bm-polygon', BmPolygon)
         app.component('bm-city-boundary', BmCityBoundary)
         app.component('bm-prism', BmPrism)
