@@ -22,7 +22,10 @@ const props = withDefaults(
         raiseOnDrag?: boolean
         draggingCursor?: string
         rotation?: number
+        zIndex?: number
         title?: string
+        label?: string
+        labelOptions?: BaiduMapVue3.BMapGL.LabelOptions
         show?: boolean
     }>(),
     {
@@ -37,7 +40,10 @@ const props = withDefaults(
         raiseOnDrag: false,
         draggingCursor: '',
         rotation: 0,
+        zIndex: undefined,
         title: '',
+        label: '',
+        labelOptions: undefined,
         show: true,
     }
 )
@@ -76,6 +82,91 @@ watch(
     val => {
         if (bm.value && BMapGLRef.value) {
             bm.value.setPosition(new BMapGLRef.value.Point(val.lng, val.lat))
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.offset,
+    val => {
+        if (bm.value && BMapGLRef.value) {
+            bm.value.setOffset(new BMapGLRef.value.Size(val[0], val[1]))
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.title,
+    val => {
+        if (bm.value) {
+            bm.value.setTitle(val)
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.label,
+    val => {
+        if (bm.value && BMapGLRef.value) {
+            bm.value.setLabel(new BMapGLRef.value.Label(val, props.labelOptions))
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.enableMassClear,
+    val => {
+        if (bm.value) {
+            if (val) {
+                bm.value.enableMassClear()
+            } else {
+                bm.value.disableMassClear()
+            }
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.enableDragging,
+    val => {
+        if (bm.value) {
+            if (val) {
+                bm.value.enableDragging()
+            } else {
+                bm.value.disableDragging()
+            }
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.rotation,
+    val => {
+        if (bm.value) {
+            bm.value.setRotation(val)
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => props.zIndex,
+    val => {
+        if (bm.value) {
+            bm.value.setZIndex(val)
         }
     },
     {
