@@ -107,9 +107,6 @@ const CustomPolyline = function (this: any) {
     };
 
     this.show = function () {
-        if (!this.canvas) {
-            this._map.addOverlay(this);
-        }
         this.canvas.style.display = 'block';
     };
 
