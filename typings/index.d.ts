@@ -129,7 +129,12 @@ declare namespace BaiduMapVue3 {
         onReady?: (state: any) => void
     }
 
-    export class CustomPolyline extends BMapGL.Overlay { }
+    export class CustomPolyline extends BMapGL.Overlay {
+        /**
+         * 返回折线的点数组
+         */
+        getPath(): BMapGL.Point[]
+    }
     /**
      * 百度地图组件
      */
