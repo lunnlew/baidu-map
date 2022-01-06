@@ -31,20 +31,31 @@ const props = withDefaults(
 )
 const emit = defineEmits({})
 const attrs = useAttrs()
-const isShow = computed(() => state.value.map_inited && props.show)
+const isShow = computed(() => props.show)
 const options = computed(() => props)
 const bm = ref<BaiduMapVue3.BMapGL.RichMarker | null>()
 watch(
-    () => isShow.value,
+    () => state.value.map_inited,
     val => {
         let merge_props = { ...options.value }
         if (val) {
             initRichMarker().then(result => {
                 bm.value = bindEvents(addRichMarker(merge_props), extractEmitEvents(attrs), emit)
+                isShow.value && bm.value?.show()
             })
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => state.value.map_inited && isShow.value,
+    val => {
+        if (val) {
+            bm.value && bm.value.show()
         } else {
-            bm.value && map.value?.removeOverlay(bm.value)
-            bm.value = null
+            bm.value && bm.value.hide()
         }
     },
     {

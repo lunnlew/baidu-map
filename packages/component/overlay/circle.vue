@@ -48,16 +48,27 @@ const props = withDefaults(
 const attrs = useAttrs()
 const emit = defineEmits({})
 const bm = ref<BaiduMapVue3.BMapGL.Circle | null>()
-const isShow = computed(() => state.value.map_inited && props.show)
+const isShow = computed(() => props.show)
 const options = computed(() => props)
 watch(
-    () => isShow.value,
+    () => state.value.map_inited,
     val => {
         if (val) {
             bm.value = bindEvents(addCircle(props.center, props.radius, options.value), extractEmitEvents(attrs), emit)
+            isShow.value && bm.value?.show()
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => state.value.map_inited && isShow.value,
+    val => {
+        if (val) {
+            bm.value && bm.value.show()
         } else {
-            bm.value && map.value?.removeOverlay(bm.value)
-            bm.value = null
+            bm.value && bm.value.hide()
         }
     },
     {

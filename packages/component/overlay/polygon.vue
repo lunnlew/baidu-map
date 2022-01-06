@@ -45,17 +45,28 @@ const props = withDefaults(
 const attrs = useAttrs()
 const slots = useSlots()
 const emit = defineEmits({})
-const isShow = computed(() => state.value.map_inited && props.show && props.points.length > 0)
+const isShow = computed(() => props.show && props.points.length > 0)
 const options = computed(() => props)
 const bm = ref<BaiduMapVue3.BMapGL.Polygon | null>()
 watch(
-    () => isShow.value,
+    () => state.value.map_inited,
     val => {
         if (val) {
             bm.value = bindEvents(addPolygon(props.points, options.value), extractEmitEvents(attrs), emit)
+            isShow.value && bm.value?.show()
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+watch(
+    () => state.value.map_inited && isShow.value,
+    val => {
+        if (val) {
+            bm.value && bm.value.show()
         } else {
-            bm.value && map.value?.removeOverlay(bm.value)
-            bm.value = null
+            bm.value && bm.value.hide()
         }
     },
     {
