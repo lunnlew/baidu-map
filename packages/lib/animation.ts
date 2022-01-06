@@ -238,7 +238,7 @@ export function addLushu(
 
         let overlay = new BMapGLRef.value.Polyline(points, polyline_options)
         map.value.addOverlay(overlay)
-        if (animation_params.overallView) {
+        if (animation_params.overallView && animation_params.show) {
             map.value.setViewport(points)
         }
         let animation = new BMapGLLibRef.value.LuShu(map.value, points, animation_options)
