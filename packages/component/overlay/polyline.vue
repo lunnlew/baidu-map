@@ -7,7 +7,7 @@
 import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { map, state } from '../../lib/map'
 import { addPolyline } from '../../lib/overlay'
-import { bindEvents, extractEmitEvents } from '../../utils/util'
+import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
@@ -52,7 +52,17 @@ watch(
     () => isShow.value,
     val => {
         if (val) {
-            bm.value = bindEvents(addPolyline(props.points, options.value), extractEmitEvents(attrs), emit)
+            let merge_props = { ...options.value, icons: [] }
+            if (slots.default) {
+                let icons = slots.default().filter(s => (s.type as any).name == 'PolylineIconSequence')
+                for (let icon of icons) {
+                    let icon_props = mergePropsDefault(icon.props as any, (icon.type as any).props)
+                    if (icon_props.symbol) {
+                        ;(merge_props as any).icons.push(icon_props)
+                    }
+                }
+            }
+            bm.value = bindEvents(addPolyline(props.points, merge_props), extractEmitEvents(attrs), emit)
         } else {
             bm.value && map.value?.removeOverlay(bm.value)
             bm.value = null

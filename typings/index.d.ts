@@ -516,6 +516,23 @@ declare namespace BaiduMapVue3 {
         show?: boolean
     }
     export const BmPolyline: ComponentPublicInstance<BmPolylineProps>
+
+    interface BmIconSequenceProps {
+        symbol?: string
+        offset?: string
+        repeat?: string
+        fixedRotation?: boolean
+        anchor?: [number, number]
+        fillColor?: string
+        fillOpacity?: number
+        scale?: number
+        rotation?: number
+        strokeColor?: string
+        strokeOpacity?: number
+        strokeWeight?: number
+    }
+
+    export const BmIconSequence: ComponentPublicInstance<BmIconSequenceProps>
     /**
      * 多边形参数
      */
@@ -2061,7 +2078,7 @@ declare namespace BaiduMapVue3 {
         }
 
         /**
-         * 此类表示SvgSymbol构造函数的可选参数。它没有构造函数，但可通过对象字面量形式表示。
+         * 此类表示Symbol构造函数的可选参数。它没有构造函数，但可通过对象字面量形式表示。
          */
         interface SymbolOptions {
             /**
@@ -2168,7 +2185,7 @@ declare namespace BaiduMapVue3 {
         /**
          * 此类表示通过svg的path string创建的矢量图标类。
          */
-        class SvgSymbol {
+        class Symbol {
             /**
              * 创建一个矢量图标实例。path为svg中的path字符串或者已定义的符号常量,opts为矢量图标的样式
              * @param path
@@ -2229,7 +2246,7 @@ declare namespace BaiduMapVue3 {
             /**
              * 创建线上的符号类。symbol为符号样式;offset为符号相对于线起点的位置，取值可以是百分比也可以是像素位置，默认为"100%";repeat为符号在线上重复显示的距离，可以是百分比也可以是距离值，同时设置repeat与offset时，以repeat为准;fixedRotation设置图标的旋转角度是否与线走向一致，默认为true
              */
-            constructor(symbol: SvgSymbol, offset: string, repeat: string, fixedRotation: boolean)
+            constructor(symbol: Symbol, offset: string, repeat: string, fixedRotation: boolean)
         }
 
         /**
@@ -6625,6 +6642,16 @@ declare namespace BaiduMapVue3 {
              * @param opts PolylineOptions
              */
             Polyline: { new(points: Array<Point>, opts?: PolylineOptions): Polyline }
+            /**
+             * 创建线上的符号类。symbol为符号样式;offset为符号相对于线起点的位置，取值可以是百分比也可以是像素位置，默认为"100%";repeat为符号在线上重复显示的距离，可以是百分比也可以是距离值，同时设置repeat与offset时，以repeat为准;fixedRotation设置图标的旋转角度是否与线走向一致，默认为true
+             */
+            IconSequence: { new(symbol: Symbol, offset: string, repeat: string, fixedRotation: boolean): IconSequence }
+            /**
+             * 创建一个矢量图标实例。path为svg中的path字符串或者已定义的符号常量,opts为矢量图标的样式
+             * @param path
+             * @param opts
+             */
+            Symbol: { new(path: string | SymbolShapeType, opts: SymbolOptions): Symbol }
             /**
              * 创建多边形覆盖物
              * @param points Array<Point>
