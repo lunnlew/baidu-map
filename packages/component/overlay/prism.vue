@@ -32,7 +32,7 @@ const props = withDefaults(
         sideFillColor: '#5679ea',
         sideFillOpacity: 0.9,
         enableMassClear: true,
-        overallView: true,
+        overallView: false,
         show: true,
     }
 )

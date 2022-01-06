@@ -169,6 +169,7 @@ export function addLushu(
 ):
     | {
         animation: BMapGL.LushuAnimation | null
+        overlay: BMapGL.Overlay | null
         clearOverlays: Function
     }
     | undefined {
@@ -235,15 +236,17 @@ export function addLushu(
                 points.push(new BMapGLRef.value.Point(point.lng, point.lat))
             }
         }
-
         let overlay = new BMapGLRef.value.Polyline(points, polyline_options)
-        map.value.addOverlay(overlay)
-        if (animation_params.overallView && animation_params.show) {
-            map.value.setViewport(points)
+        if (animation_params.show) {
+            animation_params.overallView && map.value.setViewport(points)
+        } else {
+            overlay.hide()
         }
+        map.value.addOverlay(overlay)
         let animation = new BMapGLLibRef.value.LuShu(map.value, points, animation_options)
         return {
             animation,
+            overlay,
             clearOverlays: () => {
                 map.value?.removeOverlay(overlay)
             },

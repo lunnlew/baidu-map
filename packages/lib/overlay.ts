@@ -66,6 +66,9 @@ export function addMaker(
         }
         marker_options.offset = new BMapGLRef.value.Size(marker_params.offset[0], marker_params.offset[1])
         let marker = new BMapGLRef.value.Marker(new BMapGLRef.value.Point(point.lng, point.lat), marker_options)
+        if (!marker_params.show) {
+            marker.hide()
+        }
         map.value.addOverlay(marker)
         return marker
     }
@@ -116,6 +119,9 @@ export function addMaker3D(
             marker_params.height,
             marker_options
         )
+        if (!marker_params.show) {
+            marker.hide()
+        }
         map.value.addOverlay(marker)
         return marker
     }
@@ -161,8 +167,10 @@ export function addPolyline(
             polyline_points.push(new BMapGLRef.value.Point(point.lng, point.lat))
         }
         let polyline = new BMapGLRef.value.Polyline(polyline_points, marker_options)
-        if (polyline_params.overallView && polyline_params.show) {
-            map.value.setViewport(polyline_points)
+        if (polyline_params.show) {
+            polyline_params.overallView && map.value.setViewport(polyline_points)
+        } else {
+            polyline.hide()
         }
         map.value.addOverlay(polyline)
         return polyline
@@ -197,8 +205,10 @@ export function addPolygon(
             polygon_points.push(new BMapGLRef.value.Point(point.lng, point.lat))
         }
         let polygon = new BMapGLRef.value.Polygon(polygon_points, marker_options)
-        if (polygon_params.overallView && polygon_params.show) {
-            map.value.setViewport(polygon_points)
+        if (polygon_params.show) {
+            polygon_params.overallView && map.value.setViewport(polygon_points)
+        } else {
+            polygon.hide()
         }
         map.value.addOverlay(polygon)
         return polygon
@@ -271,14 +281,6 @@ export function addCityBoundary(
                     boundaries_result.rs = rs
                 }
             }
-            if (boundary_params.overallView && boundary_params.show) {
-                map.value.setViewport((boundaries_result?.rs.boundaries[0] as any).split(';').map(function (point: string) {
-                    let lnglat = point.split(',') as any
-                    if (BMapGLRef.value) {
-                        return new BMapGLRef.value.Point(lnglat[0], lnglat[1])
-                    }
-                }))
-            }
             let hole
             if (
                 boundaries_result?.rs.boundaries.length == 2 || !boundary_params?.points || boundary_params?.points.length == 0
@@ -289,6 +291,16 @@ export function addCityBoundary(
                     [boundaries_result?.rs.boundaries[0], boundary_params.polygon.points.map((v: number[]) => v.join(', ')).join(';')],
                     marker_options
                 )
+            }
+            if (boundary_params.show) {
+                boundary_params.overallView && map.value.setViewport((boundaries_result?.rs.boundaries[0] as any).split(';').map(function (point: string) {
+                    let lnglat = point.split(',') as any
+                    if (BMapGLRef.value) {
+                        return new BMapGLRef.value.Point(lnglat[0], lnglat[1])
+                    }
+                }))
+            } else {
+                hole.hide()
             }
             map.value.addOverlay(hole)
             resolve({
@@ -329,8 +341,10 @@ export function addPrism(
             prism_points.push(new BMapGLRef.value.Point(point.lng, point.lat))
         }
         let prism = new BMapGLRef.value.Prism(prism_points, prism_params.altitude, marker_options)
-        if (prism_params.overallView && prism_params.show) {
-            map.value.setViewport(prism_points)
+        if (prism_params.show) {
+            prism_params.overallView && map.value.setViewport(prism_points)
+        } else {
+            prism.hide()
         }
         map.value.addOverlay(prism)
         return prism
@@ -370,6 +384,9 @@ export function addGroundOverlay(
             new BMapGLRef.value.Point(pEnd.lng, pStart.lat)
         )
         let imgOverlay = new BMapGLRef.value.GroundOverlay(bounds, marker_options)
+        if (!ground_params.show) {
+            imgOverlay.hide()
+        }
         map.value.addOverlay(imgOverlay)
         return imgOverlay
     }
@@ -401,6 +418,9 @@ export function addLabel(
                 label_params.styles || {}
             ),
         })
+        if (!label_params.show) {
+            label.hide()
+        }
         map.value.addOverlay(label)
         return label
     }
@@ -467,6 +487,9 @@ export function addCircle(
             radius,
             marker_options
         )
+        if (!circle_params.show) {
+            circle.hide()
+        }
         map.value.addOverlay(circle)
         return circle
     }
@@ -522,8 +545,10 @@ export function addBezierCurve(
             control_points_arr.push(control_point_arr)
         }
         let bc = new BMapGLRef.value.BezierCurve(points, control_points_arr)
-        if (params.overallView && params.show) {
-            map.value.setViewport(points)
+        if (params.show) {
+            params.overallView && map.value.setViewport(points)
+        } else {
+            bc.hide()
         }
         map.value.addOverlay(bc)
         return bc
@@ -571,8 +596,10 @@ export function addCustomPolyline(
         }
         CustomPolyline.prototype = new (BMapGLRef.value as BMapGL.BMapGL).Overlay()
         let polyline = new (CustomPolyline as any)(polyline_points, marker_options)
-        if (polyline_params.overallView && polyline_params.show) {
-            map.value.setViewport(polyline_points)
+        if (polyline_params.show) {
+            polyline_params.overallView && map.value.setViewport(polyline_points)
+        } else {
+            polyline.hide()
         }
         map.value.addOverlay(polyline)
         return polyline

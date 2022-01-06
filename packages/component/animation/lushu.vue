@@ -45,6 +45,7 @@ const isShow = computed(() => state.value.map_inited && props.show && props.poin
 const options = computed(() => props)
 const bm = ref<{
     animation: BaiduMapVue3.BMapGL.LushuAnimation | null
+    overlay: BaiduMapVue3.BMapGL.Overlay | null
     clearOverlays: Function
 } | null>()
 function clear() {
@@ -58,25 +59,25 @@ function clear() {
 watch(
     () => isShow.value,
     val => {
-        let merge_props = { ...options.value }
-        if (slots.default) {
-            let MarkerPolyline = slots.default().find(s => (s.type as any).name == 'Polyline')
-            if (MarkerPolyline) {
-                let merge_polyline_props = mergePropsDefault(
-                    MarkerPolyline.props as any,
-                    (MarkerPolyline.type as any).props
-                )
-                ;(merge_props as any).polyline = merge_polyline_props
-            }
-            let MarkerIcon = slots.default().find(s => (s.type as any).name == 'MarkerIcon')
-            if (MarkerIcon) {
-                let merge_icon_props = mergePropsDefault(MarkerIcon.props as any, (MarkerIcon.type as any).props)
-                if (merge_icon_props.src) {
-                    ;(merge_props as any).icon = merge_icon_props
+        if (val) {
+            let merge_props = { ...options.value }
+            if (slots.default) {
+                let MarkerPolyline = slots.default().find(s => (s.type as any).name == 'Polyline')
+                if (MarkerPolyline) {
+                    let merge_polyline_props = mergePropsDefault(
+                        MarkerPolyline.props as any,
+                        (MarkerPolyline.type as any).props
+                    )
+                    ;(merge_props as any).polyline = merge_polyline_props
+                }
+                let MarkerIcon = slots.default().find(s => (s.type as any).name == 'MarkerIcon')
+                if (MarkerIcon) {
+                    let merge_icon_props = mergePropsDefault(MarkerIcon.props as any, (MarkerIcon.type as any).props)
+                    if (merge_icon_props.src) {
+                        ;(merge_props as any).icon = merge_icon_props
+                    }
                 }
             }
-        }
-        if (val) {
             initLushu().then(result => {
                 bm.value = addLushu(merge_props)
                 bindEvents(bm.value?.animation, extractEmitEvents(attrs), emit)
