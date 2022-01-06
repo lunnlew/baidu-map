@@ -65,7 +65,7 @@ body,
 .code-title {
     font-size: 14px;
     font-weight: bold;
-    padding-bottom: 10px;
+    padding-top: 10px;
 }
 .code-content {
     padding: 0;
