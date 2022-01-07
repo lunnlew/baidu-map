@@ -48,6 +48,7 @@
             :zoom="zoomVal"
             :zoomCenter="zoomCenter"
             :enableMapClick="true"
+            :enableWheelZoom="true"
             :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
             @zoom_changed="zoomChange"
             @center_changed="centerChange"
@@ -184,24 +185,11 @@
 </template>
 <script setup lang="ts">
 import { BMapGL } from 'baidu-map-vue3'
+import code_baidu_map from '../code/baidu-map.txt?raw'
+import code_baidu_map_style from '../code/baidu-map-style.txt?raw'
 import { computed, ref } from 'vue'
-const usecode = ref(`<baidu-map
-    class="map"
-    ref="map"
-    :apiKey="apiKey"
-    :center="{
-        lng: 116.403963,
-        lat: 39.915119,
-    }"
-    :zoom="13"
-    :enableMapClick="true"
-    :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
-    >
-</baidu-map>`)
-const usecode1 = ref(`.map {
-    width: 100%;
-    height: 400px;
-}`)
+const usecode = ref(code_baidu_map)
+const usecode1 = ref(code_baidu_map_style)
 const center = ref({
     lng: 116.403963,
     lat: 39.915119,

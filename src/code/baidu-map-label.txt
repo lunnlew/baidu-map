@@ -1,0 +1,9 @@
+<bm-label :position="point" :content="'文本标注'" :offset="[-25, -35]" :show="isShowLabel"> </bm-label>
+
+<script setup lang="ts">
+const point = ref({
+    lng: 116.403963,
+    lat: 39.915119,
+})
+const isShowLabel = ref(true)
+</script>

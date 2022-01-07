@@ -15,6 +15,14 @@ const routes = [
         meta: {
             title: "展示地图"
         }
+    },
+    {
+        path: "/marker",
+        name: "marker",
+        component: () => import(/* webpackChunkName: "home" */ './views/Marker.vue'),
+        meta: {
+            title: "地图标注"
+        }
     }
 ]
 const router = createRouter({

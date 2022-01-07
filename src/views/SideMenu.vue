@@ -61,7 +61,7 @@ onMounted(() => {
 .sidemenu-item-icon {
     width: 30px;
     height: 30px;
-    margin-right: 10px;
+    margin-right: 20px;
     img {
         width: 100%;
         height: 100%;

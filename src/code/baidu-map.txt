@@ -1,0 +1,14 @@
+<baidu-map
+    class="map"
+    ref="map"
+    :apiKey="apiKey"
+    :center="{
+        lng: 116.403963,
+        lat: 39.915119,
+    }"
+    :zoom="13"
+    :enableMapClick="true"
+    :enableWheelZoom="true"
+    :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+    >
+</baidu-map>
