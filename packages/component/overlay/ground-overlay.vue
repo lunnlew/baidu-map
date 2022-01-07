@@ -73,7 +73,7 @@ watch(
     }
 )
 watch(
-    () => state.value.map_inited && isShow.value,
+    () => isShow.value && state.value.map_inited,
     val => {
         if (val) {
             bm.value && bm.value.show()

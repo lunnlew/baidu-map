@@ -63,16 +63,13 @@ watch(
     }
 )
 watch(
-    () => state.value.map_inited && isShow.value,
+    () => isShow.value && state.value.map_inited,
     val => {
         if (val) {
             bm.value && bm.value.show()
         } else {
             bm.value && bm.value.hide()
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -81,9 +78,6 @@ watch(
         if (bm.value && BMapGLRef.value) {
             bm.value.setCenter(new BMapGLRef.value.Point(val.lng, val.lat))
         }
-    },
-    {
-        immediate: true,
     }
 )
 onUnmounted(() => {

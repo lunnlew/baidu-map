@@ -49,13 +49,19 @@ const slots = useSlots()
 const emit = defineEmits({})
 const isShow = computed(() => props.show && props.points.length > 0)
 const options = computed(() => props)
-const bm = ref<BaiduMapVue3.BMapGL.Polygon | null>()
+const bm = ref<{
+    polygon: BaiduMapVue3.BMapGL.Polygon | null
+    removeOverlay: Function
+    overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
+} | null>()
 watch(
-    () => state.value.map_inited && props.init,
+    () => props.init && state.value.map_inited,
     val => {
         if (val) {
-            bm.value = bindEvents(addPolygon(props.points, options.value), extractEmitEvents(attrs), emit)
-            isShow.value && bm.value?.show()
+            bm.value = addPolygon(props.points, options.value)
+            bindEvents(bm.value?.polygon, extractEmitEvents(attrs), emit)
+            isShow.value && bm.value?.polygon?.show()
+            options.value.overallView && bm.value?.overallView()
         }
     },
     {
@@ -63,17 +69,12 @@ watch(
     }
 )
 watch(
-    () => state.value.map_inited && isShow.value,
+    () => isShow.value && state.value.map_inited,
     val => {
         if (val) {
-            if (bm.value) {
-                if (props.overallView && map.value) {
-                    map.value.setViewport(bm.value.getPath())
-                }
-                bm.value.show()
-            }
+            bm.value && bm.value?.polygon?.show()
         } else {
-            bm.value && bm.value.hide()
+            bm.value && bm.value?.polygon?.hide()
         }
     },
     {
@@ -83,17 +84,20 @@ watch(
 watch(
     () => props.overallView && isShow.value,
     val => {
-        if (val && map.value && bm.value) {
-            map.value.setViewport(bm.value.getPath())
+        if (val) {
+            bm.value && bm.value?.overallView()
         }
     }
 )
 onUnmounted(() => {
-    bm.value && map.value?.removeOverlay(bm.value)
-    bm.value = null
+    if (bm.value) {
+        bm.value.removeOverlay()
+        bm.value.polygon = null
+        bm.value = null
+    }
 })
 defineExpose({
-    bmobj: bm.value,
+    bmobj: bm.value?.polygon,
 })
 </script>
 <script lang="ts">

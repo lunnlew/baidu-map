@@ -79,15 +79,6 @@ watch(
         immediate: true,
     }
 )
-watch(
-    () => props.point,
-    val => {
-        console.log('point changed', val)
-    },
-    {
-        deep: true,
-    }
-)
 onUnmounted(() => {
     map.value && map.value.closeInfoWindow()
     bm.value = null

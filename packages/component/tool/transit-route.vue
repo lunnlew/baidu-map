@@ -75,10 +75,21 @@ watch(
         let merge_props = { ...options.value }
         if (val) {
             // 自定义选择路线结果
-            merge_props.onSearchComplete = function (e: any) {
+            merge_props.onSearchComplete = async function (e: BaiduMapVue3.BMapGL.TransitRouteResult) {
                 if (typeof props.onSearchComplete === 'function') {
-                    let result = props.onSearchComplete(bm.value, e)
+                    let result = await Promise.resolve(props.onSearchComplete(bm.value, e))
                     points.value = result.points
+                } else {
+                    // 默认选择第一条路线
+                    var arrPois = [] as BaiduMapVue3.BMapGL.Point[]
+                    if (bm.value?.getStatus() == 0) {
+                        var plan = e.getPlan(0)
+                        for (var j = 0; j < plan.getNumRoutes(); j++) {
+                            var route = plan.getRoute(j)
+                            arrPois = arrPois.concat(route.getPath())
+                        }
+                    }
+                    points.value = arrPois
                 }
             }
             bm.value = bindEvents(addTransitRoute(merge_props), extractEmitEvents(attrs), emit)
@@ -91,7 +102,7 @@ watch(
         immediate: true,
     }
 )
-const points = ref([])
+const points = ref<BaiduMapVue3.BMapGL.Point[]>([])
 onUnmounted(() => {
     bm.value && bm.value.clearResults()
     bm.value = null

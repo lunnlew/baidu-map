@@ -23,6 +23,7 @@ const props = withDefaults(
         enableMassClear?: boolean
         overallView?: boolean
         show?: boolean
+        init?: boolean
     }>(),
     {
         points: () => [],
@@ -34,6 +35,7 @@ const props = withDefaults(
         enableMassClear: true,
         overallView: false,
         show: true,
+        init: true,
     }
 )
 const attrs = useAttrs()
@@ -41,13 +43,19 @@ const slots = useSlots()
 const emit = defineEmits([])
 const options = computed(() => props)
 const isShow = computed(() => props.show && props.points.length > 0)
-const bm = ref<BaiduMapVue3.BMapGL.Prism | null>()
+const bm = ref<{
+    prism: BaiduMapVue3.BMapGL.Prism | null
+    removeOverlay: Function
+    overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
+} | null>()
 watch(
-    () => state.value.map_inited,
+    () => props.init && state.value.map_inited,
     val => {
         if (val) {
-            bm.value = bindEvents(addPrism(props.points, options.value), extractEmitEvents(attrs), emit)
-            isShow.value && bm.value?.show()
+            bm.value = addPrism(props.points, options.value)
+            bindEvents(bm.value?.prism, extractEmitEvents(attrs), emit)
+            isShow.value && bm.value?.prism?.show()
+            options.value.overallView && bm.value?.overallView()
         }
     },
     {
@@ -55,17 +63,12 @@ watch(
     }
 )
 watch(
-    () => state.value.map_inited && isShow.value,
+    () => isShow.value && state.value.map_inited,
     val => {
         if (val) {
-            if (bm.value) {
-                if (props.overallView && map.value) {
-                    map.value.setViewport(bm.value.getPath())
-                }
-                bm.value.show()
-            }
+            bm.value?.prism?.show()
         } else {
-            bm.value && bm.value.hide()
+            bm.value?.prism?.hide()
         }
     },
     {
@@ -75,17 +78,20 @@ watch(
 watch(
     () => props.overallView && isShow.value,
     val => {
-        if (val && map.value && bm.value) {
-            map.value.setViewport(bm.value.getPath())
+        if (val) {
+            bm.value && bm.value?.overallView()
         }
     }
 )
 onUnmounted(() => {
-    bm.value && map.value?.removeOverlay(bm.value)
-    bm.value = null
+    if (bm.value) {
+        bm.value.removeOverlay()
+        bm.value.prism = null
+        bm.value = null
+    }
 })
 defineExpose({
-    bmobj: bm.value,
+    bmobj: bm.value?.prism,
 })
 </script>
 <script lang="ts">

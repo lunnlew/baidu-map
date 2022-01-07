@@ -48,13 +48,14 @@ const options = computed(() => props)
 const bm = ref<{
     animation: BaiduMapVue3.BMapGL.LushuAnimation | null
     overlay: BaiduMapVue3.BMapGL.Overlay | null
-    clearOverlays: Function
+    removeOverlay: Function
+    overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
 } | null>()
 function clear() {
     if (bm.value) {
         bm.value.animation?.stop()
         bm.value.animation = null
-        bm.value.clearOverlays()
+        bm.value.removeOverlay()
         bm.value = null
     }
 }
@@ -83,6 +84,7 @@ watch(
             initLushu().then(result => {
                 bm.value = addLushu(merge_props)
                 bindEvents(bm.value?.animation, extractEmitEvents(attrs), emit)
+                merge_props.overallView && bm.value?.overallView()
                 emit('ready', {
                     bmobj: bm.value?.animation,
                     start: () => bm.value && bm.value?.animation?.start(),
@@ -105,6 +107,14 @@ watch(
             bm.value?.animation?._setOptions({
                 speed: val,
             })
+    }
+)
+watch(
+    () => props.overallView && isShow.value,
+    val => {
+        if (val) {
+            bm.value && bm.value?.overallView()
+        }
     }
 )
 onUnmounted(() => {

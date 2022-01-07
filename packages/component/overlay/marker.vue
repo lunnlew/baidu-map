@@ -76,7 +76,7 @@ watch(
     }
 )
 watch(
-    () => state.value.map_inited && isShow.value,
+    () => isShow.value && state.value.map_inited,
     val => {
         if (val) {
             bm.value && bm.value.show()
@@ -94,9 +94,6 @@ watch(
         if (bm.value && BMapGLRef.value) {
             bm.value.setPosition(new BMapGLRef.value.Point(val.lng, val.lat))
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -105,9 +102,6 @@ watch(
         if (bm.value && BMapGLRef.value) {
             bm.value.setOffset(new BMapGLRef.value.Size(val[0], val[1]))
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -116,9 +110,6 @@ watch(
         if (bm.value) {
             bm.value.setTitle(val)
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -127,9 +118,6 @@ watch(
         if (bm.value && BMapGLRef.value) {
             bm.value.setLabel(new BMapGLRef.value.Label(val, props.labelOptions))
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -142,9 +130,6 @@ watch(
                 bm.value.disableMassClear()
             }
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -157,9 +142,6 @@ watch(
                 bm.value.disableDragging()
             }
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -168,9 +150,6 @@ watch(
         if (bm.value) {
             bm.value.setRotation(val)
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -179,9 +158,6 @@ watch(
         if (bm.value) {
             bm.value.setZIndex(val)
         }
-    },
-    {
-        immediate: true,
     }
 )
 onUnmounted(() => {
