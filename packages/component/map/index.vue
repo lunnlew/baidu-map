@@ -134,7 +134,9 @@ onMounted(() => {
             events.filter((v: string) => !merge_props.enableMapClick || !['click', 'mousedown'].includes(v)),
             emit
         )
-        emit('ready', result)
+        emit('ready', {
+            map: bm.value,
+        })
     })
 })
 watch(
