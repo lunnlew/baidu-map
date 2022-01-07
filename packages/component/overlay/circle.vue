@@ -25,6 +25,7 @@ const props = withDefaults(
         enableMassClear?: boolean
         enableEditing?: boolean
         enableClicking?: boolean
+        overallView?: boolean
         show?: boolean
     }>(),
     {
@@ -42,6 +43,7 @@ const props = withDefaults(
         enableMassClear: true,
         enableEditing: false,
         enableClicking: true,
+        overallView: false,
         show: true,
     }
 )
@@ -50,12 +52,21 @@ const emit = defineEmits({})
 const bm = ref<BaiduMapVue3.BMapGL.Circle | null>()
 const isShow = computed(() => props.show)
 const options = computed(() => props)
+function overallView() {
+    if (bm.value && map.value) {
+        map.value?.setViewport([
+            bm.value?.getBounds().getNorthEast() as BaiduMapVue3.BMapGL.Point,
+            bm.value?.getBounds().getSouthWest() as BaiduMapVue3.BMapGL.Point,
+        ])
+    }
+}
 watch(
     () => state.value.map_inited,
     val => {
         if (val) {
             bm.value = bindEvents(addCircle(props.center, props.radius, options.value), extractEmitEvents(attrs), emit)
             isShow.value && bm.value?.show()
+            isShow.value && props.overallView && overallView()
         }
     },
     {
@@ -77,6 +88,15 @@ watch(
     val => {
         if (bm.value && BMapGLRef.value) {
             bm.value.setCenter(new BMapGLRef.value.Point(val.lng, val.lat))
+            isShow.value && props.overallView && overallView()
+        }
+    }
+)
+watch(
+    () => props.overallView && isShow.value,
+    val => {
+        if (val) {
+            bm.value && overallView()
         }
     }
 )

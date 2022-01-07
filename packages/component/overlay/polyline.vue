@@ -71,7 +71,7 @@ watch(
             bm.value = addPolyline(props.points, merge_props)
             bindEvents(bm.value?.polyline, extractEmitEvents(attrs), emit)
             isShow.value && bm.value?.polyline?.show()
-            merge_props.overallView && bm.value?.overallView()
+            isShow.value && merge_props.overallView && bm.value?.overallView()
         }
     },
     { immediate: true }

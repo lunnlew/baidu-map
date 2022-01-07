@@ -84,7 +84,7 @@ watch(
             initLushu().then(result => {
                 bm.value = addLushu(merge_props)
                 bindEvents(bm.value?.animation, extractEmitEvents(attrs), emit)
-                merge_props.overallView && bm.value?.overallView()
+                isShow.value && merge_props.overallView && bm.value?.overallView()
                 emit('ready', {
                     bmobj: bm.value?.animation,
                     start: () => bm.value && bm.value?.animation?.start(),

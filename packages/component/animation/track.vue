@@ -61,7 +61,7 @@ watch(
             initTrackAnimation().then(result => {
                 bm.value = addTrackAnimation(merge_props)
                 bindEvents(bm.value?.animation, extractEmitEvents(attrs), emit)
-                merge_props.overallView && bm.value?.overallView()
+                isShow.value && merge_props.overallView && bm.value?.overallView()
                 emit('ready', {
                     bmobj: bm.value,
                     start: () => bm.value && bm.value?.animation?.start(),
