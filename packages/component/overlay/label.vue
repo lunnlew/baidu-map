@@ -4,8 +4,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
-import { BMapGLRef, map, state } from '../../lib/map'
+import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
+import { BMapGLRef } from '../../lib/map'
 import { addLabel } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
@@ -43,7 +43,8 @@ const emit = defineEmits({})
 const bm = ref<BaiduMapVue3.BMapGL.Label | null>()
 const isShow = computed(() => props.show)
 const options = computed(() => props)
-const currentMap = computed(() => props.map || map.value)
+const inject_map = inject('map') as any
+const currentMap = computed(() => props.map || inject_map.value)
 watch(
     () => currentMap.value,
     val => {
@@ -81,7 +82,7 @@ watch(
     }
 )
 onUnmounted(() => {
-    bm.value && map.value?.removeOverlay(bm.value)
+    bm.value && currentMap.value?.removeOverlay(bm.value)
     bm.value = null
 })
 </script>

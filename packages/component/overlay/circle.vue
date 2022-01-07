@@ -4,8 +4,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, onUnmounted, ref, useAttrs, watch } from 'vue'
-import { BMapGLRef, map, state } from '../../lib/map'
+import { computed, inject, onUnmounted, ref, useAttrs, watch } from 'vue'
+import { BMapGLRef } from '../../lib/map'
 import { addCircle } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
@@ -56,10 +56,11 @@ const emit = defineEmits({})
 const bm = ref<BaiduMapVue3.BMapGL.Circle | null>()
 const isShow = computed(() => props.show)
 const options = computed(() => props)
-const currentMap = computed(() => props.map || map.value)
-function overallView() {
-    if (bm.value && map.value) {
-        map.value?.setViewport([
+const inject_map = inject('map') as any
+const currentMap = computed(() => props.map || inject_map.value)
+function overallView(map: BaiduMapVue3.BMapGL.Map) {
+    if (bm.value && map) {
+        map.setViewport([
             bm.value?.getBounds().getNorthEast() as BaiduMapVue3.BMapGL.Point,
             bm.value?.getBounds().getSouthWest() as BaiduMapVue3.BMapGL.Point,
         ])
@@ -78,7 +79,7 @@ watch(
                 bmobj: bm.value,
             })
             isShow.value && bm.value?.show()
-            isShow.value && props.overallView && overallView()
+            isShow.value && props.overallView && overallView(currentMap.value)
         }
     },
     {
@@ -100,7 +101,7 @@ watch(
     val => {
         if (bm.value && BMapGLRef.value) {
             bm.value.setCenter(new BMapGLRef.value.Point(val.lng, val.lat))
-            isShow.value && props.overallView && overallView()
+            isShow.value && props.overallView && overallView(currentMap.value)
         }
     }
 )
@@ -108,12 +109,12 @@ watch(
     () => props.overallView && isShow.value,
     val => {
         if (val) {
-            bm.value && overallView()
+            bm.value && overallView(currentMap.value)
         }
     }
 )
 onUnmounted(() => {
-    bm.value && map.value?.removeOverlay(bm.value)
+    bm.value && currentMap.value?.removeOverlay(bm.value)
     bm.value = null
 })
 </script>

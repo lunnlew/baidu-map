@@ -4,8 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
-import { map, state } from '../../lib/map'
+import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addTrackAnimation, initTrackAnimation } from '../../lib/animation'
 import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
@@ -37,6 +36,8 @@ const props = withDefaults(
 const emit = defineEmits({})
 const attrs = useAttrs()
 const slots = useSlots()
+const inject_map = inject('map') as any
+const currentMap = computed(() => props.map || inject_map.value)
 const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
 const bm = ref<{
@@ -45,7 +46,6 @@ const bm = ref<{
     removeOverlay: Function
     overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
 } | null>()
-const currentMap = computed(() => props.map || map.value)
 watch(
     () => isShow.value,
     val => {
