@@ -30,6 +30,7 @@
             <button @click="toggleLocationControl">{{ toggleLocationControlText }}</button>
             <button @click="toggleNavigationControl">{{ toggleNavigationControlText }}</button>
             <button @click="toggleNavigationThreeControl">{{ toggleNavigationThreeControlText }}</button>
+            <button @click="toggleCustomControl">{{ toggleCustomControlText }}</button>
             <button @click="toggleCityBoundary">{{ toggleCityBoundaryText }}</button>
             <button @click="togglePolygon">{{ togglePolygonText }}</button>
             <button @click="togglePolyline">{{ togglePolylineText }}</button>
@@ -100,6 +101,19 @@
                 :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
                 :type="BMapGL.NavigationControlType.BMAP_NAVIGATION_CONTROL_SMALL"
             ></bm-navigation-control>
+            <bm-custom-control
+                :show="isShowCustomControl"
+                :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
+                :offset="[300, 90]"
+            >
+                <div class="custom-control-content">
+                    <div class="custom-control-title">自定义控件</div>
+                    <div class="custom-control-body">
+                        <button @click="toggleCustomControlCount">计数:{{ count }}</button>
+                        <button @click="isShowCustomControl = false">隐藏</button>
+                    </div>
+                </div>
+            </bm-custom-control>
             <bm-navigation-threed-control
                 :show="isShowNavigationThreeControl"
                 :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
@@ -169,7 +183,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { BMapGL } from 'baidu-map-vue3'
+import { BMapGL } from '../packages/main'
 import { computed, ref } from 'vue'
 const usecode = ref(`<baidu-map
     class="map"
@@ -304,6 +318,17 @@ const toggleNavigationThreeControlText = computed(() =>
 const toggleNavigationThreeControl = function () {
     isShowNavigationThreeControl.value = !isShowNavigationThreeControl.value
 }
+
+const isShowCustomControl = ref(false)
+const toggleCustomControlText = computed(() => (isShowCustomControl.value ? '隐藏自定义控件' : '显示自定义控件'))
+const toggleCustomControl = function () {
+    isShowCustomControl.value = !isShowCustomControl.value
+}
+const count = ref(0)
+const toggleCustomControlCount = function () {
+    count.value++
+}
+
 const isShowCityBoundary = ref(false)
 const toggleCityBoundaryText = computed(() => (isShowCityBoundary.value ? '隐藏城市边界' : '显示城市边界'))
 const toggleCityBoundary = function () {
