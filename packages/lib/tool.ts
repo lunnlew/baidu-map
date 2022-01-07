@@ -1,15 +1,16 @@
 import { BMapGL, BmDistanceToolProps, BmDrawingManagerProps, BmDrivingRouteProps, BmRichMarkerProps, BmRidingRouteProps, BmTransitRouteProps, BmWalkingRouteProps } from 'typings'
-import { BMapGLLibRef, BMapGLRef, map, state } from './map'
+import { BMapGLLibRef, BMapGLRef, state } from './map'
 
 /**
  * 添加驾驶线路规划
  */
 export function addDrivingRoute(
+    map: BMapGL.Map | undefined,
     params: {
         [key: string]: any
     } & Required<BmDrivingRouteProps>
 ): BMapGL.DrivingRoute | undefined {
-    if (BMapGLRef.value && map.value) {
+    if (BMapGLRef.value && map) {
         let options = {} as {
             [key: string]: any
         } & Required<BMapGL.DrivingRouteOptions>
@@ -29,12 +30,12 @@ export function addDrivingRoute(
             }
             options.location = new BMapGLRef.value.Point(location.lng, location.lat)
         } else {
-            options.location = map.value
+            options.location = map
         }
 
         if (typeof options.renderOptions !== 'undefined') {
             if (typeof options.renderOptions.map === 'undefined') {
-                options.renderOptions.map = map.value
+                options.renderOptions.map = map
             }
         }
         let dr = new BMapGLRef.value.DrivingRoute(options.location, options)
@@ -46,11 +47,12 @@ export function addDrivingRoute(
  * 添加公交线路规划
  */
 export function addTransitRoute(
+    map: BMapGL.Map | undefined,
     params: {
         [key: string]: any
     } & Required<BmTransitRouteProps>
 ): BMapGL.TransitRoute | undefined {
-    if (BMapGLRef.value && map.value) {
+    if (BMapGLRef.value && map) {
         let options = {} as {
             [key: string]: any
         } & Required<BMapGL.TransitRouteOptions>
@@ -70,12 +72,12 @@ export function addTransitRoute(
             }
             options.location = new BMapGLRef.value.Point(location.lng, location.lat)
         } else {
-            options.location = map.value
+            options.location = map
         }
 
         if (typeof options.renderOptions !== 'undefined') {
             if (typeof options.renderOptions.map === 'undefined') {
-                options.renderOptions.map = map.value
+                options.renderOptions.map = map
             }
         }
         let dr = new BMapGLRef.value.TransitRoute(options.location, options)
@@ -87,11 +89,12 @@ export function addTransitRoute(
  * 添加步行线路规划
  */
 export function addWalkingRoute(
+    map: BMapGL.Map | undefined,
     params: {
         [key: string]: any
     } & Required<BmWalkingRouteProps>
 ): BMapGL.WalkingRoute | undefined {
-    if (BMapGLRef.value && map.value) {
+    if (BMapGLRef.value && map) {
         let options = {} as {
             [key: string]: any
         } & Required<BMapGL.WalkingRouteOptions>
@@ -111,12 +114,12 @@ export function addWalkingRoute(
             }
             options.location = new BMapGLRef.value.Point(location.lng, location.lat)
         } else {
-            options.location = map.value
+            options.location = map
         }
 
         if (typeof options.renderOptions !== 'undefined') {
             if (typeof options.renderOptions.map === 'undefined') {
-                options.renderOptions.map = map.value
+                options.renderOptions.map = map
             }
         }
         let dr = new BMapGLRef.value.WalkingRoute(options.location, options)
@@ -128,11 +131,12 @@ export function addWalkingRoute(
  * 添加骑行线路规划
  */
 export function addRidingRoute(
+    map: BMapGL.Map | undefined,
     params: {
         [key: string]: any
     } & Required<BmRidingRouteProps>
 ): BMapGL.RidingRoute | undefined {
-    if (BMapGLRef.value && map.value) {
+    if (BMapGLRef.value && map) {
         let options = {} as {
             [key: string]: any
         } & Required<BMapGL.RidingRouteOptions>
@@ -152,12 +156,12 @@ export function addRidingRoute(
             }
             options.location = new BMapGLRef.value.Point(location.lng, location.lat)
         } else {
-            options.location = map.value
+            options.location = map
         }
 
         if (typeof options.renderOptions !== 'undefined') {
             if (typeof options.renderOptions.map === 'undefined') {
-                options.renderOptions.map = map.value
+                options.renderOptions.map = map
             }
         }
         let dr = new BMapGLRef.value.RidingRoute(options.location, options)
@@ -203,12 +207,13 @@ export function initDistanceTool(): Promise<{
  * @param tool_params
  */
 export function addDistanceTool(
+    map: BMapGL.Map | undefined,
     tool_params: {
         [key: string]: any
     } & Required<BmDistanceToolProps>
 ): BMapGL.DistanceTool | undefined {
-    if (BMapGLRef.value && map.value && BMapGLLibRef.value) {
-        let tool = new BMapGLLibRef.value.DistanceTool(map.value)
+    if (BMapGLRef.value && map && BMapGLLibRef.value) {
+        let tool = new BMapGLLibRef.value.DistanceTool(map)
         return tool
     }
 }
@@ -258,12 +263,13 @@ export function initDrawingManager(): Promise<{
  * @param tool_params
  */
 export function addDrawingManager(
+    map: BMapGL.Map | undefined,
     tool_params: {
         [key: string]: any
     } & Required<BmDrawingManagerProps>
 ): BMapGL.DrawingManager | undefined {
-    if (BMapGLRef.value && map.value && BMapGLLibRef.value) {
-        let tool = new BMapGLLibRef.value.DrawingManager(map.value)
+    if (BMapGLRef.value && map && BMapGLLibRef.value) {
+        let tool = new BMapGLLibRef.value.DrawingManager(map)
         return tool
     }
 }
@@ -306,11 +312,12 @@ export function initRichMarker(): Promise<{
  * @param tool_params
  */
 export function addRichMarker(
+    map: BMapGL.Map | undefined,
     tool_params: {
         [key: string]: any
     } & Required<BmRichMarkerProps>
 ): BMapGL.RichMarker | undefined {
-    if (BMapGLRef.value && map.value && BMapGLLibRef.value) {
+    if (BMapGLRef.value && map && BMapGLLibRef.value) {
         let tool = new BMapGLLibRef.value.RichMarker(tool_params.html, new BMapGLRef.value.Point(tool_params.point.lng, tool_params.point.lat), {
             anchor: new BMapGLRef.value.Size(tool_params.anchor[0], tool_params.anchor[1]),
             enableDragging: tool_params.enableDragging,
@@ -318,7 +325,7 @@ export function addRichMarker(
         if (!tool_params.show) {
             tool.hide()
         }
-        map.value.addOverlay(tool);
+        map.addOverlay(tool);
         return tool
     }
 }

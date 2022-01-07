@@ -11,6 +11,7 @@ import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/ut
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         points: {
             lng: number
             lat: number
@@ -29,6 +30,7 @@ const props = withDefaults(
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         points: () => [],
         strokeColor: '#FF0000',
         strokeWeight: 2,
@@ -54,8 +56,9 @@ const bm = ref<{
     removeOverlay: Function
     overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
 } | null>()
+const currentMap = computed(() => props.map || map.value)
 watch(
-    () => state.value.map_inited,
+    () => currentMap.value,
     val => {
         if (val) {
             let merge_props = { ...options.value, icons: [] }
@@ -68,7 +71,7 @@ watch(
                     }
                 }
             }
-            bm.value = addCustomPolyline(props.points, merge_props)
+            bm.value = addCustomPolyline(currentMap.value, props.points, merge_props)
             emit('ready', {
                 bmobj: bm.value?.polyline,
             })
@@ -80,7 +83,7 @@ watch(
     { immediate: true }
 )
 watch(
-    () => isShow.value && state.value.map_inited,
+    () => isShow.value && currentMap.value,
     val => {
         if (val) {
             bm.value?.polyline?.show()

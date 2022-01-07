@@ -5,12 +5,13 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
-import { state } from '../../lib/map'
+import { map, state } from '../../lib/map'
 import { addTrackAnimation, initTrackAnimation } from '../../lib/animation'
 import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         points?: {
             lng: number
             lat: number
@@ -23,6 +24,7 @@ const props = withDefaults(
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         points: () => [],
         overallView: false,
         tilt: 30,
@@ -35,7 +37,7 @@ const props = withDefaults(
 const emit = defineEmits({})
 const attrs = useAttrs()
 const slots = useSlots()
-const isShow = computed(() => state.value.map_inited && props.show)
+const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
 const bm = ref<{
     animation: BaiduMapVue3.BMapGL.TrackAnimation | null
@@ -43,6 +45,7 @@ const bm = ref<{
     removeOverlay: Function
     overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
 } | null>()
+const currentMap = computed(() => props.map || map.value)
 watch(
     () => isShow.value,
     val => {
@@ -59,7 +62,7 @@ watch(
                 }
             }
             initTrackAnimation().then(result => {
-                bm.value = addTrackAnimation(merge_props)
+                bm.value = addTrackAnimation(currentMap.value, merge_props)
                 bindEvents(bm.value?.animation, extractEmitEvents(attrs), emit)
                 isShow.value && merge_props.overallView && bm.value?.overallView()
                 emit('ready', {

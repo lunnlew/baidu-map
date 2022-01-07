@@ -11,6 +11,7 @@ import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         points?: {
             lng: number
             lat: number
@@ -27,6 +28,7 @@ const props = withDefaults(
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         points: () => [],
         altitude: 5000,
         topFillColor: '#5679ea',
@@ -50,11 +52,12 @@ const bm = ref<{
     removeOverlay: Function
     overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
 } | null>()
+const currentMap = computed(() => props.map || map.value)
 watch(
-    () => props.init && state.value.map_inited,
+    () => props.init && currentMap.value,
     val => {
         if (val) {
-            bm.value = addPrism(props.points, options.value)
+            bm.value = addPrism(currentMap.value, props.points, options.value)
             bindEvents(bm.value?.prism, extractEmitEvents(attrs), emit)
             isShow.value && bm.value?.prism?.show()
             emit('ready', {
@@ -68,7 +71,7 @@ watch(
     }
 )
 watch(
-    () => isShow.value && state.value.map_inited,
+    () => isShow.value && currentMap.value,
     val => {
         if (val) {
             bm.value?.prism?.show()

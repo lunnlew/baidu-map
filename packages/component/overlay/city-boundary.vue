@@ -5,12 +5,13 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
-import { BMapGLRef, map, state } from '../../lib/map'
+import { map } from '../../lib/map'
 import { addCityBoundary, initBoundariesResult } from '../../lib/overlay'
 import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         name: string
         overallView?: boolean
         firstLoad?: boolean
@@ -18,6 +19,7 @@ const props = withDefaults(
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         name: '北京市',
         overallView: false,
         firstLoad: true,
@@ -42,12 +44,13 @@ const boundaries_result = ref<{
         boundaries: string[]
     }
 }>()
+const currentMap = computed(() => props.map || map.value)
 
-const need_init_load = computed(() => state.value.map_inited && props.firstLoad)
+const need_init_load = computed(() => currentMap.value && props.firstLoad)
 watch(
     () => need_init_load.value,
     async () => {
-        boundaries_result.value = await initBoundariesResult(props.name)
+        boundaries_result.value = await initBoundariesResult(currentMap.value, props.name)
         bindEvents(boundaries_result.value?.boundary, extractEmitEvents(attrs), emit)
     }
 )
@@ -65,7 +68,7 @@ async function loadBoundary() {
             ;(merge_props as any).polygon = merge_polygon_props
         }
     }
-    bm.value = await addCityBoundary(options.value.name, merge_props, boundaries_result.value)
+    bm.value = await addCityBoundary(currentMap.value, options.value.name, merge_props, boundaries_result.value)
     emit('ready', {
         bmobj: bm.value,
     })
@@ -74,7 +77,7 @@ async function loadBoundary() {
 }
 
 watch(
-    () => state.value.map_inited,
+    () => currentMap.value,
     async val => {
         if (val) {
             loadBoundary()
@@ -86,7 +89,7 @@ watch(
 )
 
 watch(
-    () => isShow.value && state.value.map_inited,
+    () => isShow.value && currentMap.value,
     val => {
         if (val) {
             bm.value?.overlay?.show()

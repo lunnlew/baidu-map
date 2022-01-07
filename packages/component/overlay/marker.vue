@@ -5,12 +5,13 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
-import { BMapGLRef, map, state } from '../../lib/map'
+import { BMapGLRef, state, map } from '../../lib/map'
 import { addMaker } from '../../lib/overlay'
 import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         point: {
             lng: number
             lat: number
@@ -30,6 +31,7 @@ const props = withDefaults(
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         point: () => ({
             lng: 116.403963,
             lat: 39.915119,
@@ -55,8 +57,9 @@ const emit = defineEmits({})
 const bm = ref<BaiduMapVue3.BMapGL.Marker | null>()
 const isShow = computed(() => props.show)
 const options = computed(() => props)
+const currentMap = computed(() => props.map || map.value)
 watch(
-    () => state.value.map_inited,
+    () => currentMap.value,
     val => {
         if (val) {
             let merge_props = { ...options.value }
@@ -69,7 +72,7 @@ watch(
                     }
                 }
             }
-            bm.value = bindEvents(addMaker(props.point, merge_props), extractEmitEvents(attrs), emit)
+            bm.value = bindEvents(addMaker(currentMap.value, props.point, merge_props), extractEmitEvents(attrs), emit)
             emit('ready', {
                 bmobj: bm.value,
             })
@@ -81,7 +84,7 @@ watch(
     }
 )
 watch(
-    () => isShow.value && state.value.map_inited,
+    () => isShow.value && currentMap.value,
     val => {
         if (val) {
             bm.value && bm.value.show()

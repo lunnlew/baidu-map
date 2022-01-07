@@ -16,12 +16,13 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, watch } from 'vue'
-import { state } from '../../lib/map'
+import { state, map } from '../../lib/map'
 import { addDrawingManager, initDrawingManager } from '../../lib/tool'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         drawingType?: string
         isOpen?: boolean
         enableCalculate?: boolean
@@ -42,6 +43,7 @@ const props = withDefaults(
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         isOpen: false,
         drawingType: 'marker',
         enableCalculate: false,
@@ -99,17 +101,18 @@ const props = withDefaults(
  */
 const emit = defineEmits({})
 const attrs = useAttrs()
-const isShow = computed(() => state.value.map_inited && props.show)
+const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
 const bm = ref<BaiduMapVue3.BMapGL.DrawingManager | null>()
 const btns = ref(['marker', 'polyline', 'rectangle', 'polygon', 'circle'])
+const currentMap = computed(() => props.map || map.value)
 watch(
     () => isShow.value,
     val => {
         let merge_props = { ...options.value }
         if (val) {
             initDrawingManager().then(result => {
-                bm.value = bindEvents(addDrawingManager(merge_props), extractEmitEvents(attrs), emit)
+                bm.value = bindEvents(addDrawingManager(currentMap.value, merge_props), extractEmitEvents(attrs), emit)
                 emit('ready', {
                     bmobj: bm.value,
                     open: () => bm.value && bm.value.open(),
