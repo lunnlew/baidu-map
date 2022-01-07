@@ -17,12 +17,14 @@ const props = withDefaults(
         anchor?: number
         offset?: [number, number]
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         dom: undefined,
         anchor: 0,
         offset: () => [50, 80],
         show: true,
+        onReady: (el: any) => {},
     }
 )
 const attrs = useAttrs()
@@ -41,6 +43,9 @@ watch(
                 merge_props.dom = control.value
             }
             bm.value = bindEvents(addCustomControl(merge_props), extractEmitEvents(attrs), emit)
+            emit('ready', {
+                bmobj: bm.value,
+            })
         } else {
             bm.value && map.value?.removeControl(bm.value)
             bm.value = null
@@ -53,9 +58,6 @@ watch(
 onUnmounted(() => {
     bm.value && map.value?.removeControl(bm.value)
     bm.value = null
-})
-defineExpose({
-    bmobj: bm.value,
 })
 </script>
 <script lang="ts">

@@ -15,12 +15,14 @@ const props = withDefaults(
         overallView?: boolean
         firstLoad?: boolean
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         name: '北京市',
         overallView: false,
         firstLoad: true,
         show: true,
+        onReady: (el: any) => {},
     }
 )
 const attrs = useAttrs()
@@ -64,6 +66,9 @@ async function loadBoundary() {
         }
     }
     bm.value = await addCityBoundary(options.value.name, merge_props, boundaries_result.value)
+    emit('ready', {
+        bmobj: bm.value,
+    })
     isShow.value && bm.value?.overlay?.show()
     isShow.value && merge_props.overallView && bm.value?.overallView()
 }
@@ -117,9 +122,6 @@ onUnmounted(() => {
         bm.value.overlay = null
         bm.value = null
     }
-})
-defineExpose({
-    bmobj: bm.value,
 })
 </script>
 <script lang="ts">

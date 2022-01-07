@@ -12,9 +12,11 @@ import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         show: true,
+        onReady: (el: any) => {},
     }
 )
 const attrs = useAttrs()
@@ -41,6 +43,9 @@ watch(
                 }
             }
             bm.value = bindEvents(addContextMenu(merge_props), extractEmitEvents(attrs), emit)
+            emit('ready', {
+                bmobj: bm.value,
+            })
         } else {
             bm.value && map.value?.removeContextMenu(bm.value)
             bm.value = null
@@ -53,9 +58,6 @@ watch(
 onUnmounted(() => {
     bm.value && map.value?.removeContextMenu(bm.value)
     bm.value = null
-})
-defineExpose({
-    bmobj: bm.value,
 })
 </script>
 <script lang="ts">

@@ -24,6 +24,7 @@ const props = withDefaults(
         overallView?: boolean
         show?: boolean
         init?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         points: () => [],
@@ -36,11 +37,12 @@ const props = withDefaults(
         overallView: false,
         show: true,
         init: true,
+        onReady: (el: any) => {},
     }
 )
 const attrs = useAttrs()
 const slots = useSlots()
-const emit = defineEmits([])
+const emit = defineEmits({})
 const options = computed(() => props)
 const isShow = computed(() => props.show && props.points.length > 0)
 const bm = ref<{
@@ -55,6 +57,9 @@ watch(
             bm.value = addPrism(props.points, options.value)
             bindEvents(bm.value?.prism, extractEmitEvents(attrs), emit)
             isShow.value && bm.value?.prism?.show()
+            emit('ready', {
+                bmobj: bm.value?.prism,
+            })
             isShow.value && options.value.overallView && bm.value?.overallView()
         }
     },
@@ -89,9 +94,6 @@ onUnmounted(() => {
         bm.value.prism = null
         bm.value = null
     }
-})
-defineExpose({
-    bmobj: bm.value?.prism,
 })
 </script>
 <script lang="ts">

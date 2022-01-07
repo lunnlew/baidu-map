@@ -39,6 +39,7 @@ const props = withDefaults(
         rectangleOptions?: BaiduMapVue3.DrawingStyleOptions
         labelOptions?: BaiduMapVue3.DrawingLabelOptions
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         isOpen: false,
@@ -90,6 +91,7 @@ const props = withDefaults(
             padding: '5px',
         }),
         show: true,
+        onReady: (el: any) => {},
     }
 )
 /**
@@ -108,6 +110,11 @@ watch(
         if (val) {
             initDrawingManager().then(result => {
                 bm.value = bindEvents(addDrawingManager(merge_props), extractEmitEvents(attrs), emit)
+                emit('ready', {
+                    bmobj: bm.value,
+                    open: () => bm.value && bm.value.open(),
+                    close: () => bm.value && bm.value._isOpen && bm.value.close(),
+                })
                 bm.value && merge_props.isOpen && bm.value.open()
             })
         } else {
@@ -150,7 +157,6 @@ onUnmounted(() => {
     bm.value = null
 })
 defineExpose({
-    bmobj: bm.value,
     open: () => bm.value && bm.value.open(),
     close: () => bm.value && bm.value._isOpen && bm.value.close(),
 })

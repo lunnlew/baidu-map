@@ -27,6 +27,7 @@ const props = withDefaults(
         overallView?: boolean
         show?: boolean
         init?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         points: () => [],
@@ -42,6 +43,7 @@ const props = withDefaults(
         overallView: false,
         show: true,
         init: true,
+        onReady: (el: any) => {},
     }
 )
 const attrs = useAttrs()
@@ -60,6 +62,9 @@ watch(
         if (val) {
             bm.value = addPolygon(props.points, options.value)
             bindEvents(bm.value?.polygon, extractEmitEvents(attrs), emit)
+            emit('ready', {
+                bmobj: bm.value?.polygon,
+            })
             isShow.value && bm.value?.polygon?.show()
             isShow.value && options.value.overallView && bm.value?.overallView()
         }
@@ -95,9 +100,6 @@ onUnmounted(() => {
         bm.value.polygon = null
         bm.value = null
     }
-})
-defineExpose({
-    bmobj: bm.value?.polygon,
 })
 </script>
 <script lang="ts">

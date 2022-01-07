@@ -27,6 +27,7 @@ const props = withDefaults(
         label?: string
         labelOptions?: BaiduMapVue3.BMapGL.LabelOptions
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         point: () => ({
@@ -45,6 +46,7 @@ const props = withDefaults(
         label: '',
         labelOptions: undefined,
         show: true,
+        onReady: (el: any) => {},
     }
 )
 const attrs = useAttrs()
@@ -68,6 +70,9 @@ watch(
                 }
             }
             bm.value = bindEvents(addMaker(props.point, merge_props), extractEmitEvents(attrs), emit)
+            emit('ready', {
+                bmobj: bm.value,
+            })
             isShow.value && bm.value?.show()
         }
     },
@@ -163,9 +168,6 @@ watch(
 onUnmounted(() => {
     bm.value && map.value?.removeOverlay(bm.value)
     bm.value = null
-})
-defineExpose({
-    bmobj: bm.value,
 })
 </script>
 <script lang="ts">

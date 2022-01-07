@@ -18,6 +18,7 @@ const props = withDefaults(
         anchor?: [number, number]
         enableDragging?: boolean
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         point: () => ({
@@ -27,6 +28,7 @@ const props = withDefaults(
         anchor: () => [0, 0],
         enableDragging: true,
         show: true,
+        onReady: (el: any) => {},
     }
 )
 const emit = defineEmits({})
@@ -41,6 +43,9 @@ watch(
         if (val) {
             initRichMarker().then(result => {
                 bm.value = bindEvents(addRichMarker(merge_props), extractEmitEvents(attrs), emit)
+                emit('ready', {
+                    bmobj: bm.value,
+                })
                 isShow.value && bm.value?.show()
             })
         }
@@ -65,9 +70,6 @@ watch(
 onUnmounted(() => {
     bm.value && map.value?.removeOverlay(bm.value)
     bm.value = null
-})
-defineExpose({
-    bmobj: bm.value,
 })
 </script>
 <script lang="ts">

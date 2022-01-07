@@ -58,7 +58,7 @@ const props = withDefaults(
         autoSafeArea?: boolean
         restrictCenter?: boolean
         preserveDrawingBuffer?: boolean
-        onReady?: (state: any) => void
+        onReady?: (el: any) => void
     }>(),
     {
         center: () => ({
@@ -341,9 +341,6 @@ onUnmounted(() => {
         bm.value.destroy()
     }
     bm.value = null
-})
-defineExpose({
-    bmobj: bm.value,
 })
 </script>
 <script lang="ts">
