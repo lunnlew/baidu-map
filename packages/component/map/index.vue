@@ -58,6 +58,14 @@ const props = withDefaults(
         autoSafeArea?: boolean
         restrictCenter?: boolean
         preserveDrawingBuffer?: boolean
+        displayOptions?: {
+            overlay?: boolean
+            layer?: boolean
+            building?: boolean
+            street?: boolean
+            poi?: boolean
+            skyColors?: string[]
+        }
         onReady?: (el: any) => void
     }>(),
     {
@@ -105,6 +113,16 @@ const props = withDefaults(
         autoSafeArea: false,
         restrictCenter: true,
         preserveDrawingBuffer: false,
+        displayOptions: () => {
+            return {
+                overlay: true,
+                layer: true,
+                building: true,
+                street: true,
+                poi: true,
+                skyColors: [],
+            }
+        },
         onReady: () => {},
     }
 )
@@ -134,11 +152,23 @@ onMounted(() => {
             events.filter((v: string) => !merge_props.enableMapClick || !['click', 'mousedown'].includes(v)),
             emit
         )
+        bm.value?.setDisplayOptions(merge_props.displayOptions)
         emit('ready', {
             map: bm.value,
         })
     })
 })
+watch(
+    () => props.displayOptions,
+    (val: any) => {
+        if (bm.value) {
+            bm.value?.setDisplayOptions(val)
+        }
+    },
+    {
+        deep: true,
+    }
+)
 watch(
     () => props.center,
     val => {

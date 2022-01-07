@@ -4532,6 +4532,11 @@ declare namespace BaiduMapVue3 {
              */
             closeInfoWindow(): void
             /**
+             * 设置元素隐藏及可见
+             * @param options 
+             */
+            setDisplayOptions(options: DisplayOptions): void
+            /**
              * 添加事件监听函数
              * @param event
              * @param handler
@@ -4549,6 +4554,33 @@ declare namespace BaiduMapVue3 {
              * @param listener
              */
             on<T extends MapEvent>(event: T, listener: (data: OnMapEventPayload<T>) => void): this
+        }
+
+        interface DisplayOptions {
+            /**
+             * 是否显示覆盖物
+             */
+            overlay?: boolean
+            /**
+             * 是否显示叠加图层，地球模式暂不支持
+             */
+            layer?: boolean
+            /**
+             * 是否显示3D建筑物（仅支持WebGL方式渲染的地图）
+             */
+            building?: boolean
+            /**
+             * 是否显示路网（只对卫星图和地球模式有效）
+             */
+            street?: boolean
+            /**
+             * 是否显示POI信息 
+             */
+            poi?: boolean
+            /**
+             * 天空颜色
+             */
+            skyColors?: string[]
         }
 
         /**
