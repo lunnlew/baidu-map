@@ -63,7 +63,7 @@ watch(
                 bindEvents(bm.value?.animation, extractEmitEvents(attrs), emit)
                 isShow.value && merge_props.overallView && bm.value?.overallView()
                 emit('ready', {
-                    bmobj: bm.value,
+                    bmobj: bm.value?.animation,
                     start: () => bm.value && bm.value?.animation?.start(),
                     cancel: () => bm.value && bm.value?.animation?.cancel(),
                     pause: () => bm.value && bm.value?.animation?.pause(),
