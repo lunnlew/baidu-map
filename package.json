@@ -13,6 +13,7 @@
       "import": "./packages/main.ts"
     }
   },
+  "license": "MIT",
   "scripts": {
     "dev": "vite --host",
     "build": "vue-tsc --noEmit && vite build",
