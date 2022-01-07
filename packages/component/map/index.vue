@@ -8,7 +8,7 @@
 import { computed, onMounted, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import BMapGL from '../../lib/BMapGL'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
-import { addMap, BMapGLRef, initMap } from '../../lib/map'
+import { state, addMap, BMapGLRef, initMap } from '../../lib/map'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
@@ -372,6 +372,8 @@ onUnmounted(() => {
         bm.value.clearAreaSpots()
         bm.value.destroy()
     }
+    state.value.map_inited = false
+    BMapGLRef.value = null as any
     bm.value = null
 })
 </script>
