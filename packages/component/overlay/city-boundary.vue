@@ -4,8 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
-import { map } from '../../lib/map'
+import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addCityBoundary, initBoundariesResult } from '../../lib/overlay'
 import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
@@ -44,7 +43,8 @@ const boundaries_result = ref<{
         boundaries: string[]
     }
 }>()
-const currentMap = computed(() => props.map || map.value)
+const inject_map = inject('map') as any
+const currentMap = computed(() => props.map || inject_map.value)
 
 const need_init_load = computed(() => currentMap.value && props.firstLoad)
 watch(
@@ -57,7 +57,7 @@ watch(
 
 async function loadBoundary() {
     if (bm.value?.overlay) {
-        map.value?.removeOverlay(bm.value?.overlay as BaiduMapVue3.BMapGL.Overlay)
+        currentMap.value?.removeOverlay(bm.value?.overlay as BaiduMapVue3.BMapGL.Overlay)
         bm.value.overlay = null
     }
     let merge_props = { ...options.value }

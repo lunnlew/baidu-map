@@ -9,8 +9,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
-import { map, state } from '../../lib/map'
+import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addInfoWindow } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
@@ -61,7 +60,8 @@ const emit = defineEmits({})
 const bm = ref<BaiduMapVue3.BMapGL.InfoWindow | null>()
 const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
-const currentMap = computed(() => props.map || map.value)
+const inject_map = inject('map') as any
+const currentMap = computed(() => props.map || inject_map.value)
 watch(
     () => isShow.value,
     val => {
@@ -79,7 +79,7 @@ watch(
                 bmobj: bm.value,
             })
         } else {
-            map.value && map.value.closeInfoWindow()
+            currentMap.value && currentMap.value.closeInfoWindow()
             bm.value = null
         }
     },
@@ -88,7 +88,7 @@ watch(
     }
 )
 onUnmounted(() => {
-    map.value && map.value.closeInfoWindow()
+    currentMap.value && currentMap.value.closeInfoWindow()
     bm.value = null
 })
 </script>

@@ -5,10 +5,10 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
+import { computed, onMounted, onUnmounted, provide, ref, useAttrs, useSlots, watch } from 'vue'
 import BMapGL from '../../lib/BMapGL'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
-import { state, addMap, BMapGLRef, initMap } from '../../lib/map'
+import { addMap, BMapGLRef, initMap } from '../../lib/map'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
@@ -134,6 +134,7 @@ const slots = useSlots()
 const options = computed(() => props)
 const mapView = ref()
 const map = ref()
+provide('map', map)
 onMounted(() => {
     let merge_props = { ...options.value }
     initMap(merge_props.apiKey)?.then(() => {

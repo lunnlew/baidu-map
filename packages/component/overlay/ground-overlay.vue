@@ -4,8 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { useAttrs, useSlots, watch, computed, ref, onUnmounted } from 'vue'
-import { map, state } from '../../lib/map'
+import { useAttrs, useSlots, watch, computed, ref, onUnmounted, inject } from 'vue'
 import { addGroundOverlay } from '../../lib/overlay'
 import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
@@ -49,7 +48,8 @@ const emit = defineEmits({})
 const options = computed(() => props)
 const isShow = computed(() => props.show)
 const bm = ref<BaiduMapVue3.BMapGL.GroundOverlay | null>()
-const currentMap = computed(() => props.map || map.value)
+const inject_map = inject('map') as any
+const currentMap = computed(() => props.map || inject_map.value)
 watch(
     () => currentMap.value,
     val => {
@@ -94,7 +94,7 @@ watch(
     }
 )
 onUnmounted(() => {
-    bm.value && map.value?.removeOverlay(bm.value)
+    bm.value && currentMap.value?.removeOverlay(bm.value)
     bm.value = null
 })
 </script>

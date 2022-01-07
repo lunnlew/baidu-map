@@ -15,8 +15,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, onUnmounted, ref, useAttrs, watch } from 'vue'
-import { state, map } from '../../lib/map'
+import { computed, onUnmounted, ref, useAttrs, watch, inject } from 'vue'
 import { addDrawingManager, initDrawingManager } from '../../lib/tool'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
@@ -105,7 +104,8 @@ const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
 const bm = ref<BaiduMapVue3.BMapGL.DrawingManager | null>()
 const btns = ref(['marker', 'polyline', 'rectangle', 'polygon', 'circle'])
-const currentMap = computed(() => props.map || map.value)
+const inject_map = inject('map') as any
+const currentMap = computed(() => props.map || inject_map.value)
 watch(
     () => isShow.value,
     val => {

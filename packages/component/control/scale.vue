@@ -2,8 +2,7 @@
     <div></div>
 </template>
 <script setup lang="ts">
-import { computed, onUnmounted, ref, useAttrs, watch } from 'vue'
-import { map, state } from '../../lib/map'
+import { computed, inject, onUnmounted, ref, useAttrs, watch } from 'vue'
 import { addScaleControl } from '../../lib/control'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
@@ -28,7 +27,8 @@ const emit = defineEmits({})
 const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
 const bm = ref<BaiduMapVue3.BMapGL.ScaleControl | null>()
-const currentMap = computed(() => props.map || map.value)
+const inject_map = inject('map') as any
+const currentMap = computed(() => props.map || inject_map.value)
 watch(
     () => isShow.value,
     val => {
@@ -38,7 +38,7 @@ watch(
                 bmobj: bm.value,
             })
         } else {
-            bm.value && map.value?.removeControl(bm.value)
+            bm.value && currentMap.value?.removeControl(bm.value)
             bm.value = null
         }
     },
@@ -47,7 +47,7 @@ watch(
     }
 )
 onUnmounted(() => {
-    bm.value && map.value?.removeControl(bm.value)
+    bm.value && currentMap.value?.removeControl(bm.value)
     bm.value = null
 })
 </script>

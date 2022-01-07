@@ -4,8 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
-import { map, state } from '../../lib/map'
+import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addPolygon } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
@@ -58,7 +57,8 @@ const bm = ref<{
     removeOverlay: Function
     overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
 } | null>()
-const currentMap = computed(() => props.map || map.value)
+const inject_map = inject('map') as any
+const currentMap = computed(() => props.map || inject_map.value)
 watch(
     () => props.init && currentMap.value,
     val => {
