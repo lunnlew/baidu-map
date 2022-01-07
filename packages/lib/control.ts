@@ -154,7 +154,10 @@ export function addCustomControl(
             anchor: props.anchor,
             offset: new BMapGLRef.value.Size(props.offset[0], props.offset[1]),
         })
-        Control.prototype.initialize = (map: BMapGL.Map) => map.getContainer().appendChild(props.dom)
+        if (!props.dom) {
+            console.error('自定义控件dom不能为空')
+        }
+        Control.prototype.initialize = (map: BMapGL.Map) => props.dom && map.getContainer().appendChild(props.dom)
         let control = new (Control as any)()
         map.value.addControl(control)
         return control
