@@ -61,7 +61,7 @@ watch(
             bm.value = addPolygon(props.points, options.value)
             bindEvents(bm.value?.polygon, extractEmitEvents(attrs), emit)
             isShow.value && bm.value?.polygon?.show()
-            options.value.overallView && bm.value?.overallView()
+            isShow.value && options.value.overallView && bm.value?.overallView()
         }
     },
     {

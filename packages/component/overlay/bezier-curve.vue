@@ -76,7 +76,7 @@ watch(
             bm.value = addBezierCurve(options.value)
             bindEvents(bm.value?.bc, extractEmitEvents(attrs), emit)
             isShow.value && bm.value?.bc?.show()
-            options.value.overallView && bm.value?.overallView()
+            isShow.value && options.value.overallView && bm.value?.overallView()
         }
     },
     {

@@ -55,7 +55,7 @@ watch(
             bm.value = addPrism(props.points, options.value)
             bindEvents(bm.value?.prism, extractEmitEvents(attrs), emit)
             isShow.value && bm.value?.prism?.show()
-            options.value.overallView && bm.value?.overallView()
+            isShow.value && options.value.overallView && bm.value?.overallView()
         }
     },
     {

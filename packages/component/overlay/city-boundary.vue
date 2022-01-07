@@ -47,9 +47,6 @@ watch(
     async () => {
         boundaries_result.value = await initBoundariesResult(props.name)
         bindEvents(boundaries_result.value?.boundary, extractEmitEvents(attrs), emit)
-    },
-    {
-        immediate: true,
     }
 )
 
@@ -68,7 +65,7 @@ async function loadBoundary() {
     }
     bm.value = await addCityBoundary(options.value.name, merge_props, boundaries_result.value)
     isShow.value && bm.value?.overlay?.show()
-    merge_props.overallView && bm.value?.overallView()
+    isShow.value && merge_props.overallView && bm.value?.overallView()
 }
 
 watch(

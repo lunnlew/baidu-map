@@ -47,7 +47,11 @@ const slots = useSlots()
 const emit = defineEmits({})
 const isShow = computed(() => props.show && props.points.length > 0)
 const options = computed(() => props)
-const bm = ref<BaiduMapVue3.CustomPolyline | null>()
+const bm = ref<{
+    polyline: BaiduMapVue3.CustomPolyline | null
+    removeOverlay: Function
+    overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
+} | null>()
 watch(
     () => state.value.map_inited,
     val => {
@@ -62,8 +66,10 @@ watch(
                     }
                 }
             }
-            bm.value = bindEvents(addCustomPolyline(props.points, merge_props), extractEmitEvents(attrs), emit) as any
-            isShow.value && bm.value?.show()
+            bm.value = addCustomPolyline(props.points, merge_props)
+            bindEvents(bm.value?.polyline, extractEmitEvents(attrs), emit)
+            isShow.value && bm.value?.polyline?.show()
+            isShow.value && merge_props.overallView && bm.value?.overallView()
         }
     },
     { immediate: true }
@@ -72,14 +78,9 @@ watch(
     () => isShow.value && state.value.map_inited,
     val => {
         if (val) {
-            if (bm.value) {
-                if (props.overallView && map.value) {
-                    map.value.setViewport(bm.value.getPath())
-                }
-                bm.value.show()
-            }
+            bm.value?.polyline?.show()
         } else {
-            bm.value && bm.value.hide()
+            bm.value?.polyline?.hide()
         }
     },
     {
@@ -89,14 +90,17 @@ watch(
 watch(
     () => props.overallView && isShow.value,
     val => {
-        if (val && map.value && bm.value) {
-            map.value.setViewport(bm.value.getPath())
+        if (val) {
+            bm.value && bm.value?.overallView()
         }
     }
 )
 onUnmounted(() => {
-    bm.value && map.value?.removeOverlay(bm.value)
-    bm.value = null
+    if (bm.value) {
+        bm.value.removeOverlay()
+        bm.value.polyline = null
+        bm.value = null
+    }
 })
 defineExpose({
     bmobj: bm.value,
