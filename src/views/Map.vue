@@ -183,7 +183,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { BMapGL } from '../packages/main'
+import { BMapGL } from 'baidu-map-vue3'
 import { computed, ref } from 'vue'
 const usecode = ref(`<baidu-map
     class="map"
