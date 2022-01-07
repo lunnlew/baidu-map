@@ -143,9 +143,6 @@ watch(
         if (bm.value && BMapGLRef.value) {
             bm.value.panTo(new BMapGLRef.value.Point(val.lng, val.lat))
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -158,9 +155,6 @@ watch(
                     : null,
             })
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -169,9 +163,6 @@ watch(
         if (bm.value) {
             bm.value.setMapType(val)
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -184,9 +175,6 @@ watch(
                 bm.value.disableRotate()
             }
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -199,9 +187,6 @@ watch(
                 bm.value.disableScrollWheelZoom()
             }
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -214,9 +199,6 @@ watch(
                 bm.value.disableContinuousZoom()
             }
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -229,9 +211,6 @@ watch(
                 bm.value.disableResizeOnCenter()
             }
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -244,9 +223,6 @@ watch(
                 bm.value.disableDoubleClickZoom()
             }
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -259,9 +235,6 @@ watch(
                 bm.value.disableKeyboard()
             }
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -274,9 +247,6 @@ watch(
                 bm.value.disablePinchToZoom()
             }
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -289,9 +259,6 @@ watch(
                 bm.value.disableRotate()
             }
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -304,9 +271,6 @@ watch(
                 bm.value.disableRotateGestures()
             }
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -319,9 +283,6 @@ watch(
                 bm.value.disableTiltGestures()
             }
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -334,9 +295,6 @@ watch(
                 bm.value.disableAutoResize()
             }
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -349,9 +307,6 @@ watch(
                 bm.value.disableDragging()
             }
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -364,9 +319,6 @@ watch(
                 bm.value.disableInertialDragging()
             }
         }
-    },
-    {
-        immediate: true,
     }
 )
 watch(
@@ -379,9 +331,6 @@ watch(
                 bm.value.setTrafficOff()
             }
         }
-    },
-    {
-        immediate: true,
     }
 )
 onUnmounted(() => {

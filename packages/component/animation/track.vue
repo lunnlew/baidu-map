@@ -37,51 +37,76 @@ const attrs = useAttrs()
 const slots = useSlots()
 const isShow = computed(() => state.value.map_inited && props.show)
 const options = computed(() => props)
-const bm = ref<BaiduMapVue3.BMapGL.TrackAnimation | null>()
+const bm = ref<{
+    animation: BaiduMapVue3.BMapGL.TrackAnimation | null
+    overlay: BaiduMapVue3.BMapGL.Overlay | null
+    removeOverlay: Function
+    overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
+} | null>()
 watch(
     () => isShow.value,
     val => {
-        let merge_props = { ...options.value }
-        if (slots.default) {
-            let MarkerPolyline = slots.default().find(s => (s.type as any).name == 'Polyline')
-            if (MarkerPolyline) {
-                let merge_polyline_props = mergePropsDefault(
-                    MarkerPolyline.props as any,
-                    (MarkerPolyline.type as any).props
-                )
-                ;(merge_props as any).polyline = merge_polyline_props
-            }
-        }
         if (val) {
+            let merge_props = { ...options.value }
+            if (slots.default) {
+                let MarkerPolyline = slots.default().find(s => (s.type as any).name == 'Polyline')
+                if (MarkerPolyline) {
+                    let merge_polyline_props = mergePropsDefault(
+                        MarkerPolyline.props as any,
+                        (MarkerPolyline.type as any).props
+                    )
+                    ;(merge_props as any).polyline = merge_polyline_props
+                }
+            }
             initTrackAnimation().then(result => {
-                bm.value = bindEvents(addTrackAnimation(merge_props), extractEmitEvents(attrs), emit)
+                bm.value = addTrackAnimation(merge_props)
+                bindEvents(bm.value?.animation, extractEmitEvents(attrs), emit)
+                merge_props.overallView && bm.value?.overallView()
                 emit('ready', {
                     bmobj: bm.value,
-                    start: () => bm.value && bm.value?.start(),
-                    cancel: () => bm.value && bm.value?.cancel(),
-                    pause: () => bm.value && bm.value?.pause(),
-                    continue: () => bm.value && bm.value?.continue(),
+                    start: () => bm.value && bm.value?.animation?.start(),
+                    cancel: () => bm.value && bm.value?.animation?.cancel(),
+                    pause: () => bm.value && bm.value?.animation?.pause(),
+                    continue: () => bm.value && bm.value?.animation?.continue(),
                 })
             })
         } else {
-            bm.value && bm.value?.cancel()
-            bm.value = null
+            if (bm.value) {
+                bm.value.animation?.cancel()
+                bm.value.removeOverlay(bm.value.overlay)
+                bm.value.overlay = null
+                bm.value.animation = null
+                bm.value = null
+            }
         }
     },
     {
         immediate: true,
     }
 )
+watch(
+    () => props.overallView && isShow.value,
+    val => {
+        if (val) {
+            bm.value && bm.value?.overallView()
+        }
+    }
+)
 onUnmounted(() => {
-    bm.value && bm.value.cancel()
-    bm.value = null
+    if (bm.value) {
+        bm.value.animation?.cancel()
+        bm.value.removeOverlay(bm.value.overlay)
+        bm.value.overlay = null
+        bm.value.animation = null
+        bm.value = null
+    }
 })
 defineExpose({
-    bmobj: bm.value,
-    start: () => bm.value && bm.value?.start(),
-    cancel: () => bm.value && bm.value?.cancel(),
-    pause: () => bm.value && bm.value?.pause(),
-    continue: () => bm.value && bm.value?.continue(),
+    bmobj: bm.value?.animation,
+    start: () => bm.value && bm.value?.animation?.start(),
+    cancel: () => bm.value && bm.value?.animation?.cancel(),
+    pause: () => bm.value && bm.value?.animation?.pause(),
+    continue: () => bm.value && bm.value?.animation?.continue(),
 })
 </script>
 <script lang="ts">

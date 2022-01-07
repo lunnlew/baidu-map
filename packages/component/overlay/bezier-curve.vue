@@ -62,15 +62,21 @@ const props = withDefaults(
 )
 const attrs = useAttrs()
 const emit = defineEmits({})
-const bm = ref<BaiduMapVue3.BMapGL.BezierCurve | null>()
+const bm = ref<{
+    bc: BaiduMapVue3.BMapGL.BezierCurve | null
+    removeOverlay: Function
+    overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
+} | null>()
 const isShow = computed(() => props.show && props.points.length > 0)
 const options = computed(() => props)
 watch(
     () => state.value.map_inited,
     val => {
         if (val) {
-            bm.value = bindEvents(addBezierCurve(options.value), extractEmitEvents(attrs), emit)
-            isShow.value && bm.value?.show()
+            bm.value = addBezierCurve(options.value)
+            bindEvents(bm.value?.bc, extractEmitEvents(attrs), emit)
+            isShow.value && bm.value?.bc?.show()
+            options.value.overallView && bm.value?.overallView()
         }
     },
     {
@@ -78,24 +84,32 @@ watch(
     }
 )
 watch(
-    () => state.value.map_inited && isShow.value,
+    () => isShow.value && state.value.map_inited,
     val => {
         if (val) {
-            bm.value && bm.value.show()
+            bm.value && bm.value.bc?.show()
         } else {
-            bm.value && bm.value.hide()
+            bm.value && bm.value.bc?.hide()
         }
-    },
-    {
-        immediate: true,
+    }
+)
+watch(
+    () => props.overallView && isShow.value,
+    val => {
+        if (val) {
+            bm.value && bm.value?.overallView()
+        }
     }
 )
 onUnmounted(() => {
-    bm.value && map.value?.removeOverlay(bm.value)
-    bm.value = null
+    if (bm.value) {
+        bm.value.removeOverlay(bm.value.bc)
+        bm.value.bc = null
+        bm.value = null
+    }
 })
 defineExpose({
-    bmobj: bm.value,
+    bmobj: bm.value?.bc,
 })
 </script>
 <script lang="ts">

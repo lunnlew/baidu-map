@@ -45,7 +45,7 @@ const options = computed(() => props)
  * 3D点标记 对于bm.show(), bm.hide()支持不良好，目前通过创建方法和删除方法来实现
  */
 watch(
-    () => state.value.map_inited && isShow.value,
+    () => isShow.value && state.value.map_inited,
     val => {
         if (val) {
             let merge_props = { ...options.value }

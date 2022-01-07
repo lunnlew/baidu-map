@@ -31,6 +31,8 @@ const isShow = computed(() => props.show)
 const bm = ref<{
     boundary: BaiduMapVue3.BMapGL.Boundary | null
     overlay: BaiduMapVue3.BMapGL.Overlay | null
+    removeOverlay: Function
+    overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
 } | null>()
 const boundaries_result = ref<{
     boundary: BaiduMapVue3.BMapGL.Boundary
@@ -45,6 +47,9 @@ watch(
     async () => {
         boundaries_result.value = await initBoundariesResult(props.name)
         bindEvents(boundaries_result.value?.boundary, extractEmitEvents(attrs), emit)
+    },
+    {
+        immediate: true,
     }
 )
 
@@ -63,9 +68,7 @@ async function loadBoundary() {
     }
     bm.value = await addCityBoundary(options.value.name, merge_props, boundaries_result.value)
     isShow.value && bm.value?.overlay?.show()
-    if (boundaries_result.value?.rs.boundaries) {
-        boundaries_result.value.rs.boundaries = []
-    }
+    merge_props.overallView && bm.value?.overallView()
 }
 
 watch(
@@ -81,24 +84,12 @@ watch(
 )
 
 watch(
-    () => state.value.map_inited && isShow.value,
+    () => isShow.value && state.value.map_inited,
     val => {
         if (val) {
-            if (bm.value) {
-                if (props.overallView && map.value) {
-                    map.value.setViewport(
-                        (boundaries_result.value?.rs.boundaries[0] as any).split(';').map(function (point: string) {
-                            let lnglat = point.split(',') as any
-                            if (BMapGLRef.value) {
-                                return new BMapGLRef.value.Point(lnglat[0], lnglat[1])
-                            }
-                        })
-                    )
-                }
-                bm.value.overlay?.show()
-            }
+            bm.value?.overlay?.show()
         } else {
-            bm.value && bm.value?.overlay?.hide()
+            bm.value?.overlay?.hide()
         }
     },
     {
@@ -109,15 +100,8 @@ watch(
 watch(
     () => props.overallView && isShow.value,
     val => {
-        if (val && map.value && bm.value) {
-            map.value.setViewport(
-                (boundaries_result.value?.rs.boundaries[0] as any).split(';').map(function (point: string) {
-                    let lnglat = point.split(',') as any
-                    if (BMapGLRef.value) {
-                        return new BMapGLRef.value.Point(lnglat[0], lnglat[1])
-                    }
-                })
-            )
+        if (val) {
+            bm.value && bm.value?.overallView()
         }
     }
 )
@@ -131,7 +115,7 @@ watch(
 
 onUnmounted(() => {
     if (bm.value) {
-        map.value?.removeOverlay(bm.value?.overlay as BaiduMapVue3.BMapGL.Overlay)
+        bm.value.removeOverlay()
         bm.value.boundary = null
         bm.value.overlay = null
         bm.value = null
