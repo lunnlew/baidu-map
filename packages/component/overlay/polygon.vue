@@ -11,6 +11,7 @@ import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         points?: {
             lng: number
             lat: number
@@ -30,6 +31,7 @@ const props = withDefaults(
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         points: () => [],
         strokeColor: '#FF0000',
         strokeWeight: 2,
@@ -56,11 +58,12 @@ const bm = ref<{
     removeOverlay: Function
     overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
 } | null>()
+const currentMap = computed(() => props.map || map.value)
 watch(
-    () => props.init && state.value.map_inited,
+    () => props.init && currentMap.value,
     val => {
         if (val) {
-            bm.value = addPolygon(props.points, options.value)
+            bm.value = addPolygon(currentMap.value, props.points, options.value)
             bindEvents(bm.value?.polygon, extractEmitEvents(attrs), emit)
             emit('ready', {
                 bmobj: bm.value?.polygon,
@@ -74,7 +77,7 @@ watch(
     }
 )
 watch(
-    () => isShow.value && state.value.map_inited,
+    () => isShow.value && currentMap.value,
     val => {
         if (val) {
             bm.value && bm.value?.polygon?.show()

@@ -16,6 +16,7 @@ import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         point: {
             lng: number
             lat: number
@@ -33,6 +34,7 @@ const props = withDefaults(
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         point: () => ({
             lng: 0,
             lat: 0,
@@ -57,8 +59,9 @@ const attrs = useAttrs()
 const slots = useSlots()
 const emit = defineEmits({})
 const bm = ref<BaiduMapVue3.BMapGL.InfoWindow | null>()
-const isShow = computed(() => state.value.map_inited && props.show)
+const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
+const currentMap = computed(() => props.map || map.value)
 watch(
     () => isShow.value,
     val => {
@@ -71,7 +74,7 @@ watch(
             if (slots.title) {
                 merge_props.title = info_title.value?.innerHTML
             }
-            bm.value = bindEvents(addInfoWindow(merge_props), extractEmitEvents(attrs), emit)
+            bm.value = bindEvents(addInfoWindow(currentMap.value, merge_props), extractEmitEvents(attrs), emit)
             emit('ready', {
                 bmobj: bm.value,
             })

@@ -11,6 +11,7 @@ import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/ut
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         point: {
             lng: number
             lat: number
@@ -24,6 +25,7 @@ const props = withDefaults(
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         point: () => ({
             lng: 116.403963,
             lat: 39.915119,
@@ -42,11 +44,12 @@ const emit = defineEmits({})
 const bm = ref<BaiduMapVue3.BMapGL.Marker3D | null>()
 const isShow = computed(() => props.show)
 const options = computed(() => props)
+const currentMap = computed(() => props.map || map.value)
 /**
  * 3D点标记 对于bm.show(), bm.hide()支持不良好，目前通过创建方法和删除方法来实现
  */
 watch(
-    () => isShow.value && state.value.map_inited,
+    () => isShow.value && currentMap.value,
     val => {
         if (val) {
             let merge_props = { ...options.value }
@@ -62,7 +65,11 @@ watch(
                     }
                 }
             }
-            bm.value = bindEvents(addMaker3D(props.point, merge_props), extractEmitEvents(attrs), emit)
+            bm.value = bindEvents(
+                addMaker3D(currentMap.value, props.point, merge_props),
+                extractEmitEvents(attrs),
+                emit
+            )
             emit('ready', {
                 bmobj: bm.value,
             })

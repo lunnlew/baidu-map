@@ -5,12 +5,13 @@
 </template>
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useAttrs, watch } from 'vue'
-import { BMapGLRef, state } from '../../lib/map'
+import { BMapGLRef, map, state } from '../../lib/map'
 import { addDrivingRoute } from '../../lib/tool'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         location?:
             | string
             | {
@@ -45,6 +46,7 @@ const props = withDefaults(
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         location: undefined,
         start: undefined,
         end: undefined,
@@ -60,9 +62,10 @@ const props = withDefaults(
 )
 const emit = defineEmits({})
 const attrs = useAttrs()
-const isShow = computed(() => state.value.map_inited && props.show)
+const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
 const bm = ref<BaiduMapVue3.BMapGL.DrivingRoute | null>()
+const currentMap = computed(() => props.map || map.value)
 watch(
     () => isShow.value,
     val => {
@@ -86,7 +89,7 @@ watch(
                     points.value = arrPois
                 }
             }
-            bm.value = bindEvents(addDrivingRoute(merge_props), extractEmitEvents(attrs), emit)
+            bm.value = bindEvents(addDrivingRoute(currentMap.value, merge_props), extractEmitEvents(attrs), emit)
             emit('ready', {
                 bmobj: bm.value,
                 search: () => {

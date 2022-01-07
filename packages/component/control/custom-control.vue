@@ -13,6 +13,7 @@ import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         dom?: HTMLElement
         anchor?: number
         offset?: [number, number]
@@ -20,6 +21,7 @@ const props = withDefaults(
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         dom: undefined,
         anchor: 0,
         offset: () => [50, 80],
@@ -31,9 +33,10 @@ const attrs = useAttrs()
 const slots = useSlots()
 const control = ref()
 const emit = defineEmits({})
-const isShow = computed(() => state.value.map_inited && props.show)
+const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
 const bm = ref<BaiduMapVue3.BMapGL.Control | null>()
+const currentMap = computed(() => props.map || map.value)
 watch(
     () => isShow.value,
     val => {
@@ -42,7 +45,7 @@ watch(
             if (slots.default) {
                 merge_props.dom = control.value
             }
-            bm.value = bindEvents(addCustomControl(merge_props), extractEmitEvents(attrs), emit)
+            bm.value = bindEvents(addCustomControl(currentMap.value, merge_props), extractEmitEvents(attrs), emit)
             emit('ready', {
                 bmobj: bm.value,
             })

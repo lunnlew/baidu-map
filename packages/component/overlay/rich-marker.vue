@@ -11,6 +11,7 @@ import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         point: {
             lng: number
             lat: number
@@ -21,6 +22,7 @@ const props = withDefaults(
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         point: () => ({
             lng: 0,
             lat: 0,
@@ -36,13 +38,14 @@ const attrs = useAttrs()
 const isShow = computed(() => props.show)
 const options = computed(() => props)
 const bm = ref<BaiduMapVue3.BMapGL.RichMarker | null>()
+const currentMap = computed(() => props.map || map.value)
 watch(
-    () => state.value.map_inited,
+    () => currentMap.value,
     val => {
         let merge_props = { ...options.value }
         if (val) {
             initRichMarker().then(result => {
-                bm.value = bindEvents(addRichMarker(merge_props), extractEmitEvents(attrs), emit)
+                bm.value = bindEvents(addRichMarker(currentMap.value, merge_props), extractEmitEvents(attrs), emit)
                 emit('ready', {
                     bmobj: bm.value,
                 })
@@ -55,7 +58,7 @@ watch(
     }
 )
 watch(
-    () => isShow.value && state.value.map_inited,
+    () => isShow.value && currentMap.value,
     val => {
         if (val) {
             bm.value && bm.value.show()

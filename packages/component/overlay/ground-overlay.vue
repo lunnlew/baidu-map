@@ -11,6 +11,7 @@ import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/ut
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         startPoint: {
             lng: number
             lat: number
@@ -26,6 +27,7 @@ const props = withDefaults(
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         startPoint: () => ({
             lng: 0,
             lat: 0,
@@ -47,8 +49,9 @@ const emit = defineEmits({})
 const options = computed(() => props)
 const isShow = computed(() => props.show)
 const bm = ref<BaiduMapVue3.BMapGL.GroundOverlay | null>()
+const currentMap = computed(() => props.map || map.value)
 watch(
-    () => state.value.map_inited,
+    () => currentMap.value,
     val => {
         if (val) {
             let merge_props = { ...options.value }
@@ -63,7 +66,7 @@ watch(
                 }
             }
             bm.value = bindEvents(
-                addGroundOverlay(props.startPoint, props.endPoint, merge_props),
+                addGroundOverlay(currentMap.value, props.startPoint, props.endPoint, merge_props),
                 extractEmitEvents(attrs),
                 emit
             )
@@ -78,7 +81,7 @@ watch(
     }
 )
 watch(
-    () => isShow.value && state.value.map_inited,
+    () => isShow.value && currentMap.value,
     val => {
         if (val) {
             bm.value && bm.value.show()

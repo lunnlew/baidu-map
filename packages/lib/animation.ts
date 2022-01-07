@@ -1,24 +1,24 @@
 import {
     BMapGL,
-    BmDistanceToolProps,
     BmLushuAnimationProps,
     BmMarkerIconProps,
     BmTrackAnimationProps,
     BmViewAnimationKeyFramesProps,
     BmViewAnimationProps,
 } from 'typings'
-import { BMapGLRef, BMapGLLibRef, map, state } from './map'
+import { BMapGLRef, BMapGLLibRef, state } from './map'
 
 /**
  * 添加视图动画
  * @param animation_params
  */
 export function addViewAnimation(
+    map: BMapGL.Map | undefined,
     animation_params: {
         [key: string]: any
     } & Required<BmViewAnimationProps>
 ): BMapGL.ViewAnimation | undefined {
-    if (BMapGLRef.value && map.value) {
+    if (BMapGLRef.value && map) {
         let animation_options = {} as {
             [key: string]: any
         } & BMapGL.ViewAnimationOptions
@@ -84,6 +84,7 @@ export function initTrackAnimation(): Promise<{
  * @param animation_params
  */
 export function addTrackAnimation(
+    map: BMapGL.Map | undefined,
     animation_params: {
         [key: string]: any
     } & Required<BmTrackAnimationProps>
@@ -93,7 +94,7 @@ export function addTrackAnimation(
     removeOverlay: Function,
     overallView: (points?: BMapGL.Point[]) => void,
 } | undefined {
-    if (BMapGLRef.value && map.value && BMapGLLibRef.value) {
+    if (BMapGLRef.value && map && BMapGLLibRef.value) {
         let animation_options = {} as {
             [key: string]: any
         } & BMapGL.TrackAnimationOptions
@@ -125,15 +126,15 @@ export function addTrackAnimation(
             }
         }
         let pl = new BMapGLRef.value.Polyline(points, polyline_options)
-        let animation = new BMapGLLibRef.value.TrackAnimation(map.value, pl, animation_options)
+        let animation = new BMapGLLibRef.value.TrackAnimation(map, pl, animation_options)
         return {
             animation,
             overlay: pl,
             removeOverlay: () => {
-                map.value?.removeOverlay(pl)
+                map.removeOverlay(pl)
             },
             overallView: (new_points) => {
-                map.value?.setViewport(new_points || points)
+                map.setViewport(new_points || points)
             }
         }
     }
@@ -177,6 +178,7 @@ export function initLushu(): Promise<{
  * @param animation_params
  */
 export function addLushu(
+    map: BMapGL.Map | undefined,
     animation_params: {
         [key: string]: any
     } & Required<BmLushuAnimationProps>
@@ -187,7 +189,7 @@ export function addLushu(
     overallView: (points?: BMapGL.Point[]) => void,
 }
     | undefined {
-    if (BMapGLRef.value && map.value && BMapGLLibRef.value) {
+    if (BMapGLRef.value && BMapGLLibRef.value) {
         let animation_options = {} as {
             [key: string]: any
         } & BMapGL.LushuAnimationOptions
@@ -251,16 +253,16 @@ export function addLushu(
             }
         }
         let overlay = new BMapGLRef.value.Polyline(points, polyline_options)
-        map.value.addOverlay(overlay)
-        let animation = new BMapGLLibRef.value.LuShu(map.value, points, animation_options)
+        map.addOverlay(overlay)
+        let animation = new BMapGLLibRef.value.LuShu(map, points, animation_options)
         return {
             animation,
             overlay,
             removeOverlay: () => {
-                map.value?.removeOverlay(overlay)
+                map.removeOverlay(overlay)
             },
             overallView: (new_points) => {
-                map.value?.setViewport(new_points || points)
+                map.setViewport(new_points || points)
             }
         }
     }

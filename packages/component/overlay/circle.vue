@@ -11,6 +11,7 @@ import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         center: {
             lng: number
             lat: number
@@ -30,6 +31,7 @@ const props = withDefaults(
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         center: () => ({
             lng: 116.403963,
             lat: 39.915119,
@@ -54,6 +56,7 @@ const emit = defineEmits({})
 const bm = ref<BaiduMapVue3.BMapGL.Circle | null>()
 const isShow = computed(() => props.show)
 const options = computed(() => props)
+const currentMap = computed(() => props.map || map.value)
 function overallView() {
     if (bm.value && map.value) {
         map.value?.setViewport([
@@ -63,10 +66,14 @@ function overallView() {
     }
 }
 watch(
-    () => state.value.map_inited,
+    () => currentMap.value,
     val => {
         if (val) {
-            bm.value = bindEvents(addCircle(props.center, props.radius, options.value), extractEmitEvents(attrs), emit)
+            bm.value = bindEvents(
+                addCircle(currentMap.value, props.center, props.radius, options.value),
+                extractEmitEvents(attrs),
+                emit
+            )
             emit('ready', {
                 bmobj: bm.value,
             })
@@ -79,7 +86,7 @@ watch(
     }
 )
 watch(
-    () => isShow.value && state.value.map_inited,
+    () => isShow.value && currentMap.value,
     val => {
         if (val) {
             bm.value && bm.value.show()

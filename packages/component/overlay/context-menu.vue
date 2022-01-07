@@ -11,10 +11,12 @@ import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/ut
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         show?: boolean
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         show: true,
         onReady: (el: any) => {},
     }
@@ -22,9 +24,10 @@ const props = withDefaults(
 const attrs = useAttrs()
 const slots = useSlots()
 const emit = defineEmits({})
-const isShow = computed(() => state.value.map_inited && props.show)
+const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
 const bm = ref<BaiduMapVue3.BMapGL.ContextMenu | null>()
+const currentMap = computed(() => props.map || map.value)
 watch(
     () => isShow.value,
     val => {
@@ -42,7 +45,7 @@ watch(
                     merge_props.menus.push(merge_item_props)
                 }
             }
-            bm.value = bindEvents(addContextMenu(merge_props), extractEmitEvents(attrs), emit)
+            bm.value = bindEvents(addContextMenu(currentMap.value, merge_props), extractEmitEvents(attrs), emit)
             emit('ready', {
                 bmobj: bm.value,
             })

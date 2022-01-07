@@ -11,6 +11,7 @@ import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         keyFrames: {
             center: {
                 lng: number
@@ -30,6 +31,7 @@ const props = withDefaults(
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         keyFrames: () => [],
         duration: 10000,
         delay: 3000,
@@ -41,21 +43,22 @@ const props = withDefaults(
 )
 const emit = defineEmits({})
 const attrs = useAttrs()
-const isShow = computed(() => state.value.map_inited && props.show)
+const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
 const bm = ref<BaiduMapVue3.BMapGL.ViewAnimation | null>()
+const currentMap = computed(() => props.map || map.value)
 watch(
     () => isShow.value,
     val => {
         if (val) {
-            bm.value = bindEvents(addViewAnimation(options.value), extractEmitEvents(attrs), emit)
+            bm.value = bindEvents(addViewAnimation(currentMap.value, options.value), extractEmitEvents(attrs), emit)
             emit('ready', {
                 bmobj: bm.value,
-                start: () => map.value && bm.value && map.value.startViewAnimation(bm.value),
-                cancel: () => map.value && bm.value && map.value.cancelViewAnimation(bm.value),
+                start: () => currentMap.value && bm.value && currentMap.value.startViewAnimation(bm.value),
+                cancel: () => currentMap.value && bm.value && currentMap.value.cancelViewAnimation(bm.value),
             })
         } else {
-            bm.value && map.value?.cancelViewAnimation(bm.value)
+            bm.value && currentMap.value?.cancelViewAnimation(bm.value)
             bm.value = null
         }
     },
@@ -64,12 +67,12 @@ watch(
     }
 )
 onUnmounted(() => {
-    bm.value && map.value?.cancelViewAnimation(bm.value)
+    bm.value && currentMap.value?.cancelViewAnimation(bm.value)
     bm.value = null
 })
 defineExpose({
-    start: () => map.value && bm.value && map.value.startViewAnimation(bm.value),
-    cancel: () => map.value && bm.value && map.value.cancelViewAnimation(bm.value),
+    start: () => currentMap.value && bm.value && currentMap.value.startViewAnimation(bm.value),
+    cancel: () => currentMap.value && bm.value && currentMap.value.cancelViewAnimation(bm.value),
 })
 </script>
 <script lang="ts">

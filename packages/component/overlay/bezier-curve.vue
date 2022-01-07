@@ -11,6 +11,7 @@ import { bindEvents, extractEmitEvents } from '../../utils/util'
 import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
+        map?: BaiduMapVue3.BMapGL.Map | null
         points: {
             lng: number
             lat: number
@@ -38,6 +39,7 @@ const props = withDefaults(
         onReady?: (el: any) => void
     }>(),
     {
+        map: null,
         points: () => [],
         controlPoints: () => [
             [
@@ -71,11 +73,12 @@ const bm = ref<{
 } | null>()
 const isShow = computed(() => props.show && props.points.length > 0)
 const options = computed(() => props)
+const currentMap = computed(() => props.map || map.value)
 watch(
-    () => state.value.map_inited,
+    () => currentMap.value,
     val => {
         if (val) {
-            bm.value = addBezierCurve(options.value)
+            bm.value = addBezierCurve(currentMap.value, options.value)
             bindEvents(bm.value?.bc, extractEmitEvents(attrs), emit)
             emit('ready', {
                 bmobj: bm.value?.bc,
@@ -89,7 +92,7 @@ watch(
     }
 )
 watch(
-    () => isShow.value && state.value.map_inited,
+    () => isShow.value && currentMap.value,
     val => {
         if (val) {
             bm.value && bm.value.bc?.show()

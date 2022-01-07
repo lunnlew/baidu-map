@@ -1,7 +1,7 @@
 <template>
     <div ref="container">
         <div ref="mapView" class="mapView"></div>
-        <slot></slot>
+        <slot v-bind:map="map"></slot>
     </div>
 </template>
 <script setup lang="ts">
@@ -133,6 +133,7 @@ const attrs = useAttrs()
 const slots = useSlots()
 const options = computed(() => props)
 const mapView = ref()
+const map = ref()
 onMounted(() => {
     let merge_props = { ...options.value }
     initMap(merge_props.apiKey)?.then(() => {
@@ -152,6 +153,7 @@ onMounted(() => {
             events.filter((v: string) => !merge_props.enableMapClick || !['click', 'mousedown'].includes(v)),
             emit
         )
+        map.value = result?.map
         bm.value?.setDisplayOptions(merge_props.displayOptions)
         emit('ready', {
             map: bm.value,
@@ -371,10 +373,8 @@ onUnmounted(() => {
         bm.value.clearSpots()
         bm.value.clearAreaSpots()
         bm.value.destroy()
+        bm.value = null
     }
-    state.value.map_inited = false
-    BMapGLRef.value = null as any
-    bm.value = null
 })
 </script>
 <script lang="ts">

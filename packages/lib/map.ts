@@ -5,14 +5,11 @@ import { BaiduMapProps, BMapGL } from 'typings'
  * 地图状态
  */
 export const state = ref({
+    map_loading: false,
     /**
      * 地图JS环境是否加载完成
      */
     map_loaded: false,
-    /**
-     * 地图是否初始化完成
-     */
-    map_inited: false,
     /**
      * 轨迹动画库是否初始化完成
      */
@@ -51,9 +48,25 @@ export const BMapGLRef = ref<BMapGL.BMapGL>()
 export const BMapGLLibRef = ref<BMapGL.BMapGLLib>()
 
 /**
- * 百度地图实例
+ * 百度地图全局实例
  */
 export const map = ref<BMapGL.Map>()
+
+function waitForMapLoaded() {
+    if (state.value.map_loaded) {
+        return Promise.resolve()
+    }
+    return new Promise<void>((resolve) => {
+        const handler = () => {
+            if (state.value.map_loaded) {
+                resolve()
+            } else {
+                setTimeout(handler, 100)
+            }
+        }
+        handler()
+    })
+}
 
 /**
  * 初始化百度地图JS
@@ -62,8 +75,21 @@ export const map = ref<BMapGL.Map>()
 export function initMap(apiKey: string): Promise<{
     BMapGL: BMapGL.BMapGL | undefined
 }> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         let instance = getCurrentInstance()
+
+        if (state.value.map_loading) {
+            console.warn('百度地图JS正在加载中')
+            await waitForMapLoaded()
+            state.value.map_loading = false
+            state.value.map_loaded = true
+            instance ? instance.appContext.config.globalProperties.$BMapGL = BMapGLRef.value : ''
+            resolve({
+                BMapGL: BMapGLRef.value,
+            })
+        }
+        state.value.map_loading = true
+
         if (!state.value.map_loaded || !BMapGLRef.value) {
             // @ts-ignore
             if (!globalThis.BMapGL) {
@@ -76,6 +102,7 @@ export function initMap(apiKey: string): Promise<{
                 // @ts-ignore
                 // 地图脚本加载完成后执行的初始化函数
                 globalThis.initializeMap = function () {
+                    state.value.map_loading = false
                     state.value.map_loaded = true
                     // @ts-ignore
                     BMapGLRef.value = globalThis.BMapGL as BMapGL.BMapGL
@@ -91,6 +118,7 @@ export function initMap(apiKey: string): Promise<{
                 }
                 document.body.appendChild(script)
             } else {
+                state.value.map_loading = false
                 state.value.map_loaded = true
                 // @ts-ignore
                 BMapGLRef.value = globalThis.BMapGL as BMapGL.BMapGL
@@ -100,6 +128,8 @@ export function initMap(apiKey: string): Promise<{
                 })
             }
         } else {
+            state.value.map_loading = false
+            state.value.map_loaded = true
             instance ? instance.appContext.config.globalProperties.$BMapGL = BMapGLRef.value : ''
             resolve({
                 BMapGL: BMapGLRef.value,
@@ -138,15 +168,17 @@ export function addMap(
                 map_options[key as string] = map_params[key]
             }
         }
-        map.value = new BMapGLRef.value.Map(container as string | HTMLElement, map_options)
-        map.value.centerAndZoom(
+        let new_map = new BMapGLRef.value.Map(container as string | HTMLElement, map_options)
+        new_map.centerAndZoom(
             new BMapGLRef.value.Point(map_params.center.lng, map_params.center.lat),
             map_params.zoom
         )
-        state.value.map_inited = true
+        if (!map.value) {
+            map.value = new_map
+        }
         return {
             BMap: BMapGLRef.value,
-            map: map.value,
+            map: new_map,
             container: container as string | HTMLElement,
         }
     }
