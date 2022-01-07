@@ -30,6 +30,7 @@ const props = withDefaults(
         enableMaximize?: boolean
         enableCloseOnClick?: boolean
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         point: () => ({
@@ -46,6 +47,7 @@ const props = withDefaults(
         enableMaximize: true,
         enableCloseOnClick: true,
         show: true,
+        onReady: (el: any) => {},
     }
 )
 
@@ -70,6 +72,9 @@ watch(
                 merge_props.title = info_title.value?.innerHTML
             }
             bm.value = bindEvents(addInfoWindow(merge_props), extractEmitEvents(attrs), emit)
+            emit('ready', {
+                bmobj: bm.value,
+            })
         } else {
             map.value && map.value.closeInfoWindow()
             bm.value = null
@@ -82,9 +87,6 @@ watch(
 onUnmounted(() => {
     map.value && map.value.closeInfoWindow()
     bm.value = null
-})
-defineExpose({
-    bmobj: bm.value,
 })
 </script>
 <script lang="ts">

@@ -27,6 +27,7 @@ const props = withDefaults(
         enableClicking?: boolean
         overallView?: boolean
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         center: () => ({
@@ -45,6 +46,7 @@ const props = withDefaults(
         enableClicking: true,
         overallView: false,
         show: true,
+        onReady: (el: any) => {},
     }
 )
 const attrs = useAttrs()
@@ -65,6 +67,9 @@ watch(
     val => {
         if (val) {
             bm.value = bindEvents(addCircle(props.center, props.radius, options.value), extractEmitEvents(attrs), emit)
+            emit('ready', {
+                bmobj: bm.value,
+            })
             isShow.value && bm.value?.show()
             isShow.value && props.overallView && overallView()
         }
@@ -103,9 +108,6 @@ watch(
 onUnmounted(() => {
     bm.value && map.value?.removeOverlay(bm.value)
     bm.value = null
-})
-defineExpose({
-    bmobj: bm.value,
 })
 </script>
 <script lang="ts">

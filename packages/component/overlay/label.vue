@@ -20,6 +20,7 @@ const props = withDefaults(
         enableMassClear?: boolean
         styles?: Object
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         content: '',
@@ -31,6 +32,7 @@ const props = withDefaults(
         enableMassClear: true,
         styles: () => ({}),
         show: true,
+        onReady: (el: any) => {},
     }
 )
 const attrs = useAttrs()
@@ -44,6 +46,9 @@ watch(
     val => {
         if (val) {
             bm.value = bindEvents(addLabel(options.value), extractEmitEvents(attrs), emit)
+            emit('ready', {
+                bmobj: bm.value,
+            })
             isShow.value && bm.value?.show()
         }
     },
@@ -75,9 +80,6 @@ watch(
 onUnmounted(() => {
     bm.value && map.value?.removeOverlay(bm.value)
     bm.value = null
-})
-defineExpose({
-    bmobj: bm.value,
 })
 </script>
 <script lang="ts">

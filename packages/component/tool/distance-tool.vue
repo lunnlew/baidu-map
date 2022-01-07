@@ -12,9 +12,11 @@ import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         show: true,
+        onReady: (el: any) => {},
     }
 )
 /**
@@ -32,6 +34,11 @@ watch(
         if (val) {
             initDistanceTool().then(result => {
                 bm.value = bindEvents(addDistanceTool(merge_props), extractEmitEvents(attrs), emit)
+                emit('ready', {
+                    bmobj: bm.value,
+                    open: () => bm.value && bm.value.open(),
+                    close: () => bm.value && bm.value.close(),
+                })
             })
         } else {
             bm.value && bm.value.close()
@@ -47,7 +54,6 @@ onUnmounted(() => {
     bm.value = null
 })
 defineExpose({
-    bmobj: bm.value,
     open: () => bm.value && bm.value.open(),
     close: () => bm.value && bm.value.close(),
 })

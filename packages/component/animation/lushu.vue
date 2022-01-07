@@ -121,7 +121,6 @@ onUnmounted(() => {
     clear()
 })
 defineExpose({
-    bmobj: bm.value?.animation,
     start: () => bm.value && bm.value?.animation?.start(),
     stop: () => bm.value && bm.value?.animation?.stop(),
     pause: () => bm.value && bm.value?.animation?.pause(),

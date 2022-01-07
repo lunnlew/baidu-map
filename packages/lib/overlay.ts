@@ -1,5 +1,5 @@
 import { BMapGLRef, map } from './map'
-import {
+import BaiduMapVue3, {
     BMapGL,
     BmMarkerIconProps,
     BmMarkerProps,
@@ -606,7 +606,7 @@ export function addCustomPolyline(
         [key: string]: any
     } & Required<BmPolylineProps>
 ): {
-    polyline: BMapGL.Overlay | null
+    polyline: BaiduMapVue3.CustomPolyline | null
     removeOverlay: Function,
     overallView: (points?: BMapGL.Point[]) => void,
 } | undefined {

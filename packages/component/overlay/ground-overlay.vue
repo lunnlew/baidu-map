@@ -23,6 +23,7 @@ const props = withDefaults(
         opacity?: number
         url?: string
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         startPoint: () => ({
@@ -37,6 +38,7 @@ const props = withDefaults(
         opacity: 0.8,
         url: '',
         show: true,
+        onReady: (el: any) => {},
     }
 )
 const attrs = useAttrs()
@@ -65,6 +67,9 @@ watch(
                 extractEmitEvents(attrs),
                 emit
             )
+            emit('ready', {
+                bmobj: bm.value,
+            })
             isShow.value && bm.value?.show()
         }
     },
@@ -88,9 +93,6 @@ watch(
 onUnmounted(() => {
     bm.value && map.value?.removeOverlay(bm.value)
     bm.value = null
-})
-defineExpose({
-    bmobj: bm.value,
 })
 </script>
 <script lang="ts">

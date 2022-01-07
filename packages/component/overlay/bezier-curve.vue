@@ -35,6 +35,7 @@ const props = withDefaults(
         ]
         overallView?: boolean
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         points: () => [],
@@ -58,6 +59,7 @@ const props = withDefaults(
         ],
         overallView: false,
         show: true,
+        onReady: (el: any) => {},
     }
 )
 const attrs = useAttrs()
@@ -75,6 +77,9 @@ watch(
         if (val) {
             bm.value = addBezierCurve(options.value)
             bindEvents(bm.value?.bc, extractEmitEvents(attrs), emit)
+            emit('ready', {
+                bmobj: bm.value?.bc,
+            })
             isShow.value && bm.value?.bc?.show()
             isShow.value && options.value.overallView && bm.value?.overallView()
         }
@@ -107,9 +112,6 @@ onUnmounted(() => {
         bm.value.bc = null
         bm.value = null
     }
-})
-defineExpose({
-    bmobj: bm.value?.bc,
 })
 </script>
 <script lang="ts">

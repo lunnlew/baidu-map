@@ -68,7 +68,6 @@ onUnmounted(() => {
     bm.value = null
 })
 defineExpose({
-    bmobj: bm.value,
     start: () => map.value && bm.value && map.value.startViewAnimation(bm.value),
     cancel: () => map.value && bm.value && map.value.cancelViewAnimation(bm.value),
 })

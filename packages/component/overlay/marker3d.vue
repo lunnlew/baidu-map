@@ -21,6 +21,7 @@ const props = withDefaults(
         fillColor?: string
         fillOpacity?: number
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         point: () => ({
@@ -62,6 +63,9 @@ watch(
                 }
             }
             bm.value = bindEvents(addMaker3D(props.point, merge_props), extractEmitEvents(attrs), emit)
+            emit('ready', {
+                bmobj: bm.value,
+            })
         } else {
             bm.value && map.value?.removeOverlay(bm.value)
             bm.value = null
@@ -85,9 +89,6 @@ watch(
 onUnmounted(() => {
     bm.value && map.value?.removeOverlay(bm.value)
     bm.value = null
-})
-defineExpose({
-    bmobj: bm.value,
 })
 </script>
 <script lang="ts">

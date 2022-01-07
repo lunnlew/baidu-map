@@ -118,7 +118,6 @@ onUnmounted(() => {
     bm.value = null
 })
 defineExpose({
-    bmobj: bm.value,
     search: () => {
         if (BMapGLRef.value && bm.value) {
             let start = props.start

@@ -26,6 +26,7 @@ const props = withDefaults(
         clip?: boolean
         geodesic?: boolean
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         points: () => [],
@@ -40,6 +41,7 @@ const props = withDefaults(
         clip: true,
         geodesic: false,
         show: true,
+        onReady: (el: any) => {},
     }
 )
 const attrs = useAttrs()
@@ -67,6 +69,9 @@ watch(
                 }
             }
             bm.value = addCustomPolyline(props.points, merge_props)
+            emit('ready', {
+                bmobj: bm.value?.polyline,
+            })
             bindEvents(bm.value?.polyline, extractEmitEvents(attrs), emit)
             isShow.value && bm.value?.polyline?.show()
             isShow.value && merge_props.overallView && bm.value?.overallView()
@@ -101,9 +106,6 @@ onUnmounted(() => {
         bm.value.polyline = null
         bm.value = null
     }
-})
-defineExpose({
-    bmobj: bm.value,
 })
 </script>
 <script lang="ts">
