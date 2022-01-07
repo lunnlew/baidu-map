@@ -119,7 +119,13 @@
                 :show="isShowPolyline"
                 @click="onPolylineClick"
             ></bm-polyline>
-            <bm-circle :center="point" :radius="1000" :show="isShowCircle" @click="onCircleClick"></bm-circle>
+            <bm-circle
+                :center="point"
+                :overallView="true"
+                :radius="1000"
+                :show="isShowCircle"
+                @click="onCircleClick"
+            ></bm-circle>
             <bm-context-menu :show="isShowContextMenu" @click="onCircleClick">
                 <bm-context-menu-item @click="onContextMenuClick"></bm-context-menu-item>
                 <bm-context-menu-item @click="onContextMenuClick"></bm-context-menu-item>
@@ -241,7 +247,7 @@ const backCenter = function () {
         zoomVal.value = zoom.value
     }, 300)
 }
-const isShowMaker = ref(false)
+const isShowMaker = ref(true)
 const toggleMaker = function () {
     isShowMaker.value = !isShowMaker.value
 }
