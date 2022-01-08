@@ -329,3 +329,36 @@ export function addRichMarker(
         return tool
     }
 }
+
+/**
+ * 初始地理工具库库
+ */
+export function initGeoUtils(): Promise<{
+    BMapGLLib: BMapGL.BMapGLLib | undefined
+}> {
+    return new Promise((resolve, reject) => {
+        if (!state.value.geoutils_lib_inited) {
+            let script = document.createElement('script')
+            script.src = `//mapopen.bj.bcebos.com/github/BMapGLLib/GeoUtils/src/GeoUtils.min.js`
+            script.onerror = function () {
+                reject(new Error('BMap script load failed'))
+            }
+            script.onload = function (this: any) {
+                if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') {
+                    // @ts-ignore
+                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGL.BMapGLLib
+                    state.value.geoutils_lib_inited = true
+                    resolve({
+                        BMapGLLib: BMapGLLibRef.value,
+                    })
+                }
+                script.onload = null
+            }
+            document.body.appendChild(script)
+        } else {
+            resolve({
+                BMapGLLib: BMapGLLibRef.value,
+            })
+        }
+    })
+}

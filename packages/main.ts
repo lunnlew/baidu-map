@@ -1,3 +1,6 @@
+import { initDistanceTool, initDrawingManager, initGeoUtils, initRichMarker } from './lib/tool'
+import { initLushu, initTrackAnimation } from './lib/animation'
+
 import BMapGL from './lib/BMapGL'
 
 import BaiduMap from './component/map/index.vue'
@@ -105,6 +108,7 @@ export {
 const bm = {
     install: function (app: any, options?: {
         apiKey: string,
+        plugins: []
     }) {
         app.config.globalProperties.$bm_apikey = options?.apiKey
         app.component('baidu-map', BaiduMap)
@@ -145,6 +149,23 @@ const bm = {
         app.component('bm-transit-route', BmTransitRoute)
         app.component('bm-walking-route', BmWalkingRoute)
         app.component('bm-riding-route', BmRidingRoute)
+
+        let plugins = options?.plugins || []
+        for (let plugin of plugins) {
+            if (plugin == 'GeoUtils') {
+                initGeoUtils()
+            } else if (plugin == 'DistanceTool') {
+                initDistanceTool()
+            } else if (plugin == 'DrawingManager') {
+                initDrawingManager()
+            } else if (plugin == 'RichMarker') {
+                initRichMarker()
+            } else if (plugin == 'TrackAnimation') {
+                initTrackAnimation()
+            } else if (plugin == 'Lushu') {
+                initLushu()
+            }
+        }
     },
 }
 export default bm
