@@ -14,6 +14,7 @@ import BaiduMapVue3, {
     BmCircleProps,
     BmInfoWindowProps,
     BmBezierCurveProps,
+    BmCustomPolylineProps,
 } from 'typings'
 import CustomPolyline from './CustomPolyline'
 
@@ -619,7 +620,7 @@ export function addCustomPolyline(
     }[],
     polyline_params: {
         [key: string]: any
-    } & Required<BmPolylineProps>
+    } & Required<BmCustomPolylineProps>
 ): {
     polyline: BaiduMapVue3.CustomPolyline | null
     removeOverlay: Function,

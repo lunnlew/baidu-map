@@ -14,8 +14,8 @@ const CustomPolyline = function (this: any) {
         strokeWeight: 5,
         strokeOpacity: 1,
         strokeStyle: 'solid',
-        lineCap: 'round',
-        lineJoin: 'round',
+        strokeLineCap: 'butt',
+        strokeLineJoin: 'round',
     }, options)
 
     this._map = null as any;
@@ -96,8 +96,8 @@ const CustomPolyline = function (this: any) {
         }
         ctx.strokeStyle = options.strokeColor;
         ctx.globalAlpha = options.strokeOpacity;
-        ctx.lineCap = options.lineCap as any;
-        ctx.lineJoin = options.lineJoin as any;
+        ctx.lineCap = options.strokeLineCap as any;
+        ctx.lineJoin = options.strokeLineJoin as any;
         ctx.moveTo(pixel_points[0].pixel.x, pixel_points[0].pixel.y);
         for (let i = 1; i < pixel_points.length; i++) {
             ctx.lineTo(pixel_points[i].pixel.x, pixel_points[i].pixel.y);

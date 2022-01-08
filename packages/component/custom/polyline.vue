@@ -15,32 +15,38 @@ const props = withDefaults(
             lng: number
             lat: number
         }[]
+        arrowLength?: number
+        arrowAngle?: number
+        arrowWidth?: number
+        arrowPadding?: number
+        arrowHeadlen?: number
+        arrowColor?: string
         strokeColor?: string
         strokeWeight?: number
         strokeOpacity?: number
         strokeStyle?: string
-        enableMassClear?: boolean
-        enableEditing?: boolean
-        enableClicking?: boolean
+        strokeLineCap?: string
+        strokeLineJoin?: string
         overallView?: boolean
-        clip?: boolean
-        geodesic?: boolean
         show?: boolean
         onReady?: (el: any) => void
     }>(),
     {
         map: null,
         points: () => [],
+        arrowLength: 15,
+        arrowAngle: 25,
+        arrowWidth: 1,
+        arrowPadding: 20,
+        arrowHeadlen: 10,
+        arrowColor: '#FFF',
         strokeColor: '#FF0000',
         strokeWeight: 2,
         strokeOpacity: 0.8,
         strokeStyle: 'solid',
-        enableMassClear: true,
-        enableEditing: false,
-        enableClicking: true,
+        strokeLineCap: 'round',
+        strokeLineJoin: 'round',
         overallView: false,
-        clip: true,
-        geodesic: false,
         show: true,
         onReady: (el: any) => {},
     }
