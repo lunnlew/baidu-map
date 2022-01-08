@@ -76,7 +76,8 @@ watch(
             merge_props.onSearchComplete = async function (e: BaiduMapVue3.BMapGL.DrivingRouteResult) {
                 if (typeof props.onSearchComplete === 'function') {
                     let result = await Promise.resolve(props.onSearchComplete(bm.value, e))
-                    points.value = result.points
+                    !('points' in result) && console.warn('请返回结构{points:[]}的数据')
+                    points.value = result.points || []
                 } else {
                     // 默认选择第一条路线
                     var arrPois = [] as BaiduMapVue3.BMapGL.Point[]
