@@ -1,0 +1,7 @@
+<bm-circle :center="point" :overallView="true" :radius="1000" :show="true"></bm-circle>
+<script setup lang="ts">
+const point = ref({
+    lng: 116.403963,
+    lat: 39.915119,
+})
+</script>

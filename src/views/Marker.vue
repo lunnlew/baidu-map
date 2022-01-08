@@ -9,6 +9,21 @@
                     <highlightjs :code="usecode"></highlightjs>
                 </div>
             </div>
+        </div>
+        <baidu-map
+            class="map"
+            ref="map"
+            :apiKey="'z7ngXdkrDCY1oFfaFLxyvL6UtiXu0f88'"
+            :center="point"
+            :enableMapClick="true"
+            :enableWheelZoom="true"
+            :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+        >
+            <bm-marker :point="point" :show="isShowMaker">
+                <bm-marker-icon :size="[23, 25]" :anchor="[10, 15]" :imageOffset="[0, 0]"></bm-marker-icon>
+            </bm-marker>
+        </baidu-map>
+        <div class="code">
             <div class="code-title">
                 <span>示例:文本标注</span>
             </div>
@@ -27,9 +42,6 @@
             :enableWheelZoom="true"
             :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
         >
-            <bm-marker :point="point" :show="isShowMaker">
-                <bm-marker-icon :size="[23, 25]" :anchor="[10, 15]" :imageOffset="[0, 0]"></bm-marker-icon>
-            </bm-marker>
             <bm-label :position="point" :content="'文本标注'" :offset="[-25, -35]" :show="isShowLabel"> </bm-label>
         </baidu-map>
     </div>

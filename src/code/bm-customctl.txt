@@ -1,0 +1,11 @@
+<bm-custom-control :show="true" :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT" :offset="[300, 90]">
+    <div class="custom-control-content">
+        <div class="custom-control-title">自定义控件</div>
+        <div class="custom-control-body">
+            <button @click="() => count++">计数:{{ count }}</button>
+        </div>
+    </div>
+</bm-custom-control>
+<script setup lang="ts">
+    const count = ref(0)
+</script>

@@ -1,0 +1,5 @@
+<bm-zoom-control
+    :offset="[50, 50]"
+    :show="true"
+    :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_LEFT"
+></bm-zoom-control>

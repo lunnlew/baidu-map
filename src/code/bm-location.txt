@@ -1,0 +1,5 @@
+<bm-location-control
+    :show="true"
+    :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
+    :offset="[60, 60]"
+></bm-location-control>

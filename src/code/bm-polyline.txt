@@ -1,0 +1,37 @@
+<bm-polyline
+    :points="points"
+    :overallView="true"
+    :show="true"
+></bm-polyline>
+<script setup lang="ts">
+const points = ref([
+    {
+        lng: 116.297611,
+        lat: 40.047363,
+    },
+    {
+        lng: 116.302839,
+        lat: 40.048219,
+    },
+    {
+        lng: 116.308301,
+        lat: 40.050566,
+    },
+    {
+        lng: 116.305732,
+        lat: 40.054957,
+    },
+    {
+        lng: 116.304754,
+        lat: 40.057953,
+    },
+    {
+        lng: 116.306487,
+        lat: 40.058312,
+    },
+    {
+        lng: 116.307223,
+        lat: 40.056379,
+    },
+])
+</script>

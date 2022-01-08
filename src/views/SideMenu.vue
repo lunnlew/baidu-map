@@ -28,7 +28,7 @@ const menus = ref<
         path: string
     }[]
 >()
-function handleClick(item: { icon: string; title: string }) {
+function handleClick(item: { icon: string; title: string; path: string }) {
     router.push(item.path)
 }
 onMounted(() => {
@@ -37,6 +37,10 @@ onMounted(() => {
             icon: item.meta?.icon || 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
             title: item.meta?.title || item.name,
             path: item.path,
+        } as {
+            icon: string
+            title: string
+            path: string
         }
     })
 })

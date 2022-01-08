@@ -23,6 +23,22 @@ const routes = [
         meta: {
             title: "地图标注"
         }
+    },
+    {
+        path: "/control",
+        name: "control",
+        component: () => import(/* webpackChunkName: "home" */ './views/Control.vue'),
+        meta: {
+            title: "地图控件"
+        }
+    },
+    {
+        path: "/vector",
+        name: "vector",
+        component: () => import(/* webpackChunkName: "home" */ './views/Vector.vue'),
+        meta: {
+            title: "矢量图形"
+        }
     }
 ]
 const router = createRouter({
