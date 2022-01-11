@@ -135,6 +135,15 @@ declare namespace BaiduMapVue3 {
          */
         getPath(): BMapGL.Point[]
     }
+
+    export class CustomLushu extends BMapGL.Overlay {
+        /**
+         * 增加新的路径点
+         * @param points 
+         */
+        addPoints(points: BMapGL.Point[]): void
+    }
+
     /**
      * 百度地图组件
      */
@@ -3597,6 +3606,10 @@ declare namespace BaiduMapVue3 {
              * 移动结束触发此事件
              */
             moveend: OverlayEventPayload
+            /**
+             * 移动中
+             */
+            moving: OverlayEventPayload
         }
         type OverlayEvent = keyof OverlayEventEventMap
         type OverlayEventPayload = {
