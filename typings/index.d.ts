@@ -136,6 +136,24 @@ declare namespace BaiduMapVue3 {
         getPath(): BMapGL.Point[]
     }
 
+    export interface CustomLushuOptions {
+        /**
+         * 历史轨迹点集
+         */
+        points: {
+            lng: number
+            lat: number
+        }[]
+        /**
+         * 移动速度，单位：米/秒
+         */
+        speed?: number
+        /**
+         * 时间片段，单位：毫秒
+         */
+        time?: number
+    }
+
     export class CustomLushu extends BMapGL.Overlay {
         /**
          * 增加新的路径点
@@ -480,9 +498,32 @@ declare namespace BaiduMapVue3 {
         imageOffset?: [number, number]
     }
     export const BmMarkerThreedIcon: ComponentPublicInstance<BmMarkerThreedIconProps>
-    /**
-         * 折线参数
+
+    export interface BmCustomLushuProps {
+        map?: BMapGL.Map | null
+        /**
+         * 折线点集
          */
+        points: {
+            lng: number
+            lat: number
+        }[]
+        /**
+         * 移动速度，单位：米/秒
+         */
+        speed?: number
+        /**
+         * 时间片段，单位：毫秒
+         */
+        time?: number
+        /**
+         * 是否显示
+         */
+        show?: boolean
+    }
+    /**
+     * 折线参数
+     */
     export interface BmCustomPolylineProps {
         /**
          * 折线点集

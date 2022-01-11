@@ -1,8 +1,8 @@
-import { BMapGL } from "typings";
+import BaiduMapVue3, { BMapGL } from "typings";
 import { BMapGLRef } from "./map";
 function CustomLushu(this: any) {
     let points = arguments[0] as BMapGL.Point[];
-    let options = arguments[1] || {} as BMapGL.PolylineOptions
+    let options = (arguments[1] || {}) as Required<BaiduMapVue3.CustomLushuOptions>
 
     options = Object.assign({}, {
         speed: 5,

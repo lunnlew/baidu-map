@@ -15,6 +15,7 @@ import BaiduMapVue3, {
     BmInfoWindowProps,
     BmBezierCurveProps,
     BmCustomPolylineProps,
+    BmCustomLushuProps,
 } from 'typings'
 import CustomPolyline from './CustomPolyline'
 import CustomLushu from './CustomLushu'
@@ -685,14 +686,14 @@ export function addCustomLushu(
     }[],
     lushu_params: {
         [key: string]: any
-    }
+    } & BmCustomLushuProps
 ): {
     lushu: BaiduMapVue3.CustomLushu | null
 } | undefined {
     if (BMapGLRef.value && map) {
         let marker_options = {} as {
             [key: string]: any
-        } & Required<BMapGL.PolylineOptions>
+        } & Required<BaiduMapVue3.CustomLushuOptions>
         for (let key in lushu_params) {
             if (key !== 'points' && key !== 'icons') {
                 marker_options[key as string] = lushu_params[key]
