@@ -17,6 +17,7 @@ import BaiduMapVue3, {
     BmCustomPolylineProps,
 } from 'typings'
 import CustomPolyline from './CustomPolyline'
+import CustomLushu from './CustomLushu'
 
 /**
  * 添加点标注
@@ -44,7 +45,7 @@ export function addMaker(
                     anchor: new BMapGLRef.value.Size(24, 24),
                 })
             }
-        } else {
+        } else if (marker_params.icon) {
             let icon_props = marker_params.icon as Required<BmMarkerIconProps>
             marker_options.icon = new BMapGLRef.value.Icon(
                 icon_props.src,
@@ -66,7 +67,11 @@ export function addMaker(
                 marker_options[key as string] = marker_params[key]
             }
         }
-        marker_options.offset = new BMapGLRef.value.Size(marker_params.offset[0], marker_params.offset[1])
+        if (marker_params.offset) {
+            marker_options.offset = new BMapGLRef.value.Size(marker_params.offset[0], marker_params.offset[1])
+        } else {
+            marker_options.offset = new BMapGLRef.value.Size(0, 0)
+        }
         let marker = new BMapGLRef.value.Marker(new BMapGLRef.value.Point(point.lng, point.lat), marker_options)
         if (!marker_params.show) {
             marker.hide()
@@ -665,4 +670,45 @@ export function addCustomPolyline(
             }
         }
     }
+}
+
+/**
+ * 添加自定义路书实现
+ * @param points
+ * @param polyline_params
+ */
+export function addCustomLushu(
+    map: BMapGL.Map | undefined,
+    points: {
+        lng: number
+        lat: number
+    }[],
+    lushu_params: {
+        [key: string]: any
+    }
+): {
+    lushu: BaiduMapVue3.CustomLushu | null
+} | undefined {
+    if (BMapGLRef.value && map) {
+        let marker_options = {} as {
+            [key: string]: any
+        } & Required<BMapGL.PolylineOptions>
+        for (let key in lushu_params) {
+            if (key !== 'points' && key !== 'icons') {
+                marker_options[key as string] = lushu_params[key]
+            }
+        }
+        let lushu_points = [] as BMapGL.Point[]
+        for (let point of points) {
+            lushu_points.push(new BMapGLRef.value.Point(point.lng, point.lat))
+        }
+        CustomLushu.prototype = new (BMapGLRef.value as BMapGL.BMapGL).Overlay()
+        let lushu = new (CustomLushu as any)(lushu_points, lushu_params)
+        lushu.hide()
+        map.addOverlay(lushu)
+        return {
+            lushu: lushu as BaiduMapVue3.CustomLushu,
+        }
+    }
+    return
 }

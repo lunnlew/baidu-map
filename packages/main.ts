@@ -47,6 +47,9 @@ import BmWalkingRoute from './component/tool/walking-route.vue'
 import BmRidingRoute from './component/tool/riding-route.vue'
 
 
+import BmCustomLushu from './component/custom/lushu.vue'
+
+
 /**
  * 地图类型空间及根组件
  */
@@ -103,6 +106,8 @@ export {
     BmTransitRoute,
     BmWalkingRoute,
     BmRidingRoute,
+
+    BmCustomLushu,
 }
 
 const bm = {
@@ -121,6 +126,7 @@ const bm = {
         app.component('bm-location-control', BmLocationControl)
         app.component('bm-map-type-control', BmMapTypeControl)
         app.component('bm-custom-control', BmCustomControl)
+        app.component('bm-custom-lushu', BmCustomLushu)
         app.component('bm-marker', BmMarker)
         app.component('bm-rich-marker', BmRichMarker)
         app.component('bm-marker-icon', BmMarkerIcon)
