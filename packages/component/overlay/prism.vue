@@ -7,10 +7,9 @@
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addPrism } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         points?: {
             lng: number
             lat: number
@@ -47,9 +46,9 @@ const emit = defineEmits({})
 const options = computed(() => props)
 const isShow = computed(() => props.show && props.points.length > 0)
 const bm = ref<{
-    prism: BaiduMapVue3.BMapGL.Prism | null
+    prism: BMapGL.Prism | null
     removeOverlay: Function
-    overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
+    overallView: (points?: BMapGL.Point[]) => void
 } | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)

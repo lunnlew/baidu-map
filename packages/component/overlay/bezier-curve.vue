@@ -7,10 +7,9 @@
 import { computed, inject, onUnmounted, ref, useAttrs, watch } from 'vue'
 import { addBezierCurve } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         points: {
             lng: number
             lat: number
@@ -66,9 +65,9 @@ const props = withDefaults(
 const attrs = useAttrs()
 const emit = defineEmits({})
 const bm = ref<{
-    bc: BaiduMapVue3.BMapGL.BezierCurve | null
+    bc: BMapGL.BezierCurve | null
     removeOverlay: Function
-    overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
+    overallView: (points?: BMapGL.Point[]) => void
 } | null>()
 const isShow = computed(() => props.show && props.points.length > 0)
 const options = computed(() => props)

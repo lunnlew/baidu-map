@@ -1,4 +1,3 @@
-import { BMapGL } from "typings";
 const CustomPolyline = function (this: any) {
     let points = arguments[0] as BMapGL.Point[];
     let options = arguments[1] || {} as BMapGL.PolylineOptions

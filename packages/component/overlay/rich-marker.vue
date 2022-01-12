@@ -7,10 +7,9 @@
 import { computed, inject, onUnmounted, ref, useAttrs, watch } from 'vue'
 import { addRichMarker, initRichMarker } from '../../lib/tool'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         point: {
             lng: number
             lat: number
@@ -36,7 +35,7 @@ const emit = defineEmits({})
 const attrs = useAttrs()
 const isShow = computed(() => props.show)
 const options = computed(() => props)
-const bm = ref<BaiduMapVue3.BMapGL.RichMarker | null>()
+const bm = ref<BMapGL.RichMarker | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
 watch(

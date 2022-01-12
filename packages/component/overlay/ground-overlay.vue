@@ -7,10 +7,9 @@
 import { useAttrs, useSlots, watch, computed, ref, onUnmounted, inject } from 'vue'
 import { addGroundOverlay } from '../../lib/overlay'
 import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         startPoint: {
             lng: number
             lat: number
@@ -47,7 +46,7 @@ const slots = useSlots()
 const emit = defineEmits({})
 const options = computed(() => props)
 const isShow = computed(() => props.show)
-const bm = ref<BaiduMapVue3.BMapGL.GroundOverlay | null>()
+const bm = ref<BMapGL.GroundOverlay | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
 watch(

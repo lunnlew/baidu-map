@@ -7,10 +7,9 @@
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addPolygon } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         points?: {
             lng: number
             lat: number
@@ -53,9 +52,9 @@ const emit = defineEmits({})
 const isShow = computed(() => props.show && props.points.length > 0)
 const options = computed(() => props)
 const bm = ref<{
-    polygon: BaiduMapVue3.BMapGL.Polygon | null
+    polygon: BMapGL.Polygon | null
     removeOverlay: Function
-    overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
+    overallView: (points?: BMapGL.Point[]) => void
 } | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)

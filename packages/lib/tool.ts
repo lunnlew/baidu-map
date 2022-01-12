@@ -1,4 +1,3 @@
-import { BMapGL, BmDistanceToolProps, BmDrawingManagerProps, BmDrivingRouteProps, BmRichMarkerProps, BmRidingRouteProps, BmTransitRouteProps, BmWalkingRouteProps } from 'typings'
 import { BMapGLLibRef, BMapGLRef, state } from './map'
 
 /**
@@ -8,7 +7,7 @@ export function addDrivingRoute(
     map: BMapGL.Map | undefined,
     params: {
         [key: string]: any
-    } & Required<BmDrivingRouteProps>
+    } & Required<BaiduMapVue3.BmDrivingRouteProps>
 ): BMapGL.DrivingRoute | undefined {
     if (BMapGLRef.value && map) {
         let options = {} as {
@@ -50,7 +49,7 @@ export function addTransitRoute(
     map: BMapGL.Map | undefined,
     params: {
         [key: string]: any
-    } & Required<BmTransitRouteProps>
+    } & Required<BaiduMapVue3.BmTransitRouteProps>
 ): BMapGL.TransitRoute | undefined {
     if (BMapGLRef.value && map) {
         let options = {} as {
@@ -92,7 +91,7 @@ export function addWalkingRoute(
     map: BMapGL.Map | undefined,
     params: {
         [key: string]: any
-    } & Required<BmWalkingRouteProps>
+    } & Required<BaiduMapVue3.BmWalkingRouteProps>
 ): BMapGL.WalkingRoute | undefined {
     if (BMapGLRef.value && map) {
         let options = {} as {
@@ -134,7 +133,7 @@ export function addRidingRoute(
     map: BMapGL.Map | undefined,
     params: {
         [key: string]: any
-    } & Required<BmRidingRouteProps>
+    } & Required<BaiduMapVue3.BmRidingRouteProps>
 ): BMapGL.RidingRoute | undefined {
     if (BMapGLRef.value && map) {
         let options = {} as {
@@ -173,7 +172,7 @@ export function addRidingRoute(
  * 初始化测距工具库
  */
 export function initDistanceTool(): Promise<{
-    BMapGLLib: BMapGL.BMapGLLib | undefined
+    BMapGLLib: BMapGLLib | undefined
 }> {
     return new Promise((resolve, reject) => {
         if (!state.value.distance_tool_lib_inited) {
@@ -185,7 +184,7 @@ export function initDistanceTool(): Promise<{
             script.onload = function (this: any) {
                 if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') {
                     // @ts-ignore
-                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGL.BMapGLLib
+                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGLLib
                     state.value.distance_tool_lib_inited = true
                     resolve({
                         BMapGLLib: BMapGLLibRef.value,
@@ -210,7 +209,7 @@ export function addDistanceTool(
     map: BMapGL.Map | undefined,
     tool_params: {
         [key: string]: any
-    } & Required<BmDistanceToolProps>
+    } & Required<BaiduMapVue3.BmDistanceToolProps>
 ): BMapGL.DistanceTool | undefined {
     if (BMapGLRef.value && map && BMapGLLibRef.value) {
         let tool = new BMapGLLibRef.value.DistanceTool(map)
@@ -222,7 +221,7 @@ export function addDistanceTool(
  * 初始化绘制工具库
  */
 export function initDrawingManager(): Promise<{
-    BMapGLLib: BMapGL.BMapGLLib | undefined
+    BMapGLLib: BMapGLLib | undefined
 }> {
     return new Promise((resolve, reject) => {
         if (!state.value.drawing_tool_lib_inited) {
@@ -241,7 +240,7 @@ export function initDrawingManager(): Promise<{
             script.onload = function (this: any) {
                 if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') {
                     // @ts-ignore
-                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGL.BMapGLLib
+                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGLLib
                     state.value.drawing_tool_lib_inited = true
                     resolve({
                         BMapGLLib: BMapGLLibRef.value,
@@ -266,7 +265,7 @@ export function addDrawingManager(
     map: BMapGL.Map | undefined,
     tool_params: {
         [key: string]: any
-    } & Required<BmDrawingManagerProps>
+    } & Required<BaiduMapVue3.BmDrawingManagerProps>
 ): BMapGL.DrawingManager | undefined {
     if (BMapGLRef.value && map && BMapGLLibRef.value) {
         let tool = new BMapGLLibRef.value.DrawingManager(map)
@@ -278,7 +277,7 @@ export function addDrawingManager(
  * 初始化富文本标记库
  */
 export function initRichMarker(): Promise<{
-    BMapGLLib: BMapGL.BMapGLLib | undefined
+    BMapGLLib: BMapGLLib | undefined
 }> {
     return new Promise((resolve, reject) => {
         if (!state.value.richmarker_lib_inited) {
@@ -290,7 +289,7 @@ export function initRichMarker(): Promise<{
             script.onload = function (this: any) {
                 if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') {
                     // @ts-ignore
-                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGL.BMapGLLib
+                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGLLib
                     state.value.richmarker_lib_inited = true
                     resolve({
                         BMapGLLib: BMapGLLibRef.value,
@@ -315,7 +314,7 @@ export function addRichMarker(
     map: BMapGL.Map | undefined,
     tool_params: {
         [key: string]: any
-    } & Required<BmRichMarkerProps>
+    } & Required<BaiduMapVue3.BmRichMarkerProps>
 ): BMapGL.RichMarker | undefined {
     if (BMapGLRef.value && map && BMapGLLibRef.value) {
         let tool = new BMapGLLibRef.value.RichMarker(tool_params.html, new BMapGLRef.value.Point(tool_params.point.lng, tool_params.point.lat), {
@@ -334,7 +333,7 @@ export function addRichMarker(
  * 初始地理工具库库
  */
 export function initGeoUtils(): Promise<{
-    BMapGLLib: BMapGL.BMapGLLib | undefined
+    BMapGLLib: BMapGLLib | undefined
 }> {
     return new Promise((resolve, reject) => {
         if (!state.value.geoutils_lib_inited) {
@@ -346,7 +345,7 @@ export function initGeoUtils(): Promise<{
             script.onload = function (this: any) {
                 if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') {
                     // @ts-ignore
-                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGL.BMapGLLib
+                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGLLib
                     state.value.geoutils_lib_inited = true
                     resolve({
                         BMapGLLib: BMapGLLibRef.value,

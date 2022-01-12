@@ -6,10 +6,9 @@
 </template>
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, provide, ref, useAttrs, useSlots, watch } from 'vue'
-import BMapGL from '../../lib/BMapGL'
+import { BMapGLConstant } from '../../lib/BMapGL'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import { addMap, BMapGLRef, initMap } from '../../lib/map'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
         center: {
@@ -94,7 +93,7 @@ const props = withDefaults(
         zoomCenter: null,
         zoomerDuration: 240,
         actionDuration: 450,
-        mapType: BMapGL.MapTypeId.BMAP_NORMAL_MAP,
+        mapType: BMapGLConstant.MapTypeId.BMAP_NORMAL_MAP,
         enableInertialDragging: true,
         drawMargin: 500,
         drawMarginGL: 500,
@@ -127,7 +126,7 @@ const props = withDefaults(
     }
 )
 const emit = defineEmits({})
-const bm = ref<BaiduMapVue3.BMapGL.Map | null>()
+const bm = ref<BMapGL.Map | null>()
 const container = ref()
 const attrs = useAttrs()
 const slots = useSlots()

@@ -7,10 +7,9 @@
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addContextMenu } from '../../lib/overlay'
 import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         show?: boolean
         onReady?: (el: any) => void
     }>(),
@@ -25,7 +24,7 @@ const slots = useSlots()
 const emit = defineEmits({})
 const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
-const bm = ref<BaiduMapVue3.BMapGL.ContextMenu | null>()
+const bm = ref<BMapGL.ContextMenu | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
 watch(

@@ -1,11 +1,3 @@
-import {
-    BMapGL,
-    BmLushuAnimationProps,
-    BmMarkerIconProps,
-    BmTrackAnimationProps,
-    BmViewAnimationKeyFramesProps,
-    BmViewAnimationProps,
-} from 'typings'
 import { BMapGLRef, BMapGLLibRef, state } from './map'
 
 /**
@@ -16,7 +8,7 @@ export function addViewAnimation(
     map: BMapGL.Map | undefined,
     animation_params: {
         [key: string]: any
-    } & Required<BmViewAnimationProps>
+    } & Required<BaiduMapVue3.BmViewAnimationProps>
 ): BMapGL.ViewAnimation | undefined {
     if (BMapGLRef.value && map) {
         let animation_options = {} as {
@@ -29,7 +21,7 @@ export function addViewAnimation(
         }
         let keyFrames = [] as BMapGL.ViewAnimationKeyFrames[]
         if (animation_params.keyFrames) {
-            keyFrames = (animation_params.keyFrames as BmViewAnimationKeyFramesProps[]).map(item => {
+            keyFrames = (animation_params.keyFrames as BaiduMapVue3.BmViewAnimationKeyFramesProps[]).map(item => {
                 if (BMapGLRef.value) {
                     return {
                         center: new BMapGLRef.value.Point(item.center.lng, item.center.lat),
@@ -50,7 +42,7 @@ export function addViewAnimation(
  * 初始化轨迹动画库
  */
 export function initTrackAnimation(): Promise<{
-    BMapGLLib: BMapGL.BMapGLLib | undefined
+    BMapGLLib: BMapGLLib | undefined
 }> {
     return new Promise((resolve, reject) => {
         if (!state.value.track_animation_lib_inited) {
@@ -62,7 +54,7 @@ export function initTrackAnimation(): Promise<{
             script.onload = function (this: any) {
                 if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') {
                     // @ts-ignore
-                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGL.BMapGLLib
+                    BMapGLLibRef.value = globalThis.MapGLLib as BMapGLLib
                     state.value.track_animation_lib_inited = true
                     resolve({
                         BMapGLLib: BMapGLLibRef.value,
@@ -87,7 +79,7 @@ export function addTrackAnimation(
     map: BMapGL.Map | undefined,
     animation_params: {
         [key: string]: any
-    } & Required<BmTrackAnimationProps>
+    } & Required<BaiduMapVue3.BmTrackAnimationProps>
 ): {
     animation: BMapGL.TrackAnimation | null
     overlay: BMapGL.Overlay | null
@@ -144,7 +136,7 @@ export function addTrackAnimation(
  * 初始化路书动画库
  */
 export function initLushu(): Promise<{
-    BMapGLLib: BMapGL.BMapGLLib | undefined
+    BMapGLLib: BMapGLLib | undefined
 }> {
     return new Promise((resolve, reject) => {
         if (!state.value.lushu_animation_lib_inited) {
@@ -156,7 +148,7 @@ export function initLushu(): Promise<{
             script.onload = function (this: any) {
                 if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') {
                     // @ts-ignore
-                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGL.BMapGLLib
+                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGLLib
                     state.value.lushu_animation_lib_inited = true
                     resolve({
                         BMapGLLib: BMapGLLibRef.value,
@@ -181,7 +173,7 @@ export function addLushu(
     map: BMapGL.Map | undefined,
     animation_params: {
         [key: string]: any
-    } & Required<BmLushuAnimationProps>
+    } & Required<BaiduMapVue3.BmLushuAnimationProps>
 ): {
     animation: BMapGL.LushuAnimation | null
     overlay: BMapGL.Overlay | null
@@ -221,7 +213,7 @@ export function addLushu(
                 )
             }
         } else {
-            let icon_props = animation_params.icon as unknown as Required<BmMarkerIconProps>
+            let icon_props = animation_params.icon as unknown as Required<BaiduMapVue3.BmMarkerIconProps>
             animation_options.icon = new BMapGLRef.value.Icon(
                 icon_props.src,
                 new BMapGLRef.value.Size(icon_props.size[0], icon_props.size[1]),

@@ -1,4 +1,3 @@
-import { BMapGL } from 'typings'
 /**
  * 合并实际的属性值
  * @param used_props
