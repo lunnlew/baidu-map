@@ -8,10 +8,9 @@ import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'v
 import { BMapGLRef } from '../../lib/map'
 import { addMaker } from '../../lib/overlay'
 import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         point: {
             lng: number
             lat: number
@@ -26,7 +25,7 @@ const props = withDefaults(
         zIndex?: number
         title?: string
         label?: string
-        labelOptions?: BaiduMapVue3.BMapGL.LabelOptions
+        labelOptions?: BMapGL.LabelOptions
         show?: boolean
         onReady?: (el: any) => void
     }>(),
@@ -54,7 +53,7 @@ const props = withDefaults(
 const attrs = useAttrs()
 const slots = useSlots()
 const emit = defineEmits({})
-const bm = ref<BaiduMapVue3.BMapGL.Marker | null>()
+const bm = ref<BMapGL.Marker | null>()
 const isShow = computed(() => props.show)
 const options = computed(() => props)
 const inject_map = inject('map') as any

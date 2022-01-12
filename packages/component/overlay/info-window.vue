@@ -12,10 +12,9 @@
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addInfoWindow } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         point: {
             lng: number
             lat: number
@@ -57,7 +56,7 @@ const info_title = ref()
 const attrs = useAttrs()
 const slots = useSlots()
 const emit = defineEmits({})
-const bm = ref<BaiduMapVue3.BMapGL.InfoWindow | null>()
+const bm = ref<BMapGL.InfoWindow | null>()
 const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
 const inject_map = inject('map') as any

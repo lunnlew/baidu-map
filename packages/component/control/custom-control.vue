@@ -9,10 +9,9 @@
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addCustomControl } from '../../lib/control'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         dom?: HTMLElement
         anchor?: number
         offset?: [number, number]
@@ -34,7 +33,7 @@ const control = ref()
 const emit = defineEmits({})
 const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
-const bm = ref<BaiduMapVue3.BMapGL.Control | null>()
+const bm = ref<BMapGL.Control | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
 watch(

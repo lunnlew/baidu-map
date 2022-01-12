@@ -7,10 +7,9 @@
 import { computed, inject, onUnmounted, ref, useAttrs, watch } from 'vue'
 import { addDistanceTool, initDistanceTool } from '../../lib/tool'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         show?: boolean
         onReady?: (el: any) => void
     }>(),
@@ -27,7 +26,7 @@ const emit = defineEmits({})
 const attrs = useAttrs()
 const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
-const bm = ref<BaiduMapVue3.BMapGL.DistanceTool | null>()
+const bm = ref<BMapGL.DistanceTool | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
 watch(

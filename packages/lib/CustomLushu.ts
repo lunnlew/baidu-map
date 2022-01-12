@@ -1,4 +1,3 @@
-import BaiduMapVue3, { BMapGL } from "typings";
 import { BMapGLRef } from "./map";
 function CustomLushu(this: any) {
     let points = arguments[0] as BMapGL.Point[];

@@ -7,11 +7,10 @@
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addCustomLushu, addMaker } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 import { BMapGLRef } from '../../lib/map'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         points: {
             lng: number
             lat: number

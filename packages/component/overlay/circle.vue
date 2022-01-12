@@ -8,10 +8,9 @@ import { computed, inject, onUnmounted, ref, useAttrs, watch } from 'vue'
 import { BMapGLRef } from '../../lib/map'
 import { addCircle } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         center: {
             lng: number
             lat: number
@@ -53,16 +52,16 @@ const props = withDefaults(
 )
 const attrs = useAttrs()
 const emit = defineEmits({})
-const bm = ref<BaiduMapVue3.BMapGL.Circle | null>()
+const bm = ref<BMapGL.Circle | null>()
 const isShow = computed(() => props.show)
 const options = computed(() => props)
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
-function overallView(map: BaiduMapVue3.BMapGL.Map) {
+function overallView(map: BMapGL.Map) {
     if (bm.value && map) {
         map.setViewport([
-            bm.value?.getBounds().getNorthEast() as BaiduMapVue3.BMapGL.Point,
-            bm.value?.getBounds().getSouthWest() as BaiduMapVue3.BMapGL.Point,
+            bm.value?.getBounds().getNorthEast() as BMapGL.Point,
+            bm.value?.getBounds().getSouthWest() as BMapGL.Point,
         ])
     }
 }

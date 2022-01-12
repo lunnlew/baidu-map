@@ -7,10 +7,9 @@
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addCustomPolyline } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         points: {
             lng: number
             lat: number
@@ -59,7 +58,7 @@ const options = computed(() => props)
 const bm = ref<{
     polyline: BaiduMapVue3.CustomPolyline | null
     removeOverlay: Function
-    overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
+    overallView: (points?: BMapGL.Point[]) => void
 } | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)

@@ -8,10 +8,9 @@ import { computed, inject, onUnmounted, ref, useAttrs, watch } from 'vue'
 import { BMapGLRef } from '../../lib/map'
 import { addDrivingRoute } from '../../lib/tool'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         location?:
             | string
             | {
@@ -64,7 +63,7 @@ const emit = defineEmits({})
 const attrs = useAttrs()
 const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
-const bm = ref<BaiduMapVue3.BMapGL.DrivingRoute | null>()
+const bm = ref<BMapGL.DrivingRoute | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
 watch(
@@ -73,14 +72,14 @@ watch(
         let merge_props = { ...options.value }
         if (val) {
             // 自定义选择路线结果
-            merge_props.onSearchComplete = async function (e: BaiduMapVue3.BMapGL.DrivingRouteResult) {
+            merge_props.onSearchComplete = async function (e: BMapGL.DrivingRouteResult) {
                 if (typeof props.onSearchComplete === 'function') {
                     let result = await Promise.resolve(props.onSearchComplete(bm.value, e))
                     !('points' in result) && console.warn('请返回结构{points:[]}的数据')
                     points.value = result.points || []
                 } else {
                     // 默认选择第一条路线
-                    var arrPois = [] as BaiduMapVue3.BMapGL.Point[]
+                    var arrPois = [] as BMapGL.Point[]
                     if (bm.value?.getStatus() == 0) {
                         var plan = e.getPlan(0)
                         for (var j = 0; j < plan.getNumRoutes(); j++) {
@@ -117,7 +116,7 @@ watch(
         immediate: true,
     }
 )
-const points = ref<BaiduMapVue3.BMapGL.Point[]>([])
+const points = ref<BMapGL.Point[]>([])
 onUnmounted(() => {
     bm.value && bm.value.clearResults()
     bm.value = null

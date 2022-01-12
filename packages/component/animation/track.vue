@@ -7,10 +7,9 @@
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addTrackAnimation, initTrackAnimation } from '../../lib/animation'
 import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         points?: {
             lng: number
             lat: number
@@ -41,10 +40,10 @@ const currentMap = computed(() => props.map || inject_map.value)
 const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
 const bm = ref<{
-    animation: BaiduMapVue3.BMapGL.TrackAnimation | null
-    overlay: BaiduMapVue3.BMapGL.Overlay | null
+    animation: BMapGL.TrackAnimation | null
+    overlay: BMapGL.Overlay | null
     removeOverlay: Function
-    overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
+    overallView: (points?: BMapGL.Point[]) => void
 } | null>()
 watch(
     () => isShow.value,

@@ -7,10 +7,9 @@
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addCityBoundary, initBoundariesResult } from '../../lib/overlay'
 import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         name: string
         overallView?: boolean
         firstLoad?: boolean
@@ -32,13 +31,13 @@ const emit = defineEmits({})
 const options = computed(() => props)
 const isShow = computed(() => props.show)
 const bm = ref<{
-    boundary: BaiduMapVue3.BMapGL.Boundary | null
-    overlay: BaiduMapVue3.BMapGL.Overlay | null
+    boundary: BMapGL.Boundary | null
+    overlay: BMapGL.Overlay | null
     removeOverlay: Function
-    overallView: (points?: BaiduMapVue3.BMapGL.Point[]) => void
+    overallView: (points?: BMapGL.Point[]) => void
 } | null>()
 const boundaries_result = ref<{
-    boundary: BaiduMapVue3.BMapGL.Boundary
+    boundary: BMapGL.Boundary
     rs: {
         boundaries: string[]
     }
@@ -57,7 +56,7 @@ watch(
 
 async function loadBoundary() {
     if (bm.value?.overlay) {
-        currentMap.value?.removeOverlay(bm.value?.overlay as BaiduMapVue3.BMapGL.Overlay)
+        currentMap.value?.removeOverlay(bm.value?.overlay as BMapGL.Overlay)
         bm.value.overlay = null
     }
     let merge_props = { ...options.value }

@@ -1,5 +1,4 @@
 import { ref, getCurrentInstance } from 'vue'
-import { BaiduMapProps, BMapGL } from 'typings'
 
 /**
  * 地图状态
@@ -49,7 +48,7 @@ export const BMapGLRef = ref<BMapGL.BMapGL>()
 /**
  * 百度地图三方库
  */
-export const BMapGLLibRef = ref<BMapGL.BMapGLLib>()
+export const BMapGLLibRef = ref<BMapGLLib>()
 
 /**
  * 百度地图全局实例
@@ -151,7 +150,7 @@ export function addMap(
     container: string | HTMLElement,
     map_params: {
         [key: string]: any
-    } & Required<BaiduMapProps>
+    } & Required<BaiduMapVue3.BaiduMapProps>
 ):
     | {
         BMap: BMapGL.BMapGL | undefined

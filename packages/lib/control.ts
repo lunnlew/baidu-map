@@ -1,21 +1,11 @@
-import {
-    BMapGL,
-    BmCityListControlProps,
-    BmCopyrightControlProps,
-    BmLocationControlProps,
-    BmMapTypeControlProps,
-    BmNavigationControlProps,
-    BmNavigationThreedControlProps,
-    BmScaleControlProps,
-    BmZoomControlProps,
-} from 'typings'
+
 import { BMapGLRef } from './map'
 
 /**
  * 添加比例尺控件
  * @param props
  */
-export function addScaleControl(map: BMapGL.Map | undefined, props: Required<BmScaleControlProps>) {
+export function addScaleControl(map: BMapGL.Map | undefined, props: Required<BaiduMapVue3.BmScaleControlProps>) {
     if (BMapGLRef.value && map) {
         let control = new BMapGLRef.value.ScaleControl({
             anchor: props.anchor,
@@ -30,7 +20,7 @@ export function addScaleControl(map: BMapGL.Map | undefined, props: Required<BmS
  * 添加缩放控件
  * @param props
  */
-export function addZoomControl(map: BMapGL.Map | undefined, props: Required<BmZoomControlProps>) {
+export function addZoomControl(map: BMapGL.Map | undefined, props: Required<BaiduMapVue3.BmZoomControlProps>) {
     if (BMapGLRef.value && map) {
         let control = new BMapGLRef.value.ZoomControl({
             anchor: props.anchor,
@@ -45,7 +35,7 @@ export function addZoomControl(map: BMapGL.Map | undefined, props: Required<BmZo
  * 添加版权控件
  * @param props
  */
-export function addCopyrightControl(map: BMapGL.Map | undefined, props: Required<BmCopyrightControlProps>) {
+export function addCopyrightControl(map: BMapGL.Map | undefined, props: Required<BaiduMapVue3.BmCopyrightControlProps>) {
     if (BMapGLRef.value && map) {
         let control = new BMapGLRef.value.CopyrightControl({
             anchor: props.anchor,
@@ -60,7 +50,7 @@ export function addCopyrightControl(map: BMapGL.Map | undefined, props: Required
  * 添加缩放平移控件
  * @param props
  */
-export function addNavigationControl(map: BMapGL.Map | undefined, props: Required<BmNavigationControlProps>) {
+export function addNavigationControl(map: BMapGL.Map | undefined, props: Required<BaiduMapVue3.BmNavigationControlProps>) {
     if (BMapGLRef.value && map) {
         let control = new BMapGLRef.value.NavigationControl({
             anchor: props.anchor,
@@ -76,7 +66,7 @@ export function addNavigationControl(map: BMapGL.Map | undefined, props: Require
  * 添加一个特定样式的地图平移缩放控件
  * @param props
  */
-export function addNavigationControl3D(map: BMapGL.Map | undefined, props: Required<BmNavigationThreedControlProps>) {
+export function addNavigationControl3D(map: BMapGL.Map | undefined, props: Required<BaiduMapVue3.BmNavigationThreedControlProps>) {
     if (BMapGLRef.value && map) {
         let control = new BMapGLRef.value.NavigationControl3D({
             anchor: props.anchor,
@@ -91,7 +81,7 @@ export function addNavigationControl3D(map: BMapGL.Map | undefined, props: Requi
  * 添加定位控件
  * @param props
  */
-export function addLocationControl(map: BMapGL.Map | undefined, props: Required<BmLocationControlProps>) {
+export function addLocationControl(map: BMapGL.Map | undefined, props: Required<BaiduMapVue3.BmLocationControlProps>) {
     if (BMapGLRef.value && map) {
         let control = new BMapGLRef.value.LocationControl({
             anchor: props.anchor,
@@ -106,7 +96,7 @@ export function addLocationControl(map: BMapGL.Map | undefined, props: Required<
  * 添加地图类型控件
  * @param props
  */
-export function addMapTypeControl(map: BMapGL.Map | undefined, props: Required<BmMapTypeControlProps>) {
+export function addMapTypeControl(map: BMapGL.Map | undefined, props: Required<BaiduMapVue3.BmMapTypeControlProps>) {
     if (BMapGLRef.value && map) {
         let control = new BMapGLRef.value.MapTypeControl({
             anchor: props.anchor,
@@ -121,7 +111,7 @@ export function addMapTypeControl(map: BMapGL.Map | undefined, props: Required<B
  * 添加城市列表控件
  * @param props
  */
-export function addCityListControl(map: BMapGL.Map | undefined, props: Required<BmCityListControlProps>) {
+export function addCityListControl(map: BMapGL.Map | undefined, props: Required<BaiduMapVue3.BmCityListControlProps>) {
     if (BMapGLRef.value && map) {
         let control = new BMapGLRef.value.CityListControl({
             anchor: props.anchor,

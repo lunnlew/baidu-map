@@ -18,10 +18,9 @@
 import { computed, onUnmounted, ref, useAttrs, watch, inject } from 'vue'
 import { addDrawingManager, initDrawingManager } from '../../lib/tool'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
-import BaiduMapVue3 from '../../../typings'
 const props = withDefaults(
     defineProps<{
-        map?: BaiduMapVue3.BMapGL.Map | null
+        map?: BMapGL.Map | null
         drawingType?: string
         isOpen?: boolean
         enableCalculate?: boolean
@@ -33,11 +32,11 @@ const props = withDefaults(
             distance?: number
         }
         sorptiondistance?: number
-        circleOptions?: BaiduMapVue3.DrawingStyleOptions
-        polylineOptions?: BaiduMapVue3.DrawingStyleOptions
-        polygonOptions?: BaiduMapVue3.DrawingStyleOptions
-        rectangleOptions?: BaiduMapVue3.DrawingStyleOptions
-        labelOptions?: BaiduMapVue3.DrawingLabelOptions
+        circleOptions?: BMapGLLib.DrawingStyleOptions
+        polylineOptions?: BMapGLLib.DrawingStyleOptions
+        polygonOptions?: BMapGLLib.DrawingStyleOptions
+        rectangleOptions?: BMapGLLib.DrawingStyleOptions
+        labelOptions?: BMapGLLib.DrawingLabelOptions
         show?: boolean
         onReady?: (el: any) => void
     }>(),
@@ -102,7 +101,7 @@ const emit = defineEmits({})
 const attrs = useAttrs()
 const isShow = computed(() => currentMap.value && props.show)
 const options = computed(() => props)
-const bm = ref<BaiduMapVue3.BMapGL.DrawingManager | null>()
+const bm = ref<BMapGL.DrawingManager | null>()
 const btns = ref(['marker', 'polyline', 'rectangle', 'polygon', 'circle'])
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
