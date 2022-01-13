@@ -113,7 +113,7 @@ export {
 const bm = {
     install: function (app: any, options?: {
         apiKey: string,
-        plugins: []
+        plugins: string[]
     }) {
         app.config.globalProperties.$bm_apikey = options?.apiKey
         app.component('baidu-map', BaiduMap)

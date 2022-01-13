@@ -2,6 +2,15 @@ import { ComponentPublicInstance } from "vue";
 
 export namespace BaiduMapVue3 {
     /**
+     * 组件安装
+     * @param app 
+     * @param options
+     */
+    function install(app: any, options?: {
+        apiKey: string,
+        plugins: string[]
+    }): void
+    /**
      * 地图容器
      */
     export const BmView: ComponentPublicInstance<{}>
