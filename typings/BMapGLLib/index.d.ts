@@ -25,7 +25,9 @@ declare interface BMapGLLib {
     DrawingManager: { new(bmap: BMapGL.Map): BMapGL.DrawingManager }
     /**
      * 创建一个富文本标注对象
-     * @param bmap
+     * @param html string
+     * @param point Point
+     * @param opts RichMarkerOptions
      */
     RichMarker: { new(html: string, point: BMapGL.Point, opts?: BMapGL.RichMarkerOptions): BMapGL.RichMarker }
     /**
