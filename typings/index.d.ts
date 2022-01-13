@@ -2,6 +2,14 @@ import { ComponentPublicInstance } from "vue";
 
 export namespace BaiduMapVue3 {
     /**
+     * 地图容器
+     */
+    export const BmView: ComponentPublicInstance<{}>
+    /**
+     * 地图根组件
+     */
+    export const BaiduMap: ComponentPublicInstance<BmComponent.BaiduMapProps>
+    /**
      * 比例尺控件
      */
     export const BmScaleControl: ComponentPublicInstance<BmComponent.BmScaleControlProps>
@@ -37,21 +45,69 @@ export namespace BaiduMapVue3 {
      * 城市列表控件
      */
     export const BmCityListControl: ComponentPublicInstance<BmComponent.BmCityListControlProps>
+    /**
+     * 点标注
+     */
     export const BmMarker: ComponentPublicInstance<BmComponent.BmMarkerProps>
-    export const BmMarkerThreed: ComponentPublicInstance<BmComponent.BmMarker3DProps>
-    export const BmLabel: ComponentPublicInstance<BmComponent.BmLabelProps>
-    export const BmMarkerThreedIcon: ComponentPublicInstance<BmComponent.BmMarkerThreedIconProps>
-    export const BmPolyline: ComponentPublicInstance<BmComponent.BmPolylineProps>
-    export const BmIconSequence: ComponentPublicInstance<BmComponent.BmIconSequenceProps>
-    export const BmPolygon: ComponentPublicInstance<BmComponent.BmPolygonProps>
-    export const BmCityBoundary: ComponentPublicInstance<BmComponent.BmCityBoundaryProps>
-    export const BmPrism: ComponentPublicInstance<BmComponent.BmPrismProps>
-    export const BmGroundOverlay: ComponentPublicInstance<BmComponent.BmGroundOverlayProps>
-    export const BmGroundOverlayImage: ComponentPublicInstance<BmComponent.BmGroundOverlayImageProps>
+    /**
+     * 点图标
+     */
     export const BmMarkerIcon: ComponentPublicInstance<BmComponent.BmMarkerIconProps>
+    /**
+     * 3d点标注
+     */
+    export const BmMarkerThreed: ComponentPublicInstance<BmComponent.BmMarker3DProps>
+    /**
+     * 3d点图标
+     */
+    export const BmMarkerThreedIcon: ComponentPublicInstance<BmComponent.BmMarkerThreedIconProps>
+    /**
+     * 文本标注
+     */
+    export const BmLabel: ComponentPublicInstance<BmComponent.BmLabelProps>
+    /**
+     * 折线
+     */
+    export const BmPolyline: ComponentPublicInstance<BmComponent.BmPolylineProps>
+    /**
+     * 折线图标
+     */
+    export const BmIconSequence: ComponentPublicInstance<BmComponent.BmIconSequenceProps>
+    /**
+     * 多边形
+     */
+    export const BmPolygon: ComponentPublicInstance<BmComponent.BmPolygonProps>
+    /**
+     * 城市区域
+     */
+    export const BmCityBoundary: ComponentPublicInstance<BmComponent.BmCityBoundaryProps>
+    /**
+     * 棱柱
+     */
+    export const BmPrism: ComponentPublicInstance<BmComponent.BmPrismProps>
+    /**
+     * 地面叠加层
+     */
+    export const BmGroundOverlay: ComponentPublicInstance<BmComponent.BmGroundOverlayProps>
+    /**
+     * 地面叠加层图片
+     */
+    export const BmGroundOverlayImage: ComponentPublicInstance<BmComponent.BmGroundOverlayImageProps>
+    /**
+     * 上下文菜单
+     */
     export const BmContextMenu: ComponentPublicInstance<BmComponent.BmContextMenuProps>
+    /**
+     * 上下文菜单
+     */
     export const BmContextMenuItem: ComponentPublicInstance<BmComponent.BmContextMenuItemProps>
+    /**
+     * 圆形
+     */
     export const BmCircle: ComponentPublicInstance<BmComponent.BmCircleProps>
+    /**
+     * 信息窗口
+     */
     export const BmInfoWindow: ComponentPublicInstance<BmComponent.BmInfoWindowProps>
     /**
      * 地图动画
@@ -77,6 +133,9 @@ export namespace BaiduMapVue3 {
      * 富文本标记
      */
     export const BmRichMarker: ComponentPublicInstance<BmComponent.BmRichMarkerProps>
+    /**
+     * 贝塞尔曲线
+     */
     export const BmBezierCurve: ComponentPublicInstance<BmComponent.BmBezierCurveProps>
     /**
      * 驾驶规划
@@ -94,8 +153,19 @@ export namespace BaiduMapVue3 {
      * 骑行规划
      */
     export const BmRidingRoute: ComponentPublicInstance<BmComponent.BmRidingRouteProps>
-    namespace BMapGL {
+    /**
+     * 自定义路书
+     */
+    export const BmCustomLushu: ComponentPublicInstance<BmComponent.BmCustomLushuProps>
+    /**
+     * 自定义折线
+     */
+    export const BmCustomPolyline: ComponentPublicInstance<BmComponent.BmCustomPolylineProps>
 
+    /**
+     * BMapGL
+     */
+    namespace BMapGL {
         /**
          * 此常量表示控件的定位。
          */
