@@ -1,175 +1,175 @@
-import { App, ComponentPublicInstance } from "vue";
+import { App, DefineComponent } from "vue";
 
-export namespace BaiduMapVue3 {
+declare namespace BaiduMapVue3 {
     /**
      * 组件安装
      * @param app 
      * @param options
      */
-    function install(app: App<Element>, options?: {
+    export function install(app: App<Element>, options?: {
         apiKey: string,
         plugins: string[]
     }): void
     /**
      * 地图容器
      */
-    export const BmView: ComponentPublicInstance<{}>
+    export const BmView: DefineComponent<{}, {}, any>
     /**
      * 地图根组件
      */
-    export const BaiduMap: ComponentPublicInstance<BmComponent.BaiduMapProps>
+    export const BaiduMap: DefineComponent<BmComponent.BaiduMapProps, {}, any>
     /**
      * 比例尺控件
      */
-    export const BmScaleControl: ComponentPublicInstance<BmComponent.BmScaleControlProps>
+    export const BmScaleControl: DefineComponent<BmComponent.BmScaleControlProps, {}, any>
     /**
      * 地图级别控件
      */
-    export const BmZoomControl: ComponentPublicInstance<BmComponent.BmZoomControlProps>
+    export const BmZoomControl: DefineComponent<BmComponent.BmZoomControlProps, {}, any>
     /**
      * 版权控件
      */
-    export const BmCopyrightControl: ComponentPublicInstance<BmComponent.BmCopyrightControlProps>
+    export const BmCopyrightControl: DefineComponent<BmComponent.BmCopyrightControlProps, {}, any>
     /**
      * 自定义控件
      */
-    export const BmCustomControl: ComponentPublicInstance<BmComponent.BmCustomControlProps>
+    export const BmCustomControl: DefineComponent<BmComponent.BmCustomControlProps, {}, any>
     /**
      * 平移导航控件
      */
-    export const BmNavigationControl: ComponentPublicInstance<BmComponent.BmNavigationControlProps>
+    export const BmNavigationControl: DefineComponent<BmComponent.BmNavigationControlProps, {}, any>
     /**
      * 3D导航控件
      */
-    export const BmNavigationThreedControl: ComponentPublicInstance<BmComponent.BmNavigationThreedControlProps>
+    export const BmNavigationThreedControl: DefineComponent<BmComponent.BmNavigationThreedControlProps, {}, any>
     /**
      * 定位控件
      */
-    export const BmLocationControl: ComponentPublicInstance<BmComponent.BmLocationControlProps>
+    export const BmLocationControl: DefineComponent<BmComponent.BmLocationControlProps, {}, any>
     /**
      * 地图类型控件
      */
-    export const BmMapTypeControl: ComponentPublicInstance<BmComponent.BmMapTypeControlProps>
+    export const BmMapTypeControl: DefineComponent<BmComponent.BmMapTypeControlProps, {}, any>
     /**
      * 城市列表控件
      */
-    export const BmCityListControl: ComponentPublicInstance<BmComponent.BmCityListControlProps>
+    export const BmCityListControl: DefineComponent<BmComponent.BmCityListControlProps, {}, any>
     /**
      * 点标注
      */
-    export const BmMarker: ComponentPublicInstance<BmComponent.BmMarkerProps>
+    export const BmMarker: DefineComponent<BmComponent.BmMarkerProps, {}, any>
     /**
      * 点图标
      */
-    export const BmMarkerIcon: ComponentPublicInstance<BmComponent.BmMarkerIconProps>
+    export const BmMarkerIcon: DefineComponent<BmComponent.BmMarkerIconProps, {}, any>
     /**
      * 3d点标注
      */
-    export const BmMarkerThreed: ComponentPublicInstance<BmComponent.BmMarker3DProps>
+    export const BmMarkerThreed: DefineComponent<BmComponent.BmMarker3DProps, {}, any>
     /**
      * 3d点图标
      */
-    export const BmMarkerThreedIcon: ComponentPublicInstance<BmComponent.BmMarkerThreedIconProps>
+    export const BmMarkerThreedIcon: DefineComponent<BmComponent.BmMarkerThreedIconProps, {}, any>
     /**
      * 文本标注
      */
-    export const BmLabel: ComponentPublicInstance<BmComponent.BmLabelProps>
+    export const BmLabel: DefineComponent<BmComponent.BmLabelProps, {}, any>
     /**
      * 折线
      */
-    export const BmPolyline: ComponentPublicInstance<BmComponent.BmPolylineProps>
+    export const BmPolyline: DefineComponent<BmComponent.BmPolylineProps, {}, any>
     /**
      * 折线图标
      */
-    export const BmIconSequence: ComponentPublicInstance<BmComponent.BmIconSequenceProps>
+    export const BmIconSequence: DefineComponent<BmComponent.BmIconSequenceProps, {}, any>
     /**
      * 多边形
      */
-    export const BmPolygon: ComponentPublicInstance<BmComponent.BmPolygonProps>
+    export const BmPolygon: DefineComponent<BmComponent.BmPolygonProps, {}, any>
     /**
      * 城市区域
      */
-    export const BmCityBoundary: ComponentPublicInstance<BmComponent.BmCityBoundaryProps>
+    export const BmCityBoundary: DefineComponent<BmComponent.BmCityBoundaryProps, {}, any>
     /**
      * 棱柱
      */
-    export const BmPrism: ComponentPublicInstance<BmComponent.BmPrismProps>
+    export const BmPrism: DefineComponent<BmComponent.BmPrismProps, {}, any>
     /**
      * 地面叠加层
      */
-    export const BmGroundOverlay: ComponentPublicInstance<BmComponent.BmGroundOverlayProps>
+    export const BmGroundOverlay: DefineComponent<BmComponent.BmGroundOverlayProps, {}, any>
     /**
      * 地面叠加层图片
      */
-    export const BmGroundOverlayImage: ComponentPublicInstance<BmComponent.BmGroundOverlayImageProps>
+    export const BmGroundOverlayImage: DefineComponent<BmComponent.BmGroundOverlayImageProps, {}, any>
     /**
      * 上下文菜单
      */
-    export const BmContextMenu: ComponentPublicInstance<BmComponent.BmContextMenuProps>
+    export const BmContextMenu: DefineComponent<BmComponent.BmContextMenuProps, {}, any>
     /**
      * 上下文菜单
      */
-    export const BmContextMenuItem: ComponentPublicInstance<BmComponent.BmContextMenuItemProps>
+    export const BmContextMenuItem: DefineComponent<BmComponent.BmContextMenuItemProps, {}, any>
     /**
      * 圆形
      */
-    export const BmCircle: ComponentPublicInstance<BmComponent.BmCircleProps>
+    export const BmCircle: DefineComponent<BmComponent.BmCircleProps, {}, any>
     /**
      * 信息窗口
      */
-    export const BmInfoWindow: ComponentPublicInstance<BmComponent.BmInfoWindowProps>
+    export const BmInfoWindow: DefineComponent<BmComponent.BmInfoWindowProps, {}, any>
     /**
      * 地图动画
      */
-    export const BmViewAnimation: ComponentPublicInstance<BmComponent.BmViewAnimationProps>
+    export const BmViewAnimation: DefineComponent<BmComponent.BmViewAnimationProps, {}, any>
     /**
      * 轨迹动画
      */
-    export const BmTrackAnimation: ComponentPublicInstance<BmComponent.BmTrackAnimationProps>
+    export const BmTrackAnimation: DefineComponent<BmComponent.BmTrackAnimationProps, {}, any>
     /**
      * 路书动画
      */
-    export const BmLushuAnimation: ComponentPublicInstance<BmComponent.BmLushuAnimationProps>
+    export const BmLushuAnimation: DefineComponent<BmComponent.BmLushuAnimationProps, {}, any>
     /**
      * 测距工具
      */
-    export const BmDistanceTool: ComponentPublicInstance<BmComponent.BmDistanceToolProps>
+    export const BmDistanceTool: DefineComponent<BmComponent.BmDistanceToolProps, {}, any>
     /**
      * 绘制工具
      */
-    export const BmDrawingManager: ComponentPublicInstance<BmComponent.BmDrawingManagerProps>
+    export const BmDrawingManager: DefineComponent<BmComponent.BmDrawingManagerProps, {}, any>
     /**
      * 富文本标记
      */
-    export const BmRichMarker: ComponentPublicInstance<BmComponent.BmRichMarkerProps>
+    export const BmRichMarker: DefineComponent<BmComponent.BmRichMarkerProps, {}, any>
     /**
      * 贝塞尔曲线
      */
-    export const BmBezierCurve: ComponentPublicInstance<BmComponent.BmBezierCurveProps>
+    export const BmBezierCurve: DefineComponent<BmComponent.BmBezierCurveProps, {}, any>
     /**
      * 驾驶规划
      */
-    export const BmDrivingRoute: ComponentPublicInstance<BmComponent.BmDrivingRouteProps>
+    export const BmDrivingRoute: DefineComponent<BmComponent.BmDrivingRouteProps, {}, any>
     /**
      * 公交规划
      */
-    export const BmTransitRoute: ComponentPublicInstance<BmComponent.BmTransitRouteProps>
+    export const BmTransitRoute: DefineComponent<BmComponent.BmTransitRouteProps, {}, any>
     /**
      * 步行规划
      */
-    export const BmWalkingRoute: ComponentPublicInstance<BmComponent.BmWalkingRouteProps>
+    export const BmWalkingRoute: DefineComponent<BmComponent.BmWalkingRouteProps, {}, any>
     /**
      * 骑行规划
      */
-    export const BmRidingRoute: ComponentPublicInstance<BmComponent.BmRidingRouteProps>
+    export const BmRidingRoute: DefineComponent<BmComponent.BmRidingRouteProps, {}, any>
     /**
      * 自定义路书
      */
-    export const BmCustomLushu: ComponentPublicInstance<BmComponent.BmCustomLushuProps>
+    export const BmCustomLushu: DefineComponent<BmComponent.BmCustomLushuProps, {}, any>
     /**
      * 自定义折线
      */
-    export const BmCustomPolyline: ComponentPublicInstance<BmComponent.BmCustomPolylineProps>
+    export const BmCustomPolyline: DefineComponent<BmComponent.BmCustomPolylineProps, {}, any>
 
     /**
      * BMapGL
@@ -562,3 +562,5 @@ export namespace BaiduMapVue3 {
         }
     }
 }
+
+export = BaiduMapVue3
