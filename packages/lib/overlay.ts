@@ -15,7 +15,7 @@ export function addMaker(
     },
     marker_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmMarkerProps>
+    } & Required<BmComponent.BmMarkerProps>
 ): BMapGL.Marker | undefined {
     if (BMapGLRef.value && map) {
         let marker_options = {} as {
@@ -29,7 +29,7 @@ export function addMaker(
                 })
             }
         } else if (marker_params.icon) {
-            let icon_props = marker_params.icon as Required<BaiduMapVue3.BmMarkerIconProps>
+            let icon_props = marker_params.icon as Required<BmComponent.BmMarkerIconProps>
             marker_options.icon = new BMapGLRef.value.Icon(
                 icon_props.src,
                 new BMapGLRef.value.Size(icon_props.size[0], icon_props.size[1]),
@@ -77,14 +77,14 @@ export function addMaker3D(
     },
     marker_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmMarker3DProps>
+    } & Required<BmComponent.BmMarker3DProps>
 ): BMapGL.Marker3D | undefined {
     if (BMapGLRef.value && map) {
         let marker_options = {} as {
             [key: string]: any
         } & Required<BMapGL.Marker3DOptions>
         if (marker_params.icon) {
-            let icon_props = marker_params.icon as Required<BaiduMapVue3.BmMarkerIconProps>
+            let icon_props = marker_params.icon as Required<BmComponent.BmMarkerIconProps>
             marker_options.icon = new BMapGLRef.value.Icon(
                 icon_props.src,
                 new BMapGLRef.value.Size(icon_props.size[0], icon_props.size[1]),
@@ -128,7 +128,7 @@ export function addPolyline(
     }[],
     polyline_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmPolylineProps>
+    } & Required<BmComponent.BmPolylineProps>
 ): {
     polyline: BMapGL.Polyline | null
     removeOverlay: Function,
@@ -187,7 +187,7 @@ export function addPolygon(
     }[],
     polygon_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmPolygonProps>
+    } & Required<BmComponent.BmPolygonProps>
 ): {
     polygon: BMapGL.Polygon | null
     removeOverlay: Function,
@@ -256,7 +256,7 @@ export function addCityBoundary(
     name: string,
     boundary_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmCityBoundaryProps>,
+    } & Required<BmComponent.BmCityBoundaryProps>,
     init_data: {
         boundary: BMapGL.Boundary,
         rs: { boundaries: string[] }
@@ -343,7 +343,7 @@ export function addPrism(
     }[],
     prism_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmPrismProps>
+    } & Required<BmComponent.BmPrismProps>
 ): {
     prism: BMapGL.Prism | null
     removeOverlay: Function,
@@ -393,7 +393,7 @@ export function addGroundOverlay(
     },
     ground_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmGroundOverlayProps>
+    } & Required<BmComponent.BmGroundOverlayProps>
 ): BMapGL.GroundOverlay | undefined {
     if (BMapGLRef.value && map) {
         let marker_options = {} as {
@@ -427,7 +427,7 @@ export function addLabel(
     map: BMapGL.Map | undefined,
     label_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmLabelProps>
+    } & Required<BmComponent.BmLabelProps>
 ): BMapGL.Label | undefined {
     if (BMapGLRef.value && map) {
         let label = new BMapGLRef.value.Label(label_params.content, {
@@ -462,7 +462,7 @@ export function addContextMenu(
     map: BMapGL.Map | undefined,
     menu_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmContextMenuProps>
+    } & Required<BmComponent.BmContextMenuProps>
 ): BMapGL.ContextMenu | undefined {
     if (BMapGLRef.value && map) {
         let context_menu = new BMapGLRef.value.ContextMenu()
@@ -501,7 +501,7 @@ export function addCircle(
     radius: number,
     circle_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmCircleProps>
+    } & Required<BmComponent.BmCircleProps>
 ): BMapGL.Circle | undefined {
     if (BMapGLRef.value && map) {
         let marker_options = {} as {
@@ -533,7 +533,7 @@ export function addInfoWindow(
     map: BMapGL.Map | undefined,
     info_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmInfoWindowProps>
+    } & Required<BmComponent.BmInfoWindowProps>
 ): BMapGL.InfoWindow | undefined {
     if (BMapGLRef.value && map) {
         let marker_options = {} as {
@@ -561,7 +561,7 @@ export function addBezierCurve(
     map: BMapGL.Map | undefined,
     params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmBezierCurveProps>
+    } & Required<BmComponent.BmBezierCurveProps>
 ): {
     bc: BMapGL.BezierCurve | null
     removeOverlay: Function,
@@ -608,9 +608,9 @@ export function addCustomPolyline(
     }[],
     polyline_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmCustomPolylineProps>
+    } & Required<BmComponent.BmCustomPolylineProps>
 ): {
-    polyline: BaiduMapVue3.CustomPolyline | null
+    polyline: BmComponent.CustomPolyline | null
     removeOverlay: Function,
     overallView: (points?: BMapGL.Point[]) => void,
 } | undefined {
@@ -668,14 +668,14 @@ export function addCustomLushu(
     }[],
     lushu_params: {
         [key: string]: any
-    } & BaiduMapVue3.BmCustomLushuProps
+    } & BmComponent.BmCustomLushuProps
 ): {
-    lushu: BaiduMapVue3.CustomLushu | null
+    lushu: BmComponent.CustomLushu | null
 } | undefined {
     if (BMapGLRef.value && map) {
         let marker_options = {} as {
             [key: string]: any
-        } & Required<BaiduMapVue3.CustomLushuOptions>
+        } & Required<BmComponent.CustomLushuOptions>
         for (let key in lushu_params) {
             if (key !== 'points' && key !== 'icons') {
                 marker_options[key as string] = lushu_params[key]
@@ -690,7 +690,7 @@ export function addCustomLushu(
         lushu.hide()
         map.addOverlay(lushu)
         return {
-            lushu: lushu as BaiduMapVue3.CustomLushu,
+            lushu: lushu as BmComponent.CustomLushu,
         }
     }
     return

@@ -8,7 +8,7 @@ export function addViewAnimation(
     map: BMapGL.Map | undefined,
     animation_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmViewAnimationProps>
+    } & Required<BmComponent.BmViewAnimationProps>
 ): BMapGL.ViewAnimation | undefined {
     if (BMapGLRef.value && map) {
         let animation_options = {} as {
@@ -21,7 +21,7 @@ export function addViewAnimation(
         }
         let keyFrames = [] as BMapGL.ViewAnimationKeyFrames[]
         if (animation_params.keyFrames) {
-            keyFrames = (animation_params.keyFrames as BaiduMapVue3.BmViewAnimationKeyFramesProps[]).map(item => {
+            keyFrames = (animation_params.keyFrames as BmComponent.BmViewAnimationKeyFramesProps[]).map(item => {
                 if (BMapGLRef.value) {
                     return {
                         center: new BMapGLRef.value.Point(item.center.lng, item.center.lat),
@@ -79,7 +79,7 @@ export function addTrackAnimation(
     map: BMapGL.Map | undefined,
     animation_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmTrackAnimationProps>
+    } & Required<BmComponent.BmTrackAnimationProps>
 ): {
     animation: BMapGL.TrackAnimation | null
     overlay: BMapGL.Overlay | null
@@ -173,7 +173,7 @@ export function addLushu(
     map: BMapGL.Map | undefined,
     animation_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmLushuAnimationProps>
+    } & Required<BmComponent.BmLushuAnimationProps>
 ): {
     animation: BMapGL.LushuAnimation | null
     overlay: BMapGL.Overlay | null
@@ -213,7 +213,7 @@ export function addLushu(
                 )
             }
         } else {
-            let icon_props = animation_params.icon as unknown as Required<BaiduMapVue3.BmMarkerIconProps>
+            let icon_props = animation_params.icon as unknown as Required<BmComponent.BmMarkerIconProps>
             animation_options.icon = new BMapGLRef.value.Icon(
                 icon_props.src,
                 new BMapGLRef.value.Size(icon_props.size[0], icon_props.size[1]),

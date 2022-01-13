@@ -150,7 +150,7 @@ export function addMap(
     container: string | HTMLElement,
     map_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BaiduMapProps>
+    } & Required<BmComponent.BaiduMapProps>
 ):
     | {
         BMap: BMapGL.BMapGL | undefined
