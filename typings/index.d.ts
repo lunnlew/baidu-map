@@ -1,4 +1,4 @@
-import { ComponentPublicInstance } from "vue";
+import { App, ComponentPublicInstance } from "vue";
 
 export namespace BaiduMapVue3 {
     /**
@@ -6,7 +6,7 @@ export namespace BaiduMapVue3 {
      * @param app 
      * @param options
      */
-    function install(app: any, options?: {
+    function install(app: App<Element>, options?: {
         apiKey: string,
         plugins: string[]
     }): void
