@@ -7,7 +7,7 @@ export function addDrivingRoute(
     map: BMapGL.Map | undefined,
     params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmDrivingRouteProps>
+    } & Required<BmComponent.BmDrivingRouteProps>
 ): BMapGL.DrivingRoute | undefined {
     if (BMapGLRef.value && map) {
         let options = {} as {
@@ -49,7 +49,7 @@ export function addTransitRoute(
     map: BMapGL.Map | undefined,
     params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmTransitRouteProps>
+    } & Required<BmComponent.BmTransitRouteProps>
 ): BMapGL.TransitRoute | undefined {
     if (BMapGLRef.value && map) {
         let options = {} as {
@@ -91,7 +91,7 @@ export function addWalkingRoute(
     map: BMapGL.Map | undefined,
     params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmWalkingRouteProps>
+    } & Required<BmComponent.BmWalkingRouteProps>
 ): BMapGL.WalkingRoute | undefined {
     if (BMapGLRef.value && map) {
         let options = {} as {
@@ -133,7 +133,7 @@ export function addRidingRoute(
     map: BMapGL.Map | undefined,
     params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmRidingRouteProps>
+    } & Required<BmComponent.BmRidingRouteProps>
 ): BMapGL.RidingRoute | undefined {
     if (BMapGLRef.value && map) {
         let options = {} as {
@@ -209,7 +209,7 @@ export function addDistanceTool(
     map: BMapGL.Map | undefined,
     tool_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmDistanceToolProps>
+    } & Required<BmComponent.BmDistanceToolProps>
 ): BMapGL.DistanceTool | undefined {
     if (BMapGLRef.value && map && BMapGLLibRef.value) {
         let tool = new BMapGLLibRef.value.DistanceTool(map)
@@ -265,7 +265,7 @@ export function addDrawingManager(
     map: BMapGL.Map | undefined,
     tool_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmDrawingManagerProps>
+    } & Required<BmComponent.BmDrawingManagerProps>
 ): BMapGL.DrawingManager | undefined {
     if (BMapGLRef.value && map && BMapGLLibRef.value) {
         let tool = new BMapGLLibRef.value.DrawingManager(map)
@@ -314,7 +314,7 @@ export function addRichMarker(
     map: BMapGL.Map | undefined,
     tool_params: {
         [key: string]: any
-    } & Required<BaiduMapVue3.BmRichMarkerProps>
+    } & Required<BmComponent.BmRichMarkerProps>
 ): BMapGL.RichMarker | undefined {
     if (BMapGLRef.value && map && BMapGLLibRef.value) {
         let tool = new BMapGLLibRef.value.RichMarker(tool_params.html, new BMapGLRef.value.Point(tool_params.point.lng, tool_params.point.lat), {

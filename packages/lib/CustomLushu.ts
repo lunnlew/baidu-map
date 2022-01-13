@@ -1,7 +1,7 @@
 import { BMapGLRef } from "./map";
 function CustomLushu(this: any) {
     let points = arguments[0] as BMapGL.Point[];
-    let options = (arguments[1] || {}) as Required<BaiduMapVue3.CustomLushuOptions>
+    let options = (arguments[1] || {}) as Required<BmComponent.CustomLushuOptions>
 
     options = Object.assign({}, {
         speed: 5,

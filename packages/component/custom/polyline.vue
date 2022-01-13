@@ -56,7 +56,7 @@ const emit = defineEmits({})
 const isShow = computed(() => props.show && props.points.length > 0)
 const options = computed(() => props)
 const bm = ref<{
-    polyline: BaiduMapVue3.CustomPolyline | null
+    polyline: BmComponent.CustomPolyline | null
     removeOverlay: Function
     overallView: (points?: BMapGL.Point[]) => void
 } | null>()

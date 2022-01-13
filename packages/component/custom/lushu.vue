@@ -33,7 +33,7 @@ const emit = defineEmits({})
 const isShow = computed(() => props.show)
 const options = computed(() => props)
 const bm = ref<{
-    lushu: BaiduMapVue3.CustomLushu | null
+    lushu: BmComponent.CustomLushu | null
 } | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
