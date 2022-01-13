@@ -1,3 +1,5 @@
+import { App } from 'vue'
+
 import { initDistanceTool, initDrawingManager, initGeoUtils, initRichMarker } from './lib/tool'
 import { initLushu, initTrackAnimation } from './lib/animation'
 
@@ -111,7 +113,7 @@ export {
 }
 
 const bm = {
-    install: function (app: any, options?: {
+    install: function (app: App<Element>, options?: {
         apiKey: string,
         plugins: string[]
     }) {
