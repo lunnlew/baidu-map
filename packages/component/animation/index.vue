@@ -23,7 +23,6 @@ const props = withDefaults(
         duration?: number
         delay?: number
         interation?: number | string
-        anchor?: number
         overallView?: boolean
         show?: boolean
         onReady?: (el: any) => void

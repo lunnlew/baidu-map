@@ -48,6 +48,7 @@ const props = withDefaults(
         showControls?: boolean
         showRealSunlight?: boolean
         showMilkyway?: boolean
+        earthBackground?: null
         showStreetLayer?: boolean
         minZoom?: number | null
         maxZoom?: number | null
@@ -122,7 +123,7 @@ const props = withDefaults(
                 skyColors: [],
             }
         },
-        onReady: () => {},
+        onReady: (el: any) => {},
     }
 )
 const emit = defineEmits({})
