@@ -1,4 +1,4 @@
-import{d as g,r,h as l,b as m,e as v,g as n,i as e,u as t,w as c,B as i}from"./vendor.b0b43158.js";var h=`<bm-polyline
+import{d as g,r,h as l,b as m,e as v,g as n,i as e,u as t,w as c,B as i}from"./vendor.10ab7a6d.js";var h=`<bm-polyline
     :points="points"
     :overallView="true"
     :show="true"
