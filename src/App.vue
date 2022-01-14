@@ -41,9 +41,8 @@ body,
     text-align: center;
 }
 .sideleft {
-    width: 200px;
+    flex: 0 0 200px;
     box-sizing: border-box;
-    border-right: 1px solid #eee;
 }
 .sidefixed {
     position: fixed;
@@ -51,6 +50,9 @@ body,
     left: 0;
     width: 200px;
     height: 100%;
+    background: #fff;
+    z-index: 99;
+    border-right: 1px solid #eee;
 }
 .page-content {
     padding: 10px 28px;
