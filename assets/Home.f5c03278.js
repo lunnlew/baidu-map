@@ -13,7 +13,7 @@ app.mount('#app')`,l=`<template>
         class="map"
         ref="map"
         :apiKey="apiKey"
-        :point="point"
+        :center="point"
         >
     </baidu-map>
 </template>
