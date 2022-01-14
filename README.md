@@ -44,7 +44,7 @@ app.mount('#app')
         class="map"
         ref="map"
         :apiKey="apiKey"
-        :point="point"
+        :center="point"
         >
     </baidu-map>
 </template>
