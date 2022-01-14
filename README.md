@@ -1,6 +1,6 @@
-BaiduMap Vue3 GL Map Component
+## BaiduMap Vue3 GL Map Component
 
-## 安装
+### 安装
 
 ```sh
 npm install --save baidu-map-vue3
@@ -8,7 +8,7 @@ npm install --save baidu-map-vue3
 yarn add baidu-map-vue3
 ```
 
-## 全局导入
+### 全局导入
 
 ```typescript
 import { createApp } from 'vue'
@@ -22,7 +22,21 @@ app.use(BaiduMapVue3, {
 app.mount('#app')
 ```
 
-## 局部导入
+### Volar 支持
+
+如果您使用`Volar`，需要在`tsconfig.json`中通过`compilerOptions.types`指定全局组件类型。
+
+```json
+// tsconfig.json
+{
+    "compilerOptions": {
+        // ...
+        "types": ["baidu-map-vue3/typings/global"]
+    }
+}
+```
+
+### 局部导入
 
 ```typescript
 <template>
