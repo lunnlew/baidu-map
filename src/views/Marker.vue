@@ -17,7 +17,7 @@
             :center="point"
             :enableMapClick="true"
             :enableWheelZoom="true"
-            :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+            :mapType="BMapGLConstant.MapTypeId.BMAP_NORMAL_MAP"
         >
             <bm-marker :point="point" :show="isShowMaker">
                 <bm-marker-icon :size="[23, 25]" :anchor="[10, 15]" :imageOffset="[0, 0]"></bm-marker-icon>
@@ -40,14 +40,14 @@
             :center="point"
             :enableMapClick="true"
             :enableWheelZoom="true"
-            :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+            :mapType="BMapGLConstant.MapTypeId.BMAP_NORMAL_MAP"
         >
             <bm-label :position="point" :content="'文本标注'" :offset="[-25, -35]" :show="isShowLabel"> </bm-label>
         </baidu-map>
     </div>
 </template>
 <script setup lang="ts">
-import { BMapGL } from 'baidu-map-vue3'
+import { BMapGLConstant } from 'baidu-map-vue3'
 import { ref } from 'vue'
 import code_marker from '../code/baidu-map-marker.txt?raw'
 import code_label from '../code/baidu-map-label.txt?raw'

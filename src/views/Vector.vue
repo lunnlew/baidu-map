@@ -17,7 +17,7 @@
             :center="point"
             :enableMapClick="true"
             :enableWheelZoom="true"
-            :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+            :mapType="BMapGLConstant.MapTypeId.BMAP_NORMAL_MAP"
         >
             <bm-polyline :points="points" :overallView="true" :show="true"></bm-polyline>
         </baidu-map>
@@ -38,7 +38,7 @@
             :center="point"
             :enableMapClick="true"
             :enableWheelZoom="true"
-            :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+            :mapType="BMapGLConstant.MapTypeId.BMAP_NORMAL_MAP"
         >
             <bm-polygon :points="points" :overallView="true" :show="true"></bm-polygon>
         </baidu-map>
@@ -59,14 +59,14 @@
             :center="point"
             :enableMapClick="true"
             :enableWheelZoom="true"
-            :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+            :mapType="BMapGLConstant.MapTypeId.BMAP_NORMAL_MAP"
         >
             <bm-circle :center="point" :overallView="true" :radius="1000" :show="true"></bm-circle>
         </baidu-map>
     </div>
 </template>
 <script setup lang="ts">
-import { BMapGL } from 'baidu-map-vue3'
+import { BMapGLConstant } from 'baidu-map-vue3'
 import { ref } from 'vue'
 import code_polyline from '../code/bm-polyline.txt?raw'
 import code_polygon from '../code/bm-polygon.txt?raw'

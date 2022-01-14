@@ -1,4 +1,4 @@
-<bm-custom-control :show="true" :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT" :offset="[300, 90]">
+<bm-custom-control :show="true" :anchor="BMapGLConstant.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT" :offset="[300, 90]">
     <div class="custom-control-content">
         <div class="custom-control-title">自定义控件</div>
         <div class="custom-control-body">

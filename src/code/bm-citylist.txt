@@ -1,5 +1,5 @@
 <bm-city-list-control
     :show="true"
-    :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
+    :anchor="BMapGLConstant.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
     :offset="[50, 30]"
 ></bm-city-list-control>

@@ -2,5 +2,5 @@
 <bm-scale-control
     :show="true"
     :offset="[50, 30]"
-    :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_BOTTOM_LEFT"
+    :anchor="BMapGLConstant.ControlAnchor.BMAP_ANCHOR_BOTTOM_LEFT"
 ></bm-scale-control>

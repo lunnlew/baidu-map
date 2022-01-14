@@ -9,6 +9,6 @@
     :zoom="13"
     :enableMapClick="true"
     :enableWheelZoom="true"
-    :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+    :mapType="BMapGLConstant.MapTypeId.BMAP_NORMAL_MAP"
     >
 </baidu-map>

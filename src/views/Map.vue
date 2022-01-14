@@ -49,7 +49,7 @@
             :zoomCenter="zoomCenter"
             :enableMapClick="true"
             :enableWheelZoom="true"
-            :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+            :mapType="BMapGLConstant.MapTypeId.BMAP_NORMAL_MAP"
             @zoom_changed="zoomChange"
             @center_changed="centerChange"
         >
@@ -84,27 +84,27 @@
             <bm-scale-control
                 :show="isShowScaleControl"
                 :offset="[50, 30]"
-                :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_BOTTOM_LEFT"
+                :anchor="BMapGLConstant.ControlAnchor.BMAP_ANCHOR_BOTTOM_LEFT"
             ></bm-scale-control>
             <bm-city-list-control
                 :show="isShowCityListControl"
-                :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
+                :anchor="BMapGLConstant.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
                 :offset="[20, 20]"
             ></bm-city-list-control>
             <bm-map-type-control :show="isShowMapTypeControl"></bm-map-type-control>
             <bm-location-control
                 :show="isShowLocationControl"
-                :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
+                :anchor="BMapGLConstant.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
                 :offset="[60, 60]"
             ></bm-location-control>
             <bm-navigation-control
                 :show="isShowNavigationControl"
-                :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
-                :type="BMapGL.NavigationControlType.BMAP_NAVIGATION_CONTROL_SMALL"
+                :anchor="BMapGLConstant.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
+                :type="BMapGLConstant.NavigationControlType.BMAP_NAVIGATION_CONTROL_SMALL"
             ></bm-navigation-control>
             <bm-custom-control
                 :show="isShowCustomControl"
-                :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
+                :anchor="BMapGLConstant.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
                 :offset="[300, 90]"
             >
                 <div class="custom-control-content">
@@ -117,14 +117,14 @@
             </bm-custom-control>
             <bm-navigation-threed-control
                 :show="isShowNavigationThreeControl"
-                :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
-                :type="BMapGL.NavigationControlType.BMAP_NAVIGATION_CONTROL_SMALL"
+                :anchor="BMapGLConstant.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
+                :type="BMapGLConstant.NavigationControlType.BMAP_NAVIGATION_CONTROL_SMALL"
             ></bm-navigation-threed-control>
             <bm-city-boundary
                 :show="isShowCityBoundary"
                 :name="'北京市'"
                 :overallView="true"
-                :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
+                :anchor="BMapGLConstant.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
                 :offset="[60, 60]"
             ></bm-city-boundary>
             <bm-polygon :points="points" :overallView="true" :show="isShowPolygon" @click="onPolygonClick"></bm-polygon>
@@ -184,7 +184,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { BMapGL } from 'baidu-map-vue3'
+import { BMapGLConstant } from 'baidu-map-vue3'
 import code_baidu_map from '../code/baidu-map.txt?raw'
 import code_baidu_map_style from '../code/baidu-map-style.txt?raw'
 import { computed, ref } from 'vue'

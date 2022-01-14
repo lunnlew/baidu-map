@@ -17,12 +17,12 @@
             :center="point"
             :enableMapClick="true"
             :enableWheelZoom="true"
-            :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+            :mapType="BMapGLConstant.MapTypeId.BMAP_NORMAL_MAP"
         >
             <bm-zoom-control
                 :offset="[50, 50]"
                 :show="true"
-                :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_LEFT"
+                :anchor="BMapGLConstant.ControlAnchor.BMAP_ANCHOR_TOP_LEFT"
             ></bm-zoom-control>
         </baidu-map>
         <div class="code">
@@ -42,12 +42,12 @@
             :center="point"
             :enableMapClick="true"
             :enableWheelZoom="true"
-            :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+            :mapType="BMapGLConstant.MapTypeId.BMAP_NORMAL_MAP"
         >
             <bm-scale-control
                 :show="true"
                 :offset="[50, 30]"
-                :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_BOTTOM_LEFT"
+                :anchor="BMapGLConstant.ControlAnchor.BMAP_ANCHOR_BOTTOM_LEFT"
             ></bm-scale-control>
         </baidu-map>
         <div class="code">
@@ -67,12 +67,12 @@
             :center="point"
             :enableMapClick="true"
             :enableWheelZoom="true"
-            :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+            :mapType="BMapGLConstant.MapTypeId.BMAP_NORMAL_MAP"
         >
             <bm-map-type-control
                 :show="true"
                 :offset="[80, 30]"
-                :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_BOTTOM_LEFT"
+                :anchor="BMapGLConstant.ControlAnchor.BMAP_ANCHOR_BOTTOM_LEFT"
             ></bm-map-type-control>
         </baidu-map>
         <div class="code">
@@ -92,11 +92,11 @@
             :center="point"
             :enableMapClick="true"
             :enableWheelZoom="true"
-            :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+            :mapType="BMapGLConstant.MapTypeId.BMAP_NORMAL_MAP"
         >
             <bm-location-control
                 :show="true"
-                :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
+                :anchor="BMapGLConstant.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
                 :offset="[60, 60]"
             ></bm-location-control>
         </baidu-map>
@@ -117,11 +117,11 @@
             :center="point"
             :enableMapClick="true"
             :enableWheelZoom="true"
-            :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+            :mapType="BMapGLConstant.MapTypeId.BMAP_NORMAL_MAP"
         >
             <bm-city-list-control
                 :show="true"
-                :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
+                :anchor="BMapGLConstant.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
                 :offset="[50, 30]"
             ></bm-city-list-control>
         </baidu-map>
@@ -142,9 +142,13 @@
             :center="point"
             :enableMapClick="true"
             :enableWheelZoom="true"
-            :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+            :mapType="BMapGLConstant.MapTypeId.BMAP_NORMAL_MAP"
         >
-            <bm-custom-control :show="true" :anchor="BMapGL.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT" :offset="[300, 90]">
+            <bm-custom-control
+                :show="true"
+                :anchor="BMapGLConstant.ControlAnchor.BMAP_ANCHOR_TOP_RIGHT"
+                :offset="[300, 90]"
+            >
                 <div class="custom-control-content">
                     <div class="custom-control-title">自定义控件</div>
                     <div class="custom-control-body">
@@ -156,7 +160,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { BMapGL } from 'baidu-map-vue3'
+import { BMapGLConstant } from 'baidu-map-vue3'
 import { ref } from 'vue'
 import code_zoom from '../code/bm-zoom.txt?raw'
 import code_scale from '../code/bm-scale.txt?raw'
