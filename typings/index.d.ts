@@ -1,4 +1,4 @@
-import { App, DefineComponent } from "vue";
+import { App } from "vue";
 
 declare namespace BaiduMapVue3 {
     /**
@@ -13,163 +13,163 @@ declare namespace BaiduMapVue3 {
     /**
      * 地图容器
      */
-    export const BmView: DefineComponent<{}, {}, any>
+    export const BmView: typeof import("../packages/main").BmView
     /**
      * 地图根组件
      */
-    export const BaiduMap: DefineComponent<BmComponent.BaiduMapProps, {}, any>
+    export const BaiduMap: typeof import("../packages/main").BaiduMap
     /**
      * 比例尺控件
      */
-    export const BmScaleControl: DefineComponent<BmComponent.BmScaleControlProps, {}, any>
+    export const BmScaleControl: typeof import("../packages/main").BmScaleControl
     /**
      * 地图级别控件
      */
-    export const BmZoomControl: DefineComponent<BmComponent.BmZoomControlProps, {}, any>
+    export const BmZoomControl: typeof import("../packages/main").BmZoomControl
     /**
      * 版权控件
      */
-    export const BmCopyrightControl: DefineComponent<BmComponent.BmCopyrightControlProps, {}, any>
+    export const BmCopyrightControl: typeof import("../packages/main").BmCopyrightControl
     /**
      * 自定义控件
      */
-    export const BmCustomControl: DefineComponent<BmComponent.BmCustomControlProps, {}, any>
+    export const BmCustomControl: typeof import("../packages/main").BmCustomControl
     /**
      * 平移导航控件
      */
-    export const BmNavigationControl: DefineComponent<BmComponent.BmNavigationControlProps, {}, any>
+    export const BmNavigationControl: typeof import("../packages/main").BmNavigationControl
     /**
      * 3D导航控件
      */
-    export const BmNavigationThreedControl: DefineComponent<BmComponent.BmNavigationThreedControlProps, {}, any>
+    export const BmNavigationThreedControl: typeof import("../packages/main").BmNavigationThreedControl
     /**
      * 定位控件
      */
-    export const BmLocationControl: DefineComponent<BmComponent.BmLocationControlProps, {}, any>
+    export const BmLocationControl: typeof import("../packages/main").BmLocationControl
     /**
      * 地图类型控件
      */
-    export const BmMapTypeControl: DefineComponent<BmComponent.BmMapTypeControlProps, {}, any>
+    export const BmMapTypeControl: typeof import("../packages/main").BmMapTypeControl
     /**
      * 城市列表控件
      */
-    export const BmCityListControl: DefineComponent<BmComponent.BmCityListControlProps, {}, any>
+    export const BmCityListControl: typeof import("../packages/main").BmCityListControl
     /**
      * 点标注
      */
-    export const BmMarker: DefineComponent<BmComponent.BmMarkerProps, {}, any>
+    export const BmMarker: typeof import("../packages/main").BmMarker
     /**
      * 点图标
      */
-    export const BmMarkerIcon: DefineComponent<BmComponent.BmMarkerIconProps, {}, any>
+    export const BmMarkerIcon: typeof import("../packages/main").BmMarkerIcon
     /**
      * 3d点标注
      */
-    export const BmMarkerThreed: DefineComponent<BmComponent.BmMarker3DProps, {}, any>
+    export const BmMarkerThreed: typeof import("../packages/main").BmMarkerThreed
     /**
      * 3d点图标
      */
-    export const BmMarkerThreedIcon: DefineComponent<BmComponent.BmMarkerThreedIconProps, {}, any>
+    export const BmMarkerThreedIcon: typeof import("../packages/main").BmMarkerThreedIcon
     /**
      * 文本标注
      */
-    export const BmLabel: DefineComponent<BmComponent.BmLabelProps, {}, any>
+    export const BmLabel: typeof import("../packages/main").BmLabel
     /**
      * 折线
      */
-    export const BmPolyline: DefineComponent<BmComponent.BmPolylineProps, {}, any>
+    export const BmPolyline: typeof import("../packages/main").BmPolyline
     /**
      * 折线图标
      */
-    export const BmIconSequence: DefineComponent<BmComponent.BmIconSequenceProps, {}, any>
+    export const BmIconSequence: typeof import("../packages/main").BmIconSequence
     /**
      * 多边形
      */
-    export const BmPolygon: DefineComponent<BmComponent.BmPolygonProps, {}, any>
+    export const BmPolygon: typeof import("../packages/main").BmPolygon
     /**
      * 城市区域
      */
-    export const BmCityBoundary: DefineComponent<BmComponent.BmCityBoundaryProps, {}, any>
+    export const BmCityBoundary: typeof import("../packages/main").BmCityBoundary
     /**
      * 棱柱
      */
-    export const BmPrism: DefineComponent<BmComponent.BmPrismProps, {}, any>
+    export const BmPrism: typeof import("../packages/main").BmPrism
     /**
      * 地面叠加层
      */
-    export const BmGroundOverlay: DefineComponent<BmComponent.BmGroundOverlayProps, {}, any>
+    export const BmGroundOverlay: typeof import("../packages/main").BmGroundOverlay
     /**
      * 地面叠加层图片
      */
-    export const BmGroundOverlayImage: DefineComponent<BmComponent.BmGroundOverlayImageProps, {}, any>
+    export const BmGroundOverlayImage: typeof import("../packages/main").BmGroundOverlayImage
     /**
      * 上下文菜单
      */
-    export const BmContextMenu: DefineComponent<BmComponent.BmContextMenuProps, {}, any>
+    export const BmContextMenu: typeof import("../packages/main").BmContextMenu
     /**
      * 上下文菜单
      */
-    export const BmContextMenuItem: DefineComponent<BmComponent.BmContextMenuItemProps, {}, any>
+    export const BmContextMenuItem: typeof import("../packages/main").BmContextMenuItem
     /**
      * 圆形
      */
-    export const BmCircle: DefineComponent<BmComponent.BmCircleProps, {}, any>
+    export const BmCircle: typeof import("../packages/main").BmCircle
     /**
      * 信息窗口
      */
-    export const BmInfoWindow: DefineComponent<BmComponent.BmInfoWindowProps, {}, any>
+    export const BmInfoWindow: typeof import("../packages/main").BmInfoWindow
     /**
      * 地图动画
      */
-    export const BmViewAnimation: DefineComponent<BmComponent.BmViewAnimationProps, {}, any>
+    export const BmViewAnimation: typeof import("../packages/main").BmViewAnimation
     /**
      * 轨迹动画
      */
-    export const BmTrackAnimation: DefineComponent<BmComponent.BmTrackAnimationProps, {}, any>
+    export const BmTrackAnimation: typeof import("../packages/main").BmTrackAnimation
     /**
      * 路书动画
      */
-    export const BmLushuAnimation: DefineComponent<BmComponent.BmLushuAnimationProps, {}, any>
+    export const BmLushuAnimation: typeof import("../packages/main").BmLushu
     /**
      * 测距工具
      */
-    export const BmDistanceTool: DefineComponent<BmComponent.BmDistanceToolProps, {}, any>
+    export const BmDistanceTool: typeof import("../packages/main").BmDistanceTool
     /**
      * 绘制工具
      */
-    export const BmDrawingManager: DefineComponent<BmComponent.BmDrawingManagerProps, {}, any>
+    export const BmDrawingManager: typeof import("../packages/main").BmDrawingManager
     /**
      * 富文本标记
      */
-    export const BmRichMarker: DefineComponent<BmComponent.BmRichMarkerProps, {}, any>
+    export const BmRichMarker: typeof import("../packages/main").BmRichMarker
     /**
      * 贝塞尔曲线
      */
-    export const BmBezierCurve: DefineComponent<BmComponent.BmBezierCurveProps, {}, any>
+    export const BmBezierCurve: typeof import("../packages/main").BmBezierCurve
     /**
      * 驾驶规划
      */
-    export const BmDrivingRoute: DefineComponent<BmComponent.BmDrivingRouteProps, {}, any>
+    export const BmDrivingRoute: typeof import("../packages/main").BmDrivingRoute
     /**
      * 公交规划
      */
-    export const BmTransitRoute: DefineComponent<BmComponent.BmTransitRouteProps, {}, any>
+    export const BmTransitRoute: typeof import("../packages/main").BmTransitRoute
     /**
      * 步行规划
      */
-    export const BmWalkingRoute: DefineComponent<BmComponent.BmWalkingRouteProps, {}, any>
+    export const BmWalkingRoute: typeof import("../packages/main").BmWalkingRoute
     /**
      * 骑行规划
      */
-    export const BmRidingRoute: DefineComponent<BmComponent.BmRidingRouteProps, {}, any>
+    export const BmRidingRoute: typeof import("../packages/main").BmRidingRoute
     /**
      * 自定义路书
      */
-    export const BmCustomLushu: DefineComponent<BmComponent.BmCustomLushuProps, {}, any>
+    export const BmCustomLushu: typeof import("../packages/main").BmCustomLushu
     /**
      * 自定义折线
      */
-    export const BmCustomPolyline: DefineComponent<BmComponent.BmCustomPolylineProps, {}, any>
+    export const BmCustomPolyline: typeof import("../packages/main").BmCustomPolyline
 
     /**
      * BMapGL
