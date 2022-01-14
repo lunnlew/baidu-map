@@ -51,6 +51,9 @@ watch(
     async () => {
         boundaries_result.value = await initBoundariesResult(currentMap.value, props.name)
         bindEvents(boundaries_result.value?.boundary, extractEmitEvents(attrs), emit)
+    },
+    {
+        immediate: true,
     }
 )
 
