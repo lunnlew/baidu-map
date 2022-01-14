@@ -1,7 +1,7 @@
 declare namespace BmComponent {
     /**
-         * 地图覆盖物
-         */
+     * 地图覆盖物
+     */
     interface BmMarker3DProps {
         /**
          * 标注位置

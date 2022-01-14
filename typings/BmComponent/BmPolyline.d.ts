@@ -1,7 +1,7 @@
 declare namespace BmComponent {
     /**
-         * 折线参数
-         */
+     * 折线参数
+     */
     interface BmPolylineProps {
         /**
          * 折线点集
