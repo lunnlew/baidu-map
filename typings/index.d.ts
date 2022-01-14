@@ -172,9 +172,9 @@ declare namespace BaiduMapVue3 {
     export const BmCustomPolyline: typeof import("../packages/main").BmCustomPolyline
 
     /**
-     * BMapGL
+     * BMapGL Constant
      */
-    namespace BMapGL {
+    namespace BMapGLConstant {
         /**
          * 此常量表示控件的定位。
          */
