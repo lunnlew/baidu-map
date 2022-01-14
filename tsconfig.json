@@ -15,6 +15,9 @@
       "esnext",
       "dom"
     ],
+    "types": [
+      "baidu-map-vue3/typings/global"
+    ],
     "typeRoots": [
       "node_modules/@types",
       "types/**.d.ts"
