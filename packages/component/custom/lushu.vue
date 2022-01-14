@@ -18,6 +18,7 @@ const props = withDefaults(
         speed?: number
         time?: number
         show?: boolean
+        onReady?: (el: any) => void
     }>(),
     {
         map: null,
@@ -25,6 +26,7 @@ const props = withDefaults(
         speed: 50,
         time: 10,
         show: true,
+        onReady: (el: any) => {},
     }
 )
 const attrs = useAttrs()
