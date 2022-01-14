@@ -3,7 +3,7 @@ import { App } from 'vue'
 import { initDistanceTool, initDrawingManager, initGeoUtils, initRichMarker } from './lib/tool'
 import { initLushu, initTrackAnimation } from './lib/animation'
 
-import BMapGL from './lib/BMapGL'
+import BMapGL, { BMapGLConstant } from './lib/BMapGL'
 
 import BaiduMap from './component/map/index.vue'
 import BmView from './component/map/view.vue'
@@ -57,6 +57,10 @@ import BmCustomLushu from './component/custom/lushu.vue'
  */
 export {
     BMapGL,
+    BMapGLConstant,
+    /**
+     * 地图
+     */
     BaiduMap,
     BmView,
     /**
