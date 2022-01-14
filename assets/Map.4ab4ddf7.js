@@ -1,4 +1,4 @@
-import{d as it,r as n,m as a,h as u,b as rt,e as mt,g as o,i as t,t as l,u as e,w as r,B as m,p as At}from"./vendor.10ab7a6d.js";var Ct=`<baidu-map
+import{d as it,r as n,m as a,h as u,b as rt,e as mt,g as o,i as t,t as l,u as e,w as r,B as m,p as At}from"./vendor.51b555a8.js";var Ct=`<baidu-map
     class="map"
     ref="map"
     :apiKey="apiKey"
@@ -9,7 +9,7 @@ import{d as it,r as n,m as a,h as u,b as rt,e as mt,g as o,i as t,t as l,u as e,
     :zoom="13"
     :enableMapClick="true"
     :enableWheelZoom="true"
-    :mapType="BMapGL.MapTypeId.BMAP_NORMAL_MAP"
+    :mapType="BMapGLConstant.MapTypeId.BMAP_NORMAL_MAP"
     >
 </baidu-map>`,gt=`.map {
     width: 100%;
