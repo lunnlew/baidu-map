@@ -1,7 +1,7 @@
 declare namespace BMapGL {
     /**
-         * 此类表示Lable构造函数的可选参数。它没有构造函数，但可通过对象字面量形式表示。
-         */
+     * 此类表示Lable构造函数的可选参数。它没有构造函数，但可通过对象字面量形式表示。
+     */
     interface LabelOptions {
         /**
          * 文本标注的位置偏移值
@@ -21,8 +21,8 @@ declare namespace BMapGL {
         styles?: Object
     }
     /**
-         * 此类表示地图上的文本标注。
-         */
+     * 此类表示地图上的文本标注。
+     */
     class Label extends Overlay {
         /**
          * 创建一个文本标注实例。point参数指定了文本标注所在的地理位置

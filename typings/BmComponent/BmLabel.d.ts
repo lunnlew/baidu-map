@@ -1,7 +1,7 @@
 declare namespace BmComponent {
     /**
-         * 文本标注
-         */
+     * 文本标注
+     */
     interface BmLabelProps {
         /**
          * 文本
