@@ -129,7 +129,7 @@ declare namespace BaiduMapVue3 {
     /**
      * 路书动画
      */
-    export const BmLushuAnimation: typeof import("../packages/main").BmLushu
+    export const BmLushu: typeof import("../packages/main").BmLushu
     /**
      * 测距工具
      */

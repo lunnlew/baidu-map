@@ -120,7 +120,7 @@ declare module 'vue' {
         /**
          * 路书动画
          */
-        BmLushuAnimation: typeof import("../packages/main").BmLushu
+        BmLushu: typeof import("../packages/main").BmLushu
         /**
          * 测距工具
          */
