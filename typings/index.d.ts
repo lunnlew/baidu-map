@@ -1,3 +1,6 @@
+/// <reference path="BMapGL/index.d.ts" />
+/// <reference path="BMapGLLib/index.d.ts" />
+
 import { App } from "vue";
 
 declare namespace BaiduMapVue3 {
