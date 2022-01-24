@@ -47,7 +47,7 @@ const currentMap = computed(() => props.map || inject_map.value)
 
 const need_init_load = computed(() => currentMap.value && props.firstLoad)
 watch(
-    () => need_init_load.value,
+    () => need_init_load.value && currentMap.value,
     async () => {
         boundaries_result.value = await initBoundariesResult(currentMap.value, props.name)
         bindEvents(boundaries_result.value?.boundary, extractEmitEvents(attrs), emit)
