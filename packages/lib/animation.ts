@@ -54,7 +54,7 @@ export function initTrackAnimation(): Promise<{
             script.onload = function (this: any) {
                 if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') {
                     // @ts-ignore
-                    BMapGLLibRef.value = globalThis.MapGLLib as BMapGLLib
+                    BMapGLLibRef.value = globalThis.BMapGLLib as BMapGLLib
                     state.value.track_animation_lib_inited = true
                     resolve({
                         BMapGLLib: BMapGLLibRef.value,
