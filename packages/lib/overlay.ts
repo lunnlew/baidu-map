@@ -240,6 +240,11 @@ export function initBoundariesResult(
                     rs
                 })
             })
+        } else {
+            resolve({
+                boundary: boundary as BMapGL.Boundary,
+                rs: { boundaries: [] }
+            })
         }
     })
 }
