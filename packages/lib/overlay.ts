@@ -240,8 +240,6 @@ export function initBoundariesResult(
                     rs
                 })
             })
-        } else {
-            reject(new Error('获取轮廓数据失败'))
         }
     })
 }
