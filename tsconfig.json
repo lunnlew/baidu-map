@@ -20,12 +20,12 @@
     ]
   },
   "include": [
-    "**/*.ts",
-    "**/*.d.ts",
-    "**/*.tsx",
-    "**/*.vue",
+    "packages/**/*.ts",
+    "typings/**/*.d.ts",
+    "env.d.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "**/*.spec.ts",
   ],
 }
