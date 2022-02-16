@@ -123,6 +123,7 @@ const bm = {
     }) {
         app.config.globalProperties.$bm_apikey = options?.apiKey
         app.component('baidu-map', BaiduMap)
+        app.component('bm-view', BmView)
         app.component('bm-scale-control', BmScaleControl)
         app.component('bm-zoom-control', BmZoomControl)
         app.component('bm-copyright-control', BmCopyrightControl)
