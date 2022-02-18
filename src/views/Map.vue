@@ -39,6 +39,7 @@
             <button @click="toggleViewAnimation">{{ toggleViewAnimationText }}</button>
             <button @click="toggleTrackAnimation">{{ toggleTrackAnimationText }}</button>
             <button @click="toggleLushuAnimation">{{ toggleLushuAnimationText }}</button>
+            <button @click="toggleGroundOverlay">{{ toggleGroundOverlayText }}</button>
         </div>
         <baidu-map
             class="map"
@@ -134,6 +135,18 @@
                 :show="isShowPolyline"
                 @click="onPolylineClick"
             ></bm-polyline>
+            <bm-ground-overlay
+                :show="isShowGroundOverlay"
+                :startPoint="{
+                    lng: 117.19635,
+                    lat: 36.24093,
+                }"
+                :endPoint="{
+                    lng: 117.2035,
+                    lat: 36.24764,
+                }"
+                :url="'https://lbsyun.baidu.com/jsdemo/img/shouhuimap.png'"
+            ></bm-ground-overlay>
             <bm-circle
                 :center="point"
                 :overallView="true"
@@ -422,6 +435,16 @@ function onSearchComplete(bm: any, res: any) {
     return {
         points: arrPois,
     }
+}
+
+const isShowGroundOverlay = ref(false)
+const toggleGroundOverlayText = computed(() => (isShowGroundOverlay.value ? '禁用叠加层' : '启用叠加层'))
+const toggleGroundOverlay = function () {
+    point.value = {
+        lng: 117.19635,
+        lat: 36.24093,
+    }
+    isShowGroundOverlay.value = !isShowGroundOverlay.value
 }
 </script>
 <style lang="less">
