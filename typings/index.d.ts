@@ -1,5 +1,6 @@
 /// <reference path="BMapGL/index.d.ts" />
 /// <reference path="BMapGLLib/index.d.ts" />
+/// <reference path="BmComponent/index.d.ts" />
 
 import { App } from "vue";
 
