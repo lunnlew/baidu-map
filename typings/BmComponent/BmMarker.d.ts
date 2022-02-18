@@ -50,7 +50,15 @@ declare namespace BmComponent {
         /**
          * 文本标注选项
          */
-        labelOptions?: BMapGL.LabelOptions
+        labelOptions?: {
+            offset?: [number, number]
+            position?: {
+                lng: number
+                lat: number
+            }
+            enableMassClear?: boolean
+            styles?: object
+        }
         /**
          * 覆盖物的zIndex
          * @param zIndex

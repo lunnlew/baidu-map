@@ -10,7 +10,7 @@ declare namespace BMapGL {
         /**
          * 文本标注的地理位置
          */
-        position: Point
+        position?: Point
         /**
          * 是否在调用map.clearOverlays时清除此覆盖物，默认为true
          */

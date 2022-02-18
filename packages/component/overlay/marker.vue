@@ -25,7 +25,15 @@ const props = withDefaults(
         zIndex?: number
         title?: string
         label?: string
-        labelOptions?: BMapGL.LabelOptions
+        labelOptions?: {
+            offset?: [number, number]
+            position?: {
+                lng: number
+                lat: number
+            }
+            enableMassClear?: boolean
+            styles?: object
+        }
         show?: boolean
         onReady?: (el: any) => void
     }>(),
@@ -45,7 +53,15 @@ const props = withDefaults(
         zIndex: undefined,
         title: '',
         label: '',
-        labelOptions: undefined,
+        labelOptions: () => ({
+            offset: [0, 0],
+            position: {
+                lng: 116.403963,
+                lat: 39.915119,
+            },
+            enableMassClear: true,
+            styles: {},
+        }),
         show: true,
         onReady: (el: any) => {},
     }
@@ -124,7 +140,37 @@ watch(
     () => props.label,
     val => {
         if (bm.value && BMapGLRef.value) {
-            bm.value.setLabel(new BMapGLRef.value.Label(val, props.labelOptions))
+            if (val) {
+                let labelOptions = props.labelOptions as any
+                if (labelOptions?.position) {
+                    let p = labelOptions?.position
+                    labelOptions.position = new BMapGLRef.value.Point(p.lng, p.lat)
+                }
+                if (labelOptions?.offset) {
+                    let o = labelOptions?.offset || [0, 0]
+                    labelOptions.offset = new BMapGLRef.value.Size(o[0] || 0, o[1] || 0)
+                }
+                bm.value.setLabel(new BMapGLRef.value.Label(props.label, labelOptions))
+            }
+        }
+    }
+)
+watch(
+    () => props.labelOptions,
+    val => {
+        if (bm.value && BMapGLRef.value) {
+            if (props.label) {
+                let labelOptions = props.labelOptions as any
+                if (labelOptions?.position) {
+                    let p = labelOptions?.position
+                    labelOptions.position = new BMapGLRef.value.Point(p.lng, p.lat)
+                }
+                if (labelOptions?.offset) {
+                    let o = labelOptions?.offset || [0, 0]
+                    labelOptions.offset = new BMapGLRef.value.Size(o[0] || 0, o[1] || 0)
+                }
+                bm.value.setLabel(new BMapGLRef.value.Label(props.label, labelOptions))
+            }
         }
     }
 )

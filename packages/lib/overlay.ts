@@ -55,6 +55,17 @@ export function addMaker(
         } else {
             marker_options.offset = new BMapGLRef.value.Size(0, 0)
         }
+        if (marker_options.label) {
+            if (marker_options.labelOptions?.position) {
+                let p = marker_options.labelOptions?.position
+                marker_options.labelOptions.position = new BMapGLRef.value.Point(p.lng, p.lat)
+            }
+            if (marker_options.labelOptions?.offset) {
+                let o = marker_options.labelOptions?.offset
+                marker_options.labelOptions.offset = new BMapGLRef.value.Size(o[0] || 0, o[1] || 0)
+            }
+            marker_options.label = new BMapGLRef.value.Label(marker_options.label, marker_options.labelOptions)
+        }
         let marker = new BMapGLRef.value.Marker(new BMapGLRef.value.Point(point.lng, point.lat), marker_options)
         if (!marker_params.show) {
             marker.hide()
