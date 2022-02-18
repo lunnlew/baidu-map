@@ -6,6 +6,9 @@
         <div ref="info_content">
             <slot></slot>
         </div>
+        <div ref="info_max_content">
+            <slot name="max_content"></slot>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
@@ -20,6 +23,7 @@ const props = withDefaults(
             lat: number
         }
         content: string
+        maxContent: string
         width?: number
         height?: number
         maxWidth?: number
@@ -38,6 +42,7 @@ const props = withDefaults(
             lat: 0,
         }),
         content: '',
+        maxContent: '',
         width: 0,
         height: 0,
         maxWidth: 0,
@@ -52,6 +57,7 @@ const props = withDefaults(
 )
 
 const info_content = ref()
+const info_max_content = ref()
 const info_title = ref()
 const attrs = useAttrs()
 const slots = useSlots()
@@ -84,6 +90,78 @@ watch(
     },
     {
         immediate: true,
+    }
+)
+watch(
+    () => props.width,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setWidth(val)
+        }
+    }
+)
+watch(
+    () => props.height,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setWidth(val)
+        }
+    }
+)
+watch(
+    () => info_title.value?.innerHTML,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setTitle(val)
+        }
+    }
+)
+watch(
+    () => info_content.value,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setContent(val)
+        }
+    }
+)
+watch(
+    () => props.content,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setContent(val)
+        }
+    }
+)
+watch(
+    () => info_max_content.value,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setMaxContent(val)
+        }
+    }
+)
+watch(
+    () => props.maxContent,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setMaxContent(val)
+        }
+    }
+)
+watch(
+    () => props.enableMaximize,
+    val => {
+        if (isShow.value) {
+            bm.value && (val ? bm.value?.enableMaximize() : bm.value?.disableMaximize())
+        }
+    }
+)
+watch(
+    () => props.enableCloseOnClick,
+    val => {
+        if (isShow.value) {
+            bm.value && (val ? bm.value?.enableCloseOnClick() : bm.value?.disableCloseOnClick())
+        }
     }
 )
 onUnmounted(() => {

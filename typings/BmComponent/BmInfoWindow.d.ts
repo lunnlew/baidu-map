@@ -12,6 +12,10 @@ declare namespace BmComponent {
          */
         content: string
         /**
+         * 信息窗口最大化时的内容，支持HTML内容
+         */
+        maxContent: string
+        /**
          * 信息窗宽度，单位像素。取值范围：0, 220 - 730。如果您指定宽度为0，则信息窗口的宽度将按照其内容自动调整
          */
         width?: number
