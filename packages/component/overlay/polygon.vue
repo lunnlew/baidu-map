@@ -7,6 +7,7 @@
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addPolygon } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
+import { BMapGLRef } from '../../lib/map'
 const props = withDefaults(
     defineProps<{
         map?: BMapGL.Map | null
@@ -93,6 +94,83 @@ watch(
     val => {
         if (val) {
             bm.value && bm.value?.overallView()
+        }
+    }
+)
+watch(
+    () => props.points,
+    val => {
+        if (isShow.value) {
+            bm.value &&
+                bm.value?.polygon?.setPath(
+                    props.points.map(p => {
+                        return new (BMapGLRef.value as any).Point(p.lng, p.lat)
+                    })
+                )
+        }
+    }
+)
+watch(
+    () => props.strokeColor,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.polygon?.setStrokeColor(val)
+        }
+    }
+)
+watch(
+    () => props.strokeWeight,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.polygon?.setStrokeWeight(val)
+        }
+    }
+)
+watch(
+    () => props.strokeOpacity,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.polygon?.setStrokeOpacity(val)
+        }
+    }
+)
+watch(
+    () => props.strokeStyle,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.polygon?.setStrokeStyle(val)
+        }
+    }
+)
+watch(
+    () => props.fillColor,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.polygon?.setFillColor(val)
+        }
+    }
+)
+watch(
+    () => props.fillOpacity,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.polygon?.setFillOpacity(val)
+        }
+    }
+)
+watch(
+    () => props.enableMassClear,
+    val => {
+        if (isShow.value) {
+            bm.value && (val ? bm.value?.polygon?.enableMassClear() : bm.value?.polygon?.disableMassClear())
+        }
+    }
+)
+watch(
+    () => props.enableEditing,
+    val => {
+        if (isShow.value) {
+            bm.value && (val ? bm.value?.polygon?.enableEditing() : bm.value?.polygon?.disableEditing())
         }
     }
 )
