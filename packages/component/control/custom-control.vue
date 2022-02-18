@@ -9,6 +9,7 @@
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addCustomControl } from '../../lib/control'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
+import { BMapGLRef } from '../../lib/map'
 const props = withDefaults(
     defineProps<{
         map?: BMapGL.Map | null
@@ -55,6 +56,22 @@ watch(
     },
     {
         immediate: true,
+    }
+)
+watch(
+    () => props.anchor,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setAnchor(val)
+        }
+    }
+)
+watch(
+    () => props.offset,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setOffset(new (BMapGLRef.value as any).Size(val[0], val[1]))
+        }
     }
 )
 onUnmounted(() => {
