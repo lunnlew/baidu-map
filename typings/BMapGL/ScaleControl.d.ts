@@ -20,11 +20,11 @@ declare namespace BMapGL {
         /**
          * 公制单位
          */
-        BMAP_UNIT_METRIC = 'BMAP_UNIT_METRIC',
+        BMAP_UNIT_METRIC = 'metric',
         /**
          * 英制单位
          */
-        BMAP_UNIT_IMPERIAL = 'BMAP_UNIT_IMPERIAL',
+        BMAP_UNIT_IMPERIAL = 'us',
     }
 
     type ScaleControlEvent = 'zoom_changed' | 'zoomstart' | 'zoomend'

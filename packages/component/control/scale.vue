@@ -6,12 +6,14 @@ import { computed, inject, onUnmounted, ref, useAttrs, watch } from 'vue'
 import { addScaleControl } from '../../lib/control'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import { BMapGLRef } from '../../lib/map'
+import { BMapGLConstant } from '../../lib/BMapGL'
 const props = withDefaults(
     defineProps<{
         map?: BMapGL.Map | null
         anchor?: number
         offset?: [number, number]
         show?: boolean
+        unit?: BMapGLConstant.LengthUnit
         onReady?: (el: any) => void
     }>(),
     {
@@ -19,6 +21,7 @@ const props = withDefaults(
         anchor: 0,
         offset: () => [50, 80],
         show: true,
+        unit: BMapGLConstant.LengthUnit.BMAP_UNIT_METRIC,
         onReady: (el: any) => {},
     }
 )
@@ -59,6 +62,14 @@ watch(
     val => {
         if (isShow.value) {
             bm.value && bm.value?.setOffset(new (BMapGLRef.value as any).Size(val[0], val[1]))
+        }
+    }
+)
+watch(
+    () => props.unit,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setUnit(val)
         }
     }
 )

@@ -9,6 +9,10 @@ declare namespace BmComponent {
          */
         offset?: [number, number]
         /**
+         * 比例尺单位制
+         */
+        unit: BMapGL.LengthUnit
+        /**
          * 是否显示
          */
         show?: boolean

@@ -212,11 +212,11 @@ export namespace BMapGLConstant {
         /**
          * 公制单位
          */
-        BMAP_UNIT_METRIC = 'BMAP_UNIT_METRIC',
+        BMAP_UNIT_METRIC = 'metric',
         /**
          * 英制单位
          */
-        BMAP_UNIT_IMPERIAL = 'BMAP_UNIT_IMPERIAL',
+        BMAP_UNIT_IMPERIAL = 'us',
     }
     /**
      * 此枚举类型表示矢量图标类预设的图标样式。
