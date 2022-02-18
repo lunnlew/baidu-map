@@ -7,6 +7,7 @@
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addPolyline } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/util'
+import { BMapGLRef } from '../../lib/map'
 const props = withDefaults(
     defineProps<{
         map?: BMapGL.Map | null
@@ -101,6 +102,67 @@ watch(
     val => {
         if (val) {
             bm.value && bm.value?.overallView()
+        }
+    }
+)
+watch(
+    () => props.points,
+    val => {
+        if (isShow.value) {
+            bm.value &&
+                bm.value?.polyline?.setPath(
+                    props.points.map(p => {
+                        return new (BMapGLRef.value as any).Point(p.lng, p.lat)
+                    })
+                )
+        }
+    }
+)
+watch(
+    () => props.strokeColor,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.polyline?.setStrokeColor(val)
+        }
+    }
+)
+watch(
+    () => props.strokeWeight,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.polyline?.setStrokeWeight(val)
+        }
+    }
+)
+watch(
+    () => props.strokeOpacity,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.polyline?.setStrokeOpacity(val)
+        }
+    }
+)
+watch(
+    () => props.strokeStyle,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.polyline?.setStrokeStyle(val)
+        }
+    }
+)
+watch(
+    () => props.enableMassClear,
+    val => {
+        if (isShow.value) {
+            bm.value && (val ? bm.value?.polyline?.enableMassClear() : bm.value?.polyline?.disableMassClear())
+        }
+    }
+)
+watch(
+    () => props.enableEditing,
+    val => {
+        if (isShow.value) {
+            bm.value && (val ? bm.value?.polyline?.enableEditing() : bm.value?.polyline?.disableEditing())
         }
     }
 )
