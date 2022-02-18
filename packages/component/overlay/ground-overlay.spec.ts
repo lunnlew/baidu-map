@@ -39,6 +39,18 @@ test('test Map', async () => {
             lng: 0,
             lat: 0,
         },
+        "bounds": [
+            {
+                "lat": 0,
+                "lng": 0,
+            },
+            {
+                "lat": 0,
+                "lng": 0,
+            },
+        ],
+        "dispalyOnMaxLevel": 13,
+        "displayOnMinLevel": 5,
         endPoint: {
             lng: 0,
             lat: 0,

@@ -5,6 +5,7 @@ import { addMaker } from '../../lib/overlay'
 const overlay = {
     show: jest.fn(),
     hide: jest.fn(),
+    setTitle: jest.fn(),
 }
 jest.mock('../../lib/overlay', () => ({
     addMaker: jest.fn(() => overlay)
@@ -45,7 +46,18 @@ test('test Map', async () => {
         zIndex: undefined,
         title: '',
         label: '',
-        labelOptions: undefined,
+        labelOptions: {
+            "enableMassClear": true,
+            "offset": [
+                0,
+                0,
+            ],
+            "position": {
+                "lat": 39.915119,
+                "lng": 116.403963,
+            },
+            "styles": {},
+        },
         show: true,
         onReady: onReady
     })

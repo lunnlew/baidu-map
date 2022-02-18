@@ -27,6 +27,7 @@ test('test Map', async () => {
         anchor: 0,
         offset: [50, 80],
         show: true,
+        unit: "metric",
         onReady: onReady
     })
     expect(wrapper.props().onReady.name).toEqual('onReady')

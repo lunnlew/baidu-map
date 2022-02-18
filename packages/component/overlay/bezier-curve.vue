@@ -37,7 +37,7 @@ const props = withDefaults(
         strokeWeight?: number
         strokeOpacity?: number
         strokeStyle?: string
-        enableMassClear: boolean
+        enableMassClear?: boolean
         overallView?: boolean
         show?: boolean
         onReady?: (el: any) => void

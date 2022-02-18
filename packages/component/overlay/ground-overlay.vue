@@ -19,7 +19,7 @@ const props = withDefaults(
             lng: number
             lat: number
         }
-        bounds: [
+        bounds?: [
             {
                 lng: number
                 lat: number

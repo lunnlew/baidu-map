@@ -23,7 +23,7 @@ const props = withDefaults(
             lat: number
         }
         content: string
-        maxContent: string
+        maxContent?: string
         width?: number
         height?: number
         maxWidth?: number

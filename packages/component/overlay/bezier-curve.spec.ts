@@ -73,6 +73,11 @@ test('test Map', async () => {
         ],
         overallView: false,
         show: true,
+        "enableMassClear": true,
+        "strokeColor": "#FF0000",
+        "strokeOpacity": 0.8,
+        "strokeStyle": "solid",
+        "strokeWeight": 2,
         onReady: onReady
     })
     expect(wrapper.props().onReady.name).toEqual('onReady')

@@ -2,7 +2,11 @@ import { shallowMount } from '@vue/test-utils'
 import infowindow from './info-window.vue'
 import { addInfoWindow } from '../../lib/overlay'
 
-const overlay = {}
+const overlay = {
+    setTitle: jest.fn(),
+    setContent: jest.fn(),
+    setMaxContent: jest.fn(),
+}
 jest.mock('../../lib/overlay', () => ({
     addInfoWindow: jest.fn(() => overlay)
 }))
@@ -24,6 +28,7 @@ test('test Map', async () => {
                 lat: 0,
             },
             content: '',
+            maxContent: '',
             onReady: onReady
         }
     })
@@ -34,6 +39,7 @@ test('test Map', async () => {
             lat: 0,
         },
         content: '',
+        maxContent: '',
         width: 0,
         height: 0,
         maxWidth: 0,
