@@ -204,7 +204,7 @@ declare namespace BMapGL {
          * @param points
          * @param controlPoints
          */
-        BezierCurve: { new(points: Array<Point>, controlPoints: any[]): BezierCurve }
+        BezierCurve: { new(points: Array<Point>, controlPoints: Point[][], opts: BezierCurveOptions): BezierCurve }
         /**
          * 创建一个驾车导航实例，其中location表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由地图当前的中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
          * @param location

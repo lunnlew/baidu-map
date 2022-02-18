@@ -7,6 +7,7 @@
 import { computed, inject, onUnmounted, ref, useAttrs, watch } from 'vue'
 import { addBezierCurve } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
+import { BMapGLRef } from '../../lib/map'
 const props = withDefaults(
     defineProps<{
         map?: BMapGL.Map | null
@@ -32,6 +33,11 @@ const props = withDefaults(
                 }
             ]
         ]
+        strokeColor?: string
+        strokeWeight?: number
+        strokeOpacity?: number
+        strokeStyle?: string
+        enableMassClear: boolean
         overallView?: boolean
         show?: boolean
         onReady?: (el: any) => void
@@ -59,6 +65,11 @@ const props = withDefaults(
         ],
         overallView: false,
         show: true,
+        strokeColor: '#FF0000',
+        strokeWeight: 2,
+        strokeOpacity: 0.8,
+        strokeStyle: 'solid',
+        enableMassClear: true,
         onReady: (el: any) => {},
     }
 )
@@ -105,6 +116,75 @@ watch(
     val => {
         if (val) {
             bm.value && bm.value?.overallView()
+        }
+    }
+)
+watch(
+    () => props.points,
+    val => {
+        if (isShow.value) {
+            bm.value &&
+                bm.value?.bc?.setPath(
+                    props.points.map(p => {
+                        return new (BMapGLRef.value as any).Point(p.lng, p.lat)
+                    })
+                )
+        }
+    }
+)
+watch(
+    () => props.controlPoints,
+    val => {
+        if (isShow.value) {
+            let control_points_arr = [] as BMapGL.Point[][]
+            for (let control_points of props.controlPoints) {
+                let control_point_arr = [] as BMapGL.Point[]
+                for (let control_point of control_points) {
+                    control_point_arr.push(new (BMapGLRef.value as any).Point(control_point.lng, control_point.lat))
+                }
+                control_points_arr.push(control_point_arr)
+            }
+            bm.value && bm.value?.bc?.setControlPoints(control_points_arr)
+        }
+    }
+)
+watch(
+    () => props.strokeColor,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.bc?.setStrokeColor(val)
+        }
+    }
+)
+watch(
+    () => props.strokeWeight,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.bc?.setStrokeWeight(val)
+        }
+    }
+)
+watch(
+    () => props.strokeOpacity,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.bc?.setStrokeOpacity(val)
+        }
+    }
+)
+watch(
+    () => props.strokeStyle,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.bc?.setStrokeStyle(val)
+        }
+    }
+)
+watch(
+    () => props.enableMassClear,
+    val => {
+        if (isShow.value) {
+            bm.value && (val ? bm.value?.bc?.enableMassClear() : bm.value?.bc?.disableMassClear())
         }
     }
 )

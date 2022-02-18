@@ -571,6 +571,10 @@ export function addBezierCurve(
     overallView: (points?: BMapGL.Point[]) => void,
 } | undefined {
     if (BMapGLRef.value && map) {
+        let overlay_options = {} as {
+            [key: string]: any
+        } & Required<BMapGL.BezierCurveOptions>
+
         let points = [] as BMapGL.Point[]
         for (let point of params.points) {
             points.push(new BMapGLRef.value.Point(point.lng, point.lat))
@@ -583,7 +587,13 @@ export function addBezierCurve(
             }
             control_points_arr.push(control_point_arr)
         }
-        let bc = new BMapGLRef.value.BezierCurve(points, control_points_arr)
+
+        for (let key in params) {
+            if (['strokeColor', 'strokeWeight', 'strokeOpacity', 'strokeStyle', 'enableMassClear'].indexOf(key) !== -1) {
+                overlay_options[key as string] = params[key]
+            }
+        }
+        let bc = new BMapGLRef.value.BezierCurve(points, control_points_arr, overlay_options)
         bc.hide()
         map.addOverlay(bc)
         return {
