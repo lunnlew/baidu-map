@@ -7,6 +7,7 @@
 import { useAttrs, useSlots, watch, computed, ref, onUnmounted, inject } from 'vue'
 import { addGroundOverlay } from '../../lib/overlay'
 import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
+import { BMapGLRef } from '../../lib/map'
 const props = withDefaults(
     defineProps<{
         map?: BMapGL.Map | null
@@ -18,10 +19,22 @@ const props = withDefaults(
             lng: number
             lat: number
         }
+        bounds: [
+            {
+                lng: number
+                lat: number
+            },
+            {
+                lng: number
+                lat: number
+            }
+        ]
         type?: string
         opacity?: number
         url?: string
         show?: boolean
+        displayOnMinLevel?: number
+        dispalyOnMaxLevel?: number
         onReady?: (el: any) => void
     }>(),
     {
@@ -34,10 +47,22 @@ const props = withDefaults(
             lng: 0,
             lat: 0,
         }),
+        bounds: () => [
+            {
+                lng: 0,
+                lat: 0,
+            },
+            {
+                lng: 0,
+                lat: 0,
+            },
+        ],
         type: 'image',
         opacity: 0.8,
         url: '',
         show: true,
+        displayOnMinLevel: 5,
+        dispalyOnMaxLevel: 13,
         onReady: (el: any) => {},
     }
 )
@@ -90,6 +115,86 @@ watch(
     },
     {
         immediate: true,
+    }
+)
+watch(
+    () => props.url,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setImageURL(val)
+        }
+    }
+)
+watch(
+    () => props.opacity,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setOpacity(val)
+        }
+    }
+)
+watch(
+    () => props.displayOnMinLevel,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setDisplayOnMinLevel(val)
+        }
+    }
+)
+watch(
+    () => props.dispalyOnMaxLevel,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setDispalyOnMaxLevel(val)
+        }
+    }
+)
+watch(
+    () => props.startPoint,
+    val => {
+        if (isShow.value) {
+            if (BMapGLRef.value) {
+                bm.value &&
+                    bm.value?.setBounds(
+                        new BMapGLRef.value.Bounds(
+                            new BMapGLRef.value.Point(props.startPoint.lng, props.endPoint.lat),
+                            new BMapGLRef.value.Point(props.endPoint.lng, props.startPoint.lat)
+                        )
+                    )
+            }
+        }
+    }
+)
+watch(
+    () => props.endPoint,
+    val => {
+        if (isShow.value) {
+            if (BMapGLRef.value) {
+                bm.value &&
+                    bm.value?.setBounds(
+                        new BMapGLRef.value.Bounds(
+                            new BMapGLRef.value.Point(props.startPoint.lng, props.endPoint.lat),
+                            new BMapGLRef.value.Point(props.endPoint.lng, props.startPoint.lat)
+                        )
+                    )
+            }
+        }
+    }
+)
+watch(
+    () => props.bounds,
+    val => {
+        if (isShow.value) {
+            if (BMapGLRef.value) {
+                bm.value &&
+                    bm.value?.setBounds(
+                        new BMapGLRef.value.Bounds(
+                            new BMapGLRef.value.Point(props.bounds[0].lng, props.bounds[1].lat),
+                            new BMapGLRef.value.Point(props.bounds[1].lng, props.bounds[0].lat)
+                        )
+                    )
+            }
+        }
     }
 )
 onUnmounted(() => {

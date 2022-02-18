@@ -15,6 +15,19 @@ declare namespace BmComponent {
             lat: number
         }
         /**
+         * 矩形对角坐标
+         */
+        bounds?: [
+            {
+                lng: number
+                lat: number
+            },
+            {
+                lng: number
+                lat: number
+            }
+        ]
+        /**
          * 'image' | 'video' | 'canvas'，默认为image
          */
         type?: string
@@ -30,5 +43,13 @@ declare namespace BmComponent {
          * 是否显示
          */
         show?: boolean
+        /**
+         * 设置图层显示的最小级别
+         */
+        displayOnMinLevel?: number
+        /**
+         * 设置图层显示的最大级别
+         */
+        dispalyOnMaxLevel?: number
     }
 }
