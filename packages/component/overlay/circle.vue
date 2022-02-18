@@ -105,6 +105,78 @@ watch(
     }
 )
 watch(
+    () => props.radius,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setRadius(val)
+        }
+    }
+)
+watch(
+    () => props.strokeColor,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setStrokeColor(val)
+        }
+    }
+)
+watch(
+    () => props.strokeWeight,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setStrokeWeight(val)
+        }
+    }
+)
+watch(
+    () => props.strokeOpacity,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setStrokeOpacity(val)
+        }
+    }
+)
+watch(
+    () => props.strokeStyle,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setStrokeStyle(val)
+        }
+    }
+)
+watch(
+    () => props.fillColor,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setFillColor(val)
+        }
+    }
+)
+watch(
+    () => props.fillOpacity,
+    val => {
+        if (isShow.value) {
+            bm.value && bm.value?.setFillOpacity(val)
+        }
+    }
+)
+watch(
+    () => props.enableMassClear,
+    val => {
+        if (isShow.value) {
+            bm.value && (val ? bm.value?.enableMassClear() : bm.value?.disableMassClear())
+        }
+    }
+)
+watch(
+    () => props.enableEditing,
+    val => {
+        if (isShow.value) {
+            bm.value && (val ? bm.value?.enableEditing() : bm.value?.disableEditing())
+        }
+    }
+)
+watch(
     () => props.overallView && isShow.value,
     val => {
         if (val) {
