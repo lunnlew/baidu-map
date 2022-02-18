@@ -68,7 +68,7 @@ type DataKey<T> = T[keyof T]
  * 提取事件名称
  */
 export function extractEmitEvents<T, U extends DataKey<T>>(attr: T): U {
-    let events = []
+    let events = [] as string[]
     for (let key in attr) {
         if (key.startsWith('on')) {
             events.push(key.substring(2).toLowerCase())

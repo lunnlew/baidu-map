@@ -43,7 +43,7 @@ function CustomLushu(this: any) {
      */
     this.on = function (event: string, cb: Function) {
         if (!_listeners[event]) {
-            _listeners[event] = []
+            _listeners[event] = [] as Function[]
         }
         _listeners[event].push(cb)
         return this;
@@ -134,7 +134,7 @@ function CustomLushu(this: any) {
      */
     this.calculatePixels = function (points: BMapGL.Point[]) {
         let map = this._map;
-        let pixel = [];
+        let pixel = [] as { x: number, y: number }[];
         for (let i = 0; i < points.length; i++) {
             let p = map.pointToOverlayPixel(points[i]);
             pixel.push({

@@ -144,13 +144,13 @@ export function addPolyline(
             }
         }
         if (polyline_params.icons) {
-            marker_options.icons = []
+            marker_options.icons = [] as BMapGL.IconSequence[]
             for (let icon of polyline_params.icons) {
                 if (!BMapGLRef.value.IconSequence) {
                     console.error('BMapGL 暂不支持 IconSequence')
                     break
                 }
-                marker_options.push(
+                marker_options.icons.push(
                     new BMapGLRef.value.IconSequence(new BMapGLRef.value.Symbol(icon.symbol, icon), icon.offset, icon.repeat, icon.fixedRotation)
                 )
             }
@@ -575,9 +575,9 @@ export function addBezierCurve(
         for (let point of params.points) {
             points.push(new BMapGLRef.value.Point(point.lng, point.lat))
         }
-        let control_points_arr = []
+        let control_points_arr = [] as BMapGL.Point[][]
         for (let control_points of params.controlPoints) {
-            let control_point_arr = []
+            let control_point_arr = [] as BMapGL.Point[]
             for (let control_point of control_points) {
                 control_point_arr.push(new BMapGLRef.value.Point(control_point.lng, control_point.lat))
             }
@@ -627,13 +627,13 @@ export function addCustomPolyline(
             }
         }
         if (polyline_params.icons) {
-            marker_options.icons = []
+            marker_options.icons = [] as BMapGL.IconSequence[]
             for (let icon of polyline_params.icons) {
                 if (!BMapGLRef.value.IconSequence) {
                     console.error('BMapGL 暂不支持 IconSequence')
                     break
                 }
-                marker_options.push(
+                marker_options.icons.push(
                     new BMapGLRef.value.IconSequence(new BMapGLRef.value.Symbol(icon.symbol, icon), icon.offset, icon.repeat, icon.fixedRotation)
                 )
             }
