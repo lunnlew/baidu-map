@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
+import { computed, inject, onUnmounted, reactive, ref, useAttrs, useSlots, watch } from 'vue'
 import { addPolyline } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/util'
 import { BMapGLRef } from '../../lib/map'
@@ -106,7 +106,7 @@ watch(
     }
 )
 watch(
-    () => props.points,
+    () => reactive([...props.points]),
     val => {
         if (isShow.value) {
             bm.value &&
