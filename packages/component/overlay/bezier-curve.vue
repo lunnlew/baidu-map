@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, inject, onUnmounted, ref, useAttrs, watch } from 'vue'
+import { computed, inject, onUnmounted, reactive, ref, useAttrs, watch } from 'vue'
 import { addBezierCurve } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import { BMapGLRef } from '../../lib/map'
@@ -120,7 +120,7 @@ watch(
     }
 )
 watch(
-    () => props.points,
+    () => reactive([...props.points]),
     val => {
         if (isShow.value) {
             bm.value &&
@@ -133,7 +133,7 @@ watch(
     }
 )
 watch(
-    () => props.controlPoints,
+    () => reactive([...props.controlPoints]),
     val => {
         if (isShow.value) {
             let control_points_arr = [] as BMapGL.Point[][]
