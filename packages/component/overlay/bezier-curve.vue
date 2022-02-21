@@ -125,7 +125,7 @@ watch(
         if (isShow.value) {
             bm.value &&
                 bm.value?.bc?.setPath(
-                    props.points.map(p => {
+                    val.map(p => {
                         return new (BMapGLRef.value as any).Point(p.lng, p.lat)
                     })
                 )
