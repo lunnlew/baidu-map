@@ -238,10 +238,10 @@ babel-walk@3.0.0-canary-5:
   dependencies:
     "@babel/types" "^7.9.6"
 
-baidu-map-vue3@0.4.5:
-  version "0.4.5"
-  resolved "https://registry.npmjs.org/baidu-map-vue3/-/baidu-map-vue3-0.4.5.tgz#ee8786044c1fdf3cb7173b045d2c37bf5be4413b"
-  integrity sha512-z/866jdH8me0DKKFWVHApAg1qm9UFTcfow72FeaSLPBSsVYk5V+32D1FTzXv5LRCDwEJhzH0juRDON6p0NmFpw==
+baidu-map-vue3@0.4.9:
+  version "0.4.9"
+  resolved "https://registry.npmjs.org/baidu-map-vue3/-/baidu-map-vue3-0.4.9.tgz#a6c9c5ea6f295c539d26487eb13839b59bf6695b"
+  integrity sha512-qUUi8NSb7ZVMnaXQfGcNZWbTO4A7N5e+nyVX0hGXUO2hnR8BHSLgNm8o4UzqLrSTWYtNJPqVg0Gx+MpKiZFMdg==
   dependencies:
     vue "^3.2.26"
 
