@@ -1,4 +1,4 @@
-import{d as o,b as a,e as p,g as e,h as t,u as s,i as c}from"./vendor.ffd19ce3.js";var i=`npm install --save baidu-map-vue3
+import{d as o,b as a,e as p,g as e,h as t,u as s,i as c}from"./vendor.cb1c36e0.js";var i=`npm install --save baidu-map-vue3
 // \u6216\u8005
 yarn add baidu-map-vue3`,d=`import { createApp } from 'vue'
 import App from './App.vue'
