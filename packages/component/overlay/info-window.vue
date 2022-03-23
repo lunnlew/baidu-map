@@ -104,7 +104,7 @@ watch(
     () => props.height,
     val => {
         if (isShow.value) {
-            bm.value && bm.value?.setWidth(val)
+            bm.value && bm.value?.setHeight(val)
         }
     }
 )
