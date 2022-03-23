@@ -51,7 +51,6 @@ const attrs = useAttrs()
 const slots = useSlots()
 const emit = defineEmits({})
 const isShow = computed(() => props.show && props.points.length > 0)
-const options = computed(() => props)
 const bm = ref<{
     polygon: BMapGL.Polygon | null
     removeOverlay: Function
@@ -63,13 +62,13 @@ watch(
     () => props.init && currentMap.value,
     val => {
         if (val) {
-            bm.value = addPolygon(currentMap.value, props.points, options.value)
+            bm.value = addPolygon(currentMap.value, props.points, props)
             bindEvents(bm.value?.polygon, extractEmitEvents(attrs), emit)
             emit('ready', {
                 bmobj: bm.value?.polygon,
             })
             isShow.value && bm.value?.polygon?.show()
-            isShow.value && options.value.overallView && bm.value?.overallView()
+            isShow.value && props.overallView && bm.value?.overallView()
         }
     },
     {

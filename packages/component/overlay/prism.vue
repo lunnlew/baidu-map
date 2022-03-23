@@ -43,7 +43,6 @@ const props = withDefaults(
 const attrs = useAttrs()
 const slots = useSlots()
 const emit = defineEmits({})
-const options = computed(() => props)
 const isShow = computed(() => props.show && props.points.length > 0)
 const bm = ref<{
     prism: BMapGL.Prism | null
@@ -56,13 +55,13 @@ watch(
     () => props.init && currentMap.value,
     val => {
         if (val) {
-            bm.value = addPrism(currentMap.value, props.points, options.value)
+            bm.value = addPrism(currentMap.value, props.points, props)
             bindEvents(bm.value?.prism, extractEmitEvents(attrs), emit)
             isShow.value && bm.value?.prism?.show()
             emit('ready', {
                 bmobj: bm.value?.prism,
             })
-            isShow.value && options.value.overallView && bm.value?.overallView()
+            isShow.value && props.overallView && bm.value?.overallView()
         }
     },
     {

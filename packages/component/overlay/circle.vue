@@ -54,7 +54,6 @@ const attrs = useAttrs()
 const emit = defineEmits({})
 const bm = ref<BMapGL.Circle | null>()
 const isShow = computed(() => props.show)
-const options = computed(() => props)
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
 function overallView(map: BMapGL.Map) {
@@ -70,7 +69,7 @@ watch(
     val => {
         if (val) {
             bm.value = bindEvents(
-                addCircle(currentMap.value, props.center, props.radius, options.value),
+                addCircle(currentMap.value, props.center, props.radius, props),
                 extractEmitEvents(attrs),
                 emit
             )

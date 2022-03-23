@@ -4,9 +4,9 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
+import { computed, inject, ref, useAttrs, useSlots, watch } from 'vue'
 import { addCustomLushu, addMaker } from '../../lib/overlay'
-import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/util'
+import { bindEvents, extractEmitEvents, useSlotComponentProps } from '../../utils/util'
 import { BMapGLRef } from '../../lib/map'
 const props = withDefaults(
     defineProps<{
@@ -33,17 +33,17 @@ const attrs = useAttrs()
 const slots = useSlots()
 const emit = defineEmits({})
 const isShow = computed(() => props.show)
-const options = computed(() => props)
 const bm = ref<{
     lushu: BmComponent.CustomLushu | null
 } | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
+const Marker = useSlotComponentProps(slots, 'default', 'Marker')
 watch(
     () => currentMap.value,
     val => {
         if (val) {
-            let merge_props = { ...options.value }
+            let merge_props = { ...props }
             bm.value = addCustomLushu(currentMap.value, props.points, merge_props)
             emit('ready', {
                 bmobj: bm.value?.lushu,
@@ -58,25 +58,13 @@ watch(
                 },
             })
 
-            let merge_marker_props = {
-                size: () => [23, 15],
-                src: 'http://webmap0.bdimg.com/image/api/marker_red.png',
-                anchor: undefined,
-                imageOffset: () => [0, 0],
-            } as any
-            if (slots.default) {
-                let Marker = slots.default().find(s => (s.type as any).name == 'Marker')
-                if (Marker) {
-                    merge_marker_props = mergePropsDefault(Marker.props as any, (Marker.type as any).props)
-                }
-            }
             let marker = null as any
 
             bm.value?.lushu?.on('moving', (e: any) => {
                 if (marker) {
                     marker.setPosition(e.point)
                 } else {
-                    marker = bindEvents(addMaker(currentMap.value, e.point, merge_marker_props), ['click'], emit)
+                    marker = bindEvents(addMaker(currentMap.value, e.point, Marker.props.value), ['click'], emit)
                     marker.show()
                 }
             })
@@ -109,7 +97,6 @@ watch(
 )
 defineExpose({
     addPoints: (points: { lng: number; lat: number }[]) => {
-        console.log('addPoints')
         if (bm.value && points && points.length > 0) {
             bm.value?.lushu?.addPoints(
                 points.map(p => {

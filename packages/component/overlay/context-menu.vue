@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addContextMenu } from '../../lib/overlay'
-import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
+import { bindEvents, extractEmitEvents, useSlotComponentPropsArray } from '../../utils/util'
 const props = withDefaults(
     defineProps<{
         map?: BMapGL.Map | null
@@ -23,26 +23,20 @@ const attrs = useAttrs()
 const slots = useSlots()
 const emit = defineEmits({})
 const isShow = computed(() => currentMap.value && props.show)
-const options = computed(() => props)
 const bm = ref<BMapGL.ContextMenu | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
+const ContextMenuItemList = useSlotComponentPropsArray(slots, 'default', 'ContextMenuItem')
 watch(
     () => isShow.value,
     val => {
         if (val) {
-            let merge_props = Object.assign({}, options.value, {
-                menus: [],
-            } as any)
-            if (slots.default) {
-                let ContextMenuItems = slots.default().filter(s => (s.type as any).name == 'ContextMenuItem')
-                for (let item of ContextMenuItems) {
-                    let merge_item_props = mergePropsDefault(item.props as any, (item.type as any).props)
-                    if (merge_item_props.onClick && !merge_item_props.callback) {
-                        merge_item_props.callback = merge_item_props.onClick
-                    }
-                    merge_props.menus.push(merge_item_props)
-                }
+            let merge_props = {
+                ...props,
+                menus: ContextMenuItemList.items.value.map((m: { callback: any; onClick: any }) => ({
+                    ...m,
+                    callback: m.callback || m.onClick || function () {},
+                })),
             }
             bm.value = bindEvents(addContextMenu(currentMap.value, merge_props), extractEmitEvents(attrs), emit)
             emit('ready', {

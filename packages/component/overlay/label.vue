@@ -41,14 +41,13 @@ const slots = useSlots()
 const emit = defineEmits({})
 const bm = ref<BMapGL.Label | null>()
 const isShow = computed(() => props.show)
-const options = computed(() => props)
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
 watch(
     () => currentMap.value,
     val => {
         if (val) {
-            bm.value = bindEvents(addLabel(currentMap.value, options.value), extractEmitEvents(attrs), emit)
+            bm.value = bindEvents(addLabel(currentMap.value, props), extractEmitEvents(attrs), emit)
             emit('ready', {
                 bmobj: bm.value,
             })

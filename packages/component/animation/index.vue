@@ -40,7 +40,6 @@ const props = withDefaults(
 )
 const emit = defineEmits({})
 const attrs = useAttrs()
-const options = computed(() => props)
 const bm = ref<BMapGL.ViewAnimation | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
@@ -49,7 +48,7 @@ watch(
     () => isShow.value,
     val => {
         if (val) {
-            bm.value = bindEvents(addViewAnimation(currentMap.value, options.value), extractEmitEvents(attrs), emit)
+            bm.value = bindEvents(addViewAnimation(currentMap.value, props), extractEmitEvents(attrs), emit)
             emit('ready', {
                 bmobj: bm.value,
                 start: () => currentMap.value && bm.value && currentMap.value.startViewAnimation(bm.value),

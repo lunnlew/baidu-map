@@ -81,20 +81,19 @@ const bm = ref<{
     overallView: (points?: BMapGL.Point[]) => void
 } | null>()
 const isShow = computed(() => props.show && props.points.length > 0)
-const options = computed(() => props)
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
 watch(
     () => currentMap.value,
     val => {
         if (val) {
-            bm.value = addBezierCurve(currentMap.value, options.value)
+            bm.value = addBezierCurve(currentMap.value, props)
             bindEvents(bm.value?.bc, extractEmitEvents(attrs), emit)
             emit('ready', {
                 bmobj: bm.value?.bc,
             })
             isShow.value && bm.value?.bc?.show()
-            isShow.value && options.value.overallView && bm.value?.overallView()
+            isShow.value && props.overallView && bm.value?.overallView()
         }
     },
     {

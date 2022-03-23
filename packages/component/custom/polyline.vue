@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addCustomPolyline } from '../../lib/overlay'
-import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/util'
+import { bindEvents, extractEmitEvents, useSlotComponentPropsArray } from '../../utils/util'
 const props = withDefaults(
     defineProps<{
         map?: BMapGL.Map | null
@@ -54,7 +54,6 @@ const attrs = useAttrs()
 const slots = useSlots()
 const emit = defineEmits({})
 const isShow = computed(() => props.show && props.points.length > 0)
-const options = computed(() => props)
 const bm = ref<{
     polyline: BmComponent.CustomPolyline | null
     removeOverlay: Function
@@ -62,20 +61,12 @@ const bm = ref<{
 } | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
+const CustomPolylineIconSequenceList = useSlotComponentPropsArray(slots, 'default', 'CustomPolylineIconSequence')
 watch(
     () => currentMap.value,
     val => {
         if (val) {
-            let merge_props = { ...options.value, icons: [] }
-            if (slots.default) {
-                let icons = slots.default().filter(s => (s.type as any).name == 'CustomPolylineIconSequence')
-                for (let icon of icons) {
-                    let icon_props = mergePropsDefault(icon.props as any, (icon.type as any).props)
-                    if (icon_props.symbol) {
-                        ;(merge_props as any).icons.push(icon_props)
-                    }
-                }
-            }
+            let merge_props = { ...props, icons: CustomPolylineIconSequenceList.items.value }
             bm.value = addCustomPolyline(currentMap.value, props.points, merge_props)
             emit('ready', {
                 bmobj: bm.value?.polyline,

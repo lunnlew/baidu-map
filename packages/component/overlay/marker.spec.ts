@@ -42,6 +42,7 @@ test('test Map', async () => {
         enableClicking: true,
         raiseOnDrag: false,
         draggingCursor: '',
+        icon: '',
         rotation: 0,
         zIndex: undefined,
         title: '',

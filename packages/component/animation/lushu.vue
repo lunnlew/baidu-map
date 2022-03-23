@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addLushu, initLushu } from '../../lib/animation'
-import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/util'
+import { bindEvents, extractEmitEvents, useSlotComponentProps } from '../../utils/util'
 const props = withDefaults(
     defineProps<{
         map?: BMapGL.Map | null
@@ -43,7 +43,6 @@ const props = withDefaults(
 const emit = defineEmits({})
 const attrs = useAttrs()
 const slots = useSlots()
-const options = computed(() => props)
 const bm = ref<{
     animation: BMapGL.LushuAnimation | null
     overlay: BMapGL.Overlay | null
@@ -61,28 +60,13 @@ function clear() {
         bm.value = null
     }
 }
+const MarkerIcon = useSlotComponentProps(slots, 'default', 'MarkerIcon')
+const Polyline = useSlotComponentProps(slots, 'default', 'Polyline')
 watch(
     () => isShow.value,
     val => {
         if (val) {
-            let merge_props = { ...options.value }
-            if (slots.default) {
-                let MarkerPolyline = slots.default().find(s => (s.type as any).name == 'Polyline')
-                if (MarkerPolyline) {
-                    let merge_polyline_props = mergePropsDefault(
-                        MarkerPolyline.props as any,
-                        (MarkerPolyline.type as any).props
-                    )
-                    ;(merge_props as any).polyline = merge_polyline_props
-                }
-                let MarkerIcon = slots.default().find(s => (s.type as any).name == 'MarkerIcon')
-                if (MarkerIcon) {
-                    let merge_icon_props = mergePropsDefault(MarkerIcon.props as any, (MarkerIcon.type as any).props)
-                    if (merge_icon_props.src) {
-                        ;(merge_props as any).icon = merge_icon_props
-                    }
-                }
-            }
+            let merge_props = { ...props, polyline: Polyline.props.value, icon: MarkerIcon.props.value || props.icon }
             initLushu().then(result => {
                 bm.value = addLushu(currentMap.value, merge_props)
                 bindEvents(bm.value?.animation, extractEmitEvents(attrs), emit)

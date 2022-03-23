@@ -7,7 +7,7 @@
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { BMapGLRef } from '../../lib/map'
 import { addMaker3D } from '../../lib/overlay'
-import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
+import { bindEvents, extractEmitEvents, useSlotComponentProps } from '../../utils/util'
 const props = withDefaults(
     defineProps<{
         map?: BMapGL.Map | null
@@ -42,9 +42,9 @@ const slots = useSlots()
 const emit = defineEmits({})
 const bm = ref<BMapGL.Marker3D | null>()
 const isShow = computed(() => props.show)
-const options = computed(() => props)
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
+const Marker3DIcon = useSlotComponentProps(slots, 'default', 'Marker3DIcon')
 /**
  * 3D点标记 对于bm.show(), bm.hide()支持不良好，目前通过创建方法和删除方法来实现
  */
@@ -52,19 +52,7 @@ watch(
     () => isShow.value && currentMap.value,
     val => {
         if (val) {
-            let merge_props = { ...options.value }
-            if (slots.default) {
-                let Marker3DIcon = slots.default().find(s => (s.type as any).name == 'Marker3DIcon')
-                if (Marker3DIcon) {
-                    let merge_icon_props = mergePropsDefault(
-                        Marker3DIcon.props as any,
-                        (Marker3DIcon.type as any).props
-                    )
-                    if (merge_icon_props.src) {
-                        ;(merge_props as any).icon = merge_icon_props
-                    }
-                }
-            }
+            let merge_props = { ...props, icon: Marker3DIcon.props.value }
             bm.value = bindEvents(
                 addMaker3D(currentMap.value, props.point, merge_props),
                 extractEmitEvents(attrs),

@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import { useAttrs, useSlots, watch, computed, ref, onUnmounted, inject } from 'vue'
 import { addGroundOverlay } from '../../lib/overlay'
-import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
+import { bindEvents, extractEmitEvents, useSlotComponentProps } from '../../utils/util'
 import { BMapGLRef } from '../../lib/map'
 const props = withDefaults(
     defineProps<{
@@ -69,26 +69,16 @@ const props = withDefaults(
 const attrs = useAttrs()
 const slots = useSlots()
 const emit = defineEmits({})
-const options = computed(() => props)
 const isShow = computed(() => props.show)
 const bm = ref<BMapGL.GroundOverlay | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
+const GroundOverlayImage = useSlotComponentProps(slots, 'default', 'GroundOverlayImage')
 watch(
     () => currentMap.value,
     val => {
         if (val) {
-            let merge_props = { ...options.value }
-            if (slots.default) {
-                let GroundOverlayImage = slots.default().find(s => (s.type as any).name == 'GroundOverlayImage')
-                if (GroundOverlayImage) {
-                    let merge_image_props = mergePropsDefault(
-                        GroundOverlayImage.props as any,
-                        (GroundOverlayImage.type as any).props
-                    )
-                    merge_props = Object.assign({}, merge_props, merge_image_props)
-                }
-            }
+            let merge_props = { ...props, ...GroundOverlayImage.props.value }
             bm.value = bindEvents(
                 addGroundOverlay(currentMap.value, props.startPoint, props.endPoint, merge_props),
                 extractEmitEvents(attrs),

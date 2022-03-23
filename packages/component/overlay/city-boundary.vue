@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addCityBoundary, initBoundariesResult } from '../../lib/overlay'
-import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
+import { bindEvents, extractEmitEvents, useSlotComponentProps } from '../../utils/util'
 const props = withDefaults(
     defineProps<{
         map?: BMapGL.Map | null
@@ -28,7 +28,6 @@ const props = withDefaults(
 const attrs = useAttrs()
 const slots = useSlots()
 const emit = defineEmits({})
-const options = computed(() => props)
 const isShow = computed(() => props.show)
 const bm = ref<{
     boundary: BMapGL.Boundary | null
@@ -56,21 +55,15 @@ watch(
         immediate: true,
     }
 )
+const Polygon = useSlotComponentProps(slots, 'default', 'Polygon')
 
 async function loadBoundary() {
     if (bm.value?.overlay) {
         currentMap.value?.removeOverlay(bm.value?.overlay as BMapGL.Overlay)
         bm.value.overlay = null
     }
-    let merge_props = { ...options.value }
-    if (slots.default) {
-        let MarkerPolygon = slots.default().find(s => (s.type as any).name == 'Polygon')
-        if (MarkerPolygon) {
-            let merge_polygon_props = mergePropsDefault(MarkerPolygon.props as any, (MarkerPolygon.type as any).props)
-            ;(merge_props as any).polygon = merge_polygon_props
-        }
-    }
-    bm.value = await addCityBoundary(currentMap.value, options.value.name, merge_props, boundaries_result.value)
+    let merge_props = { ...props, polygon: Polygon.props.value }
+    bm.value = await addCityBoundary(currentMap.value, props.name, merge_props, boundaries_result.value)
     emit('ready', {
         bmobj: bm.value,
     })

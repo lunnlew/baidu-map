@@ -12,7 +12,7 @@ const props = withDefaults(
         imageOffset?: [number, number]
     }>(),
     {
-        size: () => [23, 15],
+        size: () => [23, 25],
         src: 'http://webmap0.bdimg.com/image/api/marker_red.png',
         anchor: undefined,
         imageOffset: () => [0, 0],

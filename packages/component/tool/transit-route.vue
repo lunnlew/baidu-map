@@ -70,14 +70,13 @@ const props = withDefaults(
 const emit = defineEmits({})
 const attrs = useAttrs()
 const isShow = computed(() => currentMap.value && props.show)
-const options = computed(() => props)
 const bm = ref<BMapGL.TransitRoute | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
 watch(
     () => isShow.value,
     val => {
-        let merge_props = { ...options.value }
+        let merge_props = { ...props }
         if (val) {
             // 自定义选择路线结果
             merge_props.onSearchComplete = async function (e: BMapGL.TransitRouteResult) {

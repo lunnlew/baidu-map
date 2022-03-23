@@ -1,3 +1,5 @@
+import { computed, reactive, ref } from "@vue/runtime-core"
+
 /**
  * 合并实际的属性值
  * @param used_props
@@ -101,4 +103,54 @@ export function bindEvents<U, T extends PickEvent<AllEventMap>>(
         }
     }
     return obj
+}
+
+/**
+ * 获取插槽组件的props
+ * @param slots 插槽列表
+ * @param slot_name 插槽名
+ * @param component_name 插槽组件名
+ * @returns 
+ */
+export function useSlotComponentProps(slots: {
+    [name: string]: any;
+}, slot_name: string = 'default', component_name: string) {
+    return {
+        props: computed(() => {
+            let slot = slots[slot_name] as Function
+            if (!slot) {
+                return undefined
+            }
+            let component = slot().find((s: { type: any }) => (s.type as any).name == component_name)
+            if (!component) {
+                return undefined
+            }
+            return mergePropsDefault(component.props as any, (component.type as any).props)
+        })
+    }
+}
+
+/**
+ * 获取插槽组件的props
+ * @param slots 插槽列表
+ * @param slot_name 插槽名
+ * @param component_name 插槽组件名
+ * @returns 
+ */
+export function useSlotComponentPropsArray(slots: {
+    [name: string]: any;
+}, slot_name: string = 'default', component_name: string) {
+    return {
+        items: computed(() => {
+            let slot = slots[slot_name] as Function
+            if (!slot) {
+                return []
+            }
+            let components = slot().filter((s: { type: any }) => (s.type as any).name == component_name)
+            if (components.length == 0) {
+                return []
+            }
+            return components.map((component: { props: any; type: any }) => mergePropsDefault(component.props as any, (component.type as any).props))
+        })
+    }
 }

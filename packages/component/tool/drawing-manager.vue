@@ -4,10 +4,11 @@
             <ul class="drawing-panel">
                 <li
                     :class="'bmap-btn bmap-' + item"
-                    v-for="item in btns"
+                    v-for="(item, index) in btns"
                     :style="{
                         backgroundPositionY: currentType === item ? '-52px' : '0px',
                     }"
+                    :key="index"
                     @click="draw(item)"
                 ></li>
             </ul>
@@ -100,7 +101,6 @@ const props = withDefaults(
 const emit = defineEmits({})
 const attrs = useAttrs()
 const isShow = computed(() => currentMap.value && props.show)
-const options = computed(() => props)
 const bm = ref<BMapGL.DrawingManager | null>()
 const btns = ref(['marker', 'polyline', 'rectangle', 'polygon', 'circle'])
 const inject_map = inject('map') as any
@@ -108,7 +108,7 @@ const currentMap = computed(() => props.map || inject_map.value)
 watch(
     () => isShow.value,
     val => {
-        let merge_props = { ...options.value }
+        let merge_props = { ...props }
         if (val) {
             initDrawingManager().then(result => {
                 bm.value = bindEvents(addDrawingManager(currentMap.value, merge_props), extractEmitEvents(attrs), emit)

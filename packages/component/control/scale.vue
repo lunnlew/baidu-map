@@ -28,7 +28,6 @@ const props = withDefaults(
 const attrs = useAttrs()
 const emit = defineEmits({})
 const isShow = computed(() => currentMap.value && props.show)
-const options = computed(() => props)
 const bm = ref<BMapGL.ScaleControl | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
@@ -36,7 +35,7 @@ watch(
     () => isShow.value,
     val => {
         if (val) {
-            bm.value = bindEvents(addScaleControl(currentMap.value, options.value), extractEmitEvents(attrs), emit)
+            bm.value = bindEvents(addScaleControl(currentMap.value, props), extractEmitEvents(attrs), emit)
             emit('ready', {
                 bmobj: bm.value,
             })

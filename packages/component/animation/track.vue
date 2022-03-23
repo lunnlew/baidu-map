@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { addTrackAnimation, initTrackAnimation } from '../../lib/animation'
-import { bindEvents, extractEmitEvents, mergePropsDefault } from '../../utils/util'
+import { bindEvents, extractEmitEvents, useSlotComponentProps } from '../../utils/util'
 const props = withDefaults(
     defineProps<{
         map?: BMapGL.Map | null
@@ -38,28 +38,18 @@ const slots = useSlots()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
 const isShow = computed(() => currentMap.value && props.show)
-const options = computed(() => props)
 const bm = ref<{
     animation: BMapGL.TrackAnimation | null
     overlay: BMapGL.Overlay | null
     removeOverlay: Function
     overallView: (points?: BMapGL.Point[]) => void
 } | null>()
+const Polyline = useSlotComponentProps(slots, 'default', 'Polyline')
 watch(
     () => isShow.value,
     val => {
         if (val) {
-            let merge_props = { ...options.value }
-            if (slots.default) {
-                let MarkerPolyline = slots.default().find(s => (s.type as any).name == 'Polyline')
-                if (MarkerPolyline) {
-                    let merge_polyline_props = mergePropsDefault(
-                        MarkerPolyline.props as any,
-                        (MarkerPolyline.type as any).props
-                    )
-                    ;(merge_props as any).polyline = merge_polyline_props
-                }
-            }
+            let merge_props = { ...props, polyline: Polyline.props.value }
             initTrackAnimation().then(result => {
                 bm.value = addTrackAnimation(currentMap.value, merge_props)
                 bindEvents(bm.value?.animation, extractEmitEvents(attrs), emit)

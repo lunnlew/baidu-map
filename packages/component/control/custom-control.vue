@@ -33,7 +33,6 @@ const slots = useSlots()
 const control = ref()
 const emit = defineEmits({})
 const isShow = computed(() => currentMap.value && props.show)
-const options = computed(() => props)
 const bm = ref<BMapGL.Control | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
@@ -41,7 +40,7 @@ watch(
     () => isShow.value,
     val => {
         if (val) {
-            let merge_props = { ...options.value }
+            let merge_props = { ...props }
             if (slots.default) {
                 merge_props.dom = control.value
             }

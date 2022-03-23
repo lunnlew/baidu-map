@@ -34,14 +34,13 @@ const props = withDefaults(
 const emit = defineEmits({})
 const attrs = useAttrs()
 const isShow = computed(() => props.show)
-const options = computed(() => props)
 const bm = ref<BMapGL.RichMarker | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
 watch(
     () => currentMap.value,
     val => {
-        let merge_props = { ...options.value }
+        let merge_props = { ...props }
         if (val) {
             initRichMarker().then(result => {
                 bm.value = bindEvents(addRichMarker(currentMap.value, merge_props), extractEmitEvents(attrs), emit)

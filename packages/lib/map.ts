@@ -159,7 +159,6 @@ export function addMap(
     }
     | undefined {
     if (BMapGLRef.value) {
-        // console.log('MapOptions', map_params)
         if (!container) {
             throw new Error('container is not defined')
         }

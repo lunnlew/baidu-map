@@ -7,7 +7,7 @@
 import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
 import { BMapGLRef } from '../../lib/map'
 import { addMaker } from '../../lib/overlay'
-import { mergePropsDefault, bindEvents, extractEmitEvents } from '../../utils/util'
+import { bindEvents, extractEmitEvents, useSlotComponentProps } from '../../utils/util'
 const props = withDefaults(
     defineProps<{
         map?: BMapGL.Map | null
@@ -21,6 +21,7 @@ const props = withDefaults(
         enableClicking?: boolean
         raiseOnDrag?: boolean
         draggingCursor?: string
+        icon?: string
         rotation?: number
         zIndex?: number
         title?: string
@@ -49,6 +50,7 @@ const props = withDefaults(
         enableClicking: true,
         raiseOnDrag: false,
         draggingCursor: '',
+        icon: '',
         rotation: 0,
         zIndex: undefined,
         title: '',
@@ -71,23 +73,14 @@ const slots = useSlots()
 const emit = defineEmits({})
 const bm = ref<BMapGL.Marker | null>()
 const isShow = computed(() => props.show)
-const options = computed(() => props)
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
+const MarkerIcon = useSlotComponentProps(slots, 'default', 'MarkerIcon')
 watch(
     () => currentMap.value,
     val => {
         if (val) {
-            let merge_props = { ...options.value }
-            if (slots.default) {
-                let MarkerIcon = slots.default().find(s => (s.type as any).name == 'MarkerIcon')
-                if (MarkerIcon) {
-                    let merge_icon_props = mergePropsDefault(MarkerIcon.props as any, (MarkerIcon.type as any).props)
-                    if (merge_icon_props.src) {
-                        ;(merge_props as any).icon = merge_icon_props
-                    }
-                }
-            }
+            let merge_props = { ...props, icon: MarkerIcon.props.value || props.icon }
             bm.value = bindEvents(addMaker(currentMap.value, props.point, merge_props), extractEmitEvents(attrs), emit)
             emit('ready', {
                 bmobj: bm.value,

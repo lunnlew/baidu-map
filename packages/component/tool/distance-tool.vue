@@ -25,14 +25,13 @@ const props = withDefaults(
 const emit = defineEmits({})
 const attrs = useAttrs()
 const isShow = computed(() => currentMap.value && props.show)
-const options = computed(() => props)
 const bm = ref<BMapGL.DistanceTool | null>()
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
 watch(
     () => isShow.value,
     val => {
-        let merge_props = { ...options.value }
+        let merge_props = { ...props }
         if (val) {
             initDistanceTool().then(result => {
                 bm.value = bindEvents(addDistanceTool(currentMap.value, merge_props), extractEmitEvents(attrs), emit)

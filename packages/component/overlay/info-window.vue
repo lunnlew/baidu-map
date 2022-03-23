@@ -64,14 +64,13 @@ const slots = useSlots()
 const emit = defineEmits({})
 const bm = ref<BMapGL.InfoWindow | null>()
 const isShow = computed(() => currentMap.value && props.show)
-const options = computed(() => props)
 const inject_map = inject('map') as any
 const currentMap = computed(() => props.map || inject_map.value)
 watch(
     () => isShow.value,
     val => {
         if (val) {
-            let merge_props = { ...options.value }
+            let merge_props = { ...props }
             if (slots.default) {
                 merge_props.content = info_content.value
             }

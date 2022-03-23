@@ -131,12 +131,11 @@ const bm = ref<BMapGL.Map | null>()
 const container = ref()
 const attrs = useAttrs()
 const slots = useSlots()
-const options = computed(() => props)
 const mapView = ref()
 const map = ref()
 provide('map', map)
 onMounted(() => {
-    let merge_props = { ...options.value }
+    let merge_props = { ...props }
     initMap(merge_props.apiKey)?.then(() => {
         let events = extractEmitEvents(attrs) as string[]
         let map_dom = container.value

@@ -36,6 +36,10 @@ declare namespace BmComponent {
          */
         draggingCursor?: string
         /**
+         * 标注图标
+         */
+        icon?: string
+        /**
          * 旋转角度
          */
         rotation?: number
