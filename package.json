@@ -9,6 +9,7 @@
   "types": "./typings/index.d.ts",
   "main": "./dist/lib.umd.js",
   "module": "./dist/lib.es.js",
+  "style": "./dist/style.css",
   "type": "module",
   "exports": {
     ".": {
