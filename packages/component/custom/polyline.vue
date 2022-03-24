@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
+import { computed, inject, onUnmounted, Ref, ref, useAttrs, useSlots, watch } from 'vue'
 import { addCustomPolyline } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents, useSlotComponentPropsArray } from '../../utils/util'
 const props = withDefaults(
@@ -59,8 +59,8 @@ const bm = ref<{
     removeOverlay: Function
     overallView: (points?: BMapGL.Point[]) => void
 } | null>()
-const inject_map = inject('map') as any
-const currentMap = computed(() => props.map || inject_map.value)
+const inject_map = inject<Ref<BMapGL.Map>>('map')
+const currentMap = computed<BMapGL.Map | undefined>(() => props.map || inject_map?.value)
 const CustomPolylineIconSequenceList = useSlotComponentPropsArray(slots, 'default', 'CustomPolylineIconSequence')
 watch(
     () => currentMap.value,

@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
+import { computed, inject, onUnmounted, Ref, ref, useAttrs, useSlots, watch } from 'vue'
 import { BMapGLRef } from '../../lib/map'
 import { addMaker } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents, useSlotComponentProps } from '../../utils/util'
@@ -73,8 +73,8 @@ const slots = useSlots()
 const emit = defineEmits({})
 const bm = ref<BMapGL.Marker | null>()
 const isShow = computed(() => props.show)
-const inject_map = inject('map') as any
-const currentMap = computed(() => props.map || inject_map.value)
+const inject_map = inject<Ref<BMapGL.Map>>('map')
+const currentMap = computed<BMapGL.Map | undefined>(() => props.map || inject_map?.value)
 const MarkerIcon = useSlotComponentProps(slots, 'default', 'MarkerIcon')
 watch(
     () => currentMap.value,

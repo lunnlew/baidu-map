@@ -16,7 +16,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, onUnmounted, ref, useAttrs, watch, inject } from 'vue'
+import { computed, onUnmounted, ref, useAttrs, watch, inject, Ref } from 'vue'
 import { addDrawingManager, initDrawingManager } from '../../lib/tool'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 const props = withDefaults(
@@ -103,8 +103,8 @@ const attrs = useAttrs()
 const isShow = computed(() => currentMap.value && props.show)
 const bm = ref<BMapGL.DrawingManager | null>()
 const btns = ref(['marker', 'polyline', 'rectangle', 'polygon', 'circle'])
-const inject_map = inject('map') as any
-const currentMap = computed(() => props.map || inject_map.value)
+const inject_map = inject<Ref<BMapGL.Map>>('map')
+const currentMap = computed<BMapGL.Map | undefined>(() => props.map || inject_map?.value)
 watch(
     () => isShow.value,
     val => {

@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
+import { computed, inject, onUnmounted, Ref, ref, useAttrs, useSlots, watch } from 'vue'
 import { addTrackAnimation, initTrackAnimation } from '../../lib/animation'
 import { bindEvents, extractEmitEvents, useSlotComponentProps } from '../../utils/util'
 const props = withDefaults(
@@ -35,8 +35,8 @@ const props = withDefaults(
 const emit = defineEmits({})
 const attrs = useAttrs()
 const slots = useSlots()
-const inject_map = inject('map') as any
-const currentMap = computed(() => props.map || inject_map.value)
+const inject_map = inject<Ref<BMapGL.Map>>('map')
+const currentMap = computed<BMapGL.Map | undefined>(() => props.map || inject_map?.value)
 const isShow = computed(() => currentMap.value && props.show)
 const bm = ref<{
     animation: BMapGL.TrackAnimation | null

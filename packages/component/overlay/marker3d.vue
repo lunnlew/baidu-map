@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
+import { computed, inject, onUnmounted, Ref, ref, useAttrs, useSlots, watch } from 'vue'
 import { BMapGLRef } from '../../lib/map'
 import { addMaker3D } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents, useSlotComponentProps } from '../../utils/util'
@@ -42,8 +42,8 @@ const slots = useSlots()
 const emit = defineEmits({})
 const bm = ref<BMapGL.Marker3D | null>()
 const isShow = computed(() => props.show)
-const inject_map = inject('map') as any
-const currentMap = computed(() => props.map || inject_map.value)
+const inject_map = inject<Ref<BMapGL.Map>>('map')
+const currentMap = computed<BMapGL.Map | undefined>(() => props.map || inject_map?.value)
 const Marker3DIcon = useSlotComponentProps(slots, 'default', 'Marker3DIcon')
 /**
  * 3D点标记 对于bm.show(), bm.hide()支持不良好，目前通过创建方法和删除方法来实现

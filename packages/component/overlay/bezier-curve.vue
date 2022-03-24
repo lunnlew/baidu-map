@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, inject, onUnmounted, reactive, ref, useAttrs, watch } from 'vue'
+import { computed, inject, onUnmounted, reactive, Ref, ref, useAttrs, watch } from 'vue'
 import { addBezierCurve } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import { BMapGLRef } from '../../lib/map'
@@ -81,8 +81,8 @@ const bm = ref<{
     overallView: (points?: BMapGL.Point[]) => void
 } | null>()
 const isShow = computed(() => props.show && props.points.length > 0)
-const inject_map = inject('map') as any
-const currentMap = computed(() => props.map || inject_map.value)
+const inject_map = inject<Ref<BMapGL.Map>>('map')
+const currentMap = computed<BMapGL.Map | undefined>(() => props.map || inject_map?.value)
 watch(
     () => currentMap.value,
     val => {

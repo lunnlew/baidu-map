@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, inject, ref, useAttrs, useSlots, watch } from 'vue'
+import { computed, inject, Ref, ref, useAttrs, useSlots, watch } from 'vue'
 import { addCustomLushu, addMaker } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents, useSlotComponentProps } from '../../utils/util'
 import { BMapGLRef } from '../../lib/map'
@@ -36,8 +36,8 @@ const isShow = computed(() => props.show)
 const bm = ref<{
     lushu: BmComponent.CustomLushu | null
 } | null>()
-const inject_map = inject('map') as any
-const currentMap = computed(() => props.map || inject_map.value)
+const inject_map = inject<Ref<BMapGL.Map>>('map')
+const currentMap = computed<BMapGL.Map | undefined>(() => props.map || inject_map?.value)
 const Marker = useSlotComponentProps(slots, 'default', 'Marker')
 watch(
     () => currentMap.value,
@@ -71,7 +71,7 @@ watch(
 
             bm.value?.lushu?.on('remove', (e: any) => {
                 if (marker) {
-                    currentMap.value.removeOverlay(marker)
+                    currentMap.value?.removeOverlay(marker)
                     marker = null
                 }
             })

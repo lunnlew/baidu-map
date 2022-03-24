@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, inject, onUnmounted, ref, useAttrs, watch } from 'vue'
+import { computed, inject, onUnmounted, Ref, ref, useAttrs, watch } from 'vue'
 import { BMapGLRef } from '../../lib/map'
 import { addCircle } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
@@ -54,9 +54,9 @@ const attrs = useAttrs()
 const emit = defineEmits({})
 const bm = ref<BMapGL.Circle | null>()
 const isShow = computed(() => props.show)
-const inject_map = inject('map') as any
-const currentMap = computed(() => props.map || inject_map.value)
-function overallView(map: BMapGL.Map) {
+const inject_map = inject<Ref<BMapGL.Map>>('map')
+const currentMap = computed<BMapGL.Map | undefined>(() => props.map || inject_map?.value)
+function overallView(map: BMapGL.Map | undefined) {
     if (bm.value && map) {
         map.setViewport([
             bm.value?.getBounds().getNorthEast() as BMapGL.Point,

@@ -6,7 +6,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, inject, onUnmounted, ref, useAttrs, useSlots, watch } from 'vue'
+import { computed, inject, onUnmounted, Ref, ref, useAttrs, useSlots, watch } from 'vue'
 import { addCustomControl } from '../../lib/control'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import { BMapGLRef } from '../../lib/map'
@@ -34,8 +34,8 @@ const control = ref()
 const emit = defineEmits({})
 const isShow = computed(() => currentMap.value && props.show)
 const bm = ref<BMapGL.Control | null>()
-const inject_map = inject('map') as any
-const currentMap = computed(() => props.map || inject_map.value)
+const inject_map = inject<Ref<BMapGL.Map>>('map')
+const currentMap = computed<BMapGL.Map | undefined>(() => props.map || inject_map?.value)
 watch(
     () => isShow.value,
     val => {

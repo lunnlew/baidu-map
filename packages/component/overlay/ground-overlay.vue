@@ -4,7 +4,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { useAttrs, useSlots, watch, computed, ref, onUnmounted, inject } from 'vue'
+import { useAttrs, useSlots, watch, computed, ref, onUnmounted, inject, Ref } from 'vue'
 import { addGroundOverlay } from '../../lib/overlay'
 import { bindEvents, extractEmitEvents, useSlotComponentProps } from '../../utils/util'
 import { BMapGLRef } from '../../lib/map'
@@ -71,8 +71,8 @@ const slots = useSlots()
 const emit = defineEmits({})
 const isShow = computed(() => props.show)
 const bm = ref<BMapGL.GroundOverlay | null>()
-const inject_map = inject('map') as any
-const currentMap = computed(() => props.map || inject_map.value)
+const inject_map = inject<Ref<BMapGL.Map>>('map')
+const currentMap = computed<BMapGL.Map | undefined>(() => props.map || inject_map?.value)
 const GroundOverlayImage = useSlotComponentProps(slots, 'default', 'GroundOverlayImage')
 watch(
     () => currentMap.value,

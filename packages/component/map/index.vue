@@ -5,7 +5,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, provide, ref, useAttrs, useSlots, watch } from 'vue'
+import { onMounted, onUnmounted, provide, Ref, ref, useAttrs, useSlots, watch } from 'vue'
 import { BMapGLConstant } from '../../lib/BMapGL'
 import { bindEvents, extractEmitEvents } from '../../utils/util'
 import { addMap, BMapGLRef, initMap } from '../../lib/map'
@@ -132,7 +132,7 @@ const container = ref()
 const attrs = useAttrs()
 const slots = useSlots()
 const mapView = ref()
-const map = ref()
+const map = ref<BMapGL.Map>()
 provide('map', map)
 onMounted(() => {
     let merge_props = { ...props }
